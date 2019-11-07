@@ -1,0 +1,20 @@
+{
+  "name": "job-search-tracker",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": "git@github.com:taishnore/job-search-tracker.git",
+  "author": "<github username> <taimurmshah@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "2.4.3",
+    "express": "4.17.1",
+    "jsonwebtoken": "8.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "1.19.4"
+  }
+}
