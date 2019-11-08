@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://taishnore101:Green101@job-search-tracker-1fd4j.mongodb.net/test?retryWrites=true&w=majority",
+  "secret" : "thisismysecret"
+}

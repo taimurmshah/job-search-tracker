@@ -11,8 +11,12 @@
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "2.4.3",
+    "concurrently": "^5.0.0",
+    "config": "^3.2.4",
     "express": "4.17.1",
-    "jsonwebtoken": "8.5.1"
+    "jsonwebtoken": "8.5.1",
+    "mongoose": "5.7.8",
+    "validator": "12.0.0"
   },
   "devDependencies": {
     "nodemon": "1.19.4"
