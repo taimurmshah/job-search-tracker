@@ -1,8 +1,8 @@
 const express = require("express");
-const router = new express.Router();
-const mongoose = require("mongoose");
 const User = require("../models/User");
 const auth = require("../middleware/auth");
+
+const router = new express.Router();
 
 //create new user
 router.post("/users", async (req, res) => {

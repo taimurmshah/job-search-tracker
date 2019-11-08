@@ -3,6 +3,7 @@ const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
+const Job = require("./Job");
 
 const userSchema = new mongoose.Schema(
   {
@@ -46,6 +47,12 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+userSchema.virtual("jobs", {
+  ref: "Job",
+  localField: "_id",
+  foreignField: "owner"
+});
+
 userSchema.methods.toJSON = function() {
   const user = this;
   const userObj = user.toObject();
@@ -87,6 +94,12 @@ userSchema.methods.generateAuthToken = async function() {
 
   return token;
 };
+
+userSchema.pre("remove", async function(next) {
+  const user = this;
+  await Job.deleteMany({ owner: user._id });
+  next();
+});
 
 const User = mongoose.model("User", userSchema);
 
