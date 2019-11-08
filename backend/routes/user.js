@@ -6,7 +6,6 @@ const auth = require("../middleware/auth");
 
 //create new user
 router.post("/users", async (req, res) => {
-  //take req name, email, and password, and somehow save it.
   const user = new User(req.body);
   try {
     await user.save();
@@ -27,6 +26,7 @@ router.post("/login", async (req, res) => {
     res.status(400).send(err);
   }
 });
+
 //logout
 router.post("/logout", auth, async (req, res) => {
   try {
@@ -42,6 +42,45 @@ router.post("/logout", auth, async (req, res) => {
 });
 
 //get my profile
-//delete my profile
+router.get("/users/me", auth, async (req, res) => {
+  res.send(req.user);
+});
+
+//update myself
+router.patch("/users/me", auth, async (req, res) => {
+  try {
+    const user = req.user;
+    const updates = Object.keys(req.body);
+    const allowedUpdates = ["name", "email", "password"];
+
+    const isValidOperation = updates.every(update =>
+      allowedUpdates.includes(update)
+    );
+
+    if (!isValidOperation) {
+      res.status(400).send("Invalid update parameters");
+    }
+
+    updates.forEach(update => {
+      user[update] = req.body[update];
+    });
+
+    await user.save();
+
+    res.send(user);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+//delete me
+router.delete("/users/me", auth, async (req, res) => {
+  try {
+    await req.user.remove();
+    res.send(req.user);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
 
 module.exports = router;
