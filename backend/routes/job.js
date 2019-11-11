@@ -49,7 +49,7 @@ router.get("/jobs/:id", auth, async (req, res) => {
 router.patch("/jobs/:id", auth, async (req, res) => {
   const updates = Object.keys(req.body);
 
-  const allowedUpdates = ["response", "status", "notes", "website"];
+  const allowedUpdates = ["response", "status", "notes"];
 
   for (let i = 0; i < updates.length; i++) {
     if (!allowedUpdates.includes(updates[i])) {
