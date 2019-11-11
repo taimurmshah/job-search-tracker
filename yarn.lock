@@ -328,7 +328,7 @@ concat-map@0.0.1:
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   integrity sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=
 
-concurrently@^5.0.0:
+concurrently@5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/concurrently/-/concurrently-5.0.0.tgz#99c7567d009411fbdc98299d553c4b99a978612c"
   integrity sha512-1yDvK8mduTIdxIxV9C60KoiOySUl/lfekpdbI+U5GXaPrgdffEavFa9QZB3vh68oWOpbCC+TuvxXV9YRPMvUrA==
