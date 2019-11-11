@@ -11,3 +11,17 @@ export const login = user => {
     payload: user
   };
 };
+
+//this action is used when a user's jwt is stored in the browser; auth with jwt
+export const authorize = user => {
+  return {
+    type: "AUTHORIZE",
+    payload: user
+  };
+};
+
+export const logout = () => {
+  return {
+    type: "LOGOUT"
+  };
+};

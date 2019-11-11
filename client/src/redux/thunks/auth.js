@@ -1,4 +1,4 @@
-import { login, signup } from "../actions/auth";
+import { login, signup, authorize, logout } from "../actions/auth";
 import { URL } from "../../resources";
 
 export const signupThunk = userObj => async dispatch => {
@@ -42,6 +42,42 @@ export const loginThunk = userObj => async dispatch => {
     localStorage.setItem("token", res.token);
 
     dispatch(login(res.user));
+  } catch (err) {
+    //todo configure auth errors with redux...
+  }
+};
+
+export const jwtThunk = token => async dispatch => {
+  try {
+    let res = await fetch(`${URL}/users/me`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: token
+      }
+    });
+    res = await res.json();
+    console.log({ res });
+    return dispatch(authorize(res.user));
+  } catch (err) {
+    //todo configure auth errors with redux...
+  }
+};
+
+export const logoutThunk = () => async dispatch => {
+  const token = localStorage.getItem("token");
+  try {
+    let res = await fetch(`${URL}/logout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: token
+      }
+    });
+    localStorage.removeItem("token");
+    return dispatch(logout());
   } catch (err) {
     //todo configure auth errors with redux...
   }
