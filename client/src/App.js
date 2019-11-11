@@ -3,6 +3,7 @@ import "./App.css";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import { jwtThunk } from "./redux/thunks/auth";
+import { readJobsThunk } from "./redux/thunks/jobs";
 
 import Landing from "./components/layout/Landing";
 import Navbar from "./components/layout/Navbar";
@@ -14,7 +15,8 @@ class App extends Component {
   componentDidMount() {
     const token = localStorage.getItem("token");
     if (token) {
-      return this.props.jwtThunk(token);
+      this.props.jwtThunk(token);
+      // this.props.readJobsThunk(token);
     }
   }
 
@@ -35,14 +37,21 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: state.auth.isLoggedIn
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
-    jwtThunk: token => dispatch(jwtThunk(token))
+    jwtThunk: token => dispatch(jwtThunk(token)),
+    readJobsThunk: token => dispatch(readJobsThunk(token))
   };
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(App);
 
