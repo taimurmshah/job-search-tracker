@@ -31,9 +31,8 @@ router.get("/jobs", auth, async (req, res) => {
   }
 });
 
-//view one job by id
+//get job by id
 router.get("/jobs/:id", auth, async (req, res) => {
-  console.log("req.params:", req.params);
   try {
     const job = await Job.findOne({ _id: req.params.id, owner: req.user._id });
     if (!job) {
@@ -49,14 +48,8 @@ router.get("/jobs/:id", auth, async (req, res) => {
 //update job
 router.patch("/jobs/:id", auth, async (req, res) => {
   const updates = Object.keys(req.body);
-  // let possibleUpdates = { description: true, completed: true };
-  // for (let i = 0; i < updates.length; i++) {
-  //   if (!possibleUpdates[updates[i]]) {
-  //     return res.status(400).send({ error: "Invalid update parameters." });
-  //   }
-  // }
 
-  const allowedUpdates = ["response", "status", "notes"];
+  const allowedUpdates = ["response", "status", "notes", "website"];
 
   for (let i = 0; i < updates.length; i++) {
     if (!allowedUpdates.includes(updates[i])) {

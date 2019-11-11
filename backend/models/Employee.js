@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const validator = require("validator");
 
 const employeeSchema = new mongoose.Schema(
   {
@@ -9,15 +10,32 @@ const employeeSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      trim: true
+      trim: true,
+      required: true,
+      unique: true,
+      validate(value) {
+        if (!validator.isEmail(value)) {
+          throw new Error("Please enter valid email");
+        }
+      }
     },
     position: {
       type: String,
+      required: true,
       trim: true
     },
     response: {
       type: Boolean,
       default: false
+    },
+    linkedIn: {
+      type: String,
+      required: true,
+      trim: true
+    },
+    notes: {
+      type: String,
+      trim: true
     },
     owner: {
       type: mongoose.Schema.Types.ObjectId,

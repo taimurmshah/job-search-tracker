@@ -8,6 +8,11 @@ const jobSchema = new mongoose.Schema(
       trim: true,
       required: true
     },
+    website: {
+      type: String,
+      required: true,
+      trim: true
+    },
     link: {
       type: String,
       trim: true,
