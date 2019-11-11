@@ -6,6 +6,9 @@ import { jwtThunk } from "./redux/thunks/auth";
 
 import Landing from "./components/layout/Landing";
 import Navbar from "./components/layout/Navbar";
+import Login from "./components/auth/Login";
+import Signup from "./components/auth/Signup";
+import Dashboard from "./components/dashboard/Dashboard";
 
 class App extends Component {
   componentDidMount() {
@@ -20,7 +23,12 @@ class App extends Component {
       <div>
         <>
           <Navbar />
-          <Switch>{/*<Route exact path="/" component={Landing} />*/}</Switch>
+          <Switch>
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/" component={Landing} />
+          </Switch>
         </>
       </div>
     );

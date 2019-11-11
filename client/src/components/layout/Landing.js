@@ -4,12 +4,7 @@ import Signup from "../auth/Signup";
 
 class Landing extends Component {
   render() {
-    return (
-      <>
-        <Signup />
-        <Login />
-      </>
-    );
+    return <h1>Landing</h1>;
   }
 }
 

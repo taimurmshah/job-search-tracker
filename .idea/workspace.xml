@@ -2,18 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9795be7-cb21-497b-ace0-f02a597b388f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/components/auth/Logout.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/layout/Navbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/taimur.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/taimur.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/dashboard/Dashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/middleware/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/middleware/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/user.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/landing/Landing.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/Landing.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/actions/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/actions/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/auth/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/auth/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/auth/Signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/auth/Signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/layout/Landing.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/Landing.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/layout/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/Navbar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/redux/reducers/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/reducers/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/thunks/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/thunks/auth.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -70,7 +66,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1573434303322</updated>
-      <workItem from="1573434305260" duration="9336000" />
+      <workItem from="1573434305260" duration="11191000" />
     </task>
     <servers />
   </component>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { loginThunk } from "../../redux/thunks/auth";
+import { Redirect } from "react-router-dom";
 
 class Login extends Component {
   state = {
@@ -19,6 +20,10 @@ class Login extends Component {
   };
 
   render() {
+    if (this.props.isLoggedIn) {
+      return <Redirect to="/dashboard" />;
+    }
+
     return (
       <div>
         <p>Login:</p>
@@ -41,6 +46,12 @@ class Login extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: state.auth.isLoggedIn
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     loginThunk: userObj => dispatch(loginThunk(userObj))
@@ -48,6 +59,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Login);
