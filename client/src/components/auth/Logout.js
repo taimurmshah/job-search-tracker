@@ -6,7 +6,8 @@ const Logout = ({ logoutThunk }) => (
   <button
     onClick={e => {
       e.preventDefault();
-      return logoutThunk();
+      const token = localStorage.getItem("token");
+      return logoutThunk(token);
     }}
   >
     Log Out
@@ -15,7 +16,7 @@ const Logout = ({ logoutThunk }) => (
 
 const mapDispatchToProps = dispatch => {
   return {
-    logoutThunk: () => dispatch(logoutThunk())
+    logoutThunk: token => dispatch(logoutThunk(token))
   };
 };
 

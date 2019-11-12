@@ -50,7 +50,7 @@ export const loginThunk = userObj => async dispatch => {
 export const jwtThunk = token => async dispatch => {
   try {
     let res = await fetch(`${URL}/users/me`, {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -59,14 +59,13 @@ export const jwtThunk = token => async dispatch => {
     });
     res = await res.json();
     console.log({ res });
-    return dispatch(authorize(res.user));
+    return dispatch(authorize(res));
   } catch (err) {
     //todo configure auth errors with redux...
   }
 };
 
-export const logoutThunk = () => async dispatch => {
-  const token = localStorage.getItem("token");
+export const logoutThunk = token => async dispatch => {
   try {
     let res = await fetch(`${URL}/logout`, {
       method: "POST",

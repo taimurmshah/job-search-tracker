@@ -13,7 +13,8 @@ export const readJobsThunk = token => async dispatch => {
     });
 
     res = await res.json();
-    return dispatch(loadJobs(res.jobs));
+    console.log("jobRes:", res);
+    return dispatch(loadJobs(res));
   } catch (err) {
     //todo configure auth errors with redux...
   }

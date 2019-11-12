@@ -21,12 +21,8 @@ router.post("/users", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  console.log("hitting the login method");
-
   try {
-    console.log("in the try");
     const user = await User.findByCredentials(email, password);
-    console.log({ user });
     const token = await user.generateAuthToken();
     res.send({ user, token });
   } catch (err) {
@@ -48,8 +44,20 @@ router.post("/logout", auth, async (req, res) => {
   }
 });
 
+//logout all sessions
+router.post("/logoutAll", auth, async (req, res) => {
+  try {
+    req.user.tokens = [];
+    await req.user.save();
+    res.send();
+  } catch (err) {
+    res.status(500).send();
+  }
+});
+
 //get my profile
 router.get("/users/me", auth, async (req, res) => {
+  console.log("hit");
   res.send(req.user);
 });
 

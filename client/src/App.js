@@ -16,7 +16,7 @@ class App extends Component {
     const token = localStorage.getItem("token");
     if (token) {
       this.props.jwtThunk(token);
-      // this.props.readJobsThunk(token);
+      this.props.readJobsThunk(token);
     }
   }
 
