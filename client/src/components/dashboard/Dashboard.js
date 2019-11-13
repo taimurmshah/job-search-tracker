@@ -1,13 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 class Dashboard extends Component {
   render() {
+    const token = localStorage.getItem("token");
+    console.log("Dashboard.js");
     if (!this.props.isLoggedIn) {
       return <Redirect to="/" />;
     }
 
-    return <h1>Dashboard</h1>;
+    return (
+      <div>
+        <h1>Dashboard</h1>
+        <Link to="/create-job">Add new job</Link>
+      </div>
+    );
   }
 }
 

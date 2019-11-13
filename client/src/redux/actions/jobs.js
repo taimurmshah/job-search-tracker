@@ -4,3 +4,10 @@ export const loadJobs = jobs => {
     payload: jobs
   };
 };
+
+export const newJob = job => {
+  return {
+    type: "NEW_JOB",
+    payload: job
+  };
+};

@@ -58,7 +58,7 @@ export const jwtThunk = token => async dispatch => {
       }
     });
     res = await res.json();
-    console.log({ res });
+
     return dispatch(authorize(res));
   } catch (err) {
     //todo configure auth errors with redux...

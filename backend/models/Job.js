@@ -18,6 +18,11 @@ const jobSchema = new mongoose.Schema(
       trim: true,
       required: true
     },
+    linkedIn: {
+      type: String,
+      trim: true,
+      required: true
+    },
     response: {
       type: Boolean,
       default: false

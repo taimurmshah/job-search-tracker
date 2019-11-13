@@ -6,7 +6,13 @@ const router = new express.Router();
 
 //create new job
 router.post("/jobs", auth, async (req, res) => {
+  if (req.body.website[0] === "h") {
+    console.log("in the edit");
+    req.body.website = req.body.website.split("/")[2];
+  }
+
   const job = new Job({ ...req.body, owner: req.user._id });
+
   try {
     await job.save();
 

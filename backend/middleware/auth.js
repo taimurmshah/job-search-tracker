@@ -8,7 +8,6 @@ const auth = async (req, res, next) => {
       req.headers.authorization[0] === "B"
         ? req.headers.authorization.split(" ")[1]
         : req.headers.authorization;
-    console.log({ token });
     const decoded = await jwt.decode(token, config.get("secret"));
     const user = await User.findOne({
       _id: decoded._id,
