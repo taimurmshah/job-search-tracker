@@ -1,7 +1,9 @@
-import { loadJobs, newJob } from "../actions/jobs";
+import { getJobs, newJob } from "../actions/job";
 import { URL } from "../../resources";
 
-export const newJobThunk = (jobObj, token) => async dispatch => {
+const token = localStorage.getItem("token");
+
+export const newJobThunk = jobObj => async dispatch => {
   try {
     let res = await fetch(`${URL}/jobs`, {
       method: "POST",
@@ -21,7 +23,7 @@ export const newJobThunk = (jobObj, token) => async dispatch => {
   }
 };
 
-export const readJobsThunk = token => async dispatch => {
+export const readJobsThunk = () => async dispatch => {
   try {
     let res = await fetch(`${URL}/jobs`, {
       method: "GET",
@@ -33,7 +35,7 @@ export const readJobsThunk = token => async dispatch => {
     });
 
     res = await res.json();
-    return dispatch(loadJobs(res));
+    return dispatch(getJobs(res));
   } catch (err) {
     //todo configure auth errors with redux...
   }

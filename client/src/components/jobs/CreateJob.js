@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { newJobThunk } from "../../redux/thunks/jobs";
+import { newJobThunk } from "../../redux/thunks/job";
 
 class CreateJob extends Component {
   state = {
@@ -20,8 +20,7 @@ class CreateJob extends Component {
   submitHandler = e => {
     e.preventDefault();
     console.log("submit form");
-    const token = localStorage.getItem("token");
-    this.props.newJobThunk(this.state, token);
+    this.props.newJobThunk(this.state);
     this.setState({ company: "", website: "", link: "", linkedIn: "" });
     return this.props.history.push("/jobs");
   };
@@ -67,7 +66,7 @@ class CreateJob extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    newJobThunk: (jobObj, token) => dispatch(newJobThunk(jobObj, token))
+    newJobThunk: jobObj => dispatch(newJobThunk(jobObj))
   };
 };
 

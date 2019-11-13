@@ -1,6 +1,6 @@
-export const loadJobs = jobs => {
+export const getJobs = jobs => {
   return {
-    type: "LOAD_JOBS",
+    type: "GET_JOBS",
     payload: jobs
   };
 };

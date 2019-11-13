@@ -1,7 +1,8 @@
 import { combineReducers } from "redux";
 import auth from "./auth";
-import jobs from "./jobs";
+import job from "./job";
+import employee from "./employee";
 
-const rootReducer = combineReducers({ auth, jobs });
+const rootReducer = combineReducers({ auth, job, employee });
 
 export default rootReducer;

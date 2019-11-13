@@ -12,8 +12,14 @@ class Dashboard extends Component {
     return (
       <div>
         <h1>Dashboard</h1>
-        <Link to="/create-job">Add new job</Link>
-        <Link to="/jobs">View all jobs</Link>
+        <ul>
+          <li>
+            <Link to="/create-job">Add new job</Link>
+          </li>
+          <li>
+            <Link to="/jobs">View all jobs</Link>
+          </li>
+        </ul>
       </div>
     );
   }

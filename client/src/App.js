@@ -3,7 +3,7 @@ import "./App.css";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import { jwtThunk } from "./redux/thunks/auth";
-import { readJobsThunk } from "./redux/thunks/jobs";
+import { readJobsThunk } from "./redux/thunks/job";
 import PrivateRoute from "./components/auth/PrivateRoute";
 
 import Landing from "./components/layout/Landing";
@@ -23,7 +23,7 @@ class App extends Component {
       this.props.jwtThunk(token);
 
       //todo should i put this here? or should i put it somewhere else? is this expensive?
-      this.props.readJobsThunk(token);
+      this.props.readJobsThunk();
     }
   }
 
@@ -56,7 +56,7 @@ class App extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     jwtThunk: token => dispatch(jwtThunk(token)),
-    readJobsThunk: token => dispatch(readJobsThunk(token))
+    readJobsThunk: () => dispatch(readJobsThunk())
   };
 };
 
