@@ -57,7 +57,6 @@ router.post("/logoutAll", auth, async (req, res) => {
 
 //get my profile
 router.get("/users/me", auth, async (req, res) => {
-  console.log("hit");
   res.send(req.user);
 });
 

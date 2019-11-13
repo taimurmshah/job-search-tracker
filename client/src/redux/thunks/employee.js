@@ -1,4 +1,4 @@
-import { newEmployee } from "../actions/employee";
+import { newEmployee, getEmployees } from "../actions/employee";
 import { URL } from "../../resources";
 
 const token = localStorage.getItem("token");
@@ -23,4 +23,21 @@ export const newEmployeeThunk = (employee, jobId) => async dispatch => {
   } catch (err) {
     //todo handle error
   }
+};
+
+export const getEmployeesThunk = jobId => async dispatch => {
+  try {
+    let res = await fetch(`${URL}/jobs/${jobId}/employees`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: token
+      }
+    });
+
+    res = await res.json();
+
+    return dispatch(getEmployees(res));
+  } catch (err) {}
 };

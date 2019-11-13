@@ -11,8 +11,6 @@ const employeeSchema = new mongoose.Schema(
     email: {
       type: String,
       trim: true,
-      // required: true,
-      unique: true,
       validate(value) {
         if (!validator.isEmail(value)) {
           throw new Error("Please enter valid email");
@@ -44,9 +42,12 @@ const employeeSchema = new mongoose.Schema(
     }
   },
   {
-    timestamps: true
+    timestamps: true,
+    autoIndex: false
   }
 );
+
+employeeSchema.set("autoIndex", false);
 
 const Employee = mongoose.model("Employee", employeeSchema);
 

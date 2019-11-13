@@ -2,22 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9795be7-cb21-497b-ace0-f02a597b388f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/components/employees/NewEmployee.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/redux/actions/employee.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/redux/reducers/employee.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/redux/thunks/employee.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/models/Employee.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/Employee.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/routes/employee.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/employee.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/dashboard/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/jobs/CreateJob.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/jobs/CreateJob.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routes/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/user.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/jobs/Job.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/jobs/Job.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/jobs/Jobs.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/jobs/Jobs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/actions/jobs.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/actions/job.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/reducers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/reducers/jobs.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/reducers/job.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/thunks/jobs.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/thunks/job.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/layout/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/Navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/actions/employee.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/actions/employee.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/reducers/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/reducers/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/reducers/employee.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/reducers/employee.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/thunks/employee.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/thunks/employee.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/db.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -75,7 +71,7 @@
       <option name="presentableId" value="Default" />
       <updated>1573434303322</updated>
       <workItem from="1573434305260" duration="14389000" />
-      <workItem from="1573504891575" duration="13509000" />
+      <workItem from="1573504891575" duration="16768000" />
     </task>
     <servers />
   </component>

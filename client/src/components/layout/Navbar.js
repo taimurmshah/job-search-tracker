@@ -13,7 +13,7 @@ const Navbar = ({ currentUser, isLoggedIn }) => {
               <Logout />
             </li>
             <li>
-              <p>Home Button</p>
+              <Link to="/dashboard">Home</Link>
             </li>
           </>
         ) : (

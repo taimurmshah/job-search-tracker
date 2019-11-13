@@ -8,9 +8,8 @@ const router = new express.Router();
 //create employee
 //requires job id
 router.post("/jobs/:id/employees", auth, async (req, res) => {
-  console.log("employee routes create new employee");
-
-  if (req.body.email.length === 0) {
+  console.log("req.body:", req.body);
+  if (req.body.email !== undefined && req.body.email.length === 0) {
     delete req.body.email;
   }
 

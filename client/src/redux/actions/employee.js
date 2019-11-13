@@ -4,3 +4,10 @@ export const newEmployee = employee => {
     payload: employee
   };
 };
+
+export const getEmployees = employees => {
+  return {
+    type: "GET_EMPLOYEES",
+    payload: employees
+  };
+};
