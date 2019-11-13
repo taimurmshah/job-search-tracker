@@ -12,6 +12,14 @@ export default function(state = initialState, action) {
       };
     case "LOAD_JOBS":
       return { ...state, jobs: action.payload };
+    case "CURRENT_JOB":
+      const currentJob = state.jobs.filter(
+        job => job._id === action.payload
+      )[0];
+      return {
+        ...state,
+        currentJob
+      };
     default:
       return state;
   }

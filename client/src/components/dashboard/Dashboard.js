@@ -13,6 +13,7 @@ class Dashboard extends Component {
       <div>
         <h1>Dashboard</h1>
         <Link to="/create-job">Add new job</Link>
+        <Link to="/jobs">View all jobs</Link>
       </div>
     );
   }

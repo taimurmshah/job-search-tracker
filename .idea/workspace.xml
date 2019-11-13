@@ -2,20 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9795be7-cb21-497b-ace0-f02a597b388f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/components/auth/PrivateRoute.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/jobs/Job.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/middleware/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/middleware/auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/models/Job.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/Job.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/job.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/job.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/dashboard/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/jobs/CreateJob.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/jobs/CreateJob.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/jobs/JobContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/jobs/Jobs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/layout/Landing.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/Landing.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/jobs/Jobs.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/jobs/Jobs.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/redux/actions/jobs.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/actions/jobs.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/redux/reducers/jobs.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/reducers/jobs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/thunks/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/thunks/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/thunks/jobs.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/thunks/jobs.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +67,7 @@
       <option name="presentableId" value="Default" />
       <updated>1573434303322</updated>
       <workItem from="1573434305260" duration="14389000" />
-      <workItem from="1573504891575" duration="7983000" />
+      <workItem from="1573504891575" duration="9264000" />
     </task>
     <servers />
   </component>

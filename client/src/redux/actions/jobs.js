@@ -11,3 +11,10 @@ export const newJob = job => {
     payload: job
   };
 };
+
+export const currentJob = id => {
+  return {
+    type: "CURRENT_JOB",
+    payload: id
+  };
+};

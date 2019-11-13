@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Employee = require("./Employee");
 
+//todo website validation (includes ".com")
+
 const jobSchema = new mongoose.Schema(
   {
     company: {

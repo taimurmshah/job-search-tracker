@@ -12,6 +12,7 @@ import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Dashboard from "./components/dashboard/Dashboard";
 import Jobs from "./components/jobs/Jobs";
+import Job from "./components/jobs/Job";
 import CreateJob from "./components/jobs/CreateJob";
 
 class App extends Component {
@@ -37,6 +38,7 @@ class App extends Component {
             <Route exact path="/signup" component={Signup} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <PrivateRoute exact path="/jobs" component={Jobs} />
+            <PrivateRoute exact path="/jobs/:id" component={Job} />
             <PrivateRoute exact path="/create-job" component={CreateJob} />
           </Switch>
         </>
