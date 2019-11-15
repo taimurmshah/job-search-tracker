@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 
 class AddEmail extends Component {
   state = {
@@ -14,7 +13,7 @@ class AddEmail extends Component {
 
   submitHandler = e => {
     e.preventDefault();
-    this.props.submitHandler(this.state);
+    this.props.updateEmployeeSubmitHandler(this.state);
     this.setState({ email: "" });
   };
 
@@ -29,6 +28,7 @@ class AddEmail extends Component {
             onChange={this.changeHandler}
           />
           <button type="submit">Submit</button>
+          <button onClick={this.props.closeEmailFormHandler}>Close</button>
         </form>
       </div>
     );

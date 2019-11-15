@@ -88,8 +88,6 @@ router.patch("/jobs/:id/employees/:employee_id", auth, async (req, res) => {
 
     await employee.save();
 
-    console.log({ employee });
-
     res.send(employee);
   } catch (err) {
     res.status(400).send(err);

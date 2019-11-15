@@ -1,6 +1,5 @@
 import { newEmployee, getEmployees, updateEmployee } from "../actions/employee";
 import { URL } from "../../resources";
-import employee from "../reducers/employee";
 
 const token = localStorage.getItem("token");
 

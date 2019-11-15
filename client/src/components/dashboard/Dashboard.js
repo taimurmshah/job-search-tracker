@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
 class Dashboard extends Component {
   render() {
-    const token = localStorage.getItem("token");
-    console.log("Dashboard.js");
     if (!this.props.isLoggedIn) {
       return <Redirect to="/" />;
     }

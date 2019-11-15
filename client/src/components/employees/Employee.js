@@ -17,6 +17,13 @@ class Employee extends Component {
     );
   };
 
+  clickHandler = () => {
+    this.props.emailButtonClickHandler(this.props.employee._id);
+  };
+
+  send = <button>Send Email</button>;
+  add = <button onClick={this.clickHandler}>Add Email</button>;
+
   render() {
     const {
       _id,
@@ -27,17 +34,6 @@ class Employee extends Component {
       response
     } = this.props.employee;
 
-    const send = <button>Send Email</button>;
-    const add = (
-      <button
-        onClick={() => {
-          this.setState({ addEmail: !this.state.addEmail });
-        }}
-      >
-        Add Email
-      </button>
-    );
-
     return (
       <>
         <tr key={_id}>
@@ -47,7 +43,7 @@ class Employee extends Component {
           <td>{response ? "✅" : "🚨"}</td>
 
           <td>{email ? email : ""}</td>
-          <td>{email ? send : add}</td>
+          <td>{email ? this.send : this.add}</td>
         </tr>
 
         {this.state.addEmail ? (

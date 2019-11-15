@@ -4,15 +4,9 @@ import { connect } from "react-redux";
 
 class Landing extends Component {
   render() {
-    const token = localStorage.getItem("token");
-
-    console.log("Landing.js");
-
     if (this.props.isLoggedIn) {
-      console.log("Landing redirect to dashboard");
       return <Redirect to="/dashboard" />;
     }
-
     return <h1>Landing</h1>;
   }
 }

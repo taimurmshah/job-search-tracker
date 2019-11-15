@@ -67,7 +67,7 @@ export const jwtThunk = token => async dispatch => {
 
 export const logoutThunk = token => async dispatch => {
   try {
-    let res = await fetch(`${URL}/logout`, {
+    await fetch(`${URL}/logout`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

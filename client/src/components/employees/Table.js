@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import AddEmail from "../jobs/AddEmail";
 import { updateEmployeeThunk } from "../../redux/thunks/employee";
 import Employee from "./Employee";
 
 class Table extends Component {
-  tableData = this.props.employees.map(e => {
-    return <Employee key={e._id} employee={e} />;
-  });
-
   render() {
-    console.log("tableData", this.tableData);
+    const tableData = this.props.employees.map(e => {
+      return (
+        <Employee
+          key={e._id}
+          employee={e}
+          emailButtonClickHandler={this.props.emailButtonClickHandler}
+        />
+      );
+    });
+
     return (
       <div>
         <h1>Table</h1>
@@ -25,12 +29,18 @@ class Table extends Component {
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>{this.tableData}</tbody>
+          <tbody>{tableData}</tbody>
         </table>
       </div>
     );
   }
 }
+
+// const mapStateToProps = state => {
+//   return {
+//     employees: state.employee.employees
+//   };
+// };
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -40,6 +50,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
+  // mapStateToProps,
   null,
   mapDispatchToProps
 )(Table);
