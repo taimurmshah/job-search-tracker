@@ -14,8 +14,7 @@ export default function(state = initialState, action) {
     case "GET_EMPLOYEES":
       return { ...state, employees: action.payload };
     case "UPDATE_EMPLOYEE":
-      console.log("in reducer, action.payload:", action.payload);
-      let updatedEmployees = state.employees;
+      let updatedEmployees = [...state.employees];
       let index = updatedEmployees.findIndex(e => e._id === action.payload._id);
       updatedEmployees[index] = action.payload;
       return {

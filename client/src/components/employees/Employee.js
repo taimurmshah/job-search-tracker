@@ -18,7 +18,14 @@ class Employee extends Component {
   };
 
   render() {
-    const { name, position, linkedIn, email } = this.props.employee;
+    const {
+      _id,
+      name,
+      position,
+      linkedIn,
+      email,
+      response
+    } = this.props.employee;
 
     const send = <button>Send Email</button>;
     const add = (
@@ -33,19 +40,19 @@ class Employee extends Component {
 
     return (
       <>
-        <li className="employee">
-          <p>{name}</p>
+        <tr key={_id}>
+          <td>{name}</td>
+          <td>{position}</td>
+          <td>{linkedIn}</td>
+          <td>{response ? "✅" : "🚨"}</td>
 
-          <p>Position: {position} </p>
+          <td>{email ? email : ""}</td>
+          <td>{email ? send : add}</td>
+        </tr>
 
-          <p>LinkedIn: {linkedIn} </p>
-
-          <p>{email ? send : add} </p>
-
-          {this.state.addEmail ? (
-            <AddEmail submitHandler={this.newEmailSubmit} />
-          ) : null}
-        </li>
+        {this.state.addEmail ? (
+          <AddEmail submitHandler={this.newEmailSubmit} />
+        ) : null}
       </>
     );
   }

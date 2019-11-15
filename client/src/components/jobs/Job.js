@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Employee from "../employees/Employee";
 import NewEmployee from "../employees/NewEmployee";
+import Table from "../employees/Table";
+import AddEmail from "./AddEmail";
 
 import { newEmployeeThunk } from "../../redux/thunks/employee";
 
@@ -17,17 +19,15 @@ class Job extends Component {
   };
 
   render() {
-    //todo enter email if not there
-
-    const employees = this.props.employees.map(e => (
-      <Employee key={e._id} employee={e} jobId={this.props.job._id} />
-    ));
-
     return (
       <div>
         <h1>{this.props.job.company}</h1>
         <h2>Employees:</h2>
-        <ul>{employees}</ul>
+
+        {this.props.employees.length > 0 && (
+          <Table employees={this.props.employees} jobId={this.props.job._id} />
+        )}
+
         <button
           onClick={() => {
             this.setState({ newEmployeeForm: !this.state.newEmployeeForm });
