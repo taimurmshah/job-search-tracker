@@ -41,7 +41,7 @@ class Employee extends Component {
           <td>{name}</td>
           <td>{position}</td>
           <td>
-            <a href={linkedIn}>
+            <a href={linkedIn[0] === "h" ? linkedIn : "https://" + linkedIn}>
               <img
                 className="linkedIn-logo"
                 src={linkedInLogo}

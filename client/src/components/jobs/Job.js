@@ -57,6 +57,18 @@ class Job extends Component {
     return (
       <div>
         <h1>{this.props.job.company}</h1>
+        <ul className="job-links">
+          <li>
+            <a href={this.props.job.linkedIn}>LinkedIn</a>
+          </li>
+          <li>
+            <a href={"https://" + this.props.job.website}>Website</a>
+          </li>
+          <li>
+            <a href={this.props.job.link}>Job Description</a>
+          </li>
+        </ul>
+
         {this.props.employees.length > 0 && (
           <Table
             employees={this.props.employees}
