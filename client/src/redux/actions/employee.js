@@ -11,3 +11,11 @@ export const getEmployees = employees => {
     payload: employees
   };
 };
+
+export const updateEmployee = employee => {
+  console.log("in action, action.payload:", employee);
+  return {
+    type: "UPDATE_EMPLOYEE",
+    payload: employee
+  };
+};

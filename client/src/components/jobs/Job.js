@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import Employee from "../employees/Employee";
 import NewEmployee from "../employees/NewEmployee";
+
 import { newEmployeeThunk } from "../../redux/thunks/employee";
 
 class Job extends Component {
@@ -10,7 +12,6 @@ class Job extends Component {
   };
 
   newEmployeeSubmitHandler = employee => {
-    console.log({ employee });
     this.setState({ newEmployeeForm: !this.state.newEmployeeForm });
     return this.props.newEmployeeThunk(employee, this.props.job._id);
   };
@@ -18,17 +19,9 @@ class Job extends Component {
   render() {
     //todo enter email if not there
 
-    const employees = this.props.employees.map(e => {
-      console.log({ e });
-      return (
-        <li key={e._id}>
-          <p>{e.name}</p>
-          <p>Position: {e.position}</p>
-          <p>LinkedIn: {e.linkedIn}</p>
-          <p>{e.email ? "send email" : "add email"}</p>
-        </li>
-      );
-    });
+    const employees = this.props.employees.map(e => (
+      <Employee key={e._id} employee={e} jobId={this.props.job._id} />
+    ));
 
     return (
       <div>

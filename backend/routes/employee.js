@@ -8,7 +8,6 @@ const router = new express.Router();
 //create employee
 //requires job id
 router.post("/jobs/:id/employees", auth, async (req, res) => {
-  console.log("req.body:", req.body);
   if (req.body.email !== undefined && req.body.email.length === 0) {
     delete req.body.email;
   }
@@ -69,7 +68,7 @@ router.get("/jobs/:id/employees/:employee_id", auth, async (req, res) => {
 router.patch("/jobs/:id/employees/:employee_id", auth, async (req, res) => {
   const updates = Object.keys(req.body);
 
-  const allowedUpdates = ["response", "notes"];
+  const allowedUpdates = ["response", "notes", "email"];
 
   for (let i = 0; i < updates.length; i++) {
     if (!allowedUpdates.includes(updates[i])) {
@@ -88,6 +87,8 @@ router.patch("/jobs/:id/employees/:employee_id", auth, async (req, res) => {
     updates.forEach(update => (employee[update] = req.body[update]));
 
     await employee.save();
+
+    console.log({ employee });
 
     res.send(employee);
   } catch (err) {

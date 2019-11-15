@@ -1,5 +1,6 @@
-import { newEmployee, getEmployees } from "../actions/employee";
+import { newEmployee, getEmployees, updateEmployee } from "../actions/employee";
 import { URL } from "../../resources";
+import employee from "../reducers/employee";
 
 const token = localStorage.getItem("token");
 
@@ -39,5 +40,31 @@ export const getEmployeesThunk = jobId => async dispatch => {
     res = await res.json();
 
     return dispatch(getEmployees(res));
-  } catch (err) {}
+  } catch (err) {
+    //todo handle error
+  }
+};
+
+export const updateEmployeeThunk = (
+  jobId,
+  employeeId,
+  updates
+) => async dispatch => {
+  try {
+    let res = await fetch(`${URL}/jobs/${jobId}/employees/${employeeId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: token
+      },
+      body: JSON.stringify(updates)
+    });
+
+    res = await res.json();
+
+    return dispatch(updateEmployee(res));
+  } catch (err) {
+    //todo handle error
+  }
 };
