@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9795be7-cb21-497b-ace0-f02a597b388f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/client/src/images/linkedInLogo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/employee.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/employee.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/dashboard/Dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/employees/Employee.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/employees/Employee.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/employees/Table.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/employees/Table.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/jobs/AddEmail.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/jobs/AddEmail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/jobs/Job.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/jobs/Job.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/layout/Landing.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/Landing.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/thunks/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/thunks/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/thunks/employee.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/thunks/employee.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,6 +23,7 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../dev-connector" />
@@ -70,7 +67,7 @@
       <updated>1573434303322</updated>
       <workItem from="1573434305260" duration="14389000" />
       <workItem from="1573504891575" duration="21542000" />
-      <workItem from="1573778923565" duration="8650000" />
+      <workItem from="1573778923565" duration="11148000" />
     </task>
     <servers />
   </component>
@@ -89,5 +86,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AddEmail from "../jobs/AddEmail";
 import { connect } from "react-redux";
 import { updateEmployeeThunk } from "../../redux/thunks/employee";
+import linkedInLogo from "../../images/linkedInLogo.png";
 
 class Employee extends Component {
   state = {
@@ -39,7 +40,15 @@ class Employee extends Component {
         <tr key={_id}>
           <td>{name}</td>
           <td>{position}</td>
-          <td>{linkedIn}</td>
+          <td>
+            <a href={linkedIn}>
+              <img
+                className="linkedIn-logo"
+                src={linkedInLogo}
+                alt="linkedIn logo"
+              />
+            </a>
+          </td>
           <td>{response ? "✅" : "🚨"}</td>
 
           <td>{email ? email : ""}</td>

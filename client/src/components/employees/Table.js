@@ -16,9 +16,9 @@ class Table extends Component {
     });
 
     return (
-      <div>
-        <h1>Table</h1>
-        <table id="employees">
+      <div className="employees-table">
+        <h1>Employees</h1>
+        <table className="table">
           <thead>
             <tr>
               <th>Name</th>

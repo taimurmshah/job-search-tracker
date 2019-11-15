@@ -57,8 +57,6 @@ class Job extends Component {
     return (
       <div>
         <h1>{this.props.job.company}</h1>
-        <h2>Employees:</h2>
-
         {this.props.employees.length > 0 && (
           <Table
             employees={this.props.employees}
@@ -67,7 +65,10 @@ class Job extends Component {
           />
         )}
 
-        <button onClick={this.newEmployeeFormHandler}>Add Employee</button>
+        <div className="add-employee-button">
+          <button onClick={this.newEmployeeFormHandler}>Add Employee</button>
+        </div>
+
         {this.state.newEmployeeForm ? (
           <NewEmployee submitHandler={this.newEmployeeSubmitHandler} />
         ) : null}
