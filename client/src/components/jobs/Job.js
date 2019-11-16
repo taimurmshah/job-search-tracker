@@ -3,36 +3,31 @@ import { connect } from "react-redux";
 import NewEmployee from "../employees/NewEmployee";
 import Table from "../employees/Table";
 import AddEmail from "./AddEmail";
+import Modal from "../layout/Modal";
 import { updateEmployeeThunk } from "../../redux/thunks/employee";
-
 import { newEmployeeThunk } from "../../redux/thunks/employee";
 
 class Job extends Component {
   state = {
     newEmployeeForm: false,
     addEmailForm: false,
-    employeeId: ""
+    employeeId: "",
+    showModal: false
   };
 
   newEmployeeFormHandler = async () => {
-    await this.setState({ newEmployeeForm: !this.state.newEmployeeForm });
+    await this.setState({
+      newEmployeeForm: !this.state.newEmployeeForm,
+      showModal: true
+    });
   };
 
   newEmployeeSubmitHandler = employee => {
-    this.setState({ newEmployeeForm: !this.state.newEmployeeForm });
+    this.setState({ newEmployeeForm: false, showModal: false });
     return this.props.newEmployeeThunk(employee, this.props.job._id);
   };
 
   updateEmployeeSubmitHandler = updates => {
-    console.log(
-      "In submitHandler. jobId:",
-      this.props.job._id,
-      "employeeId:",
-      this.state.employeeId,
-      "updates:",
-      updates
-    );
-
     this.props.updateEmployeeThunk(
       this.props.job._id,
       this.state.employeeId,
@@ -40,20 +35,55 @@ class Job extends Component {
     );
     this.setState({
       addEmailForm: false,
-      employeeId: ""
+      employeeId: "",
+      showModal: false
     });
   };
 
   closeEmailFormHandler = async () => {
-    await this.setState({ addEmailForm: false, employeeId: "" });
+    await this.setState({
+      addEmailForm: false,
+      employeeId: "",
+      showModal: false
+    });
   };
 
   emailButtonClickHandler = async employeeId => {
-    await this.setState({ addEmailForm: true, employeeId });
+    await this.setState({ addEmailForm: true, employeeId, showModal: true });
+  };
+
+  openModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  closeModal = () => {
+    this.setState({
+      showModal: false,
+      addEmailForm: false,
+      newEmployeeForm: false
+    });
+  };
+
+  componentPassToModal = () => {
+    if (
+      this.state.newEmployeeForm === true &&
+      this.state.addEmailForm === false
+    ) {
+      return <NewEmployee submitHandler={this.newEmployeeSubmitHandler} />;
+    } else if (
+      this.state.newEmployeeForm === false &&
+      this.state.addEmailForm === true
+    ) {
+      return (
+        <AddEmail
+          closeEmailFormHandler={this.closeEmailFormHandler}
+          updateEmployeeSubmitHandler={this.updateEmployeeSubmitHandler}
+        />
+      );
+    }
   };
 
   render() {
-    console.log("rerender");
     return (
       <div>
         <h1>{this.props.job.company}</h1>
@@ -68,7 +98,6 @@ class Job extends Component {
             <a href={this.props.job.link}>Job Description</a>
           </li>
         </ul>
-
         {this.props.employees.length > 0 && (
           <Table
             employees={this.props.employees}
@@ -81,16 +110,20 @@ class Job extends Component {
           <button onClick={this.newEmployeeFormHandler}>Add Employee</button>
         </div>
 
-        {this.state.newEmployeeForm ? (
-          <NewEmployee submitHandler={this.newEmployeeSubmitHandler} />
-        ) : null}
-
-        {this.state.addEmailForm && (
-          <AddEmail
-            closeEmailFormHandler={this.closeEmailFormHandler}
-            updateEmployeeSubmitHandler={this.updateEmployeeSubmitHandler}
-          />
-        )}
+        <Modal
+          closeModal={this.closeModal}
+          show={this.state.showModal}
+          component={this.componentPassToModal()}
+        />
+        {/*{this.state.newEmployeeForm && (*/}
+        {/*  <NewEmployee submitHandler={this.newEmployeeSubmitHandler} />*/}
+        {/*)}*/}
+        {/*{this.state.addEmailForm && (*/}
+        {/*  <AddEmail*/}
+        {/*    closeEmailFormHandler={this.closeEmailFormHandler}*/}
+        {/*    updateEmployeeSubmitHandler={this.updateEmployeeSubmitHandler}*/}
+        {/*  />*/}
+        {/*)}*/}
       </div>
     );
   }
