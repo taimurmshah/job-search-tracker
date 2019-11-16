@@ -18,8 +18,8 @@ background: linear-gradient(112deg, rgba(177, 133, 231, 0.46) 0%, rgba(177, 133,
 .modal-main {
   position:fixed;
   background: white;
-  width: 80%;
-  height: auto;
+  width: 35vw;
+  height: 20vw;
   top:50%;
   left:50%;
   transform: translate(-50%,-50%);

@@ -92,6 +92,7 @@ class Job extends Component {
             <a href={this.props.job.linkedIn}>LinkedIn</a>
           </li>
           <li>
+            {/* todo standardize this on backend*/}
             <a href={"https://" + this.props.job.website}>Website</a>
           </li>
           <li>
