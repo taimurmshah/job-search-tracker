@@ -30,7 +30,7 @@ class NewEmployee extends Component {
 
   render() {
     return (
-      <div>
+      <div className="new-employee-form">
         <form onSubmit={this.submitHandler}>
           <p>First Name:</p>
           <input
@@ -67,7 +67,14 @@ class NewEmployee extends Component {
             value={this.state.email}
             onChange={this.changeHandler}
           />
-          <button type="submit">Submit</button>
+          <div className="modal-buttons">
+            <button className="button" type="submit">
+              Submit
+            </button>
+            <button className="button" onClick={this.props.closeModal}>
+              Close
+            </button>
+          </div>
         </form>
       </div>
     );

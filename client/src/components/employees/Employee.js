@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AddEmail from "../jobs/AddEmail";
+import AddEmail from "./AddEmail";
 import { connect } from "react-redux";
 import { updateEmployeeThunk } from "../../redux/thunks/employee";
 import linkedInLogo from "../../images/linkedInLogo.png";
@@ -41,7 +41,10 @@ class Employee extends Component {
           <td>{name}</td>
           <td>{position}</td>
           <td>
-            <a href={linkedIn[0] === "h" ? linkedIn : "https://" + linkedIn}>
+            <a
+              href={linkedIn[0] === "h" ? linkedIn : "https://" + linkedIn}
+              target="_blank"
+            >
               <img
                 className="linkedIn-logo"
                 src={linkedInLogo}

@@ -28,7 +28,7 @@ class AddEmail extends Component {
             onChange={this.changeHandler}
           />
           <button type="submit">Submit</button>
-          <button onClick={this.props.closeEmailFormHandler}>Close</button>
+          <button onClick={this.props.closeModal}>Close</button>
         </form>
       </div>
     );

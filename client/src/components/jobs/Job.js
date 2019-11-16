@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import NewEmployee from "../employees/NewEmployee";
 import Table from "../employees/Table";
-import AddEmail from "./AddEmail";
+import AddEmail from "../employees/AddEmail";
 import Modal from "../layout/Modal";
 import { updateEmployeeThunk } from "../../redux/thunks/employee";
 import { newEmployeeThunk } from "../../redux/thunks/employee";
@@ -40,14 +40,6 @@ class Job extends Component {
     });
   };
 
-  closeEmailFormHandler = async () => {
-    await this.setState({
-      addEmailForm: false,
-      employeeId: "",
-      showModal: false
-    });
-  };
-
   emailButtonClickHandler = async employeeId => {
     await this.setState({ addEmailForm: true, employeeId, showModal: true });
   };
@@ -60,7 +52,8 @@ class Job extends Component {
     this.setState({
       showModal: false,
       addEmailForm: false,
-      newEmployeeForm: false
+      newEmployeeForm: false,
+      employeeId: ""
     });
   };
 
@@ -69,14 +62,19 @@ class Job extends Component {
       this.state.newEmployeeForm === true &&
       this.state.addEmailForm === false
     ) {
-      return <NewEmployee submitHandler={this.newEmployeeSubmitHandler} />;
+      return (
+        <NewEmployee
+          submitHandler={this.newEmployeeSubmitHandler}
+          closeModal={this.closeModal}
+        />
+      );
     } else if (
       this.state.newEmployeeForm === false &&
       this.state.addEmailForm === true
     ) {
       return (
         <AddEmail
-          closeEmailFormHandler={this.closeEmailFormHandler}
+          closeModal={this.closeModal}
           updateEmployeeSubmitHandler={this.updateEmployeeSubmitHandler}
         />
       );
@@ -89,14 +87,20 @@ class Job extends Component {
         <h1>{this.props.job.company}</h1>
         <ul className="job-links">
           <li>
-            <a href={this.props.job.linkedIn}>LinkedIn</a>
+            <a href={this.props.job.linkedIn} target="_blank">
+              LinkedIn
+            </a>
           </li>
           <li>
             {/* todo standardize this on backend*/}
-            <a href={"https://" + this.props.job.website}>Website</a>
+            <a href={"https://" + this.props.job.website} target="_blank">
+              Website
+            </a>
           </li>
           <li>
-            <a href={this.props.job.link}>Job Description</a>
+            <a href={this.props.job.link} target="_blank">
+              Job Description
+            </a>
           </li>
         </ul>
         {this.props.employees.length > 0 && (
