@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
+import GoogleOAuth from "../auth/GoogleOAuth";
 import Logout from "../auth/Logout";
 
 const Navbar = ({ currentUser, isLoggedIn }) => {
@@ -23,6 +24,9 @@ const Navbar = ({ currentUser, isLoggedIn }) => {
             </li>
             <li>
               <Link to="/signup">Sign Up</Link>
+            </li>
+            <li>
+              <GoogleOAuth />
             </li>
           </>
         )}
