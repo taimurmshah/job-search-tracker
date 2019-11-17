@@ -1,7 +1,5 @@
 {
-  "mongoURI": "mongodb+srv://taishnore101:Green101@job-search-tracker-1fd4j.mongodb.net/test?retryWrites=true&w=majority",
-  "secret" : "thisismysecret",
-  "google-oauth" : {
+  "web": {
     "client_id": "602278501830-rphr8gpcgsbitjkn43gcej296j9723sh.apps.googleusercontent.com",
     "project_id": "job-search-helper-259208",
     "auth_uri": "https://accounts.google.com/o/oauth2/auth",

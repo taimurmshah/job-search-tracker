@@ -3,6 +3,8 @@ const User = require("../models/User");
 const auth = require("../middleware/auth");
 
 const router = new express.Router();
+const passport = require("passport");
+const passportConf = require("../middleware/passport");
 
 //create new user
 router.post("/users", async (req, res) => {
@@ -22,13 +24,30 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findByCredentials(email, password);
+    const user = await User.findByCredentials({ email, password });
     const token = await user.generateAuthToken();
     res.send({ user, token });
   } catch (err) {
     res.status(400).send();
   }
 });
+
+// google oauth create
+router
+  .route("/oauth/google")
+  .post(
+    passport.authenticate("googleToken", { session: false }),
+    async (req, res) => {
+      console.log({ req });
+      try {
+        const user = req.user;
+        const token = await user.generateAuthToken();
+        res.send({ user, token });
+      } catch (err) {
+        res.status(400).send(err);
+      }
+    }
+  );
 
 //logout
 router.post("/logout", auth, async (req, res) => {
