@@ -74,8 +74,6 @@ userSchema.virtual("jobs", {
 userSchema.pre("save", async function(next) {
   const user = this;
 
-  console.log("in save pre", { user });
-
   if (user.method !== "local") {
     next();
   }

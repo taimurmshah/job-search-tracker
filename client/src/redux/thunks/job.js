@@ -1,9 +1,9 @@
 import { getJobs, newJob } from "../actions/job";
 import { URL } from "../../resources";
 
-const token = localStorage.getItem("token");
-
 export const newJobThunk = jobObj => async dispatch => {
+  const token = localStorage.getItem("token");
+  console.log({ token });
   try {
     let res = await fetch(`${URL}/jobs`, {
       method: "POST",
@@ -24,6 +24,7 @@ export const newJobThunk = jobObj => async dispatch => {
 };
 
 export const readJobsThunk = () => async dispatch => {
+  const token = localStorage.getItem("token");
   try {
     let res = await fetch(`${URL}/jobs`, {
       method: "GET",

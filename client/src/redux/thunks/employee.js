@@ -4,6 +4,7 @@ import { URL } from "../../resources";
 const token = localStorage.getItem("token");
 
 export const newEmployeeThunk = (employee, jobId) => async dispatch => {
+  const token = localStorage.getItem("token");
   try {
     let res = await fetch(`${URL}/jobs/${jobId}/employees`, {
       method: "POST",
@@ -26,6 +27,7 @@ export const newEmployeeThunk = (employee, jobId) => async dispatch => {
 };
 
 export const getEmployeesThunk = jobId => async dispatch => {
+  const token = localStorage.getItem("token");
   try {
     let res = await fetch(`${URL}/jobs/${jobId}/employees`, {
       method: "GET",
@@ -49,6 +51,7 @@ export const updateEmployeeThunk = (
   employeeId,
   updates
 ) => async dispatch => {
+  const token = localStorage.getItem("token");
   try {
     let res = await fetch(`${URL}/jobs/${jobId}/employees/${employeeId}`, {
       method: "PATCH",
