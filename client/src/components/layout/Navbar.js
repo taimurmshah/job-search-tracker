@@ -5,7 +5,7 @@ import Logout from "../auth/Logout";
 
 const Navbar = ({ currentUser, isLoggedIn }) => {
   return (
-    <div>
+    <div className="navbar">
       <ul>
         {isLoggedIn ? (
           <>

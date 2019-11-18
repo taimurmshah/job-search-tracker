@@ -17,12 +17,20 @@ const GoogleOAuth = props => {
 
   return (
     <GoogleLogin
+      render={renderProps => (
+        <button
+          className="login-page-button google-button"
+          onClick={renderProps.onClick}
+          disabled={renderProps.disabled}
+        >
+          {props.type + " with Google"}
+        </button>
+      )}
       onSuccess={googleResponse}
       onFailure={err => {
         console.log({ err });
       }}
       clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
-      buttonText={props.type}
     />
   );
 };

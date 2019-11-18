@@ -9,6 +9,15 @@ const Logout = ({ logoutThunk, method }) => {
   if (method === "google") {
     return (
       <GoogleLogout
+        render={renderProps => (
+          <button
+            className="local-button button"
+            onClick={renderProps.onClick}
+            disabled={renderProps.disabled}
+          >
+            Log Out
+          </button>
+        )}
         clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
         buttonText="logout"
         onLogoutSuccess={() => logoutThunk(token)}
@@ -18,6 +27,7 @@ const Logout = ({ logoutThunk, method }) => {
 
   return (
     <button
+      className="local-button button"
       onClick={e => {
         e.preventDefault();
         return logoutThunk(token);

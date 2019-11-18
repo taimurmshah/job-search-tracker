@@ -1,24 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { loginThunk } from "../../redux/thunks/auth";
 import { Redirect } from "react-router-dom";
+import LoginForm from "./LoginForm";
 import GoogleOAuth from "./GoogleOAuth";
+import Modal from "../layout/Modal";
 
 class Login extends Component {
   state = {
-    method: "local",
-    email: "",
-    password: ""
+    showModal: false
   };
 
-  changeHandler = e => {
-    this.setState({ [e.target.name]: e.target.value });
+  openModal = () => {
+    this.setState({ showModal: true });
   };
 
-  submitHandler = e => {
-    e.preventDefault();
-    this.props.loginThunk(this.state);
-    return this.setState({ email: "", password: "" });
+  closeModal = () => {
+    this.setState({ showModal: false });
   };
 
   render() {
@@ -30,25 +27,24 @@ class Login extends Component {
     }
 
     return (
-      <div>
+      <div className="container">
         <p>Login:</p>
-        <form onSubmit={this.submitHandler}>
-          <input
-            name="email"
-            value={this.state.email}
-            placeholder="email"
-            onChange={this.changeHandler}
+        <div className="auth-buttons">
+          <button
+            className="login-page-button local-button"
+            onClick={this.openModal}
+          >
+            Log In
+          </button>
+          <GoogleOAuth type="Log in" />
+        </div>
+        {this.state.showModal && (
+          <Modal
+            closeModal={this.closeModal}
+            show={this.state.showModal}
+            component={<LoginForm closeModal={this.closeModal} />}
           />
-          <input
-            type="password"
-            name="password"
-            value={this.state.password}
-            placeholder="password"
-            onChange={this.changeHandler}
-          />
-          <button type="submit">Login</button>
-        </form>
-        <GoogleOAuth type="Log in" />
+        )}
       </div>
     );
   }
@@ -60,13 +56,4 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    loginThunk: userObj => dispatch(loginThunk(userObj))
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Login);
+export default connect(mapStateToProps)(Login);
