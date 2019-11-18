@@ -6,6 +6,7 @@ import GoogleOAuth from "./GoogleOAuth";
 
 class Login extends Component {
   state = {
+    method: "local",
     email: "",
     password: ""
   };

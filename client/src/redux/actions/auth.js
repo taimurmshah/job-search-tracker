@@ -12,6 +12,13 @@ export const login = user => {
   };
 };
 
+export const googleLogin = user => {
+  return {
+    type: "GOOGLE_LOGIN",
+    payload: user
+  };
+};
+
 //this action is used when a user's jwt is stored in the browser; auth with jwt
 export const authorize = user => {
   return {

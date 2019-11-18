@@ -72,13 +72,15 @@ userSchema.virtual("jobs", {
 });
 
 userSchema.pre("save", async function(next) {
-  if (this.method !== "local") {
+  const user = this;
+
+  console.log("in save pre", { user });
+
+  if (user.method !== "local") {
     next();
   }
 
-  const user = this;
-
-  if (user.isModified("password")) {
+  if (user.isModified("local.password")) {
     user.local.password = await bcrypt.hash(user.local.password, 8);
   }
 
@@ -100,7 +102,10 @@ userSchema.methods.toJSON = function() {
 };
 
 userSchema.statics.findByCredentials = async (email, password) => {
-  const user = await User.findOne({ "local.email": email });
+  console.log({ email });
+  console.log({ password });
+  const user = await User.findOne({ method: "local", "local.email": email });
+  console.log({ user });
 
   if (!user) throw new Error("Cannot log in");
 

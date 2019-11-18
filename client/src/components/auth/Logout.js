@@ -1,18 +1,38 @@
 import React from "react";
 import { connect } from "react-redux";
 import { logoutThunk } from "../../redux/thunks/auth";
+import { GoogleLogout } from "react-google-login";
 
-const Logout = ({ logoutThunk }) => (
-  <button
-    onClick={e => {
-      e.preventDefault();
-      const token = localStorage.getItem("token");
-      return logoutThunk(token);
-    }}
-  >
-    Log Out
-  </button>
-);
+const Logout = ({ logoutThunk, method }) => {
+  const token = localStorage.getItem("token");
+
+  if (method === "google") {
+    return (
+      <GoogleLogout
+        clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
+        buttonText="logout"
+        onLogoutSuccess={() => logoutThunk(token)}
+      />
+    );
+  }
+
+  return (
+    <button
+      onClick={e => {
+        e.preventDefault();
+        return logoutThunk(token);
+      }}
+    >
+      Log Out
+    </button>
+  );
+};
+
+const mapStateToProps = state => {
+  return {
+    method: state.auth.currentUser.method
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -21,6 +41,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Logout);

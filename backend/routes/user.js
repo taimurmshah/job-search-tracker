@@ -4,12 +4,19 @@ const auth = require("../middleware/auth");
 const googleOAuth = require("../middleware/google-oauth");
 
 const router = new express.Router();
-const passport = require("passport");
-const passportConf = require("../middleware/passport");
 
 //create new user
 router.post("/users", async (req, res) => {
-  const user = new User(req.body);
+  console.log("req.body:", req.body);
+
+  const { method, email, name, password } = req.body;
+
+  const user = new User({
+    method,
+    "local.email": email,
+    "local.password": password,
+    name
+  });
 
   try {
     await user.save();
@@ -22,10 +29,12 @@ router.post("/users", async (req, res) => {
 
 //login
 router.post("/login", async (req, res) => {
+  console.log("req.body:", req.body);
   const { email, password } = req.body;
 
   try {
-    const user = await User.findByCredentials({ email, password });
+    const user = await User.findByCredentials(email, password);
+
     const token = await user.generateAuthToken();
     res.send({ user, token });
   } catch (err) {
@@ -38,30 +47,11 @@ router.post("/oauth/google", googleOAuth, async (req, res) => {
   try {
     const user = req.user;
     const token = await user.generateAuthToken();
-    // console.log({ user });
-    // console.log({ token });
     res.send({ user, token });
   } catch (err) {
     res.status(400).send(err);
   }
 });
-
-// // google oauth create
-// router
-//   .route("/oauth/google")
-//   .post(
-//     passport.authenticate("googleToken", { session: false }),
-//     async (req, res) => {
-//       console.log({ req });
-//       try {
-//         const user = req.user;
-//         const token = await user.generateAuthToken();
-//         res.send({ user, token });
-//       } catch (err) {
-//         res.status(400).send(err);
-//       }
-//     }
-//   );
 
 //logout
 router.post("/logout", auth, async (req, res) => {
