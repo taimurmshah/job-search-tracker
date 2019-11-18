@@ -16,10 +16,9 @@ const GoogleOAuth = props => {
 
   return (
     <GoogleLogin
+      responseType="code"
       onSuccess={googleResponse}
-      onFailure={err => {
-        console.log({ err });
-      }}
+      onFailure={googleResponse}
       clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
       buttonText={props.type}
     />
