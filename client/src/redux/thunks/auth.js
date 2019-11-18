@@ -82,7 +82,7 @@ export const logoutThunk = token => async dispatch => {
   }
 };
 
-export const googleOAuthThunk = access_token => async dispatch => {
+export const googleOAuthThunk = user => async dispatch => {
   try {
     let res = await fetch("http://localhost:5000/oauth/google", {
       method: "POST",
@@ -91,10 +91,10 @@ export const googleOAuthThunk = access_token => async dispatch => {
         Accept: "application/json",
         "Access-Control-Allow-Origin": "*"
       },
-      body: JSON.stringify({ access_token })
+      body: JSON.stringify({ user })
     });
 
-    res = res.json();
+    res = await res.json();
     console.log("need to add action, here's the res:", res);
   } catch (err) {}
 };

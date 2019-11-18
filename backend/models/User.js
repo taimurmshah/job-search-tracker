@@ -53,7 +53,10 @@ const userSchema = new mongoose.Schema(
           required: true
         }
       }
-    ]
+    ],
+    imageUrl: {
+      type: String
+    }
   },
   {
     timestamps: true

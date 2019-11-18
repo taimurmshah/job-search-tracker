@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d9795be7-cb21-497b-ace0-f02a597b388f" name="Default Changelist" comment="" />
+    <list default="true" id="d9795be7-cb21-497b-ace0-f02a597b388f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/middleware/google-oauth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/User.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routes/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/auth/GoogleOAuth.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/auth/GoogleOAuth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/thunks/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/thunks/auth.js" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

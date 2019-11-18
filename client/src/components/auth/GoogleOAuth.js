@@ -7,12 +7,13 @@ import { googleOAuthThunk } from "../../redux/thunks/auth";
 
 const GoogleOAuth = props => {
   const googleResponse = response => {
-    console.log({ response });
+    let user = response.profileObj;
+
     // console.log("access_token:", response.Zi.access_token);
-    // props.googleOAuthThunk(response.Zi.access_token);
+    props.googleOAuthThunk(user);
   };
 
-  console.log("oauth:", process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID);
+  // console.log("oauth:", process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID);
 
   return (
     <GoogleLogin
