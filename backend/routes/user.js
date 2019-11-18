@@ -1,12 +1,22 @@
 const express = require("express");
 const User = require("../models/User");
 const auth = require("../middleware/auth");
+const googleOAuth = require("../middleware/google-oauth");
 
 const router = new express.Router();
 
 //create new user
 router.post("/users", async (req, res) => {
-  const user = new User(req.body);
+  console.log("req.body:", req.body);
+
+  const { method, email, name, password } = req.body;
+
+  const user = new User({
+    method,
+    "local.email": email,
+    "local.password": password,
+    name
+  });
 
   try {
     await user.save();
@@ -19,14 +29,27 @@ router.post("/users", async (req, res) => {
 
 //login
 router.post("/login", async (req, res) => {
+  console.log("req.body:", req.body);
   const { email, password } = req.body;
 
   try {
     const user = await User.findByCredentials(email, password);
+
     const token = await user.generateAuthToken();
     res.send({ user, token });
   } catch (err) {
     res.status(400).send();
+  }
+});
+
+// google oauth
+router.post("/oauth/google", googleOAuth, async (req, res) => {
+  try {
+    const user = req.user;
+    const token = await user.generateAuthToken();
+    res.send({ user, token });
+  } catch (err) {
+    res.status(400).send(err);
   }
 });
 

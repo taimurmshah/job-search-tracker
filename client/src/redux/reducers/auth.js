@@ -10,6 +10,7 @@ export default function(state = initialState, action) {
     case "SIGNUP":
     case "LOGIN":
     case "AUTHORIZE":
+    case "GOOGLE_LOGIN":
       return { ...state, currentUser: action.payload, isLoggedIn: true };
     case "LOGOUT":
       return {

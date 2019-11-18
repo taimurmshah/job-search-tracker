@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { signupThunk } from "../../redux/thunks/auth";
 import { Redirect } from "react-router-dom";
+import GoogleOAuth from "./GoogleOAuth";
 
 class Signup extends Component {
   state = {
+    method: "local",
     name: "",
     email: "",
     password: ""
@@ -32,26 +34,29 @@ class Signup extends Component {
     return (
       <div>
         <p>Sign Up:</p>
-        <input
-          name="name"
-          value={this.state.name}
-          placeholder="name"
-          onChange={this.changeHandler}
-        />
-        <input
-          name="email"
-          value={this.state.email}
-          placeholder="email"
-          onChange={this.changeHandler}
-        />
-        <input
-          type="password"
-          name="password"
-          value={this.state.password}
-          placeholder="password"
-          onChange={this.changeHandler}
-        />
-        <button onClick={this.submitHandler}>Register</button>
+        <form onSubmit={this.submitHandler}>
+          <input
+            name="name"
+            value={this.state.name}
+            placeholder="name"
+            onChange={this.changeHandler}
+          />
+          <input
+            name="email"
+            value={this.state.email}
+            placeholder="email"
+            onChange={this.changeHandler}
+          />
+          <input
+            type="password"
+            name="password"
+            value={this.state.password}
+            placeholder="password"
+            onChange={this.changeHandler}
+          />
+          <button type="submit">Register</button>
+        </form>
+        <GoogleOAuth type="Register" />
       </div>
     );
   }

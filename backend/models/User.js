@@ -7,30 +7,43 @@ const Job = require("./Job");
 
 const userSchema = new mongoose.Schema(
   {
+    method: {
+      type: String,
+      enum: ["local", "google"],
+      required: true
+    },
     name: {
       type: String,
       required: true,
       trim: true
     },
-    email: {
-      type: String,
-      trim: true,
-      required: true,
-      unique: true,
-      validate(value) {
-        if (!validator.isEmail(value)) {
-          throw new Error("Please enter valid email");
+    local: {
+      email: {
+        type: String,
+        trim: true,
+        validate(value) {
+          if (!validator.isEmail(value)) {
+            throw new Error("Please enter valid email");
+          }
+        }
+      },
+      password: {
+        type: String,
+        minlength: 7,
+        validate(value) {
+          if (value.toLowerCase().includes("password")) {
+            throw new Error("Password entry cannot contain 'password'.");
+          }
         }
       }
     },
-    password: {
-      type: String,
-      minlength: 7,
-      required: true,
-      validate(value) {
-        if (value.toLowerCase().includes("password")) {
-          throw new Error("Password entry cannot contain 'password'.");
-        }
+    google: {
+      id: {
+        type: String
+      },
+      email: {
+        type: String,
+        lowercase: true
       }
     },
     tokens: [
@@ -40,12 +53,17 @@ const userSchema = new mongoose.Schema(
           required: true
         }
       }
-    ]
+    ],
+    imageUrl: {
+      type: String
+    }
   },
   {
     timestamps: true
   }
 );
+
+//todo is tokens field gonna be part of local?
 
 userSchema.virtual("jobs", {
   ref: "Job",
@@ -53,36 +71,50 @@ userSchema.virtual("jobs", {
   foreignField: "owner"
 });
 
+userSchema.pre("save", async function(next) {
+  const user = this;
+
+  console.log("in save pre", { user });
+
+  if (user.method !== "local") {
+    next();
+  }
+
+  if (user.isModified("local.password")) {
+    user.local.password = await bcrypt.hash(user.local.password, 8);
+  }
+
+  next();
+});
+
 userSchema.methods.toJSON = function() {
   const user = this;
+
   const userObj = user.toObject();
-  delete userObj.password;
+
+  if (user.method === "local") {
+    delete userObj.local.password;
+  }
+
   delete userObj.tokens;
 
   return userObj;
 };
 
 userSchema.statics.findByCredentials = async (email, password) => {
-  const user = await User.findOne({ email });
+  console.log({ email });
+  console.log({ password });
+  const user = await User.findOne({ method: "local", "local.email": email });
+  console.log({ user });
 
   if (!user) throw new Error("Cannot log in");
 
-  const isMatch = await bcrypt.compare(password, user.password);
+  const isMatch = await bcrypt.compare(password, user.local.password);
 
   if (!isMatch) throw new Error("Cannot log in");
 
   return user;
 };
-
-userSchema.pre("save", async function(next) {
-  const user = this;
-
-  if (user.isModified("password")) {
-    user.password = await bcrypt.hash(user.password, 8);
-  }
-
-  next();
-});
 
 userSchema.methods.generateAuthToken = async function() {
   const user = this;

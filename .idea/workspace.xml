@@ -3,12 +3,23 @@
   <component name="ChangeListManager">
     <list default="true" id="d9795be7-cb21-497b-ace0-f02a597b388f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/client/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/employees/Employee.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/employees/Employee.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/employees/NewEmployee.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/employees/NewEmployee.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/jobs/AddEmail.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/employees/AddEmail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/jobs/Job.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/jobs/Job.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/layout/Modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/Modal.js" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/backend/models/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/User.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routes/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/auth/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/auth/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/auth/Logout.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/auth/Logout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/auth/Signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/auth/Signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/actions/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/actions/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/reducers/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/reducers/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/redux/thunks/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/thunks/auth.js" afterDir="false" />
+>>>>>>> googlefix
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,7 +38,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../dev-connector" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Bootcamp/Five/Mod-5-project" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -37,6 +48,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="watcher.settings" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">

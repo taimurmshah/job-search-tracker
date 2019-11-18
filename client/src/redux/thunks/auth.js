@@ -1,4 +1,4 @@
-import { login, signup, authorize, logout } from "../actions/auth";
+import { login, signup, googleLogin, authorize, logout } from "../actions/auth";
 import { URL } from "../../resources";
 
 export const signupThunk = userObj => async dispatch => {
@@ -45,6 +45,26 @@ export const loginThunk = userObj => async dispatch => {
   } catch (err) {
     //todo configure auth errors with redux...
   }
+};
+
+export const googleOAuthThunk = user => async dispatch => {
+  try {
+    let res = await fetch("http://localhost:5000/oauth/google", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
+      body: JSON.stringify({ user })
+    });
+
+    res = await res.json();
+
+    localStorage.setItem("token", res.token);
+
+    dispatch(googleLogin(res.user));
+  } catch (err) {}
 };
 
 export const jwtThunk = token => async dispatch => {
