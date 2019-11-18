@@ -2,18 +2,17 @@
   "mongoURI": "mongodb+srv://taishnore101:Green101@job-search-tracker-1fd4j.mongodb.net/test?retryWrites=true&w=majority",
   "secret" : "thisismysecret",
   "google-oauth" : {
-    "client_id": "602278501830-rphr8gpcgsbitjkn43gcej296j9723sh.apps.googleusercontent.com",
+    "client_id": "602278501830-b6dgn7vhmg5ui2ccefo5q91rllluhv70.apps.googleusercontent.com",
     "project_id": "job-search-helper-259208",
     "auth_uri": "https://accounts.google.com/o/oauth2/auth",
     "token_uri": "https://oauth2.googleapis.com/token",
     "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-    "client_secret": "ePV_FcVyr7etPofcaN4pmYcL",
+    "client_secret": "G__CY5nGsckdEK79X10KQgad",
     "redirect_uris": [
-      "https://localhost:3000/auth/google/callback"
+      "http://localhost:3000"
     ],
     "javascript_origins": [
-      "https://localhost:3000",
-      "https://localhost:5000"
+      "http://localhost:3000"
     ]
   }
 }

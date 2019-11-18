@@ -81,3 +81,20 @@ export const logoutThunk = token => async dispatch => {
     //todo configure auth errors with redux...
   }
 };
+
+export const googleOAuthThunk = access_token => async dispatch => {
+  try {
+    let res = await fetch("http://localhost:5000/oauth/google", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
+      body: JSON.stringify({ access_token })
+    });
+
+    res = res.json();
+    console.log("need to add action, here's the res:", res);
+  } catch (err) {}
+};

@@ -1,17 +1,18 @@
 const passport = require("passport");
 const GooglePlusTokenStrategy = require("passport-google-plus-token");
 const User = require("../models/User");
+const config = require("config");
 
 //Google OAuth strategy
 passport.use(
   "googleToken",
   new GooglePlusTokenStrategy(
     {
-      clientID:
-        "602278501830-rphr8gpcgsbitjkn43gcej296j9723sh.apps.googleusercontent.com",
-      clientSecret: "ePV_FcVyr7etPofcaN4pmYcL"
+      clientID: config.get("google-oauth.client_id"),
+      clientSecret: config.get("google-oauth.client_secret")
     },
     async (accessToken, refreshToken, profile, done) => {
+      console.log("hit");
       try {
         // console.log({ accessToken });
         // console.log({ refreshToken });

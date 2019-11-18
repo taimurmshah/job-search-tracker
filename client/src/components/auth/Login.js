@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { loginThunk } from "../../redux/thunks/auth";
 import { Redirect } from "react-router-dom";
+import GoogleOAuth from "./GoogleOAuth";
 
 class Login extends Component {
   state = {
@@ -20,6 +21,9 @@ class Login extends Component {
   };
 
   render() {
+    //todo this should be checking if there's a token; if there is, and shit isn't loaded, there should be a
+    // loading screen. the loading shit is something i could do like in DevConnector with the redux state.
+
     if (this.props.isLoggedIn) {
       return <Redirect to="/dashboard" />;
     }
@@ -27,20 +31,23 @@ class Login extends Component {
     return (
       <div>
         <p>Login:</p>
-        <input
-          name="email"
-          value={this.state.email}
-          placeholder="email"
-          onChange={this.changeHandler}
-        />
-        <input
-          type="password"
-          name="password"
-          value={this.state.password}
-          placeholder="password"
-          onChange={this.changeHandler}
-        />
-        <button onClick={this.submitHandler}>Login</button>
+        <form onSubmit={this.submitHandler}>
+          <input
+            name="email"
+            value={this.state.email}
+            placeholder="email"
+            onChange={this.changeHandler}
+          />
+          <input
+            type="password"
+            name="password"
+            value={this.state.password}
+            placeholder="password"
+            onChange={this.changeHandler}
+          />
+          <button type="submit">Login</button>
+        </form>
+        <GoogleOAuth type="Log in" />
       </div>
     );
   }
