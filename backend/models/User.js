@@ -46,6 +46,14 @@ const userSchema = new mongoose.Schema(
         lowercase: true
       }
     },
+    possibleEmails: [
+      {
+        email: {
+          type: String,
+          trim: true
+        }
+      }
+    ],
     tokens: [
       {
         token: {
