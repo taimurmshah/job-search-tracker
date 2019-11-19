@@ -3,8 +3,7 @@ import PossibleEmails from "./PossibleEmails";
 
 class AddEmail extends Component {
   state = {
-    email: "",
-    fieldActive: false
+    email: ""
   };
 
   changeHandler = e => {
@@ -17,16 +16,6 @@ class AddEmail extends Component {
     e.preventDefault();
     this.props.updateEmployeeSubmitHandler(this.state);
     this.setState({ email: "" });
-  };
-
-  activateField = () => {
-    this.setState({ fieldActive: true });
-  };
-
-  disableFocus = e => {
-    if (e.target.value === "") {
-      this.setState({ fieldActive: false });
-    }
   };
 
   render() {

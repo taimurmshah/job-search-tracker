@@ -206,7 +206,7 @@ table, th, td {
 .add-email-container {}
 
 .add-email-form {
-    margin: 0px;
+    margin: 0;
     position: fixed;
     top: 65px;
     left: 70px;
@@ -224,7 +224,7 @@ table, th, td {
 /* initially label is below input */
 label {
     display: inline-block;
-    position:absolute;
+    /*position:absolute;*/
     left: 15px;
     top: 16px;
     transition: all 150ms ease-in;
@@ -232,3 +232,11 @@ label {
 }
 /* when the label is activated, it jumps up (using translateY) */
 /* you could add animation here as well */
+
+
+.send-email-form {
+    display: flex;
+    margin-top: 160px;
+    margin-left: 200px;
+    flex-direction: column;
+}

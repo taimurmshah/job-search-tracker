@@ -18,12 +18,16 @@ class Employee extends Component {
     );
   };
 
-  clickHandler = () => {
-    this.props.emailButtonClickHandler(this.props.employee._id);
+  addEmailButtonClickHandler = () => {
+    this.props.addEmailButtonClickHandler(this.props.employee._id);
   };
 
-  send = <button>Send Email</button>;
-  add = <button onClick={this.clickHandler}>Add Email</button>;
+  sendEmailButtonClickHandler = () => {
+    this.props.sendEmailButtonClickHandler(this.props.employee._id);
+  };
+
+  send = <button onClick={this.sendEmailButtonClickHandler}>Send Email</button>;
+  add = <button onClick={this.addEmailButtonClickHandler}>Add Email</button>;
 
   render() {
     const {

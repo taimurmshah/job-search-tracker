@@ -3,11 +3,6 @@ const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
 require("dotenv").config();
 
-// const id =
-//   "602278501830-b6dgn7vhmg5ui2ccefo5q91rllluhv70.apps.googleusercontent.com";
-// const secret = "G__CY5nGsckdEK79X10KQgad";
-// const refreshToken =
-//   "1//04i05kCRrvneCCgYIARAAGAQSNwF-L9IrV6G8qI81Mw43qQFUz6fbaEXGJvS45Ix7lpVpXFW4nzqWNuwNq8vkJbKFH9bdETunKrY";
 const redirectURI = "https://developers.google.com/oauthplayground";
 
 // const oauth2Client = new OAuth2(id, secret, redirectURI);
@@ -48,9 +43,9 @@ const smtpTransport = nodemailer.createTransport({
 
 const mailOptions = {
   from: "taimurmshah@gmail.com",
-  to: "tshah1395@gmail.com",
+  to: "maahnoorshah1@gmail.com",
   subject: "Test",
-  text: "yer"
+  text: "you modafoka"
 };
 
 smtpTransport.sendMail(mailOptions, (err, res) => {

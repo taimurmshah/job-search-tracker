@@ -4,7 +4,7 @@ const userRouter = require("./backend/routes/user");
 const jobRouter = require("./backend/routes/job");
 const employeeRouter = require("./backend/routes/employee");
 const emailRouter = require("./backend/routes/email");
-require("./nodemailer-test");
+// require("./nodemailer-test");
 //Connect Database
 require("./config/db");
 

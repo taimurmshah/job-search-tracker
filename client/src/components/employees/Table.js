@@ -10,7 +10,8 @@ class Table extends Component {
         <Employee
           key={e._id}
           employee={e}
-          emailButtonClickHandler={this.props.emailButtonClickHandler}
+          addEmailButtonClickHandler={this.props.addEmailButtonClickHandler}
+          sendEmailButtonClickHandler={this.props.sendEmailButtonClickHandler}
         />
       );
     });
@@ -36,12 +37,6 @@ class Table extends Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     employees: state.employee.employees
-//   };
-// };
-
 const mapDispatchToProps = dispatch => {
   return {
     updateEmployeeThunk: (jobId, employeeId, updates) =>
@@ -50,7 +45,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  // mapStateToProps,
   null,
   mapDispatchToProps
 )(Table);

@@ -23,8 +23,7 @@ const employeeSchema = new mongoose.Schema(
       trim: true
     },
     response: {
-      type: Boolean,
-      default: false
+      type: Boolean
     },
     linkedIn: {
       type: String,

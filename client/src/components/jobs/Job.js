@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import NewEmployee from "../employees/NewEmployee";
 import Table from "../employees/Table";
 import AddEmail from "../employees/AddEmail";
+import SendEmail from "../employees/SendEmail";
 import Modal from "../layout/Modal";
 import {
   currentEmployee,
@@ -12,20 +13,36 @@ import {
   updateEmployeeThunk,
   newEmployeeThunk
 } from "../../redux/thunks/employee";
+import { sendGmailThunk } from "../../redux/thunks/email";
+
+//todo:
+// - create job description component
+// - standardize method names
 
 class Job extends Component {
   state = {
     newEmployeeForm: false,
     addEmailForm: false,
+    sendEmailForm: false,
     employeeId: "",
     showModal: false
   };
 
-  newEmployeeFormHandler = async () => {
-    await this.setState({
+  newEmployeeFormHandler = () => {
+    this.setState({
       newEmployeeForm: !this.state.newEmployeeForm,
       showModal: true
     });
+  };
+
+  addEmailButtonClickHandler = employeeId => {
+    this.props.currentEmployee(employeeId);
+    this.setState({ addEmailForm: true, employeeId, showModal: true });
+  };
+
+  sendEmailButtonClickHandler = employeeId => {
+    this.props.currentEmployee(employeeId);
+    this.setState({ sendEmailForm: true, employeeId, showModal: true });
   };
 
   newEmployeeSubmitHandler = employee => {
@@ -41,15 +58,24 @@ class Job extends Component {
       updates
     );
     this.setState({
+      newEmployeeForm: false,
       addEmailForm: false,
+      sendEmailForm: false,
       employeeId: "",
       showModal: false
     });
   };
 
-  emailButtonClickHandler = async employeeId => {
-    this.props.currentEmployee(employeeId);
-    await this.setState({ addEmailForm: true, employeeId, showModal: true });
+  sendEmailSubmitHandler = emailObj => {
+    this.props.removeCurrentEmployee();
+    this.props.sendGmailThunk(this.state.employeeId, emailObj);
+    this.setState({
+      newEmployeeForm: false,
+      addEmailForm: false,
+      sendEmailForm: false,
+      employeeId: "",
+      showModal: false
+    });
   };
 
   openModal = () => {
@@ -61,6 +87,7 @@ class Job extends Component {
     this.setState({
       showModal: false,
       addEmailForm: false,
+      sendEmailForm: false,
       newEmployeeForm: false,
       employeeId: ""
     });
@@ -69,7 +96,8 @@ class Job extends Component {
   componentPassToModal = () => {
     if (
       this.state.newEmployeeForm === true &&
-      this.state.addEmailForm === false
+      this.state.addEmailForm === false &&
+      this.state.sendEmailForm === false
     ) {
       return (
         <NewEmployee
@@ -79,12 +107,24 @@ class Job extends Component {
       );
     } else if (
       this.state.newEmployeeForm === false &&
-      this.state.addEmailForm === true
+      this.state.addEmailForm === true &&
+      this.state.sendEmailForm === false
     ) {
       return (
         <AddEmail
           closeModal={this.closeModal}
           updateEmployeeSubmitHandler={this.updateEmployeeSubmitHandler}
+        />
+      );
+    } else if (
+      this.state.newEmployeeForm === false &&
+      this.state.addEmailForm === false &&
+      this.state.sendEmailForm === true
+    ) {
+      return (
+        <SendEmail
+          closeModal={this.closeModal}
+          sendEmailSubmitHandler={this.sendEmailSubmitHandler}
         />
       );
     }
@@ -128,7 +168,8 @@ class Job extends Component {
           <Table
             employees={this.props.employees}
             jobId={this.props.job._id}
-            emailButtonClickHandler={this.emailButtonClickHandler}
+            addEmailButtonClickHandler={this.addEmailButtonClickHandler}
+            sendEmailButtonClickHandler={this.sendEmailButtonClickHandler}
           />
         )}
 
@@ -160,7 +201,9 @@ const mapDispatchToProps = dispatch => {
     updateEmployeeThunk: (jobId, employeeId, updates) =>
       dispatch(updateEmployeeThunk(jobId, employeeId, updates)),
     currentEmployee: employeeId => dispatch(currentEmployee(employeeId)),
-    removeCurrentEmployee: () => dispatch(removeCurrentEmployee())
+    removeCurrentEmployee: () => dispatch(removeCurrentEmployee()),
+    sendGmailThunk: (employeeId, emailObj) =>
+      dispatch(sendGmailThunk(employeeId, emailObj))
   };
 };
 
