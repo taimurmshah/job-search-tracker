@@ -10,13 +10,14 @@ const Logout = ({ logoutThunk, method }) => {
     return (
       <GoogleLogout
         render={renderProps => (
-          <button
+          <a
+            href="#"
             className="local-button button"
             onClick={renderProps.onClick}
-            disabled={renderProps.disabled}
+            // disabled={renderProps.disabled}
           >
             Log Out
-          </button>
+          </a>
         )}
         clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
         buttonText="logout"

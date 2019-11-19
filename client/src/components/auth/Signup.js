@@ -23,7 +23,7 @@ class Signup extends Component {
     }
 
     return (
-      <div className="container">
+      <div>
         <p>Register:</p>
         <div className="auth-buttons">
           <button

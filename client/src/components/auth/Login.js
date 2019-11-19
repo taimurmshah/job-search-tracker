@@ -27,7 +27,7 @@ class Login extends Component {
     }
 
     return (
-      <div className="container">
+      <div>
         <p>Login:</p>
         <div className="auth-buttons">
           <button
