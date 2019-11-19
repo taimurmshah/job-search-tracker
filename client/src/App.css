@@ -197,9 +197,38 @@ table, th, td {
     width: 20px;
 }
 
-/*.job-links {*/
-/*  display: flex;*/
-/*  flex-direction: column;*/
-/*}*/
+
 
 /*_____________________JOB PAGE_____________________*/
+
+/*add email modal*/
+
+.add-email-container {}
+
+.add-email-form {
+    margin: 0px;
+    position: fixed;
+    top: 65px;
+    left: 70px;
+}
+
+.poss-email-container {
+    border: 3px solid black;
+    position: fixed;
+    right: 50px;
+    top: 40px;
+    padding: 0 5px;
+}
+/*add email modal*/
+
+/* initially label is below input */
+label {
+    display: inline-block;
+    position:absolute;
+    left: 15px;
+    top: 16px;
+    transition: all 150ms ease-in;
+    color: rgba(0, 0, 0, 0.98);
+}
+/* when the label is activated, it jumps up (using translateY) */
+/* you could add animation here as well */

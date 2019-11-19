@@ -4,8 +4,14 @@ import NewEmployee from "../employees/NewEmployee";
 import Table from "../employees/Table";
 import AddEmail from "../employees/AddEmail";
 import Modal from "../layout/Modal";
-import { updateEmployeeThunk } from "../../redux/thunks/employee";
-import { newEmployeeThunk } from "../../redux/thunks/employee";
+import {
+  currentEmployee,
+  removeCurrentEmployee
+} from "../../redux/actions/employee";
+import {
+  updateEmployeeThunk,
+  newEmployeeThunk
+} from "../../redux/thunks/employee";
 
 class Job extends Component {
   state = {
@@ -28,6 +34,7 @@ class Job extends Component {
   };
 
   updateEmployeeSubmitHandler = updates => {
+    this.props.removeCurrentEmployee();
     this.props.updateEmployeeThunk(
       this.props.job._id,
       this.state.employeeId,
@@ -41,6 +48,7 @@ class Job extends Component {
   };
 
   emailButtonClickHandler = async employeeId => {
+    this.props.currentEmployee(employeeId);
     await this.setState({ addEmailForm: true, employeeId, showModal: true });
   };
 
@@ -49,6 +57,7 @@ class Job extends Component {
   };
 
   closeModal = () => {
+    this.props.removeCurrentEmployee();
     this.setState({
       showModal: false,
       addEmailForm: false,
@@ -87,18 +96,30 @@ class Job extends Component {
         <h1>{this.props.job.company}</h1>
         <ul className="job-links">
           <li>
-            <a href={this.props.job.linkedIn} target="_blank">
+            <a
+              href={this.props.job.linkedIn}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               LinkedIn
             </a>
           </li>
           <li>
             {/* todo standardize this on backend*/}
-            <a href={"https://" + this.props.job.website} target="_blank">
+            <a
+              href={"https://" + this.props.job.website}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Website
             </a>
           </li>
           <li>
-            <a href={this.props.job.link} target="_blank">
+            <a
+              href={this.props.job.link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Job Description
             </a>
           </li>
@@ -120,15 +141,6 @@ class Job extends Component {
           show={this.state.showModal}
           component={this.componentPassToModal()}
         />
-        {/*{this.state.newEmployeeForm && (*/}
-        {/*  <NewEmployee submitHandler={this.newEmployeeSubmitHandler} />*/}
-        {/*)}*/}
-        {/*{this.state.addEmailForm && (*/}
-        {/*  <AddEmail*/}
-        {/*    closeEmailFormHandler={this.closeEmailFormHandler}*/}
-        {/*    updateEmployeeSubmitHandler={this.updateEmployeeSubmitHandler}*/}
-        {/*  />*/}
-        {/*)}*/}
       </div>
     );
   }
@@ -146,7 +158,9 @@ const mapDispatchToProps = dispatch => {
     newEmployeeThunk: (employee, jobId) =>
       dispatch(newEmployeeThunk(employee, jobId)),
     updateEmployeeThunk: (jobId, employeeId, updates) =>
-      dispatch(updateEmployeeThunk(jobId, employeeId, updates))
+      dispatch(updateEmployeeThunk(jobId, employeeId, updates)),
+    currentEmployee: employeeId => dispatch(currentEmployee(employeeId)),
+    removeCurrentEmployee: () => dispatch(removeCurrentEmployee())
   };
 };
 

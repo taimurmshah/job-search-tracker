@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import PossibleEmails from "./PossibleEmails";
 
 class AddEmail extends Component {
   state = {
-    email: ""
+    email: "",
+    fieldActive: false
   };
 
   changeHandler = e => {
@@ -17,19 +19,36 @@ class AddEmail extends Component {
     this.setState({ email: "" });
   };
 
+  activateField = () => {
+    this.setState({ fieldActive: true });
+  };
+
+  disableFocus = e => {
+    if (e.target.value === "") {
+      this.setState({ fieldActive: false });
+    }
+  };
+
   render() {
     return (
-      <div>
-        <form onSubmit={this.submitHandler}>
-          <input
-            type="text"
-            name="email"
-            value={this.state.email}
-            onChange={this.changeHandler}
-          />
-          <button type="submit">Submit</button>
-          <button onClick={this.props.closeModal}>Close</button>
+      <div className="add-email-container">
+        <form className="add-email-form" onSubmit={this.submitHandler}>
+          <label>
+            Email:
+            <input
+              type="text"
+              name="email"
+              value={this.state.email}
+              onChange={this.changeHandler}
+            />
+          </label>
+
+          <div className="modal-buttons">
+            <button type="submit">Submit</button>
+            <button onClick={this.props.closeModal}>Close</button>
+          </div>
         </form>
+        <PossibleEmails />
       </div>
     );
   }

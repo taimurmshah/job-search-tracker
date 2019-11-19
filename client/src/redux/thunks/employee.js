@@ -1,8 +1,6 @@
 import { newEmployee, getEmployees, updateEmployee } from "../actions/employee";
 import { URL } from "../../resources";
 
-const token = localStorage.getItem("token");
-
 export const newEmployeeThunk = (employee, jobId) => async dispatch => {
   const token = localStorage.getItem("token");
   try {

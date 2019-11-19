@@ -1,5 +1,6 @@
 const initialState = {
-  employees: []
+  employees: [],
+  currentEmployee: {}
 };
 
 //todo how to handle when the component dismounts?
@@ -20,6 +21,16 @@ export default function(state = initialState, action) {
       return {
         ...state,
         employees: updatedEmployees
+      };
+    case "CURRENT_EMPLOYEE":
+      const currentEmployee = state.employees.filter(
+        e => e._id === action.payload
+      )[0];
+      return { ...state, currentEmployee };
+    case "REMOVE_CURRENT_EMPLOYEE":
+      return {
+        ...state,
+        currentEmployee: {}
       };
     default:
       return state;

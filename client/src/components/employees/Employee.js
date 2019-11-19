@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import AddEmail from "./AddEmail";
 import { connect } from "react-redux";
+
 import { updateEmployeeThunk } from "../../redux/thunks/employee";
 import linkedInLogo from "../../images/linkedInLogo.png";
 
@@ -44,6 +44,7 @@ class Employee extends Component {
             <a
               href={linkedIn[0] === "h" ? linkedIn : "https://" + linkedIn}
               target="_blank"
+              rel="noopener noreferrer"
             >
               <img
                 className="linkedIn-logo"
@@ -57,10 +58,6 @@ class Employee extends Component {
           <td>{email ? email : ""}</td>
           <td>{email ? this.send : this.add}</td>
         </tr>
-
-        {this.state.addEmail ? (
-          <AddEmail submitHandler={this.newEmailSubmit} />
-        ) : null}
       </>
     );
   }

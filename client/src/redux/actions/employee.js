@@ -13,9 +13,21 @@ export const getEmployees = employees => {
 };
 
 export const updateEmployee = employee => {
-  console.log("in action, action.payload:", employee);
   return {
     type: "UPDATE_EMPLOYEE",
     payload: employee
+  };
+};
+
+export const currentEmployee = employeeId => {
+  return {
+    type: "CURRENT_EMPLOYEE",
+    payload: employeeId
+  };
+};
+
+export const removeCurrentEmployee = () => {
+  return {
+    type: "REMOVE_CURRENT_EMPLOYEE"
   };
 };
