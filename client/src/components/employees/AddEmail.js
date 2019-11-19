@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PossibleEmails from "./PossibleEmails";
 
 class AddEmail extends Component {
   state = {
@@ -29,6 +30,7 @@ class AddEmail extends Component {
           />
           <button type="submit">Submit</button>
           <button onClick={this.props.closeModal}>Close</button>
+          <PossibleEmails />
         </form>
       </div>
     );
