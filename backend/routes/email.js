@@ -10,13 +10,9 @@ const OAuth2 = google.auth.OAuth2;
 const router = new express.Router();
 
 router.post("/gmail/send", auth, async (req, res) => {
-  console.log("req.body:", req.body);
-
   const myEmail = req.user.google.email;
 
   const employee = await Employee.findOne({ _id: req.body.employeeId });
-
-  console.log({ employee });
 
   const employeeEmail = employee.email;
   try {

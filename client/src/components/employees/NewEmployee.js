@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { FormContainer, Input } from "../styled-components/styledComponents";
+import styled from "styled-components";
 
 class NewEmployee extends Component {
   state = {
@@ -30,38 +32,38 @@ class NewEmployee extends Component {
 
   render() {
     return (
-      <div className="new-employee-form">
-        <form onSubmit={this.submitHandler}>
+      <div>
+        <FormContainer onSubmit={this.submitHandler}>
           <p>First Name:</p>
-          <input
+          <Input
             type="text"
             name="firstName"
             value={this.state.firstName}
             onChange={this.changeHandler}
           />
           <p>Last Name:</p>
-          <input
+          <Input
             type="text"
             name="lastName"
             value={this.state.lastName}
             onChange={this.changeHandler}
           />
           <p>Position:</p>
-          <input
+          <Input
             type="text"
             name="position"
             value={this.state.position}
             onChange={this.changeHandler}
           />
           <p>LinkedIn Profile:</p>
-          <input
+          <Input
             type="text"
             name="linkedIn"
             value={this.state.linkedIn}
             onChange={this.changeHandler}
           />
           <p>Email: (not required)</p>
-          <input
+          <Input
             type="text"
             name="email"
             value={this.state.email}
@@ -75,7 +77,7 @@ class NewEmployee extends Component {
               Close
             </button>
           </div>
-        </form>
+        </FormContainer>
       </div>
     );
   }
@@ -92,3 +94,7 @@ export default connect(
   null,
   mapDispatchToProps
 )(NewEmployee);
+
+// const NewEmployeeForm = styled(FormContainer)`
+//   height: 100%;
+// `;

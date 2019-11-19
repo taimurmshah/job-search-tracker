@@ -1,33 +1,32 @@
 import React from "react";
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
+import styled from "styled-components";
 import Logout from "../auth/Logout";
 
 const Navbar = ({ currentUser, isLoggedIn }) => {
   return (
-    <div className="navbar">
-      <ul>
-        {isLoggedIn ? (
-          <>
-            <li>
-              <Logout />
-            </li>
-            <li>
-              <Link to="/dashboard">Home</Link>
-            </li>
-          </>
-        ) : (
-          <>
-            <li>
-              <Link to="/login">Log In</Link>
-            </li>
-            <li>
-              <Link to="/signup">Sign Up</Link>
-            </li>
-          </>
-        )}
-      </ul>
-    </div>
+    <Nav>
+      {isLoggedIn ? (
+        <>
+          <Span>
+            <Logout />
+          </Span>
+          <Span>
+            <Link to="/dashboard">Home</Link>
+          </Span>
+        </>
+      ) : (
+        <>
+          <Span>
+            <Link to="/login">Log In</Link>
+          </Span>
+          <Span>
+            <Link to="/signup">Sign Up</Link>
+          </Span>
+        </>
+      )}
+    </Nav>
   );
 };
 
@@ -48,3 +47,15 @@ export default withRouter(
     mapDispatchToProps
   )(Navbar)
 );
+
+const Nav = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 40px;
+  background-color: #43996a;
+`;
+
+const Span = styled.span`
+  padding: 10px;
+  margin: 0 5px;
+`;

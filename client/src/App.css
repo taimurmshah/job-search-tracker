@@ -234,9 +234,9 @@ label {
 /* you could add animation here as well */
 
 
-.send-email-form {
-    display: flex;
-    margin-top: 160px;
-    margin-left: 200px;
-    flex-direction: column;
-}
+/*.send-email-form {*/
+/*    display: flex;*/
+/*    margin-top: 160px;*/
+/*    margin-left: 200px;*/
+/*    flex-direction: column;*/
+/*}*/

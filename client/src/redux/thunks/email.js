@@ -14,7 +14,6 @@ export const sendGmailThunk = (employeeId, emailObj) => async dispatch => {
     });
 
     res = await res.json();
-    console.log({ res });
   } catch (err) {
     //todo handle error
   }

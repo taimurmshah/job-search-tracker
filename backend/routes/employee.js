@@ -66,9 +66,7 @@ router.get("/jobs/:id/employees/:employee_id", auth, async (req, res) => {
 //update employee by id
 //requires job id
 router.patch("/jobs/:id/employees/:employee_id", auth, async (req, res) => {
-  console.log("in the patch method");
   const updates = Object.keys(req.body);
-  console.log({ updates });
 
   const allowedUpdates = ["response", "notes", "email"];
 

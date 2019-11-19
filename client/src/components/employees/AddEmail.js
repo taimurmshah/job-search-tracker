@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PossibleEmails from "./PossibleEmails";
+import { FormContainer, Input } from "../styled-components/styledComponents";
 
 class AddEmail extends Component {
   state = {
@@ -21,10 +22,10 @@ class AddEmail extends Component {
   render() {
     return (
       <div className="add-email-container">
-        <form className="add-email-form" onSubmit={this.submitHandler}>
+        <FormContainer className="add-email-form" onSubmit={this.submitHandler}>
           <label>
             Email:
-            <input
+            <Input
               type="text"
               name="email"
               value={this.state.email}
@@ -36,7 +37,7 @@ class AddEmail extends Component {
             <button type="submit">Submit</button>
             <button onClick={this.props.closeModal}>Close</button>
           </div>
-        </form>
+        </FormContainer>
         <PossibleEmails />
       </div>
     );

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { signupThunk } from "../../redux/thunks/auth";
+import { FormContainer, Input } from "../styled-components/styledComponents";
 
 class SignupForm extends Component {
   state = {
@@ -29,29 +30,31 @@ class SignupForm extends Component {
     return (
       <div>
         <p>Sign Up:</p>
-        <form onSubmit={this.submitHandler}>
-          <input
+        <FormContainer onSubmit={this.submitHandler}>
+          <Input
             name="name"
             value={this.state.name}
             placeholder="name"
             onChange={this.changeHandler}
           />
-          <input
+          <Input
             name="email"
             value={this.state.email}
             placeholder="email"
             onChange={this.changeHandler}
           />
-          <input
+          <Input
             type="password"
             name="password"
             value={this.state.password}
             placeholder="password"
             onChange={this.changeHandler}
           />
-          <button type="submit">Register</button>
-          <button onClick={this.props.closeModal}>Close</button>
-        </form>
+          <div className="modal-buttons">
+            <button type="submit">Register</button>
+            <button onClick={this.props.closeModal}>Close</button>
+          </div>
+        </FormContainer>
       </div>
     );
   }

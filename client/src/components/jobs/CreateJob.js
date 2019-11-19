@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { newJobThunk } from "../../redux/thunks/job";
+import { FormContainer, Input } from "../styled-components/styledComponents";
 
 class CreateJob extends Component {
   state = {
@@ -19,7 +20,7 @@ class CreateJob extends Component {
 
   submitHandler = e => {
     e.preventDefault();
-    console.log("submit form");
+
     this.props.newJobThunk(this.state);
     this.setState({ company: "", website: "", link: "", linkedIn: "" });
     return this.props.history.push("/jobs");
@@ -28,37 +29,37 @@ class CreateJob extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.submitHandler}>
+        <FormContainer onSubmit={this.submitHandler}>
           <p>Company Name:</p>
-          <input
+          <Input
             type="text"
             name="company"
             value={this.state.company}
             onChange={this.changeHandler}
           />
           <p>Company Website:</p>
-          <input
+          <Input
             type="text"
             name="website"
             value={this.state.website}
             onChange={this.changeHandler}
           />
           <p>Link to Job Description:</p>
-          <input
+          <Input
             type="text"
             name="link"
             value={this.state.link}
             onChange={this.changeHandler}
           />
           <p>LinkedIn Page:</p>
-          <input
+          <Input
             type="text"
             name="linkedIn"
             value={this.state.linkedIn}
             onChange={this.changeHandler}
           />
           <button type="submit">Submit</button>
-        </form>
+        </FormContainer>
       </div>
     );
   }

@@ -19,7 +19,6 @@ class App extends Component {
   componentDidMount() {
     const token = localStorage.getItem("token");
     if (token) {
-      console.log("App.js");
       this.props.jwtThunk(token);
 
       //todo should i put this here? or should i put it somewhere else? is this expensive?

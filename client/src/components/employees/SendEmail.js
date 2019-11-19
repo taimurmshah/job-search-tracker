@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { FormContainer, Input } from "../styled-components/styledComponents";
 
 class SendEmail extends Component {
   state = {
@@ -25,10 +26,13 @@ class SendEmail extends Component {
   render() {
     return (
       <div className="send-email-container">
-        <form className="send-email-form" onSubmit={this.submitHandler}>
+        <FormContainer
+          className="send-email-form"
+          onSubmit={this.submitHandler}
+        >
           <label htmlFor="">
             Subject:
-            <input
+            <Input
               type="text"
               name="subject"
               value={this.state.subject}
@@ -46,7 +50,7 @@ class SendEmail extends Component {
               cols="30"
               rows="10"
             />
-            {/*<input*/}
+            {/*<Input*/}
             {/*  type="text"*/}
             {/*  name="message"*/}
             {/*  value={this.state.message}*/}
@@ -57,7 +61,7 @@ class SendEmail extends Component {
             <button type="submit">Submit</button>
             <button onClick={this.props.closeModal}>Close</button>
           </div>
-        </form>
+        </FormContainer>
       </div>
     );
   }

@@ -3,7 +3,7 @@ import { URL } from "../../resources";
 
 export const newJobThunk = jobObj => async dispatch => {
   const token = localStorage.getItem("token");
-  console.log({ token });
+
   try {
     let res = await fetch(`${URL}/jobs`, {
       method: "POST",
@@ -16,7 +16,7 @@ export const newJobThunk = jobObj => async dispatch => {
     });
 
     res = await res.json();
-    console.log({ res });
+
     return dispatch(newJob(res));
   } catch (err) {
     //todo configure auth errors with redux...
