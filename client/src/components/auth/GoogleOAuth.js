@@ -7,6 +7,7 @@ import { googleOAuthThunk } from "../../redux/thunks/auth";
 
 const GoogleOAuth = props => {
   const googleResponse = response => {
+    console.log({ response });
     let user = response.profileObj;
 
     // console.log("access_token:", response.Zi.access_token);
@@ -15,8 +16,19 @@ const GoogleOAuth = props => {
 
   // console.log("oauth:", process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID);
 
+  const scope =
+    "https://mail.google.com/ openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email";
+
   return (
     <GoogleLogin
+      prompt="consent"
+      accessType="offline"
+      scope={scope}
+      onSuccess={googleResponse}
+      onFailure={err => {
+        console.log({ err });
+      }}
+      clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
       render={renderProps => (
         <button
           className="login-page-button google-button"
@@ -26,11 +38,6 @@ const GoogleOAuth = props => {
           {props.type + " with Google"}
         </button>
       )}
-      onSuccess={googleResponse}
-      onFailure={err => {
-        console.log({ err });
-      }}
-      clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
     />
   );
 };

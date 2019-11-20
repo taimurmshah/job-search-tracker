@@ -54,7 +54,7 @@ router.post("/gmail/send", auth, async (req, res) => {
       if (err) {
         console.log({ err });
         smtpTransport.close();
-        throw new Error(err);
+        // throw new Error(err);
       }
 
       console.log({ result });
