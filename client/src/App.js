@@ -12,7 +12,7 @@ import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Dashboard from "./components/dashboard/Dashboard";
 import Jobs from "./components/jobs/Jobs";
-import Job from "./components/jobs/Job";
+import Job from "./components/jobs/JobContainer";
 import CreateJob from "./components/jobs/CreateJob";
 
 class App extends Component {

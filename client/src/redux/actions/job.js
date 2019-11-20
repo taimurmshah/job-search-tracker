@@ -19,6 +19,13 @@ export const currentJob = id => {
   };
 };
 
+export const refreshCurrentJob = job => {
+  return {
+    type: "REFRESH_CURRENT_JOB",
+    payload: job
+  };
+};
+
 export const removeCurrentJob = () => {
   return {
     type: "REMOVE_CURRENT_JOB"

@@ -20,6 +20,8 @@ export default function(state = initialState, action) {
         ...state,
         currentJob
       };
+    case "REFRESH_CURRENT_JOB":
+      return { ...state, currentJob: action.payload };
     case "REMOVE_CURRENT_JOB":
       return { ...state, currentJob: {} };
     default:
