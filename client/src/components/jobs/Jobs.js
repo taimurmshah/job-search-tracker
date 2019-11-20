@@ -3,9 +3,14 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { currentJob } from "../../redux/actions/job";
 import { getEmployeesThunk } from "../../redux/thunks/employee";
+import Loading from "../layout/Loading";
 
 class Jobs extends Component {
   render() {
+    if (this.props.jobs.length === 0) {
+      return <Loading />;
+    }
+
     let jobs = this.props.jobs.map(job => (
       <li key={job._id}>
         <Link

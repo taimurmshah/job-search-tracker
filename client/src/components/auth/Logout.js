@@ -12,7 +12,6 @@ const Logout = ({ logoutThunk, method }) => {
         render={renderProps => (
           <a
             href="#"
-            className="local-button button"
             onClick={renderProps.onClick}
             // disabled={renderProps.disabled}
           >

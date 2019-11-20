@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { FormContainer, Input } from "../styled-components/styledComponents";
-import styled from "styled-components";
+import {
+  FormContainer,
+  InputContainer,
+  Input
+} from "../styled-components/styledComponents";
 
 class NewEmployee extends Component {
   state = {
@@ -34,41 +37,43 @@ class NewEmployee extends Component {
     return (
       <div>
         <FormContainer onSubmit={this.submitHandler}>
-          <p>First Name:</p>
-          <Input
-            type="text"
-            name="firstName"
-            value={this.state.firstName}
-            onChange={this.changeHandler}
-          />
-          <p>Last Name:</p>
-          <Input
-            type="text"
-            name="lastName"
-            value={this.state.lastName}
-            onChange={this.changeHandler}
-          />
-          <p>Position:</p>
-          <Input
-            type="text"
-            name="position"
-            value={this.state.position}
-            onChange={this.changeHandler}
-          />
-          <p>LinkedIn Profile:</p>
-          <Input
-            type="text"
-            name="linkedIn"
-            value={this.state.linkedIn}
-            onChange={this.changeHandler}
-          />
-          <p>Email: (not required)</p>
-          <Input
-            type="text"
-            name="email"
-            value={this.state.email}
-            onChange={this.changeHandler}
-          />
+          <InputContainer>
+            <p>First Name:</p>
+            <Input
+              type="text"
+              name="firstName"
+              value={this.state.firstName}
+              onChange={this.changeHandler}
+            />
+            <p>Last Name:</p>
+            <Input
+              type="text"
+              name="lastName"
+              value={this.state.lastName}
+              onChange={this.changeHandler}
+            />
+            <p>Position:</p>
+            <Input
+              type="text"
+              name="position"
+              value={this.state.position}
+              onChange={this.changeHandler}
+            />
+            <p>LinkedIn Profile:</p>
+            <Input
+              type="text"
+              name="linkedIn"
+              value={this.state.linkedIn}
+              onChange={this.changeHandler}
+            />
+            <p>Email: (not required)</p>
+            <Input
+              type="text"
+              name="email"
+              value={this.state.email}
+              onChange={this.changeHandler}
+            />
+          </InputContainer>
           <div className="modal-buttons">
             <button className="button" type="submit">
               Submit

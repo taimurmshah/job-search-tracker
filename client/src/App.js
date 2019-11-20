@@ -31,7 +31,7 @@ class App extends Component {
       <div>
         <>
           <Navbar />
-          <Route exact path="/" component={Landing} />
+
           <Switch>
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
@@ -39,6 +39,7 @@ class App extends Component {
             <PrivateRoute exact path="/jobs" component={Jobs} />
             <PrivateRoute exact path="/jobs/:id" component={Job} />
             <PrivateRoute exact path="/create-job" component={CreateJob} />
+            <Route exact path="/" component={Landing} />
           </Switch>
         </>
       </div>

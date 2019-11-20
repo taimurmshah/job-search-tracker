@@ -3,11 +3,12 @@ import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
 const PrivateRoute = ({ component: Component, isLoggedIn, ...rest }) => {
+  const token = localStorage.getItem("token");
   return (
     <Route
       {...rest}
       render={props =>
-        !isLoggedIn ? <Redirect to="/" /> : <Component {...props} />
+        !token ? <Redirect to="/" /> : <Component {...props} />
       }
     />
   );

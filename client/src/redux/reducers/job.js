@@ -20,6 +20,8 @@ export default function(state = initialState, action) {
         ...state,
         currentJob
       };
+    case "REMOVE_CURRENT_JOB":
+      return { ...state, currentJob: {} };
     default:
       return state;
   }

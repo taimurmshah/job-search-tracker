@@ -12,6 +12,12 @@ export const getEmployees = employees => {
   };
 };
 
+export const removeEmployees = () => {
+  return {
+    type: "REMOVE_EMPLOYEES"
+  };
+};
+
 export const updateEmployee = employee => {
   return {
     type: "UPDATE_EMPLOYEE",

@@ -18,3 +18,9 @@ export const currentJob = id => {
     payload: id
   };
 };
+
+export const removeCurrentJob = () => {
+  return {
+    type: "REMOVE_CURRENT_JOB"
+  };
+};

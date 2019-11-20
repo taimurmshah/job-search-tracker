@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import PossibleEmails from "./PossibleEmails";
-import { FormContainer, Input } from "../styled-components/styledComponents";
+import {
+  FormContainer,
+  InputContainer,
+  Input
+} from "../styled-components/styledComponents";
+import styled from "styled-components";
 
 class AddEmail extends Component {
   state = {
@@ -22,22 +27,22 @@ class AddEmail extends Component {
   render() {
     return (
       <div className="add-email-container">
-        <FormContainer className="add-email-form" onSubmit={this.submitHandler}>
-          <label>
-            Email:
+        <Form onSubmit={this.submitHandler}>
+          <InputContainer>
+            <p>Email:</p>
             <Input
               type="text"
               name="email"
               value={this.state.email}
               onChange={this.changeHandler}
             />
-          </label>
+          </InputContainer>
 
           <div className="modal-buttons">
             <button type="submit">Submit</button>
             <button onClick={this.props.closeModal}>Close</button>
           </div>
-        </FormContainer>
+        </Form>
         <PossibleEmails />
       </div>
     );
@@ -45,3 +50,13 @@ class AddEmail extends Component {
 }
 
 export default AddEmail;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 35%;
+  height: 100%;
+  margin-left: 50px;
+`;

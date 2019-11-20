@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { FormContainer, Input } from "../styled-components/styledComponents";
+import {
+  FormContainer,
+  InputContainer,
+  Input
+} from "../styled-components/styledComponents";
 
 class SendEmail extends Component {
   state = {
@@ -30,18 +34,16 @@ class SendEmail extends Component {
           className="send-email-form"
           onSubmit={this.submitHandler}
         >
-          <label htmlFor="">
-            Subject:
+          <InputContainer>
+            <p>Subject:</p>
             <Input
               type="text"
               name="subject"
               value={this.state.subject}
               onChange={this.changeHandler}
             />
-          </label>
-          <br />
-          <label htmlFor="">
-            Message:
+
+            <p>Message:</p>
             <textarea
               name="message"
               value={this.state.message}
@@ -50,13 +52,8 @@ class SendEmail extends Component {
               cols="30"
               rows="10"
             />
-            {/*<Input*/}
-            {/*  type="text"*/}
-            {/*  name="message"*/}
-            {/*  value={this.state.message}*/}
-            {/*  onChange={this.changeHandler}*/}
-            {/*/>*/}
-          </label>
+          </InputContainer>
+
           <div className="modal-buttons">
             <button type="submit">Submit</button>
             <button onClick={this.props.closeModal}>Close</button>

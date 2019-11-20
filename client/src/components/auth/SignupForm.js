@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { signupThunk } from "../../redux/thunks/auth";
-import { FormContainer, Input } from "../styled-components/styledComponents";
+import {
+  FormContainer,
+  InputContainer,
+  Input
+} from "../styled-components/styledComponents";
 
 class SignupForm extends Component {
   state = {
@@ -31,25 +35,30 @@ class SignupForm extends Component {
       <div>
         <p>Sign Up:</p>
         <FormContainer onSubmit={this.submitHandler}>
-          <Input
-            name="name"
-            value={this.state.name}
-            placeholder="name"
-            onChange={this.changeHandler}
-          />
-          <Input
-            name="email"
-            value={this.state.email}
-            placeholder="email"
-            onChange={this.changeHandler}
-          />
-          <Input
-            type="password"
-            name="password"
-            value={this.state.password}
-            placeholder="password"
-            onChange={this.changeHandler}
-          />
+          <InputContainer>
+            <p>Name:</p>
+            <Input
+              name="name"
+              value={this.state.name}
+              placeholder="name"
+              onChange={this.changeHandler}
+            />
+            <p>Email:</p>
+            <Input
+              name="email"
+              value={this.state.email}
+              placeholder="email"
+              onChange={this.changeHandler}
+            />
+            Password:
+            <Input
+              type="password"
+              name="password"
+              value={this.state.password}
+              placeholder="password"
+              onChange={this.changeHandler}
+            />
+          </InputContainer>
           <div className="modal-buttons">
             <button type="submit">Register</button>
             <button onClick={this.props.closeModal}>Close</button>

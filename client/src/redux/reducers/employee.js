@@ -14,6 +14,8 @@ export default function(state = initialState, action) {
       };
     case "GET_EMPLOYEES":
       return { ...state, employees: action.payload };
+    case "REMOVE_EMPLOYEES":
+      return { ...state, employees: [] };
     case "UPDATE_EMPLOYEE":
       let updatedEmployees = [...state.employees];
       let index = updatedEmployees.findIndex(e => e._id === action.payload._id);

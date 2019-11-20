@@ -51,7 +51,7 @@ export default withRouter(
 const Nav = styled.div`
   display: flex;
   justify-content: flex-end;
-  padding: 20px 40px;
+  padding: 20px 200px;
   background-color: #43996a;
 `;
 

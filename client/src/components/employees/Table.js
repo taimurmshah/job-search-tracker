@@ -2,9 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateEmployeeThunk } from "../../redux/thunks/employee";
 import Employee from "./Employee";
+import Loading from "../layout/Loading";
 
 class Table extends Component {
   render() {
+    console.log("Table is mounted, here are the props:", this.props);
+
+    if (!this.props.employees) {
+      return <Loading />;
+    }
+
     const tableData = this.props.employees.map(e => {
       return (
         <Employee

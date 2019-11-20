@@ -5,9 +5,12 @@ import Table from "../employees/Table";
 import AddEmail from "../employees/AddEmail";
 import SendEmail from "../employees/SendEmail";
 import Modal from "../layout/Modal";
+import Loading from "../layout/Loading";
+import { removeCurrentJob } from "../../redux/actions/job";
 import {
   currentEmployee,
-  removeCurrentEmployee
+  removeCurrentEmployee,
+  removeEmployees
 } from "../../redux/actions/employee";
 import {
   updateEmployeeThunk,
@@ -27,6 +30,20 @@ class Job extends Component {
     employeeId: "",
     showModal: false
   };
+
+  componentWillMount() {
+    if (
+      this.props.employees.length === 0 &&
+      Object.keys(this.props.job).length === 0
+    ) {
+      console.log("match:", this.props.match);
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.removeEmployees();
+    this.props.removeCurrentJob();
+  }
 
   newEmployeeFormHandler = () => {
     this.setState({
@@ -131,6 +148,8 @@ class Job extends Component {
   };
 
   render() {
+    console.log("job component, here are the props:", this.props);
+
     return (
       <div>
         <h1>{this.props.job.company}</h1>
@@ -203,7 +222,9 @@ const mapDispatchToProps = dispatch => {
     currentEmployee: employeeId => dispatch(currentEmployee(employeeId)),
     removeCurrentEmployee: () => dispatch(removeCurrentEmployee()),
     sendGmailThunk: (employeeId, emailObj) =>
-      dispatch(sendGmailThunk(employeeId, emailObj))
+      dispatch(sendGmailThunk(employeeId, emailObj)),
+    removeEmployees: () => dispatch(removeEmployees()),
+    removeCurrentJob: () => dispatch(removeCurrentJob())
   };
 };
 

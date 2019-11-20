@@ -3,7 +3,6 @@ import styled from "styled-components";
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  // height: 300px;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -16,4 +15,9 @@ const Input = styled.input`
   margin: 10px 0;
 `;
 
-export { FormContainer, Input };
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export { FormContainer, Input, InputContainer };
