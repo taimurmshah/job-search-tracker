@@ -21,6 +21,8 @@
     "googleapis": "45.0.0",
     "jsonwebtoken": "8.5.1",
     "mongoose": "5.7.8",
+    "ngrok": "^3.2.5",
+    "node-fetch": "^2.6.0",
     "nodemailer": "^6.3.1",
     "passport": "^0.4.0",
     "passport-google-plus-token": "^2.1.0",

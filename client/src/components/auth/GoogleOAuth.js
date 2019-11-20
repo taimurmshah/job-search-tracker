@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import GoogleLogin from "react-google-login";
 import { googleOAuthThunk } from "../../redux/thunks/auth";
+import { URL } from "../../resources";
 
 //todo take care of the clientId value -- why isn't process.env working?
 
@@ -14,6 +15,20 @@ const GoogleOAuth = props => {
     props.googleOAuthThunk(user);
   };
 
+  const testResponse = response => {
+    // debugger;
+    console.log({ response });
+    const code = response.code;
+    let res = fetch(`${URL}/oauth/google`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({ code })
+    });
+  };
+
   // console.log("oauth:", process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID);
 
   const scope =
@@ -21,10 +36,13 @@ const GoogleOAuth = props => {
 
   return (
     <GoogleLogin
-      prompt="consent"
+      // prompt="consent"
       accessType="offline"
       scope={scope}
-      onSuccess={googleResponse}
+      responseType="code"
+      redirectUri="postmessage"
+      // onSuccess={googleResponse}
+      onSuccess={testResponse}
       onFailure={err => {
         console.log({ err });
       }}

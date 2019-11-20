@@ -44,6 +44,10 @@ const userSchema = new mongoose.Schema(
       email: {
         type: String,
         lowercase: true
+      },
+      refresh_token: {
+        type: String,
+        required: true
       }
     },
     possibleEmails: [
