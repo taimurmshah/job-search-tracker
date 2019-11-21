@@ -31,49 +31,59 @@ const fetchUserProfile = async access_token => {
   }
 };
 
+const registerUser = async (userProfile, refresh_token) => {
+  try {
+    let user = new User({
+      name: userProfile.name,
+      method: "google",
+      "google.id": userProfile.sub,
+      "google.email": userProfile.email,
+      "google.refresh_token": refresh_token,
+      imageUrl: userProfile.picture
+    });
+    await user.save();
+
+    return user;
+  } catch (err) {
+    console.log({ err });
+  }
+};
+
 const googleOAuth = async (req, res, next) => {
   try {
     const code = req.body.code;
 
-    console.log({ code });
-
     const tokens = await getTokens(code);
 
-    console.log({ tokens });
-
     const access_token = tokens.access_token;
-
     let refresh_token;
     if (tokens.refresh_token) {
       refresh_token = tokens.refresh_token;
     }
-
     const userProfile = await fetchUserProfile(access_token);
 
-    console.log({ userProfile });
+    const googleId = userProfile.sub;
 
-    // const existingUser = await User.findOne({
-    //   method: "google",
-    //   "google.id": googleId
-    // });
+    //check for existing User
+    const existingUser = await User.findOne({
+      method: "google",
+      "google.id": googleId
+    });
 
-    // if (existingUser) {
-    //   req.user = existingUser;
-    //   return next();
-    // }
+    if (!existingUser) {
+      const user = await registerUser(userProfile, refresh_token);
+      req.user = user;
 
-    // const newUser = await new User({
-    //   name,
-    //   method: "google",
-    //   "google.id": googleId,
-    //   "google.email": email,
-    //   imageUrl: imageUrl
-    // });
-    //
-    // await newUser.save();
-    //
-    // req.user = newUser;
-    // next();
+      return next();
+    }
+
+    if (refresh_token) {
+      existingUser.refresh_token = refresh_token;
+      await user.save();
+    }
+
+    req.user = existingUser;
+    next();
   } catch (err) {
     res.status(400).send(err);
   }

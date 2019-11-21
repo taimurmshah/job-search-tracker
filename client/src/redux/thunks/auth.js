@@ -47,24 +47,26 @@ export const loginThunk = userObj => async dispatch => {
   }
 };
 
-export const googleOAuthThunk = user => async dispatch => {
+export const googleOAuthThunk = code => async dispatch => {
   try {
-    let res = await fetch("http://localhost:5000/oauth/google", {
+    let res = await fetch(`${URL}/oauth/google`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "*"
+        Accept: "application/json"
       },
-      body: JSON.stringify({ user })
+      body: JSON.stringify({ code })
     });
 
     res = await res.json();
 
+    console.log("google oauth thunk:", { res });
     localStorage.setItem("token", res.token);
 
     dispatch(googleLogin(res.user));
-  } catch (err) {}
+  } catch (err) {
+    //todo configure auth errors with redux...
+  }
 };
 
 export const jwtThunk = token => async dispatch => {

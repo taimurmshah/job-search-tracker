@@ -19,14 +19,7 @@ const GoogleOAuth = props => {
     // debugger;
     console.log({ response });
     const code = response.code;
-    let res = fetch(`${URL}/oauth/google`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify({ code })
-    });
+    props.googleOAuthThunk(code);
   };
 
   // console.log("oauth:", process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID);
@@ -62,7 +55,7 @@ const GoogleOAuth = props => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    googleOAuthThunk: access_token => dispatch(googleOAuthThunk(access_token))
+    googleOAuthThunk: code => dispatch(googleOAuthThunk(code))
   };
 };
 
