@@ -18,7 +18,7 @@ router.post("/gmail/send", auth, async (req, res) => {
 
   const myEmail = user.google.email;
   const refresh_token = user.google.refresh_token;
-  // let access_token = user.google.access_token;
+  let access_token = user.google.access_token;
 
   const employee = await Employee.findOne({ _id: req.body.employeeId });
 
@@ -38,25 +38,17 @@ router.post("/gmail/send", auth, async (req, res) => {
 
     // let access_token = testResponse.Authorization.split(" ")[1];
 
-    const access_token = await oauth2Client.getAccessToken();
-    console.log({ access_token });
-
     const tokenInfo = await accessTokenRemainingTime(access_token);
 
     // console.log({ tokenInfo });
 
-    // if (tokenInfo.expires_in <= 0) {
-    //   console.log("I need a new access token!");
-    //
-    //   let testResponse = await oauth2Client.getRequestHeaders();
-    //
-    //   access_token = testResponse.Authorization.split(" ")[1];
-    //
-    //   user.google.access_token = access_token;
-    //   await user.save();
-    // }
-
-    console.log("right before it");
+    if (tokenInfo.expires_in <= 0) {
+      console.log("I need a new access token!");
+      access_token = await oauth2Client.getAccessToken();
+      console.log({ access_token });
+      user.google.access_token = access_token;
+      await user.save();
+    }
 
     console.log({ access_token, refresh_token });
 
