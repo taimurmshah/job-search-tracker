@@ -1,12 +1,11 @@
 const express = require("express");
-const User = require("../models/User");
 const Employee = require("../models/Employee");
 const auth = require("../middleware/auth");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
-const fetch = require("node-fetch");
+
 const {
   accessTokenRemainingTime
 } = require("../helper-methods/google-oauth-helpers");
@@ -15,7 +14,6 @@ const router = new express.Router();
 
 router.post("/gmail/send", auth, async (req, res) => {
   const user = req.user;
-
   const myEmail = user.google.email;
   const refresh_token = user.google.refresh_token;
   let access_token = user.google.access_token;
@@ -34,13 +32,9 @@ router.post("/gmail/send", auth, async (req, res) => {
       refresh_token: refresh_token
     });
 
-    // let testResponse = await oauth2Client.getRequestHeaders();
-
-    // let access_token = testResponse.Authorization.split(" ")[1];
-
     const tokenInfo = await accessTokenRemainingTime(access_token);
 
-    // console.log({ tokenInfo });
+    console.log({ tokenInfo });
 
     if (tokenInfo.expires_in <= 0) {
       console.log("I need a new access token!");
@@ -59,11 +53,11 @@ router.post("/gmail/send", auth, async (req, res) => {
       },
       auth: {
         type: "OAuth2",
-        user: myEmail,
+        // user: myEmail,
         clientId: process.env.OAUTH_CLIENT,
-        clientSecret: process.env.OAUTH_SECRET,
-        refreshToken: refresh_token,
-        accessToken: access_token
+        clientSecret: process.env.OAUTH_SECRET
+        // refreshToken: refresh_token,
+        // accessToken: access_token
       }
     });
 
@@ -71,7 +65,13 @@ router.post("/gmail/send", auth, async (req, res) => {
       from: myEmail,
       to: employeeEmail,
       subject: req.body.emailObj.subject,
-      text: req.body.emailObj.message
+      text: req.body.emailObj.message,
+      auth: {
+        user: myEmail,
+        refreshToken: refresh_token,
+        accessToken: access_token,
+        expires: Date.now()
+      }
     };
 
     await smtpTransport.sendMail(mailOptions, async (err, result) => {

@@ -3,8 +3,9 @@ import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import Logout from "../auth/Logout";
+import Picture from "react-rounded-image";
 
-const Navbar = ({ currentUser, isLoggedIn }) => {
+const Navbar = ({ currentUser, isLoggedIn, imageUrl }) => {
   return (
     <Nav>
       {isLoggedIn ? (
@@ -14,6 +15,14 @@ const Navbar = ({ currentUser, isLoggedIn }) => {
           </Span>
           <Span>
             <Link to="/dashboard">Home</Link>
+          </Span>
+          <Span>
+            <Picture
+              image={imageUrl}
+              roundedSize="0"
+              imageHeight="50"
+              imageWidth="50"
+            />
           </Span>
         </>
       ) : (
@@ -33,7 +42,8 @@ const Navbar = ({ currentUser, isLoggedIn }) => {
 const mapStateToProps = state => {
   return {
     currentUser: state.auth.currentUser,
-    isLoggedIn: state.auth.isLoggedIn
+    isLoggedIn: state.auth.isLoggedIn,
+    imageUrl: state.auth.currentUser.imageUrl
   };
 };
 
@@ -51,11 +61,12 @@ export default withRouter(
 const Nav = styled.div`
   display: flex;
   justify-content: flex-end;
-  padding: 20px 200px;
+  padding: 5px 200px;
   background-color: #43996a;
 `;
 
 const Span = styled.span`
   padding: 10px;
   margin: 0 5px;
+  line-height: 52px;
 `;

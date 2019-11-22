@@ -91,10 +91,10 @@ const googleOAuth = async (req, res, next) => {
 
     existingUser.google.access_token = access_token;
 
-    if (refresh_token) {
-      console.log("setting up a new refresh token");
-      existingUser.refresh_token = refresh_token;
-    }
+    // if (refresh_token) {
+    //   console.log("setting up a new refresh token");
+    //   existingUser.refresh_token = refresh_token;
+    // }
 
     await existingUser.save();
 

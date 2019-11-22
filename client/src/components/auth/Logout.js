@@ -6,28 +6,28 @@ import { GoogleLogout } from "react-google-login";
 const Logout = ({ logoutThunk, method }) => {
   const token = localStorage.getItem("token");
 
-  if (method === "google") {
-    return (
-      <GoogleLogout
-        render={renderProps => (
-          <a
-            href="#"
-            onClick={renderProps.onClick}
-            // disabled={renderProps.disabled}
-          >
-            Log Out
-          </a>
-        )}
-        clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
-        buttonText="logout"
-        onLogoutSuccess={() => logoutThunk(token)}
-      />
-    );
-  }
+  // if (method === "google") {
+  //   return (
+  //     <GoogleLogout
+  //       render={renderProps => (
+  //         <a
+  //           href="#"
+  //           onClick={renderProps.onClick}
+  //           // disabled={renderProps.disabled}
+  //         >
+  //           Log Out
+  //         </a>
+  //       )}
+  //       clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
+  //       buttonText="logout"
+  //       onLogoutSuccess={() => logoutThunk(token)}
+  //     />
+  //   );
+  // }
 
   return (
     <button
-      className="local-button button"
+      className="nav-button button"
       onClick={e => {
         e.preventDefault();
         return logoutThunk(token);
