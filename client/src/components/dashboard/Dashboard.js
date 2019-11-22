@@ -21,9 +21,11 @@ class Dashboard extends Component {
           <li>
             <Link to="/create-job">Add new job</Link>
           </li>
-          <li>
-            <Link to="/jobs">View all jobs</Link>
-          </li>
+          {this.props.hasJobs && (
+            <li>
+              <Link to="/jobs">View all jobs</Link>
+            </li>
+          )}
         </ul>
       </div>
     );
@@ -32,7 +34,8 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => {
   return {
-    isLoggedIn: state.auth.isLoggedIn
+    isLoggedIn: state.auth.isLoggedIn,
+    hasJobs: state.job.hasJobs
   };
 };
 

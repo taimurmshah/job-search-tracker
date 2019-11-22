@@ -3,35 +3,40 @@ require("dotenv").config();
 const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
 const fetch = require("node-fetch");
+const {
+  getTokens,
+  fetchUserProfile
+} = require("../helper-methods/google-oauth-helpers");
 
-const getTokens = async code => {
-  const oauth2Client = new OAuth2(
-    process.env.OAUTH_CLIENT,
-    process.env.OAUTH_SECRET,
-    process.env.REDIRECT_URI
-  );
+// const getTokens = async code => {
+//   const oauth2Client = new OAuth2(
+//     process.env.OAUTH_CLIENT,
+//     process.env.OAUTH_SECRET,
+//     process.env.REDIRECT_URI
+//     // "postmessage"
+//   );
+//
+//   const { tokens } = await oauth2Client.getToken(code);
+//   return tokens;
+// };
 
-  const { tokens } = await oauth2Client.getToken(code);
-  return tokens;
-};
+// const fetchUserProfile = async access_token => {
+//   try {
+//     let res = await fetch("https://openidconnect.googleapis.com/v1/userinfo", {
+//       method: "GET",
+//       headers: {
+//         Authorization: `Bearer ${access_token}`
+//       }
+//     });
+//
+//     res = await res.json();
+//     return res;
+//   } catch (err) {
+//     console.log({ err });
+//   }
+// };
 
-const fetchUserProfile = async access_token => {
-  try {
-    let res = await fetch("https://openidconnect.googleapis.com/v1/userinfo", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${access_token}`
-      }
-    });
-
-    res = await res.json();
-    return res;
-  } catch (err) {
-    console.log({ err });
-  }
-};
-
-const registerUser = async (userProfile, refresh_token) => {
+const registerUser = async (userProfile, refresh_token, access_token) => {
   try {
     let user = new User({
       name: userProfile.name,
@@ -39,6 +44,7 @@ const registerUser = async (userProfile, refresh_token) => {
       "google.id": userProfile.sub,
       "google.email": userProfile.email,
       "google.refresh_token": refresh_token,
+      "google.access_token": access_token,
       imageUrl: userProfile.picture
     });
     await user.save();
@@ -58,6 +64,7 @@ const googleOAuth = async (req, res, next) => {
     const access_token = tokens.access_token;
     let refresh_token;
     if (tokens.refresh_token) {
+      console.log("there was a new refreshToken");
       refresh_token = tokens.refresh_token;
     }
     const userProfile = await fetchUserProfile(access_token);
@@ -70,17 +77,26 @@ const googleOAuth = async (req, res, next) => {
       "google.id": googleId
     });
 
+    //create new user
     if (!existingUser) {
-      const user = await registerUser(userProfile, refresh_token);
+      console.log("registering new user");
+
+      const user = await registerUser(userProfile, refresh_token, access_token);
+
+      await user.save();
       req.user = user;
 
       return next();
     }
 
+    existingUser.google.access_token = access_token;
+
     if (refresh_token) {
+      console.log("setting up a new refresh token");
       existingUser.refresh_token = refresh_token;
-      await user.save();
     }
+
+    await existingUser.save();
 
     req.user = existingUser;
     next();

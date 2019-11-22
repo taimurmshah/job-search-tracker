@@ -1,4 +1,4 @@
-import { getJobs, newJob, refreshCurrentJob } from "../actions/job";
+import { getJobs, newJob, refreshCurrentJob, hasJobs } from "../actions/job";
 import { URL } from "../../resources";
 
 export const newJobThunk = jobObj => async dispatch => {
@@ -36,6 +36,9 @@ export const readJobsThunk = () => async dispatch => {
     });
 
     res = await res.json();
+    if (res.length > 0) {
+      dispatch(hasJobs());
+    }
     return dispatch(getJobs(res));
   } catch (err) {
     //todo configure auth errors with redux...

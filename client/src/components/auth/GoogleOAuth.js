@@ -8,14 +8,6 @@ import { URL } from "../../resources";
 
 const GoogleOAuth = props => {
   const googleResponse = response => {
-    console.log({ response });
-    let user = response.profileObj;
-
-    // console.log("access_token:", response.Zi.access_token);
-    props.googleOAuthThunk(user);
-  };
-
-  const testResponse = response => {
     // debugger;
     console.log({ response });
     const code = response.code;
@@ -29,13 +21,11 @@ const GoogleOAuth = props => {
 
   return (
     <GoogleLogin
-      // prompt="consent"
       accessType="offline"
       scope={scope}
       responseType="code"
       redirectUri="postmessage"
-      // onSuccess={googleResponse}
-      onSuccess={testResponse}
+      onSuccess={googleResponse}
       onFailure={err => {
         console.log({ err });
       }}

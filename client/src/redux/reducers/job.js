@@ -1,10 +1,13 @@
 const initialState = {
+  hasJobs: false,
   jobs: [],
   currentJob: {}
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case "HAS_JOBS":
+      return { ...state, hasJobs: true };
     case "NEW_JOB":
       return {
         ...state,

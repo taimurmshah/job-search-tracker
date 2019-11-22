@@ -46,9 +46,11 @@ router.post("/login", async (req, res) => {
 router.post("/oauth/google", googleOAuth, async (req, res) => {
   try {
     const user = req.user;
+    console.log({ user });
     const token = await user.generateAuthToken();
     res.send({ user, token });
   } catch (err) {
+    console.log("google oauth route err:", err);
     res.status(400).send(err);
   }
 });
@@ -57,6 +59,7 @@ router.post("/oauth/google", googleOAuth, async (req, res) => {
 router.post("/logout", auth, async (req, res) => {
   try {
     const user = req.user;
+
     user.tokens = user.tokens.filter(token => token.token !== req.token);
 
     await user.save();

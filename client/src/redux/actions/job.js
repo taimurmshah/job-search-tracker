@@ -5,6 +5,12 @@ export const getJobs = jobs => {
   };
 };
 
+export const hasJobs = () => {
+  return {
+    type: "HAS_JOBS"
+  };
+};
+
 export const newJob = job => {
   return {
     type: "NEW_JOB",
