@@ -36,19 +36,12 @@ router.post("/gmail/send", auth, async (req, res) => {
 
     console.log({ tokenInfo });
 
-    // if (tokenInfo.expires_in <= 0) {
-    //   console.log("I need a new access token!");
-    //   access_token = await oauth2Client.getAccessToken();
-    //   console.log({ access_token });
-    //   user.google.access_token = access_token;
-    //   await user.save();
-    // }
-
-    if (tokenInfo.error <= 0) {
+    //i dont really need to get a new token.
+    if (tokenInfo.error) {
       console.log("I need a new access token!");
       access_token = await oauth2Client.getAccessToken();
       console.log({ access_token });
-      user.google.access_token = access_token;
+      user.google.access_token = access_token.token;
       await user.save();
     }
 
@@ -77,7 +70,7 @@ router.post("/gmail/send", auth, async (req, res) => {
       auth: {
         user: myEmail,
         refreshToken: refresh_token,
-        accessToken: access_token,
+        // accessToken: access_token,
         expires: Date.now()
       }
     };
