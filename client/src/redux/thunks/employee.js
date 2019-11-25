@@ -1,18 +1,21 @@
 import { newEmployee, getEmployees, updateEmployee } from "../actions/employee";
-import { URL } from "../../resources";
+// import { process.env.REACT_APP_URL } from "../../resources";
 
 export const newEmployeeThunk = (employee, jobId) => async dispatch => {
   const token = localStorage.getItem("token");
   try {
-    let res = await fetch(`${URL}/jobs/${jobId}/employees`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: token
-      },
-      body: JSON.stringify(employee)
-    });
+    let res = await fetch(
+      `${process.env.REACT_APP_URL}/jobs/${jobId}/employees`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: token
+        },
+        body: JSON.stringify(employee)
+      }
+    );
 
     res = await res.json();
 
@@ -27,14 +30,17 @@ export const newEmployeeThunk = (employee, jobId) => async dispatch => {
 export const getEmployeesThunk = jobId => async dispatch => {
   const token = localStorage.getItem("token");
   try {
-    let res = await fetch(`${URL}/jobs/${jobId}/employees`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: token
+    let res = await fetch(
+      `${process.env.REACT_APP_URL}/jobs/${jobId}/employees`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: token
+        }
       }
-    });
+    );
 
     res = await res.json();
 
@@ -51,15 +57,18 @@ export const updateEmployeeThunk = (
 ) => async dispatch => {
   const token = localStorage.getItem("token");
   try {
-    let res = await fetch(`${URL}/jobs/${jobId}/employees/${employeeId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: token
-      },
-      body: JSON.stringify(updates)
-    });
+    let res = await fetch(
+      `${process.env.REACT_APP_URL}/jobs/${jobId}/employees/${employeeId}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: token
+        },
+        body: JSON.stringify(updates)
+      }
+    );
 
     res = await res.json();
 

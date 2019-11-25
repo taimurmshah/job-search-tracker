@@ -1,9 +1,9 @@
 import { login, signup, googleLogin, authorize, logout } from "../actions/auth";
-import { URL } from "../../resources";
+// import { process.env.REACT_APP_URL } from "../../resources";
 
 export const signupThunk = userObj => async dispatch => {
   try {
-    let res = await fetch(`${URL}/users`, {
+    let res = await fetch(`${process.env.REACT_APP_URL}/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export const signupThunk = userObj => async dispatch => {
 
 export const loginThunk = userObj => async dispatch => {
   try {
-    let res = await fetch(`${URL}/login`, {
+    let res = await fetch(`${process.env.REACT_APP_URL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -49,7 +49,7 @@ export const loginThunk = userObj => async dispatch => {
 
 export const googleOAuthThunk = code => async dispatch => {
   try {
-    let res = await fetch(`${URL}/oauth/google`, {
+    let res = await fetch(`${process.env.REACT_APP_URL}/oauth/google`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -71,7 +71,7 @@ export const googleOAuthThunk = code => async dispatch => {
 
 export const jwtThunk = token => async dispatch => {
   try {
-    let res = await fetch(`${URL}/users/me`, {
+    let res = await fetch(`${process.env.REACT_APP_URL}/users/me`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -89,7 +89,7 @@ export const jwtThunk = token => async dispatch => {
 
 export const logoutThunk = token => async dispatch => {
   try {
-    await fetch(`${URL}/logout`, {
+    await fetch(`${process.env.REACT_APP_URL}/logout`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

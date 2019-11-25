@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import GoogleLogin from "react-google-login";
 import { googleOAuthThunk } from "../../redux/thunks/auth";
-import { URL } from "../../resources";
 
 //todo take care of the clientId value -- why isn't process.env working?
 

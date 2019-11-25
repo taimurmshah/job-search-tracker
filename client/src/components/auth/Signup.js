@@ -24,13 +24,13 @@ class Signup extends Component {
 
     return (
       <div>
-        <p>Register:</p>
+        <p>Sign Up:</p>
         <div className="auth-buttons">
           <button
             className="login-page-button local-button"
             onClick={this.openModal}
           >
-            Register
+            Sign Up
           </button>
           <GoogleOAuth type="Register" />
         </div>

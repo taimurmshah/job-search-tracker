@@ -5,7 +5,7 @@ export const newJobThunk = jobObj => async dispatch => {
   const token = localStorage.getItem("token");
 
   try {
-    let res = await fetch(`${URL}/jobs`, {
+    let res = await fetch(`${process.env.REACT_APP_URL}/jobs`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export const newJobThunk = jobObj => async dispatch => {
 export const readJobsThunk = () => async dispatch => {
   const token = localStorage.getItem("token");
   try {
-    let res = await fetch(`${URL}/jobs`, {
+    let res = await fetch(`${process.env.REACT_APP_URL}/jobs`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -48,7 +48,7 @@ export const readJobsThunk = () => async dispatch => {
 export const getJobByIdThunk = jobId => async dispatch => {
   const token = localStorage.getItem("token");
   try {
-    let res = await fetch(`${URL}/jobs/${jobId}`, {
+    let res = await fetch(`${process.env.REACT_APP_URL}/jobs/${jobId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

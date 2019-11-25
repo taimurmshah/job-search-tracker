@@ -1,4 +1,4 @@
-import { URL } from "../../resources";
+// import { URL } from "../../resources";
 
 export const sendGmailThunk = (employeeId, emailObj) => async dispatch => {
   const token = localStorage.getItem("token");
@@ -14,6 +14,7 @@ export const sendGmailThunk = (employeeId, emailObj) => async dispatch => {
     });
 
     res = await res.json();
+    console.log("res from email thunk, need to dispatch action:", res);
   } catch (err) {
     //todo handle error
   }
