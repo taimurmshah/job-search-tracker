@@ -21,7 +21,6 @@ class SendEmail extends Component {
   submitHandler = e => {
     e.preventDefault();
 
-    console.log("send email action and thunks here");
     // this.props.closeModal();
     this.props.sendEmailSubmitHandler(this.state);
     this.setState({ subject: "", message: "" });

@@ -2,6 +2,7 @@ const express = require("express");
 const User = require("../models/User");
 const auth = require("../middleware/auth");
 const googleOAuth = require("../middleware/google-oauth");
+const multer = require("multer");
 
 const router = new express.Router();
 
@@ -18,12 +19,16 @@ router.post("/users", async (req, res) => {
     name
   });
 
+  console.log({ user });
+
   try {
+    console.log("in the try");
     await user.save();
     const token = await user.generateAuthToken();
     res.status(201).send({ user, token });
   } catch (err) {
-    res.status(400).send("Cannot create new user");
+    console.log("in the catch, here's the error:", err);
+    res.status(400).send({ err });
   }
 });
 
@@ -120,6 +125,85 @@ router.delete("/users/me", auth, async (req, res) => {
     res.send(req.user);
   } catch (err) {
     res.status(400).send(err);
+  }
+});
+
+//resume upload ish:
+const upload = multer({
+  limits: {
+    fileSize: 1000000
+  },
+  fileFilter(req, file, cb) {
+    // if (!file.originalname.match(/\.(pdf|doc|docx|rtf)$/)) {
+    //   return cb(
+    //     new Error(
+    //       "Please upload a valid file type. " +
+    //         "File types accepted: " +
+    //         ".pdf, .doc, .docx, .rtf"
+    //     )
+    //   );
+    // }
+
+    //right now only taking pdfs
+    if (!file.originalname.match(/\.pdf$/)) {
+      return cb(new Error("Please upload a PDF."));
+    }
+
+    cb(undefined, true);
+  }
+});
+
+//upload user's resume
+router.post(
+  "/users/me/resume",
+  auth,
+  upload.single("resume"),
+  async (req, res) => {
+    try {
+      req.user.resume = req.file.buffer;
+      await req.user.save();
+      res.send();
+    } catch (err) {
+      res.status(400).send({ err });
+    }
+  },
+  (error, req, res, next) => {
+    res.status(400).send({ error: error.message });
+  }
+);
+
+//update user's resume
+router.patch(
+  "/users/me/resume",
+  auth,
+  upload.single("resume"),
+  async (req, res) => {
+    try {
+      req.user.resume = req.file.buffer;
+      await req.user.save();
+      res.send();
+    } catch (err) {
+      res.status(400).send({ err });
+    }
+  },
+  (error, req, res, next) => {
+    res.status(400).send({ error: error.message });
+  }
+);
+
+//delete resume
+router.delete("/users/me/resume", auth, async (req, res) => {
+  try {
+    const user = req.user;
+
+    user.resume = undefined;
+
+    await user.save();
+
+    res.send({ user, message: "Resume has been deleted" });
+  } catch (err) {
+    console.log("error:", err);
+    res.status(400).send({ err });
   }
 });
 

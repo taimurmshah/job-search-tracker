@@ -13,8 +13,6 @@ const GoogleOAuth = props => {
     props.googleOAuthThunk(code);
   };
 
-  // console.log("oauth:", process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID);
-
   const scope =
     "https://mail.google.com/ openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email";
 

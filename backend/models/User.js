@@ -46,12 +46,10 @@ const userSchema = new mongoose.Schema(
         lowercase: true
       },
       refresh_token: {
-        type: String,
-        required: true
+        type: String
       },
       access_token: {
-        type: String,
-        required: true
+        type: String
       }
     },
     possibleEmails: [
@@ -70,6 +68,9 @@ const userSchema = new mongoose.Schema(
         }
       }
     ],
+    resume: {
+      type: Buffer
+    },
     imageUrl: {
       type: String
     }
@@ -116,10 +117,7 @@ userSchema.methods.toJSON = function() {
 };
 
 userSchema.statics.findByCredentials = async (email, password) => {
-  console.log({ email });
-  console.log({ password });
   const user = await User.findOne({ method: "local", "local.email": email });
-  console.log({ user });
 
   if (!user) throw new Error("Cannot log in");
 

@@ -20,6 +20,18 @@ app.use(jobRouter);
 app.use(employeeRouter);
 app.use(emailRouter);
 
+//multer file upload example
+
+const multer = require("multer");
+const upload = multer({
+  dest: "resumes"
+});
+
+//the name value @ upload.single must be the key name in the form-data post method.
+app.post("/uploads", upload.single("upload"), (req, res) => {
+  res.send();
+});
+
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => {

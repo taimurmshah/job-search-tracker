@@ -60,7 +60,6 @@ export const googleOAuthThunk = code => async dispatch => {
 
     res = await res.json();
 
-    console.log("google oauth thunk:", { res });
     localStorage.setItem("token", res.token);
 
     dispatch(googleLogin(res.user));
