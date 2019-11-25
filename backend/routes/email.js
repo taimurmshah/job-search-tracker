@@ -37,7 +37,7 @@ router.post("/gmail/send", auth, async (req, res) => {
 
     const tokenInfo = await accessTokenRemainingTime(access_token);
 
-    console.log({ tokenInfo });
+    // console.log({ tokenInfo });
 
     //i dont really need to get a new token.
     if (tokenInfo.error) {
@@ -48,7 +48,7 @@ router.post("/gmail/send", auth, async (req, res) => {
       await user.save();
     }
 
-    console.log({ access_token, refresh_token });
+    // console.log({ access_token, refresh_token });
 
     const smtpTransport = nodemailer.createTransport({
       service: "gmail",

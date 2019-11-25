@@ -173,6 +173,21 @@ router.post(
   }
 );
 
+//get my resume
+router.get("/users/me/resume", auth, async (req, res) => {
+  try {
+    const user = req.user;
+    const resume = user.resume;
+
+    if (!resume) {
+      throw new Error();
+    }
+
+    res.set("Content-Type", "application/pdf");
+    res.send(resume);
+  } catch (err) {}
+});
+
 //update user's resume
 router.patch(
   "/users/me/resume",
