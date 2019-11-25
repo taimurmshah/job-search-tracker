@@ -14,6 +14,8 @@ const router = new express.Router();
 
 router.post("/gmail/send", auth, async (req, res) => {
   const user = req.user;
+  const firstName = user.name.split(" ")[0];
+  const lastName = user.name.split(" ")[1];
   const myEmail = user.google.email;
   const refresh_token = user.google.refresh_token;
   const resume = user.resume;
@@ -76,7 +78,7 @@ router.post("/gmail/send", auth, async (req, res) => {
       },
       attachments: [
         {
-          filename: "TS-2019-Resume.pdf",
+          filename: `${firstName}-${lastName}-Resume.pdf`,
           content: resume
         }
       ]
