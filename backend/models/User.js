@@ -111,6 +111,12 @@ userSchema.methods.toJSON = function() {
     delete userObj.local.password;
   }
 
+  if (userObj.resume) {
+    userObj.resume = true;
+  } else {
+    userObj.resume = false;
+  }
+
   delete userObj.tokens;
 
   return userObj;
