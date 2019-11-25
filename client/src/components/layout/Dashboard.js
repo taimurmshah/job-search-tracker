@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
 import { jwtThunk } from "../../redux/thunks/auth";
-import Loading from "../layout/Loading";
-import FileUpload from "../fileUpload/FileUpload";
-import Modal from "../layout/Modal";
+import Loading from "./Loading";
+import Upload from "../resume/Upload";
+import Modal from "./Modal";
+import LoginForm from "../auth/LoginForm";
 
 class Dashboard extends Component {
   state = {
@@ -33,7 +34,7 @@ class Dashboard extends Component {
         <h1>Dashboard</h1>
         {this.state.showModal && (
           <Modal
-            component={<FileUpload closeModal={this.closeModal} />}
+            component={<Upload closeModal={this.closeModal} />}
             closeModal={this.closeModal}
             show={this.state.showModal}
           />
@@ -48,9 +49,13 @@ class Dashboard extends Component {
             </li>
           )}
           <li>
-            <button className="nav-button" onClick={this.openModal}>
-              Add Resume
-            </button>
+            {this.props.currentUser.resume ? (
+              <Link to="/resume">View Resume</Link>
+            ) : (
+              <button className="nav-button" onClick={this.openModal}>
+                Add Resume
+              </button>
+            )}
           </li>
         </ul>
       </div>
@@ -61,7 +66,8 @@ class Dashboard extends Component {
 const mapStateToProps = state => {
   return {
     isLoggedIn: state.auth.isLoggedIn,
-    hasJobs: state.job.hasJobs
+    hasJobs: state.job.hasJobs,
+    currentUser: state.auth.currentUser
   };
 };
 

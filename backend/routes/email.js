@@ -16,6 +16,7 @@ router.post("/gmail/send", auth, async (req, res) => {
   const user = req.user;
   const myEmail = user.google.email;
   const refresh_token = user.google.refresh_token;
+  const resume = user.resume;
   let access_token = user.google.access_token;
 
   const employee = await Employee.findOne({ _id: req.body.employeeId });
@@ -72,7 +73,13 @@ router.post("/gmail/send", auth, async (req, res) => {
         refreshToken: refresh_token,
         // accessToken: access_token,
         expires: Date.now()
-      }
+      },
+      attachments: [
+        {
+          filename: "TS-2019-Resume.pdf",
+          content: resume
+        }
+      ]
     };
 
     await smtpTransport.sendMail(mailOptions, async (err, result) => {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class FileUpload extends Component {
+class Upload extends Component {
   state = {
     file: "",
     fileName: "Choose File"
@@ -30,7 +30,7 @@ class FileUpload extends Component {
         method: "POST",
         headers: {
           // "Content-Type": "multipart/form-data",
-          // Accept: "application/json",
+          Accept: "application/json",
           Authorization: token
         },
         body: formData
@@ -58,4 +58,4 @@ class FileUpload extends Component {
   }
 }
 
-export default FileUpload;
+export default Upload;
