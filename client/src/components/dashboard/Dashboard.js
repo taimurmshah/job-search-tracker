@@ -3,8 +3,22 @@ import { connect } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
 import { jwtThunk } from "../../redux/thunks/auth";
 import Loading from "../layout/Loading";
+import FileUpload from "../fileUpload/FileUpload";
+import Modal from "../layout/Modal";
 
 class Dashboard extends Component {
+  state = {
+    showModal: false
+  };
+
+  openModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ showModal: false });
+  };
+
   render() {
     if (!this.props.isLoggedIn) {
       return <Loading />;
@@ -17,6 +31,13 @@ class Dashboard extends Component {
     return (
       <div>
         <h1>Dashboard</h1>
+        {this.state.showModal && (
+          <Modal
+            component={<FileUpload closeModal={this.closeModal} />}
+            closeModal={this.closeModal}
+            show={this.state.showModal}
+          />
+        )}
         <ul>
           <li>
             <Link to="/create-job">Add new job</Link>
@@ -26,6 +47,11 @@ class Dashboard extends Component {
               <Link to="/jobs">View all jobs</Link>
             </li>
           )}
+          <li>
+            <button className="nav-button" onClick={this.openModal}>
+              Add Resume
+            </button>
+          </li>
         </ul>
       </div>
     );

@@ -3,7 +3,7 @@
 export const sendGmailThunk = (employeeId, emailObj) => async dispatch => {
   const token = localStorage.getItem("token");
   try {
-    let res = await fetch(`${URL}/gmail/send`, {
+    let res = await fetch(`${process.env.REACT_APP_URL}/gmail/send`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

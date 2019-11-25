@@ -35,7 +35,7 @@ class JobContainer extends Component {
     showModal: false
   };
 
-  UNSAFE_componentWillMount() {
+  componentDidMount() {
     if (
       this.props.employees.length === 0 &&
       Object.keys(this.props.job).length === 0

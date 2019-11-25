@@ -160,6 +160,7 @@ router.post(
   upload.single("resume"),
   async (req, res) => {
     try {
+      console.log("upload resume try");
       req.user.resume = req.file.buffer;
       await req.user.save();
       res.send();
