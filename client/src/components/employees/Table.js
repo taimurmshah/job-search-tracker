@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { updateEmployeeThunk } from "../../redux/thunks/employee";
 import Employee from "./Employee";
 import Loading from "../layout/Loading";
+import { HeaderContainer } from "../styled-components/styledComponents";
 
 class Table extends Component {
   render() {
@@ -25,7 +26,9 @@ class Table extends Component {
 
     return (
       <div className="employees-table">
-        <h1>Employees</h1>
+        <HeaderContainer>
+          <h2>Employees</h2>
+        </HeaderContainer>
         <table className="table">
           <thead>
             <tr>

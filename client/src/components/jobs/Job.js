@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import {
+  HeaderContainer,
+  Menu,
+  Span
+} from "../styled-components/styledComponents";
 
 class Job extends Component {
   render() {
@@ -10,9 +15,11 @@ class Job extends Component {
 
     return (
       <div>
-        <h1>{company}</h1>
-        <ul className="job-links">
-          <li>
+        <HeaderContainer>
+          <h1>{company}</h1>
+        </HeaderContainer>
+        <Menu>
+          <Span>
             <a
               className="nav-link"
               href={linkedIn}
@@ -21,8 +28,8 @@ class Job extends Component {
             >
               LinkedIn
             </a>
-          </li>
-          <li>
+          </Span>
+          <Span>
             {/* todo standardize this on backend*/}
             <a
               className="nav-link"
@@ -32,8 +39,8 @@ class Job extends Component {
             >
               Website
             </a>
-          </li>
-          <li>
+          </Span>
+          <Span>
             <a
               className="nav-link"
               href={link}
@@ -42,8 +49,8 @@ class Job extends Component {
             >
               Job Description
             </a>
-          </li>
-        </ul>
+          </Span>
+        </Menu>
       </div>
     );
   }

@@ -12,6 +12,13 @@ export default function(state = initialState, action) {
     case "AUTHORIZE":
     case "GOOGLE_LOGIN":
       return { ...state, currentUser: action.payload, isLoggedIn: true };
+    case "NEW_RESUME":
+      let userWithResume = state.currentUser;
+      userWithResume.resume = true;
+      return {
+        ...state,
+        currentUser: userWithResume
+      };
     case "LOGOUT":
       return {
         ...state,

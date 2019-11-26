@@ -3,7 +3,10 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { currentJob } from "../../redux/actions/job";
 import { getEmployeesThunk } from "../../redux/thunks/employee";
+import JobList from "./JobList";
 import Loading from "../layout/Loading";
+
+import { HeaderContainer, Menu } from "../styled-components/styledComponents";
 
 class Jobs extends Component {
   render() {
@@ -11,27 +14,12 @@ class Jobs extends Component {
       return <Loading />;
     }
 
-    let jobs = this.props.jobs.map(job => (
-      <li key={job._id}>
-        <Link
-          className="nav-link"
-          onClick={() => {
-            this.props.currentJob(job._id);
-            this.props.getEmployeesThunk(job._id);
-          }}
-          to={`/jobs/${job._id}`}
-        >
-          {job.company}
-        </Link>
-      </li>
-    ));
     return (
       <div>
-        <h1>Jobs</h1>
-        <ul>{jobs}</ul>
-        <Link className="nav-link" to="create-job">
-          Add New Job
-        </Link>
+        <HeaderContainer>
+          <h1>Jobs</h1>
+        </HeaderContainer>
+        <JobList jobs={this.props.jobs} />
       </div>
     );
   }

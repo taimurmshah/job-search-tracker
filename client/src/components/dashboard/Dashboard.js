@@ -9,6 +9,7 @@ import Modal from "../layout/Modal";
 import DashboardLinks from "./DashboardLinks";
 import Resume from "../resume/Resume";
 import Templates from "../templates/Templates";
+import { HeaderContainer } from "../styled-components/styledComponents";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -66,7 +67,9 @@ class Dashboard extends Component {
 
     return (
       <div>
-        <h1>Dashboard</h1>
+        <HeaderContainer>
+          <h1>Dashboard</h1>
+        </HeaderContainer>
         {this.state.showModal && this.componentToPassToModal()}
         <DashboardLinks
           openResume={this.openResume}

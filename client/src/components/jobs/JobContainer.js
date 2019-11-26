@@ -21,6 +21,7 @@ import {
 } from "../../redux/thunks/employee";
 import { sendGmailThunk } from "../../redux/thunks/email";
 import Job from "./Job";
+import { HeaderContainer } from "../styled-components/styledComponents";
 
 //todo:
 // - create job description component
@@ -101,10 +102,6 @@ class JobContainer extends Component {
     });
   };
 
-  openModal = () => {
-    this.setState({ showModal: true });
-  };
-
   closeModal = () => {
     this.props.removeCurrentEmployee();
     this.setState({
@@ -154,8 +151,6 @@ class JobContainer extends Component {
   };
 
   render() {
-    console.log("job component, here are the props:", this.props);
-
     if (
       Object.keys(this.props.job).length === 0 &&
       this.props.employees.length === 0

@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Menu } from "../styled-components/styledComponents";
 
 const DashboardLinks = ({ openResume, openTemplates }) => {
   return (
@@ -33,11 +34,6 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(DashboardLinks);
-
-const Menu = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
 const Span = styled.span`
   padding: 10px;

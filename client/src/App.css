@@ -17,6 +17,12 @@ h1 {
     font-size: 6em;
 }
 
+h2 {
+    font-family: 'Patua One', cursive;
+    font-size: 4em;
+    padding-bottom: 5px
+}
+
 textarea {
     margin-top: 10px;
     background-color: #FFF;

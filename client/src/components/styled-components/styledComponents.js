@@ -25,4 +25,21 @@ const InputContainer = styled.div`
   flex-direction: column;
 `;
 
-export { FormContainer, Input, InputContainer };
+const HeaderContainer = styled.div`
+  display: flex;
+  width: 100;
+  justify-content: center;
+`;
+
+const Menu = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+`;
+
+const Span = styled.span`
+  padding: 10px;
+  margin: 5px;
+`;
+
+export { FormContainer, Input, InputContainer, HeaderContainer, Menu, Span };

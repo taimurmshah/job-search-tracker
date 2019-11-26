@@ -32,3 +32,9 @@ export const logout = () => {
     type: "LOGOUT"
   };
 };
+
+export const newResume = () => {
+  return {
+    type: "NEW_RESUME"
+  };
+};
