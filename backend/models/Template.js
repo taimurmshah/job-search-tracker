@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Employee = require("./Employee");
 
 const templateSchema = new mongoose.Schema(
   {
@@ -7,6 +6,11 @@ const templateSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true
+    },
+    subject: {
+      type: String,
+      required: true,
+      trim: true
     },
     message: {
       type: String,

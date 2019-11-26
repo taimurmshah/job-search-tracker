@@ -10,11 +10,11 @@ import Landing from "./components/layout/Landing";
 import Navbar from "./components/layout/Navbar";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
-import Dashboard from "./components/layout/Dashboard";
+import Dashboard from "./components/dashboard/Dashboard";
 import Jobs from "./components/jobs/Jobs";
 import Job from "./components/jobs/JobContainer";
 import CreateJob from "./components/jobs/CreateJob";
-import Resume from "./components/resume/Resume";
+import Resume from "./components/resume/ViewResume";
 
 class App extends Component {
   componentDidMount() {

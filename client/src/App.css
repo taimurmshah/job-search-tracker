@@ -12,6 +12,11 @@ p {
 }
 
 
+h1 {
+    font-family: 'Patua One', cursive;
+    font-size: 6em;
+}
+
 textarea {
     margin-top: 10px;
     background-color: #FFF;

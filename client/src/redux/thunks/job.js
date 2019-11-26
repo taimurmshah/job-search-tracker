@@ -24,6 +24,7 @@ export const newJobThunk = jobObj => async dispatch => {
 };
 
 export const readJobsThunk = () => async dispatch => {
+  console.log("read jobs thunk is hit");
   const token = localStorage.getItem("token");
   try {
     let res = await fetch(`${process.env.REACT_APP_URL}/jobs`, {

@@ -4,6 +4,7 @@ const userRouter = require("./backend/routes/user");
 const jobRouter = require("./backend/routes/job");
 const employeeRouter = require("./backend/routes/employee");
 const emailRouter = require("./backend/routes/email");
+const templateRouter = require("./backend/models/Template");
 
 require("dotenv").config();
 
@@ -19,6 +20,7 @@ app.use(userRouter);
 app.use(jobRouter);
 app.use(employeeRouter);
 app.use(emailRouter);
+app.use(templateRouter);
 
 const port = process.env.PORT || 5000;
 

@@ -70,7 +70,7 @@ const Nav = styled.div`
   display: flex;
   justify-content: flex-end;
   padding: 5px 200px;
-  background-color: #a3bfb7;
+  background-color: rgb(15, 174, 241);
 `;
 
 const Span = styled.span`

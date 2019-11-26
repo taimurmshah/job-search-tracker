@@ -53,14 +53,6 @@ const userSchema = new mongoose.Schema(
         type: String
       }
     },
-    possibleEmails: [
-      {
-        email: {
-          type: String,
-          trim: true
-        }
-      }
-    ],
     tokens: [
       {
         token: {
@@ -118,11 +110,12 @@ userSchema.methods.toJSON = function() {
     delete userObj.local.password;
   }
 
-  if (userObj.resume) {
-    userObj.resume = true;
-  } else {
-    userObj.resume = false;
+  if (user.method === "google") {
+    delete userObj.google.refresh_token;
+    delete userObj.google.access_token;
   }
+
+  userObj.resume ? (userObj.resume = true) : (userObj.resume = false);
 
   delete userObj.tokens;
 

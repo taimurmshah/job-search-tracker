@@ -34,6 +34,14 @@ const employeeSchema = new mongoose.Schema(
       type: String,
       trim: true
     },
+    possibleEmails: [
+      {
+        email: {
+          type: String,
+          trim: true
+        }
+      }
+    ],
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
