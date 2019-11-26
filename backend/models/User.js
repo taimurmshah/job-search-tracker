@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const Job = require("./Job");
+const Template = require("./Template");
 
 const userSchema = new mongoose.Schema(
   {
@@ -88,6 +89,12 @@ userSchema.virtual("jobs", {
   foreignField: "owner"
 });
 
+userSchema.virtual("templates", {
+  ref: "Template",
+  localField: "_id",
+  foreignField: "owner"
+});
+
 userSchema.pre("save", async function(next) {
   const user = this;
 
@@ -148,6 +155,7 @@ userSchema.methods.generateAuthToken = async function() {
 userSchema.pre("remove", async function(next) {
   const user = this;
   await Job.deleteMany({ owner: user._id });
+  await Template.deleteMany({ owner: user._id });
   next();
 });
 

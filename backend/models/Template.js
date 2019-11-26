@@ -1,0 +1,29 @@
+const mongoose = require("mongoose");
+const Employee = require("./Employee");
+
+const templateSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      trim: true,
+      required: true
+    },
+    message: {
+      type: String,
+      required: true,
+      trim: true
+    },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User"
+    }
+  },
+  {
+    timestamps: true
+  }
+);
+
+const Template = mongoose.model("Template", templateSchema);
+
+module.exports = Template;
