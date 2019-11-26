@@ -14,6 +14,7 @@ class Jobs extends Component {
     let jobs = this.props.jobs.map(job => (
       <li key={job._id}>
         <Link
+          className="nav-link"
           onClick={() => {
             this.props.currentJob(job._id);
             this.props.getEmployeesThunk(job._id);
@@ -28,7 +29,9 @@ class Jobs extends Component {
       <div>
         <h1>Jobs</h1>
         <ul>{jobs}</ul>
-        <Link to="create-job">Add New Job</Link>
+        <Link className="nav-link" to="create-job">
+          Add New Job
+        </Link>
       </div>
     );
   }

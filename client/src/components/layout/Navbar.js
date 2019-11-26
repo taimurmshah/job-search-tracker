@@ -14,24 +14,32 @@ const Navbar = ({ currentUser, isLoggedIn, imageUrl }) => {
             <Logout />
           </Span>
           <Span>
-            <Link to="/dashboard">Home</Link>
+            <Link className="nav-link" to="/dashboard">
+              Home
+            </Link>
           </Span>
-          <Span>
-            <Picture
-              image={imageUrl}
-              roundedSize="0"
-              imageHeight="50"
-              imageWidth="50"
-            />
-          </Span>
+          {imageUrl && (
+            <Span>
+              <Picture
+                image={imageUrl}
+                roundedSize="0"
+                imageHeight="50"
+                imageWidth="50"
+              />
+            </Span>
+          )}
         </>
       ) : (
         <>
           <Span>
-            <Link to="/login">Log In</Link>
+            <Link className="nav-link" to="/login">
+              Log In
+            </Link>
           </Span>
           <Span>
-            <Link to="/signup">Sign Up</Link>
+            <Link className="nav-link" to="/signup">
+              Sign Up
+            </Link>
           </Span>
         </>
       )}
@@ -62,7 +70,7 @@ const Nav = styled.div`
   display: flex;
   justify-content: flex-end;
   padding: 5px 200px;
-  background-color: #43996a;
+  background-color: #a3bfb7;
 `;
 
 const Span = styled.span`

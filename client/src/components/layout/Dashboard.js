@@ -41,18 +41,24 @@ class Dashboard extends Component {
         )}
         <ul>
           <li>
-            <Link to="/create-job">Add new job</Link>
+            <Link className="nav-link" to="/create-job">
+              Add new job
+            </Link>
           </li>
           {this.props.hasJobs && (
             <li>
-              <Link to="/jobs">View all jobs</Link>
+              <Link className="nav-link" to="/jobs">
+                View all jobs
+              </Link>
             </li>
           )}
           <li>
             {this.props.currentUser.resume ? (
-              <Link to="/resume">View Resume</Link>
+              <Link className="nav-link" to="/resume">
+                View Resume
+              </Link>
             ) : (
-              <button className="nav-button" onClick={this.openModal}>
+              <button className="nav-link" onClick={this.openModal}>
                 Add Resume
               </button>
             )}

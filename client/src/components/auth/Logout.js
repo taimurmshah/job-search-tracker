@@ -27,7 +27,7 @@ const Logout = ({ logoutThunk, method }) => {
 
   return (
     <button
-      className="nav-button button"
+      className="nav-link"
       onClick={e => {
         e.preventDefault();
         return logoutThunk(token);

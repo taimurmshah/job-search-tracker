@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import styled from "styled-components";
+import { InputContainer, Input } from "../styled-components/styledComponents";
 
 class Upload extends Component {
   state = {
@@ -45,13 +47,19 @@ class Upload extends Component {
 
   render() {
     return (
-      <div>
+      <div className="upload-btn-wrapper">
         <form onSubmit={this.submitHandler}>
-          <label htmlFor="">
-            {this.state.fileName}
+          <InputContainer>
+            <Input type="text" value={this.state.fileName} />
+
+            {this.state.fileName !== "Choose File" ? (
+              <Button type="submit">Submit</Button>
+            ) : (
+              <Button>Upload Resume</Button>
+            )}
             <input type="file" onChange={this.changeHandler} />
-            <input type="submit" value="submit" />
-          </label>
+            {/*<input type="submit" value="submit" />*/}
+          </InputContainer>
         </form>
       </div>
     );
@@ -59,3 +67,13 @@ class Upload extends Component {
 }
 
 export default Upload;
+
+const Button = styled.button`
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+`;
