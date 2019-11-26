@@ -1,9 +1,9 @@
 import React from "react";
-import styled from "styled-components";
+import { Span, ModalNav } from "../styled-components/styledComponents";
 
 const ResumeNavbar = ({ resume, upload, view, edit, deleteResume }) => {
   return (
-    <Nav>
+    <ModalNav>
       {resume ? (
         <>
           <Span>
@@ -29,26 +29,8 @@ const ResumeNavbar = ({ resume, upload, view, edit, deleteResume }) => {
           </p>
         </Span>
       )}
-    </Nav>
+    </ModalNav>
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    resume: state.auth.currentUser.resume
-  };
-};
-
 export default ResumeNavbar;
-
-const Nav = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: center;
-`;
-
-const Span = styled.span`
-  padding: 10px;
-  margin: 5px;
-`;

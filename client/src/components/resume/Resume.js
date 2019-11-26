@@ -62,8 +62,8 @@ class Resume extends Component {
           edit={this.edit}
           deleteResume={this.deleteResume}
         />
-        {this.state.upload && <Upload />}
-        {this.state.edit && <Upload />}
+        {this.state.upload && <Upload closeModal={this.props.closeModal} />}
+        {this.state.edit && <Upload closeModal={this.props.closeModal} />}
         {this.state.view && <ViewResume />}
         {this.state.deleteResume && <DeleteResume />}
       </div>

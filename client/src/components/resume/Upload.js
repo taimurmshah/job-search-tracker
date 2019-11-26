@@ -11,7 +11,6 @@ class Upload extends Component {
   };
 
   changeHandler = e => {
-    // console.log("e.target.files[0]:", e.target.files[0]);
     this.setState(
       {
         file: e.target.files[0],

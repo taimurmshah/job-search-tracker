@@ -11,7 +11,7 @@ const FormContainer = styled.form`
 
 const Input = styled.input`
   font-size: 18px;
-  padding: 10px 15px;
+  padding: 5px 10px;
   margin: 10px 0;
   background-color: #fff;
   color: rgb(26, 31, 33);
@@ -42,4 +42,19 @@ const Span = styled.span`
   margin: 5px;
 `;
 
-export { FormContainer, Input, InputContainer, HeaderContainer, Menu, Span };
+const ModalNav = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+`;
+
+export {
+  FormContainer,
+  Input,
+  InputContainer,
+  HeaderContainer,
+  Menu,
+  Span,
+  ModalNav
+};
