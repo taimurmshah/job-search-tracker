@@ -34,7 +34,7 @@ router.post("/users", async (req, res) => {
 
 //login
 router.post("/login", async (req, res) => {
-  console.log("req.body:", req.body);
+  console.log("login route, req.body:", req.body);
   const { email, password } = req.body;
 
   try {

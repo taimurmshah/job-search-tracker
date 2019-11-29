@@ -4,7 +4,7 @@ const userRouter = require("./backend/routes/user");
 const jobRouter = require("./backend/routes/job");
 const employeeRouter = require("./backend/routes/employee");
 const emailRouter = require("./backend/routes/email");
-const templateRouter = require("./backend/models/Template");
+const templateRouter = require("./backend/routes/template");
 
 require("dotenv").config();
 

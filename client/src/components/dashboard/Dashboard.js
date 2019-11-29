@@ -10,6 +10,7 @@ import DashboardLinks from "./DashboardLinks";
 import Resume from "../resume/Resume";
 import Templates from "../templates/Templates";
 import { HeaderContainer } from "../styled-components/styledComponents";
+import { readAllTemplatesThunk } from "../../redux/thunks/template";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -29,6 +30,7 @@ class Dashboard extends Component {
   };
 
   openTemplates = () => {
+    this.props.readAllTemplatesThunk();
     this.setState({ showModal: true, templates: true });
   };
 
@@ -91,7 +93,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     jwtThunk: token => dispatch(jwtThunk(token)),
-    readJobsThunk: () => dispatch(readJobsThunk())
+    readJobsThunk: () => dispatch(readJobsThunk()),
+    readAllTemplatesThunk: () => dispatch(readAllTemplatesThunk())
   };
 };
 

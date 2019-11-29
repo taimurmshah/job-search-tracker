@@ -6,6 +6,7 @@ import AddEmail from "../email/AddEmail";
 import Email from "../email/Email";
 import Modal from "../layout/Modal";
 import Loading from "../layout/Loading";
+import Job from "./Job";
 import { currentJob, removeCurrentJob } from "../../redux/actions/job";
 import {
   currentEmployee,
@@ -20,7 +21,7 @@ import {
   newEmployeeThunk
 } from "../../redux/thunks/employee";
 import { sendGmailThunk } from "../../redux/thunks/email";
-import Job from "./Job";
+import { readAllTemplatesThunk } from "../../redux/thunks/template";
 
 //todo:
 // - create job description component
@@ -65,6 +66,11 @@ class JobContainer extends Component {
 
   sendEmailButtonClickHandler = employeeId => {
     this.props.currentEmployee(employeeId);
+
+    if (this.props.templates.length === 0) {
+      this.props.readAllTemplatesThunk();
+    }
+
     this.setState({ sendEmailForm: true, employeeId, showModal: true });
   };
 
@@ -186,7 +192,8 @@ class JobContainer extends Component {
 const mapStateToProps = state => {
   return {
     job: state.job.currentJob,
-    employees: state.employee.employees
+    employees: state.employee.employees,
+    templates: state.template.templates
   };
 };
 
@@ -204,7 +211,8 @@ const mapDispatchToProps = dispatch => {
     sendGmailThunk: (employeeId, emailObj) =>
       dispatch(sendGmailThunk(employeeId, emailObj)),
     removeEmployees: () => dispatch(removeEmployees()),
-    removeCurrentJob: () => dispatch(removeCurrentJob())
+    removeCurrentJob: () => dispatch(removeCurrentJob()),
+    readAllTemplatesThunk: () => dispatch(readAllTemplatesThunk())
   };
 };
 
