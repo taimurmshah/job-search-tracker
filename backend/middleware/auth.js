@@ -3,7 +3,6 @@ const User = require("../models/User");
 const config = require("config");
 
 const auth = async (req, res, next) => {
-  console.log("in the auth method");
   try {
     const token =
       req.headers.authorization[0] === "B"
