@@ -6,6 +6,7 @@ const router = new express.Router();
 
 //create new template
 router.post("/templates", auth, async (req, res) => {
+  console.log("create new template route, here's req.body:", req.body);
   const template = new Template({ ...req.body, owner: req.user._id });
   try {
     await template.save();

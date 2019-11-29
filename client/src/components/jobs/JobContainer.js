@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import NewEmployee from "../employees/NewEmployee";
 import Table from "../employees/Table";
-import AddEmail from "../employees/AddEmail";
-import SendEmail from "../employees/SendEmail";
+import AddEmail from "../email/AddEmail";
+import Email from "../email/Email";
 import Modal from "../layout/Modal";
 import Loading from "../layout/Loading";
 import { currentJob, removeCurrentJob } from "../../redux/actions/job";
@@ -21,7 +21,6 @@ import {
 } from "../../redux/thunks/employee";
 import { sendGmailThunk } from "../../redux/thunks/email";
 import Job from "./Job";
-import { HeaderContainer } from "../styled-components/styledComponents";
 
 //todo:
 // - create job description component
@@ -142,7 +141,7 @@ class JobContainer extends Component {
       this.state.sendEmailForm === true
     ) {
       return (
-        <SendEmail
+        <Email
           closeModal={this.closeModal}
           sendEmailSubmitHandler={this.sendEmailSubmitHandler}
         />

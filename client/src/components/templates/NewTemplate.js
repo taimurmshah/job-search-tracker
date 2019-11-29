@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { newTemplateThunk } from "../../redux/thunks/template";
 import styled from "styled-components";
 import { FormContainer, Input } from "../styled-components/styledComponents";
 
@@ -18,7 +20,9 @@ class NewTemplate extends Component {
   submitHandler = e => {
     e.preventDefault();
     console.log("new template submit, need to connect to server and shit.");
+    this.props.newTemplateThunk(this.state);
     this.props.closeModal();
+    this.setState({ name: "", subject: "", message: "" });
   };
 
   render() {
@@ -50,7 +54,16 @@ class NewTemplate extends Component {
   }
 }
 
-export default NewTemplate;
+const mapDispatchToProps = dispatch => {
+  return {
+    newTemplateThunk: templateObj => dispatch(newTemplateThunk(templateObj))
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(NewTemplate);
 
 const TextArea = styled.textarea`
   margin-top: 10px;
