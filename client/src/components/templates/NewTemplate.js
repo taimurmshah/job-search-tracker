@@ -8,7 +8,8 @@ class NewTemplate extends Component {
   state = {
     name: "",
     subject: "",
-    message: ""
+    message: "",
+    withResume: false
   };
 
   changeHandler = e => {
@@ -23,6 +24,17 @@ class NewTemplate extends Component {
     this.props.newTemplateThunk(this.state);
     this.props.closeModal();
     this.setState({ name: "", subject: "", message: "" });
+  };
+
+  checkHandler = () => {
+    this.setState(
+      {
+        withResume: !this.state.withResume
+      },
+      () => {
+        console.log("this.state.withResume:", this.state.withResume);
+      }
+    );
   };
 
   render() {
@@ -48,6 +60,13 @@ class NewTemplate extends Component {
           value={this.state.message}
           onChange={this.changeHandler}
         />
+
+        {this.props.resume && (
+          <CheckBoxSpan>
+            <p>Attach resume?</p>
+            <CheckBox onClick={this.checkHandler} />
+          </CheckBoxSpan>
+        )}
         <button type="submit">Submit</button>
       </FormContainer>
     );
@@ -60,8 +79,14 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+const mapStateToProps = state => {
+  return {
+    resume: state.auth.currentUser.resume
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(NewTemplate);
 
@@ -70,4 +95,14 @@ const TextArea = styled.textarea`
   margin-bottom: 0px;
   height: 150px;
   width: 400px;
+`;
+
+const CheckBoxSpan = styled.span`
+  display: flex;
+  flex-direction: row;
+  margin: 15px;
+`;
+
+const CheckBox = styled.input.attrs({ type: "checkbox" })`
+  margin-left: 5px;
 `;

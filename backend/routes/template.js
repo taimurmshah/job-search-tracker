@@ -6,14 +6,18 @@ const router = new express.Router();
 
 //create new template
 router.post("/templates", auth, async (req, res) => {
-  console.log("create new template route, here's req.body:", req.body);
   const template = new Template({ ...req.body, owner: req.user._id });
+
   try {
     await template.save();
     console.log({ template });
     res.send(template);
   } catch (err) {
-    res.status(400).send();
+    console.log(
+      "in the create new template route error, here's the error:",
+      err
+    );
+    res.status(400).send(err);
   }
 });
 

@@ -17,6 +17,10 @@ const templateSchema = new mongoose.Schema(
       required: true,
       trim: true
     },
+    withResume: {
+      required: true,
+      type: Boolean
+    },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
