@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ResumeCheckbox from "../resusable-components/ResumeCheckbox";
+import Checkbox from "../resusable-components/Checkbox";
 import {
   FormContainer,
   InputContainer,
@@ -60,7 +60,10 @@ class SendEmail extends Component {
             />
 
             {this.props.hasResume && (
-              <ResumeCheckbox clickHandler={this.checkHandler} />
+              <Checkbox
+                text="Attach Resume?"
+                clickHandler={this.checkHandler}
+              />
             )}
           </InputContainer>
 

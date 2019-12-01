@@ -3,13 +3,14 @@ import { connect } from "react-redux";
 import { newTemplateThunk } from "../../redux/thunks/template";
 import styled from "styled-components";
 import { FormContainer, Input } from "../resusable-components/styledComponents";
-import ResumeCheckbox from "../resusable-components/ResumeCheckbox";
+import Checkbox from "../resusable-components/Checkbox";
 
 class NewTemplate extends Component {
   state = {
     name: "",
     subject: "",
     message: "",
+    interpolationValues: false,
     withResume: false
   };
 
@@ -27,7 +28,18 @@ class NewTemplate extends Component {
     this.setState({ name: "", subject: "", message: "" });
   };
 
-  checkHandler = () => {
+  interpolationCheckHandler = () => {
+    this.setState(
+      {
+        interpolationValues: !this.state.interpolationValues
+      },
+      () => {
+        console.log("interpolationValues:", this.state.interpolationValues);
+      }
+    );
+  };
+
+  resumeCheckHandler = () => {
     this.setState(
       {
         withResume: !this.state.withResume
@@ -62,8 +74,16 @@ class NewTemplate extends Component {
           onChange={this.changeHandler}
         />
 
+        <Checkbox
+          text="Include custom values?"
+          clickHandler={this.interpolationCheckHandler}
+        />
+
         {this.props.resume && (
-          <ResumeCheckbox clickHandler={this.checkHandler} />
+          <Checkbox
+            text="Attach Resume?"
+            clickHandler={this.resumeCheckHandler}
+          />
         )}
         <button type="submit">Submit</button>
       </FormContainer>

@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-const ResumeCheckbox = ({ clickHandler }) => {
+const Checkbox = ({ clickHandler, text }) => {
   return (
     <CheckBoxSpan>
-      <p>Attach resume?</p>
-      <Checkbox onClick={clickHandler} />
+      <p>{text}</p>
+      <CheckboxInput onClick={clickHandler} />
     </CheckBoxSpan>
   );
 };
 
-export default ResumeCheckbox;
+export default Checkbox;
 const CheckBoxSpan = styled.span`
   display: flex;
   flex-direction: row;
@@ -18,6 +18,6 @@ const CheckBoxSpan = styled.span`
   justify-content: center;
 `;
 
-const Checkbox = styled.input.attrs({ type: "checkbox" })`
+const CheckboxInput = styled.input.attrs({ type: "checkbox" })`
   margin-left: 5px;
 `;

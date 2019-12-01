@@ -21,6 +21,11 @@ const templateSchema = new mongoose.Schema(
       required: true,
       type: Boolean
     },
+    interpolationValues: {
+      required: true,
+      type: Boolean
+    },
+
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,

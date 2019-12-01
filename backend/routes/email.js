@@ -1,10 +1,13 @@
 const express = require("express");
 const Employee = require("../models/Employee");
+const Template = require("../models/Template");
+const Job = require("../models/Job");
 const auth = require("../middleware/auth");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
+const replaceValues = require("../helper-methods/email-helpers");
 
 const {
   accessTokenRemainingTime
@@ -65,7 +68,7 @@ router.post("/gmail/send/new", auth, async (req, res) => {
       }
     });
 
-    const mailOptions = {
+    let mailOptions = {
       from: myEmail,
       to: employeeEmail,
       subject: req.body.emailObj.subject,
@@ -106,5 +109,102 @@ router.post("/gmail/send/new", auth, async (req, res) => {
     res.status(400).send(err);
   }
 });
+
+router.post("/gmail/send/template", auth, async (req, res) => {
+  let template = await Template.findOne({ _id: req.body.templateId });
+  const employee = await Employee.findOne({ _id: req.body.employeeId });
+  const job = await Job.findOne({ _id: employee.owner });
+  const user = req.user;
+  const firstName = user.name.split(" ")[0];
+  const lastName = user.name.split(" ")[1];
+  const myEmail = user.google.email;
+  const refresh_token = user.google.refresh_token;
+
+  const employeeEmail = employee.email;
+  try {
+    const oauth2Client = new OAuth2(
+      process.env.OAUTH_CLIENT,
+      process.env.OAUTH_SECRET,
+      process.env.REDIRECT_URI
+    );
+
+    oauth2Client.setCredentials({
+      refresh_token: refresh_token
+    });
+
+    const smtpTransport = nodemailer.createTransport({
+      service: "gmail",
+      tls: {
+        rejectUnauthorized: false
+      },
+      auth: {
+        type: "OAuth2",
+        clientId: process.env.OAUTH_CLIENT,
+        clientSecret: process.env.OAUTH_SECRET
+      }
+    });
+
+    if (template.interpolationValues) {
+      template = replaceValues(template, employee, job);
+    }
+
+    let mailOptions = {
+      from: myEmail,
+      to: employeeEmail,
+      subject: template.subject,
+      text: template.message,
+      auth: {
+        user: myEmail,
+        refreshToken: refresh_token,
+        expires: Date.now()
+      }
+    };
+
+    if (template.withResume) {
+      mailOptions.attachments = [
+        {
+          filename: `${firstName}-${lastName}-Resume.pdf`,
+          content: user.resume
+        }
+      ];
+    }
+
+    await smtpTransport.sendMail(mailOptions, async (err, result) => {
+      if (err) {
+        console.log("in sendmail err", { err });
+        return smtpTransport.close();
+      }
+
+      console.log({ result });
+
+      employee.response = false;
+      await employee.save();
+
+      res.send({ result });
+    });
+
+    //crete method for replacing interpolated values
+  } catch (err) {
+    console.log("in gmail/send/template, here's the error:", err);
+    res.status(400).send(err);
+  }
+});
+
+// const replaceValues = (template, employee, job) => {
+//   //return customized template
+//
+//   let str = template;
+//
+//   let mapObj = {
+//     "<<employee_name>>": employee.name.split(" ")[0],
+//     "<<company_name>>": job.company
+//   };
+//
+//   str = str.replace(/<<employee_name>>|<<company_name>>/gim, function(matched) {
+//     return mapObj[matched];
+//   });
+//
+//   return str;
+// };
 
 module.exports = router;
