@@ -190,21 +190,4 @@ router.post("/gmail/send/template", auth, async (req, res) => {
   }
 });
 
-// const replaceValues = (template, employee, job) => {
-//   //return customized template
-//
-//   let str = template;
-//
-//   let mapObj = {
-//     "<<employee_name>>": employee.name.split(" ")[0],
-//     "<<company_name>>": job.company
-//   };
-//
-//   str = str.replace(/<<employee_name>>|<<company_name>>/gim, function(matched) {
-//     return mapObj[matched];
-//   });
-//
-//   return str;
-// };
-
 module.exports = router;

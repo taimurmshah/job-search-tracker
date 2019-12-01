@@ -34,7 +34,9 @@ class Email extends Component {
           />
         )}
 
-        {this.state.template && <EmailModalTemplateList />}
+        {this.state.template && (
+          <EmailModalTemplateList closeModal={this.props.closeModal} />
+        )}
       </div>
     );
   }

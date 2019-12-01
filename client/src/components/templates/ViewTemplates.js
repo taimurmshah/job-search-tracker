@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const ViewTemplates = ({ templates }) => {
   const allTemplates = templates.map(t => {
-    return <TemplateListItem key={t._id} template={t} />;
+    return <TemplateListItem id={t._id} key={t._id} template={t} text="View" />;
   });
 
   console.log({ allTemplates });

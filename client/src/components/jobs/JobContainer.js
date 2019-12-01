@@ -20,7 +20,7 @@ import {
   updateEmployeeThunk,
   newEmployeeThunk
 } from "../../redux/thunks/employee";
-import { sendGmailThunk } from "../../redux/thunks/email";
+import { sendNewGmailThunk } from "../../redux/thunks/email";
 import { readAllTemplatesThunk } from "../../redux/thunks/template";
 
 //todo:
@@ -97,7 +97,7 @@ class JobContainer extends Component {
 
   sendEmailSubmitHandler = emailObj => {
     this.props.removeCurrentEmployee();
-    this.props.sendGmailThunk(this.state.employeeId, emailObj);
+    this.props.sendNewGmailThunk(this.state.employeeId, emailObj);
     this.setState({
       newEmployeeForm: false,
       addEmailForm: false,
@@ -208,8 +208,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(updateEmployeeThunk(jobId, employeeId, updates)),
     currentEmployee: employeeId => dispatch(currentEmployee(employeeId)),
     removeCurrentEmployee: () => dispatch(removeCurrentEmployee()),
-    sendGmailThunk: (employeeId, emailObj) =>
-      dispatch(sendGmailThunk(employeeId, emailObj)),
+    sendNewGmailThunk: (employeeId, emailObj) =>
+      dispatch(sendNewGmailThunk(employeeId, emailObj)),
     removeEmployees: () => dispatch(removeEmployees()),
     removeCurrentJob: () => dispatch(removeCurrentJob()),
     readAllTemplatesThunk: () => dispatch(readAllTemplatesThunk())

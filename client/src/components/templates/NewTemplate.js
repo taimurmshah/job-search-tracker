@@ -75,7 +75,7 @@ class NewTemplate extends Component {
         />
 
         <Checkbox
-          text="Include custom values?"
+          text="Include custom values?*"
           clickHandler={this.interpolationCheckHandler}
         />
 

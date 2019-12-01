@@ -1,18 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
-const TemplateListItem = ({ template }) => {
+const TemplateListItem = ({ template, text, clickHandler, id }) => {
   console.log("template list item is mounted");
+
   return (
     <TemplateContainer>
       <Span>
-        <p>Name: {template.name}</p>
+        <p>{template.name}</p>
       </Span>
       <Span>
-        <p>Subject: {template.subject}</p>
-      </Span>
-      <Span>
-        <p>Resume? {template.withResume ? "👍🏽" : "👎🏽"}</p>
+        <button onClick={clickHandler ? () => clickHandler(id) : null}>
+          {text}
+        </button>
       </Span>
     </TemplateContainer>
   );
