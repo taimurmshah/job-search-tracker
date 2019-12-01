@@ -1,5 +1,5 @@
 import React from "react";
-import { ModalNav } from "../styled-components/styledComponents";
+import { ModalNav } from "../resusable-components/styledComponents";
 
 const Loading = props => {
   return (

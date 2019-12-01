@@ -6,7 +6,10 @@ import { getEmployeesThunk } from "../../redux/thunks/employee";
 import JobList from "./JobList";
 import Loading from "../layout/Loading";
 
-import { HeaderContainer, Menu } from "../styled-components/styledComponents";
+import {
+  HeaderContainer,
+  Menu
+} from "../resusable-components/styledComponents";
 
 class Jobs extends Component {
   render() {

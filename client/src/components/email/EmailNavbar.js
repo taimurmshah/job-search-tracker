@@ -1,5 +1,5 @@
 import React from "react";
-import { Span, ModalNav } from "../styled-components/styledComponents";
+import { Span, ModalNav } from "../resusable-components/styledComponents";
 
 const EmailNavbar = ({ template, newEmail }) => {
   return (

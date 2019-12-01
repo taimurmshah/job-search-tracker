@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { newJobThunk } from "../../redux/thunks/job";
-import { FormContainer, Input } from "../styled-components/styledComponents";
+import { FormContainer, Input } from "../resusable-components/styledComponents";
 
 class CreateJob extends Component {
   state = {

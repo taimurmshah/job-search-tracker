@@ -12,13 +12,14 @@ const {
 
 const router = new express.Router();
 
-router.post("/gmail/send", auth, async (req, res) => {
+router.post("/gmail/send/new", auth, async (req, res) => {
+  console.log("req.body.emailObj:", req.body.emailObj);
+
   const user = req.user;
   const firstName = user.name.split(" ")[0];
   const lastName = user.name.split(" ")[1];
   const myEmail = user.google.email;
   const refresh_token = user.google.refresh_token;
-  const resume = user.resume;
   let access_token = user.google.access_token;
 
   const employee = await Employee.findOne({ _id: req.body.employeeId });
@@ -35,20 +36,19 @@ router.post("/gmail/send", auth, async (req, res) => {
       refresh_token: refresh_token
     });
 
-    const tokenInfo = await accessTokenRemainingTime(access_token);
-
-    // console.log({ tokenInfo });
-
-    //i dont really need to get a new token.
-    if (tokenInfo.error) {
-      console.log("I need a new access token!");
-      access_token = await oauth2Client.getAccessToken();
-      console.log({ access_token });
-      user.google.access_token = access_token.token;
-      await user.save();
-    }
-
-    // console.log({ access_token, refresh_token });
+    //I dont think I need these lines; the nodemailer seems to renew the accesstoken if it needs to.
+    // const tokenInfo = await accessTokenRemainingTime(access_token);
+    //
+    // // console.log({ tokenInfo });
+    //
+    // //i dont really need to get a new token.
+    // if (tokenInfo.error) {
+    //   console.log("I need a new access token!");
+    //   access_token = await oauth2Client.getAccessToken();
+    //   console.log({ access_token });
+    //   user.google.access_token = access_token.token;
+    //   await user.save();
+    // }
 
     const smtpTransport = nodemailer.createTransport({
       service: "gmail",
@@ -75,14 +75,18 @@ router.post("/gmail/send", auth, async (req, res) => {
         refreshToken: refresh_token,
         // accessToken: access_token,
         expires: Date.now()
-      },
-      attachments: [
+      }
+    };
+
+    if (req.body.emailObj.withResume) {
+      console.log("user wants to send it with resume!");
+      mailOptions.attachments = [
         {
           filename: `${firstName}-${lastName}-Resume.pdf`,
-          content: resume
+          content: user.resume
         }
-      ]
-    };
+      ];
+    }
 
     await smtpTransport.sendMail(mailOptions, async (err, result) => {
       if (err) {

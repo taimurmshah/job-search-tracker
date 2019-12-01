@@ -5,7 +5,7 @@ import {
   FormContainer,
   InputContainer,
   Input
-} from "../styled-components/styledComponents";
+} from "../resusable-components/styledComponents";
 
 class LoginForm extends Component {
   state = {

@@ -4,7 +4,7 @@ import {
   FormContainer,
   InputContainer,
   Input
-} from "../styled-components/styledComponents";
+} from "../resusable-components/styledComponents";
 import styled from "styled-components";
 
 class AddEmail extends Component {

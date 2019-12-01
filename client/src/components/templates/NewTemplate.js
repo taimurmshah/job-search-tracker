@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { newTemplateThunk } from "../../redux/thunks/template";
 import styled from "styled-components";
-import { FormContainer, Input } from "../styled-components/styledComponents";
+import { FormContainer, Input } from "../resusable-components/styledComponents";
+import ResumeCheckbox from "../resusable-components/ResumeCheckbox";
 
 class NewTemplate extends Component {
   state = {
@@ -62,10 +63,7 @@ class NewTemplate extends Component {
         />
 
         {this.props.resume && (
-          <CheckBoxSpan>
-            <p>Attach resume?</p>
-            <CheckBox onClick={this.checkHandler} />
-          </CheckBoxSpan>
+          <ResumeCheckbox clickHandler={this.checkHandler} />
         )}
         <button type="submit">Submit</button>
       </FormContainer>
@@ -95,14 +93,4 @@ const TextArea = styled.textarea`
   margin-bottom: 0px;
   height: 150px;
   width: 400px;
-`;
-
-const CheckBoxSpan = styled.span`
-  display: flex;
-  flex-direction: row;
-  margin: 15px;
-`;
-
-const CheckBox = styled.input.attrs({ type: "checkbox" })`
-  margin-left: 5px;
 `;

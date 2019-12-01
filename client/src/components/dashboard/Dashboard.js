@@ -9,7 +9,7 @@ import Modal from "../layout/Modal";
 import DashboardLinks from "./DashboardLinks";
 import Resume from "../resume/Resume";
 import Templates from "../templates/Templates";
-import { HeaderContainer } from "../styled-components/styledComponents";
+import { HeaderContainer } from "../resusable-components/styledComponents";
 import { readAllTemplatesThunk } from "../../redux/thunks/template";
 
 class Dashboard extends Component {

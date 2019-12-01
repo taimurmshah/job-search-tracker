@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import ResumeCheckbox from "../resusable-components/ResumeCheckbox";
 import {
   FormContainer,
   InputContainer,
   Input
-} from "../styled-components/styledComponents";
+} from "../resusable-components/styledComponents";
 
 class SendEmail extends Component {
   state = {
     subject: "",
-    message: ""
+    message: "",
+    withResume: false
   };
 
   changeHandler = e => {
@@ -21,9 +23,14 @@ class SendEmail extends Component {
   submitHandler = e => {
     e.preventDefault();
 
-    // this.props.closeModal();
     this.props.sendEmailSubmitHandler(this.state);
     this.setState({ subject: "", message: "" });
+  };
+
+  checkHandler = () => {
+    this.setState({ withResume: !this.state.withResume }, () => {
+      console.log("withResume:", this.state.withResume);
+    });
   };
 
   render() {
@@ -51,6 +58,10 @@ class SendEmail extends Component {
               cols="30"
               rows="10"
             />
+
+            {this.props.hasResume && (
+              <ResumeCheckbox clickHandler={this.checkHandler} />
+            )}
           </InputContainer>
 
           <div className="modal-buttons">
@@ -63,4 +74,10 @@ class SendEmail extends Component {
   }
 }
 
-export default connect()(SendEmail);
+const mapStateToProps = state => {
+  return {
+    hasResume: state.auth.currentUser.resume
+  };
+};
+
+export default connect(mapStateToProps)(SendEmail);

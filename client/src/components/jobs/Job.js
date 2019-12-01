@@ -3,7 +3,7 @@ import {
   HeaderContainer,
   Menu,
   Span
-} from "../styled-components/styledComponents";
+} from "../resusable-components/styledComponents";
 
 class Job extends Component {
   render() {
