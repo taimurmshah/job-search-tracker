@@ -36,7 +36,8 @@ class Employee extends Component {
       position,
       linkedIn,
       email,
-      response
+      response,
+      emailsSent
     } = this.props.employee;
 
     return (
@@ -57,9 +58,14 @@ class Employee extends Component {
               />
             </a>
           </td>
-          <td>{response ? "✅" : "🚨"}</td>
+
+          {emailsSent > 0 && <td>{response ? "✅" : "🚨"}</td>}
+          {emailsSent === 0 && <td>Email not sent</td>}
 
           <td>{email ? email : ""}</td>
+
+          <td>{emailsSent}</td>
+
           <td>{email ? this.send : this.add}</td>
         </tr>
       </>

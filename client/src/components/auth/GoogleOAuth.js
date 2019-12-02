@@ -7,8 +7,6 @@ import { googleOAuthThunk } from "../../redux/thunks/auth";
 
 const GoogleOAuth = props => {
   const googleResponse = response => {
-    // debugger;
-    console.log({ response });
     const code = response.code;
     props.googleOAuthThunk(code);
   };
@@ -50,5 +48,3 @@ export default connect(
   null,
   mapDispatchToProps
 )(GoogleOAuth);
-
-//"602278501830-rphr8gpcgsbitjkn43gcej296j9723sh.apps.googleusercontent.com"

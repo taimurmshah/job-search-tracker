@@ -37,6 +37,7 @@ class Table extends Component {
               <th>LinkedIn</th>
               <th>Response</th>
               <th>Email</th>
+              <th>Emails Sent</th>
               <th>Action</th>
             </tr>
           </thead>
