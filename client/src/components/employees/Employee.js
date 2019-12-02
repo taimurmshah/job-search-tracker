@@ -30,7 +30,7 @@ class Employee extends Component {
   add = <button onClick={this.addEmailButtonClickHandler}>Add Email</button>;
 
   render() {
-    const {
+    let {
       _id,
       name,
       position,
@@ -40,6 +40,9 @@ class Employee extends Component {
       emailsSent
     } = this.props.employee;
 
+    if (typeof emailsSent !== "number") {
+      emailsSent = emailsSent.length;
+    }
     return (
       <>
         <tr key={_id}>

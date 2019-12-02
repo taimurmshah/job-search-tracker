@@ -5,6 +5,10 @@ const PossibleEmails = ({ name, website }) => {
   console.log({ name });
   console.log({ website });
 
+  if (website.startsWith("www.")) {
+    website = website.split("www.")[1];
+  }
+
   const possibleEmails = (name, website) => {
     let emails = [];
     let firstName = name.split(" ")[0].toLowerCase();
