@@ -11,13 +11,21 @@ const Navbar = ({ currentUser, isLoggedIn, imageUrl }) => {
       {isLoggedIn ? (
         <>
           <Span>
-            <Logout />
-          </Span>
-          <Span>
             <Link className="nav-link" to="/dashboard">
               Home
             </Link>
           </Span>
+
+          <Span>
+            <Link className="nav-link" to="/jobs">
+              Jobs
+            </Link>
+          </Span>
+
+          <Span>
+            <Logout />
+          </Span>
+
           {imageUrl && (
             <Span>
               <Picture

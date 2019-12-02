@@ -100,6 +100,7 @@ router.post("/gmail/send/new", auth, async (req, res) => {
       console.log({ result });
 
       employee.response = false;
+      employee.emailsSent = [...employee.emailsSent, { method: "custom" }];
       await employee.save();
 
       res.send({ result });
@@ -119,6 +120,7 @@ router.post("/gmail/send/template", auth, async (req, res) => {
   const lastName = user.name.split(" ")[1];
   const myEmail = user.google.email;
   const refresh_token = user.google.refresh_token;
+  let emailsSent = employee.emailsSent;
 
   const employeeEmail = employee.email;
   try {
@@ -178,6 +180,28 @@ router.post("/gmail/send/template", auth, async (req, res) => {
       console.log({ result });
 
       employee.response = false;
+
+      if (
+        employee.emailsSent.length > 0 &&
+        employee.emailsSent[0].method === undefined
+      ) {
+        console.log("in here, fixing it");
+        employee.emailsSent[0].method = "template";
+        employee.emailsSent[0].template_id = "5de53ba3fcfed33a8fc61e21";
+      }
+
+      if (typeof employee.emailsSent !== "number") {
+        employee.emailsSent = [
+          ...employee.emailsSent,
+          { method: "template", template_id: template._id }
+        ];
+      } else {
+        employee.emailsSent = [
+          { method: "template", template_id: "5de53ba3fcfed33a8fc61e21" },
+          { method: "template", template_id: template._id }
+        ];
+      }
+
       await employee.save();
 
       res.send({ result });

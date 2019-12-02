@@ -34,12 +34,17 @@ const employeeSchema = new mongoose.Schema(
       type: String,
       trim: true
     },
-    possibleEmails: [
+    emailsSent: [
       {
-        email: {
+        method: {
           type: String,
-          trim: true
-        }
+          enum: ["custom", "template"],
+          required: true
+        },
+        template_id: {
+          type: String
+        },
+        time: { type: Date, default: Date.now }
       }
     ],
     owner: {
