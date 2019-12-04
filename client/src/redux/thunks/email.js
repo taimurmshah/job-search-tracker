@@ -1,5 +1,7 @@
 // import { URL } from "../../resources";
 
+import { updateEmployee } from "../actions/employee";
+
 export const sendNewGmailThunk = (employeeId, emailObj) => async dispatch => {
   const token = localStorage.getItem("token");
   try {
@@ -15,6 +17,7 @@ export const sendNewGmailThunk = (employeeId, emailObj) => async dispatch => {
 
     res = await res.json();
     console.log("res from email thunk, need to dispatch action:", res);
+    dispatch(updateEmployee(res.employee));
   } catch (err) {
     console.log("sendNewGmailThunk, here's the error:", err);
     //todo handle error
@@ -43,6 +46,7 @@ export const sendTemplateGmailThunk = (
 
     res = await res.json();
     console.log("res from email thunk, need to dispatch action:", res);
+    dispatch(updateEmployee(res.employee));
   } catch (err) {
     console.log("sendTemplateGmailThunk, here's the error:", err);
     //todo handle error

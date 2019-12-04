@@ -44,6 +44,7 @@ class NewEmployee extends Component {
               name="firstName"
               value={this.state.firstName}
               onChange={this.changeHandler}
+              required
             />
             <p>Last Name:</p>
             <Input
@@ -51,6 +52,7 @@ class NewEmployee extends Component {
               name="lastName"
               value={this.state.lastName}
               onChange={this.changeHandler}
+              required
             />
             <p>Position:</p>
             <Input
@@ -58,6 +60,7 @@ class NewEmployee extends Component {
               name="position"
               value={this.state.position}
               onChange={this.changeHandler}
+              required
             />
             <p>LinkedIn Profile:</p>
             <Input
@@ -65,6 +68,7 @@ class NewEmployee extends Component {
               name="linkedIn"
               value={this.state.linkedIn}
               onChange={this.changeHandler}
+              required
             />
             <p>Email: (not required)</p>
             <Input

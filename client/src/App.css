@@ -37,7 +37,7 @@ textarea {
     position: relative;
     overflow: hidden;
     display: inline-block;
-    cursor: pointer;
+    /*cursor: pointer;*/
     padding-left: 188px;
 }
 
@@ -47,7 +47,7 @@ textarea {
     left: 0;
     top: 0;
     opacity: 0;
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 
 /*container*/
