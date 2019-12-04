@@ -92,6 +92,15 @@ router.patch("/jobs/:id/employees/:employee_id", auth, async (req, res) => {
       await job.save();
     }
 
+    //todo cleanup
+    if (
+      employee.emailsSent.length > 0 &&
+      employee.emailsSent[0].method === undefined
+    ) {
+      employee.emailsSent[0].method = "template";
+      employee.emailsSent[0].template_id = "5de53ba3fcfed33a8fc61e21";
+    }
+
     await employee.save();
 
     res.send(employee);
