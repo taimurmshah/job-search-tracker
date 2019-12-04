@@ -31,7 +31,14 @@ router.get("/jobs", auth, async (req, res) => {
         path: "jobs"
       })
       .execPopulate();
-    res.send(user.jobs);
+
+    let jobs = user.jobs;
+
+    for (let i = 0, j = jobs.length - 1; i < j; i++, j--) {
+      [jobs[i], jobs[j]] = [jobs[j], jobs[i]];
+    }
+
+    res.send(jobs);
   } catch (err) {
     res.status(500).send(err);
   }

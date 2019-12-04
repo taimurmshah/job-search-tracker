@@ -11,7 +11,7 @@ export default function(state = initialState, action) {
     case "NEW_JOB":
       return {
         ...state,
-        jobs: [...state.jobs, action.payload]
+        jobs: [action.payload, ...state.jobs]
       };
     case "GET_JOBS":
       return { ...state, jobs: action.payload };

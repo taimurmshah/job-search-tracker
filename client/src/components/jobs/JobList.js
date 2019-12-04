@@ -22,16 +22,7 @@ const JobList = ({ jobs, currentJob, getEmployeesThunk }) => {
     </Span>
   ));
 
-  return (
-    <Menu>
-      {jobs}
-      <Span>
-        <Link className="nav-link" to="create-job">
-          Add New Job
-        </Link>
-      </Span>
-    </Menu>
-  );
+  return <Menu>{jobs}</Menu>;
 };
 
 const mapDispatchToProps = dispatch => {

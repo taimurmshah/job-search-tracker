@@ -5,10 +5,9 @@ import { currentJob } from "../../redux/actions/job";
 import { getEmployeesThunk } from "../../redux/thunks/employee";
 import JobList from "./JobList";
 import Loading from "../layout/Loading";
-
 import {
   HeaderContainer,
-  Menu
+  Span
 } from "../resusable-components/styledComponents";
 
 class Jobs extends Component {
@@ -22,6 +21,11 @@ class Jobs extends Component {
         <HeaderContainer>
           <h1>Jobs</h1>
         </HeaderContainer>
+        <Span>
+          <Link className="nav-link" to="create-job">
+            Add New Job +
+          </Link>
+        </Span>
         <JobList jobs={this.props.jobs} />
       </div>
     );

@@ -37,13 +37,6 @@ class CreateJob extends Component {
             value={this.state.company}
             onChange={this.changeHandler}
           />
-          <p>Company Website:</p>
-          <Input
-            type="text"
-            name="website"
-            value={this.state.website}
-            onChange={this.changeHandler}
-          />
           <p>Link to Job Description:</p>
           <Input
             type="text"
@@ -58,6 +51,14 @@ class CreateJob extends Component {
             value={this.state.linkedIn}
             onChange={this.changeHandler}
           />
+          <p>Company Website:</p>
+          <Input
+            type="text"
+            name="website"
+            value={this.state.website}
+            onChange={this.changeHandler}
+          />
+
           <button type="submit">Submit</button>
         </FormContainer>
       </div>
