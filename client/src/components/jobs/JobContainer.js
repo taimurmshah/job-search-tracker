@@ -5,6 +5,8 @@ import Table from "../employees/Table";
 import AddEmail from "../email/AddEmail";
 import Email from "../email/Email";
 import Modal from "../layout/Modal";
+import SmallModal from "../layout/SmallModal";
+import UpdateResponse from "../employees/UpdateResponse";
 import Loading from "../layout/Loading";
 import Job from "./Job";
 import { currentJob, removeCurrentJob } from "../../redux/actions/job";
@@ -33,7 +35,8 @@ class JobContainer extends Component {
     addEmailForm: false,
     sendEmailForm: false,
     employeeId: "",
-    showModal: false
+    showModal: false,
+    smallModal: false
   };
 
   componentDidMount() {
@@ -114,7 +117,32 @@ class JobContainer extends Component {
       addEmailForm: false,
       sendEmailForm: false,
       newEmployeeForm: false,
-      employeeId: ""
+      employeeId: "",
+      smallModal: false
+    });
+  };
+
+  showSmallModal = employeeId => {
+    this.props.currentEmployee(employeeId);
+    this.setState({ smallModal: true }, () => {
+      console.log("state:", this.state);
+    });
+  };
+
+  responseSubmitHandler = () => {
+    this.props.updateEmployeeThunk(
+      this.props.job._id,
+      this.props.currentEmployeeId,
+      { response: true }
+    );
+    this.props.removeCurrentEmployee();
+    this.setState({
+      newEmployeeForm: false,
+      addEmailForm: false,
+      sendEmailForm: false,
+      employeeId: "",
+      showModal: false,
+      smallModal: false
     });
   };
 
@@ -172,6 +200,7 @@ class JobContainer extends Component {
             jobId={this.props.job._id}
             addEmailButtonClickHandler={this.addEmailButtonClickHandler}
             sendEmailButtonClickHandler={this.sendEmailButtonClickHandler}
+            showSmallModal={this.showSmallModal}
           />
         )}
 
@@ -184,6 +213,17 @@ class JobContainer extends Component {
           show={this.state.showModal}
           component={this.componentPassToModal()}
         />
+
+        <SmallModal
+          closeModal={this.closeModal}
+          show={this.state.smallModal}
+          component={
+            <UpdateResponse
+              closeModal={this.closeModal}
+              submitHandler={this.responseSubmitHandler}
+            />
+          }
+        />
       </div>
     );
   }
@@ -193,6 +233,7 @@ const mapStateToProps = state => {
   return {
     job: state.job.currentJob,
     employees: state.employee.employees,
+    currentEmployeeId: state.employee.currentEmployee._id,
     templates: state.template.templates
   };
 };

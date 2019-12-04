@@ -40,13 +40,6 @@ router.get("/jobs/:id/employees", auth, async (req, res) => {
       })
       .execPopulate();
 
-    const num = job.employees.forEach(e => {
-      e.emailsSent = e.emailsSent.length;
-      console.log({ e });
-    });
-
-    // console.log({ num });
-
     res.send(job.employees);
   } catch (err) {
     res.status(400).send();
@@ -92,6 +85,12 @@ router.patch("/jobs/:id/employees/:employee_id", auth, async (req, res) => {
     if (!employee) return res.status(404).send();
 
     updates.forEach(update => (employee[update] = req.body[update]));
+
+    if (updates.includes("response")) {
+      const job = await Job.findOne({ _id: req.params.id });
+      job.response = true;
+      await job.save();
+    }
 
     await employee.save();
 

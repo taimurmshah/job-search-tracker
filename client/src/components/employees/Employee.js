@@ -26,6 +26,10 @@ class Employee extends Component {
     this.props.sendEmailButtonClickHandler(this.props.employee._id);
   };
 
+  showSmallModal = () => {
+    this.props.showSmallModal(this.props.employee._id);
+  };
+
   send = <button onClick={this.sendEmailButtonClickHandler}>Send Email</button>;
   add = <button onClick={this.addEmailButtonClickHandler}>Add Email</button>;
 
@@ -62,7 +66,15 @@ class Employee extends Component {
             </a>
           </td>
 
-          {emailsSent > 0 && <td>{response ? "✅" : "🚨"}</td>}
+          {emailsSent > 0 && (
+            <td>
+              {response ? (
+                <p>✅</p>
+              ) : (
+                <button onClick={this.showSmallModal}>🚨</button>
+              )}
+            </td>
+          )}
           {emailsSent === 0 && <td>Email not sent</td>}
 
           <td>{email ? email : ""}</td>

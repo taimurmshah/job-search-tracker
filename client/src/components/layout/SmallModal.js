@@ -1,28 +1,27 @@
 import React from "react";
 import styled from "styled-components";
 
-const Modal = ({ closeModal, show, component }) => {
+const SmallModal = ({ closeModal, show, component }) => {
   const showHideClassName = show ? "modal display-block" : "modal display-none";
-
   return (
     <div className={showHideClassName}>
-      <ModalMain>
+      <SmallModalMain>
         <div className="dialog">
           <a onClick={closeModal} className="close-thick" />
         </div>
         {component}
-      </ModalMain>
+      </SmallModalMain>
     </div>
   );
 };
 
-export default Modal;
+export default SmallModal;
 
-const ModalMain = styled.section`
+const SmallModalMain = styled.section`
   position: fixed;
   background: #fff;
-  width: 600px;
-  height: 500px;
+  width: 300px;
+  height: 200px;
   top: 50%;
   left: 50%;
   padding-top: 35px;

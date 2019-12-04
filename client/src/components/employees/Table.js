@@ -20,6 +20,7 @@ class Table extends Component {
           employee={e}
           addEmailButtonClickHandler={this.props.addEmailButtonClickHandler}
           sendEmailButtonClickHandler={this.props.sendEmailButtonClickHandler}
+          showSmallModal={this.props.showSmallModal}
         />
       );
     });
