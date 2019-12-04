@@ -195,14 +195,25 @@ router.patch(
   upload.single("resume"),
   async (req, res) => {
     try {
+      console.log(
+        "I'm in the route to update a user's resume. I'm in the try, where does it break?"
+      );
       req.user.resume = req.file.buffer;
       await req.user.save();
       res.send();
     } catch (err) {
+      console.log(
+        "in the route to update user resume, in the first catch, here's the error:",
+        err
+      );
       res.status(400).send({ err });
     }
   },
   (error, req, res, next) => {
+    console.log(
+      "in the update resume error callback, here's the error:",
+      error
+    );
     res.status(400).send({ error: error.message });
   }
 );

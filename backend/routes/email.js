@@ -103,7 +103,7 @@ router.post("/gmail/send/new", auth, async (req, res) => {
       employee.emailsSent = [...employee.emailsSent, { method: "custom" }];
       await employee.save();
 
-      res.send({ result });
+      res.send({ result, employee });
     });
   } catch (err) {
     console.log("in the overall catch, here's the error", err);
@@ -204,7 +204,7 @@ router.post("/gmail/send/template", auth, async (req, res) => {
 
       await employee.save();
 
-      res.send({ result });
+      res.send({ result, employee });
     });
 
     //crete method for replacing interpolated values
