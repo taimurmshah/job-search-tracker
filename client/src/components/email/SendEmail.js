@@ -43,6 +43,7 @@ class SendEmail extends Component {
           <InputContainer>
             <p>Subject:</p>
             <Input
+              required
               type="text"
               name="subject"
               value={this.state.subject}
@@ -51,6 +52,7 @@ class SendEmail extends Component {
 
             <p>Message:</p>
             <textarea
+              required
               name="message"
               value={this.state.message}
               onChange={this.changeHandler}

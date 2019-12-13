@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+// import { withRouter } from "react-router-dom";
 import { newJobThunk } from "../../redux/thunks/job";
 import { FormContainer, Input } from "../resusable-components/styledComponents";
 
@@ -20,10 +20,9 @@ class CreateJob extends Component {
 
   submitHandler = e => {
     e.preventDefault();
-
+    this.props.closeModal();
     this.props.newJobThunk(this.state);
     this.setState({ company: "", website: "", link: "", linkedIn: "" });
-    return this.props.history.push("/jobs");
   };
 
   render() {
@@ -32,6 +31,7 @@ class CreateJob extends Component {
         <FormContainer onSubmit={this.submitHandler}>
           <p>Company Name:</p>
           <Input
+            required
             type="text"
             name="company"
             value={this.state.company}
@@ -39,6 +39,7 @@ class CreateJob extends Component {
           />
           <p>Link to Job Description:</p>
           <Input
+            required
             type="text"
             name="link"
             value={this.state.link}
@@ -46,6 +47,7 @@ class CreateJob extends Component {
           />
           <p>LinkedIn Page:</p>
           <Input
+            required
             type="text"
             name="linkedIn"
             value={this.state.linkedIn}
@@ -53,6 +55,7 @@ class CreateJob extends Component {
           />
           <p>Company Website:</p>
           <Input
+            required
             type="text"
             name="website"
             value={this.state.website}
@@ -75,4 +78,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   null,
   mapDispatchToProps
-)(withRouter(CreateJob));
+)(CreateJob);

@@ -35,7 +35,7 @@ const Menu = styled.div`
   display: flex;
   flex-direction: column;
   padding: 5px;
-  width: 200px;
+  width: 300px;
 `;
 
 const Span = styled.span`

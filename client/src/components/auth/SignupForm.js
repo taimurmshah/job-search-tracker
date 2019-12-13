@@ -38,6 +38,7 @@ class SignupForm extends Component {
           <InputContainer>
             <p>Name:</p>
             <Input
+              required
               name="name"
               value={this.state.name}
               placeholder="name"
@@ -45,6 +46,7 @@ class SignupForm extends Component {
             />
             <p>Email:</p>
             <Input
+              required
               name="email"
               value={this.state.email}
               placeholder="email"
@@ -52,6 +54,7 @@ class SignupForm extends Component {
             />
             Password:
             <Input
+              required
               type="password"
               name="password"
               value={this.state.password}

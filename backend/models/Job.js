@@ -29,9 +29,19 @@ const jobSchema = new mongoose.Schema(
       type: Boolean,
       default: false
     },
-    /* status as in, false = rejected & true = currently interviewing */
     status: {
-      type: Boolean
+      type: String,
+      enum: [
+        "Haven't sent email yet",
+        "Waiting for response",
+        "Rejected",
+        "Interviewing",
+        "Offer"
+      ],
+      default: "Haven't sent email yet"
+    },
+    mostRecentEmailSent: {
+      type: Date
     },
     notes: {
       type: String,
@@ -61,4 +71,5 @@ jobSchema.pre("remove", async function(next) {
 });
 
 const Job = mongoose.model("Job", jobSchema);
+
 module.exports = Job;

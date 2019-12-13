@@ -55,6 +55,7 @@ class NewTemplate extends Component {
       <FormContainer onSubmit={this.submitHandler}>
         <p>Name:</p>
         <Input
+          required
           type="text"
           name="name"
           value={this.state.name}
@@ -62,6 +63,7 @@ class NewTemplate extends Component {
         />
         <p>Subject:</p>
         <Input
+          required
           type="text"
           name="subject"
           value={this.state.subject}
@@ -69,6 +71,7 @@ class NewTemplate extends Component {
         />
         <p>Message:</p>
         <TextArea
+          required
           name="message"
           value={this.state.message}
           onChange={this.changeHandler}

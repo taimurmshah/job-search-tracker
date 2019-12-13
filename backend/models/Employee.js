@@ -44,7 +44,7 @@ const employeeSchema = new mongoose.Schema(
         template_id: {
           type: String
         },
-        time: { type: Date, default: Date.now }
+        time: { type: Date, default: new Date() }
       }
     ],
     owner: {

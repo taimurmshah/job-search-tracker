@@ -32,6 +32,7 @@ class LoginForm extends Component {
           <InputContainer>
             <p>Email:</p>
             <Input
+              required
               name="email"
               value={this.state.email}
               placeholder="email"
@@ -40,6 +41,7 @@ class LoginForm extends Component {
 
             <p>Password:</p>
             <Input
+              required
               type="password"
               name="password"
               value={this.state.password}
