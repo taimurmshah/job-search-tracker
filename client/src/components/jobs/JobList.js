@@ -1,25 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { Menu, Span } from "../resusable-components/styledComponents";
 import { connect } from "react-redux";
 import { currentJob } from "../../redux/actions/job";
 import { getEmployeesThunk } from "../../redux/thunks/employee";
+import JobCard from "./JobCard";
 
-const JobList = ({ jobs, currentJob, getEmployeesThunk }) => {
+const JobList = ({ jobs }) => {
   jobs = jobs.map(job => (
-    <Span key={job._id}>
-      <Link
-        className="nav-link"
-        onClick={() => {
-          currentJob(job._id);
-          getEmployeesThunk(job._id);
-        }}
-        to={`/jobs/${job._id}`}
-      >
-        {job.company}
-      </Link>
-    </Span>
+    <JobCard
+      key={job._id}
+      _id={job._id}
+      company={job.company}
+      status={job.status}
+    />
   ));
 
   return <Menu>{jobs}</Menu>;

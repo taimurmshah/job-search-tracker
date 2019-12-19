@@ -50,6 +50,37 @@ const ModalNav = styled.div`
   justify-content: center;
 `;
 
+const FormButton = styled.button`
+  width: 80px;
+  display: inline-block;
+  padding: 0.3em 1.2em;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: #ffffff;
+  background-color: rgb(12, 96, 146);
+  text-align: center;
+  transition: all 0.2s;
+`;
+
+// a.button3{
+//   display:inline-block;
+//   padding:0.3em 1.2em;
+//   margin:0 0.3em 0.3em 0;
+//   border-radius:2em;
+//   box-sizing: border-box;
+//   text-decoration:none;
+//   font-family:'Roboto',sans-serif;
+//   font-weight:300;
+//   color:#FFFFFF;
+//   background-color:#4eb5f1;
+//   text-align:center;
+//   transition: all 0.2s;
+// }
+
 export {
   FormContainer,
   Input,
@@ -57,5 +88,6 @@ export {
   HeaderContainer,
   Menu,
   Span,
-  ModalNav
+  ModalNav,
+  FormButton
 };

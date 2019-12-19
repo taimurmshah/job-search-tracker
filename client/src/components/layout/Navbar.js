@@ -11,13 +11,13 @@ const Navbar = ({ currentUser, isLoggedIn, imageUrl }) => {
       {isLoggedIn ? (
         <>
           <Span>
-            <Link className="nav-link" to="/dashboard">
+            <Link className="navbar-link" to="/dashboard">
               Home
             </Link>
           </Span>
 
           <Span>
-            <Link className="nav-link" to="/jobs">
+            <Link className="navbar-link" to="/jobs">
               Jobs
             </Link>
           </Span>
@@ -40,12 +40,12 @@ const Navbar = ({ currentUser, isLoggedIn, imageUrl }) => {
       ) : (
         <>
           <Span>
-            <Link className="nav-link" to="/login">
+            <Link className="navbar-link" to="/login">
               Log In
             </Link>
           </Span>
           <Span>
-            <Link className="nav-link" to="/signup">
+            <Link className="navbar-link" to="/signup">
               Sign Up
             </Link>
           </Span>

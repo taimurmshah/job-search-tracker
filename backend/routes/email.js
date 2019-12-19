@@ -26,6 +26,7 @@ router.post("/gmail/send/new", auth, async (req, res) => {
   let access_token = user.google.access_token;
 
   const employee = await Employee.findOne({ _id: req.body.employeeId });
+  const job = await Job.findOne({ _id: employee.owner });
 
   const employeeEmail = employee.email;
   try {
@@ -39,20 +40,6 @@ router.post("/gmail/send/new", auth, async (req, res) => {
       refresh_token: refresh_token
     });
 
-    //I dont think I need these lines; the nodemailer seems to renew the accesstoken if it needs to.
-    // const tokenInfo = await accessTokenRemainingTime(access_token);
-    //
-    // // console.log({ tokenInfo });
-    //
-    // //i dont really need to get a new token.
-    // if (tokenInfo.error) {
-    //   console.log("I need a new access token!");
-    //   access_token = await oauth2Client.getAccessToken();
-    //   console.log({ access_token });
-    //   user.google.access_token = access_token.token;
-    //   await user.save();
-    // }
-
     const smtpTransport = nodemailer.createTransport({
       service: "gmail",
       tls: {
@@ -60,11 +47,8 @@ router.post("/gmail/send/new", auth, async (req, res) => {
       },
       auth: {
         type: "OAuth2",
-        // user: myEmail,
         clientId: process.env.OAUTH_CLIENT,
         clientSecret: process.env.OAUTH_SECRET
-        // refreshToken: refresh_token,
-        // accessToken: access_token
       }
     });
 
@@ -76,7 +60,6 @@ router.post("/gmail/send/new", auth, async (req, res) => {
       auth: {
         user: myEmail,
         refreshToken: refresh_token,
-        // accessToken: access_token,
         expires: Date.now()
       }
     };
@@ -99,9 +82,12 @@ router.post("/gmail/send/new", auth, async (req, res) => {
 
       console.log({ result });
 
+      job.status = "Waiting for response";
       employee.response = false;
+
       employee.emailsSent = [...employee.emailsSent, { method: "custom" }];
       await employee.save();
+      await job.save();
 
       res.send({ result, employee });
     });
@@ -202,12 +188,13 @@ router.post("/gmail/send/template", auth, async (req, res) => {
         ];
       }
 
+      job.status = "Waiting for response";
+
       await employee.save();
+      await job.save();
 
       res.send({ result, employee });
     });
-
-    //crete method for replacing interpolated values
   } catch (err) {
     console.log("in gmail/send/template, here's the error:", err);
     res.status(400).send(err);

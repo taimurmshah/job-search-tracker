@@ -116,6 +116,20 @@ textarea {
     cursor: pointer;
 }
 
+ .navbar-link {
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    font-family: 'Bitter', serif;
+    color: rgb(26, 31, 33);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nav-link:hover {
+    color: blue;
+}
+
 
 .local-button {
     background: lightgrey;

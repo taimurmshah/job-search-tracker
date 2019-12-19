@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+
 import { currentJob } from "../../redux/actions/job";
 import { getEmployeesThunk } from "../../redux/thunks/employee";
 import Modal from "../layout/Modal";
@@ -11,6 +11,7 @@ import {
   HeaderContainer,
   Span
 } from "../resusable-components/styledComponents";
+import styled from "styled-components";
 
 class Jobs extends Component {
   state = {
@@ -40,9 +41,9 @@ class Jobs extends Component {
           <h1>Jobs</h1>
         </HeaderContainer>
         <Span>
-          <p className="nav-link" onClick={this.showModal}>
+          <Add className="nav-link" onClick={this.showModal}>
             Add New Job +
-          </p>
+          </Add>
         </Span>
 
         {this.state.showModal && (
@@ -77,3 +78,7 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Jobs);
+
+const Add = styled.p`
+  margin-left: 30px;
+`;

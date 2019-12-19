@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import Modal from "../layout/Modal";
+import UpdateStatus from "./UpdateStatus";
+import JobNotes from "./JobNotes";
 import {
   HeaderContainer,
   Menu,
@@ -6,6 +9,30 @@ import {
 } from "../resusable-components/styledComponents";
 
 class Job extends Component {
+  state = {
+    status: false,
+    notes: false
+  };
+
+  showStatus = () => {
+    this.setState({
+      status: true
+    });
+  };
+
+  showNotes = () => {
+    this.setState({
+      notes: true
+    });
+  };
+
+  closeModal = () => {
+    this.setState({
+      status: false,
+      notes: false
+    });
+  };
+
   render() {
     let { company, linkedIn, link, website } = this.props.job;
 
@@ -50,7 +77,34 @@ class Job extends Component {
               Job Description
             </a>
           </Span>
+          <Span>
+            <p className="nav-link" onClick={this.showStatus}>
+              Update Status
+            </p>
+          </Span>
+          <Span>
+            <p className="nav-link" onClick={this.showNotes}>
+              Notes
+            </p>
+          </Span>
         </Menu>
+
+        {this.state.status && (
+          <Modal
+            closeModal={this.closeModal}
+            component={<UpdateStatus closeModal={this.closeModal} />}
+            show={this.state.status}
+          />
+        )}
+        {this.state.notes && (
+          <Modal
+            closeModal={this.closeModal}
+            component={
+              <JobNotes company={company} closeModal={this.closeModal} />
+            }
+            show={this.state.notes}
+          />
+        )}
       </div>
     );
   }
