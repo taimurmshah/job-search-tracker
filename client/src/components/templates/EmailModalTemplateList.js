@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import TemplateListItem from "./TemplateListItem";
 import { sendTemplateGmailThunk } from "../../redux/thunks/email";
+
 import styled from "styled-components";
 
 const EmailModalTemplateList = ({

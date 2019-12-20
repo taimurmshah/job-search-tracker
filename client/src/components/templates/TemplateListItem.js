@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { FormButton } from "../resusable-components/styledComponents";
 
 const TemplateListItem = ({ template, text, clickHandler, id }) => {
   console.log("template list item is mounted");
@@ -10,9 +11,9 @@ const TemplateListItem = ({ template, text, clickHandler, id }) => {
         <p>{template.name}</p>
       </Span>
       <Span>
-        <button onClick={clickHandler ? () => clickHandler(id) : null}>
+        <FormButton onClick={clickHandler ? () => clickHandler(id) : null}>
           {text}
-        </button>
+        </FormButton>
       </Span>
     </TemplateContainer>
   );

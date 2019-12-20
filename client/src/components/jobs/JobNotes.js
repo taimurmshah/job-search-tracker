@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { updateJobThunk } from "../../redux/thunks/job";
 import {
   HeaderContainer,
   InputContainer,
@@ -8,8 +9,27 @@ import {
 import styled from "styled-components";
 
 class JobNotes extends Component {
+  state = {
+    notes: this.props.notes
+  };
+
+  changeHandler = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  submitHandler = e => {
+    e.preventDefault();
+    if (this.state.notes === this.props.notes) {
+      return this.props.closeModal();
+    }
+    this.props.updateJobThunk(this.props._id, this.state);
+    this.props.closeModal();
+  };
+
   render() {
-    let { company } = this.props;
+    let { company, notes } = this.props;
     return (
       <div>
         <HeaderContainer>
@@ -19,23 +39,32 @@ class JobNotes extends Component {
           <Notes
             required
             name="notes"
-            // value={this.state.message}
-            // onChange={this.changeHandler}
+            value={this.state.notes}
+            onChange={this.changeHandler}
             id=""
             cols="30"
             rows="20"
           />
         </InputContainer>
         <HeaderContainer>
-          <FormButton>Save</FormButton>
-          <FormButton>Close</FormButton>
+          <FormButton onClick={this.submitHandler}>Save</FormButton>
+          <FormButton onClick={this.props.closeModal}>Close</FormButton>
         </HeaderContainer>
       </div>
     );
   }
 }
 
-export default JobNotes;
+const mapDispatchToProps = dispatch => {
+  return {
+    updateJobThunk: (jobId, updates) => dispatch(updateJobThunk(jobId, updates))
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(JobNotes);
 
 const Title = styled.h3`
   font-size: 25px;

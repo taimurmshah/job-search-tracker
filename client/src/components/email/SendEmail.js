@@ -4,7 +4,9 @@ import Checkbox from "../resusable-components/Checkbox";
 import {
   FormContainer,
   InputContainer,
-  Input
+  Input,
+  HeaderContainer,
+  FormButton
 } from "../resusable-components/styledComponents";
 
 class SendEmail extends Component {
@@ -70,8 +72,8 @@ class SendEmail extends Component {
           </InputContainer>
 
           <div className="modal-buttons">
-            <button type="submit">Submit</button>
-            <button onClick={this.props.closeModal}>Close</button>
+            <FormButton type="submit">Submit</FormButton>
+            <FormButton onClick={this.props.closeModal}>Close</FormButton>
           </div>
         </FormContainer>
       </div>

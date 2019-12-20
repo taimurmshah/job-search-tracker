@@ -139,6 +139,7 @@ router.get("/jobs/:id", auth, async (req, res) => {
 //update job
 router.patch("/jobs/:id", auth, async (req, res) => {
   const updates = Object.keys(req.body);
+  // console.log("updates:", updates);
 
   const allowedUpdates = ["response", "status", "notes"];
 

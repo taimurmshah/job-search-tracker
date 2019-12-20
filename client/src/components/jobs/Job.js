@@ -34,7 +34,15 @@ class Job extends Component {
   };
 
   render() {
-    let { company, linkedIn, link, website } = this.props.job;
+    let {
+      _id,
+      company,
+      linkedIn,
+      link,
+      website,
+      notes,
+      status
+    } = this.props.job;
 
     website = "https://" + website;
 
@@ -100,7 +108,12 @@ class Job extends Component {
           <Modal
             closeModal={this.closeModal}
             component={
-              <JobNotes company={company} closeModal={this.closeModal} />
+              <JobNotes
+                _id={_id}
+                company={company}
+                notes={notes}
+                closeModal={this.closeModal}
+              />
             }
             show={this.state.notes}
           />

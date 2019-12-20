@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import { withRouter } from "react-router-dom";
+
 import { newJobThunk } from "../../redux/thunks/job";
-import { FormContainer, Input } from "../resusable-components/styledComponents";
+import {
+  FormContainer,
+  Input,
+  FormButton
+} from "../resusable-components/styledComponents";
 
 class CreateJob extends Component {
   state = {
@@ -62,7 +66,7 @@ class CreateJob extends Component {
             onChange={this.changeHandler}
           />
 
-          <button type="submit">Submit</button>
+          <FormButton type="submit">Submit</FormButton>
         </FormContainer>
       </div>
     );

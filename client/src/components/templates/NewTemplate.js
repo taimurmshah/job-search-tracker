@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { newTemplateThunk } from "../../redux/thunks/template";
 import styled from "styled-components";
-import { FormContainer, Input } from "../resusable-components/styledComponents";
+import {
+  FormContainer,
+  Input,
+  FormButton
+} from "../resusable-components/styledComponents";
 import Checkbox from "../resusable-components/Checkbox";
 
 class NewTemplate extends Component {
@@ -88,7 +92,7 @@ class NewTemplate extends Component {
             clickHandler={this.resumeCheckHandler}
           />
         )}
-        <button type="submit">Submit</button>
+        <FormButton type="submit">Submit</FormButton>
       </FormContainer>
     );
   }
