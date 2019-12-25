@@ -32,4 +32,5 @@ const TemplateListContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   margin-left: 30px;
+  margin-right: 20px;
 `;

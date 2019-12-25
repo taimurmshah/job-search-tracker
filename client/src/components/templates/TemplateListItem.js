@@ -24,6 +24,7 @@ export default TemplateListItem;
 const TemplateContainer = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 `;
 
 const Span = styled.span`

@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import styled from "styled-components";
 
 const PossibleEmails = ({ name, website }) => {
   console.log({ name });
@@ -21,14 +22,8 @@ const PossibleEmails = ({ name, website }) => {
     emails.push(firstName + "." + lastName + "@" + website);
     emails.push(lastName + "." + firstName + "@" + website);
 
-    emails.push(firstName + "_" + lastName + "@" + website);
-    emails.push(lastName + "_" + firstName + "@" + website);
-
     emails.push(firstName[0] + "." + lastName + "@" + website);
     emails.push(lastName + "." + firstName[0] + "@" + website);
-
-    emails.push(firstName[0] + "_" + lastName + "@" + website);
-    emails.push(lastName + "_" + firstName[0] + "@" + website);
 
     emails.push(firstName[0] + lastName + "@" + website);
     emails.push(lastName + firstName[0] + "@" + website);
@@ -36,19 +31,16 @@ const PossibleEmails = ({ name, website }) => {
     emails.push(firstName + "." + lastName[0] + "@" + website);
     emails.push(lastName[0] + "." + firstName + "@" + website);
 
-    emails.push(firstName + "_" + lastName[0] + "@" + website);
-    emails.push(lastName[0] + "_" + firstName + "@" + website);
-
     emails.push(firstName + lastName[0] + "@" + website);
     emails.push(lastName[0] + firstName + "@" + website);
 
     return emails.map((e, i) => <li key={i}>{e}</li>);
   };
   return (
-    <div className="poss-email-container">
-      <p>possible emails</p>
-      <ul className="poss-email-list">{possibleEmails(name, website)}</ul>
-    </div>
+    <Container>
+      <Title>Possible Emails</Title>
+      <List className="poss-email-list">{possibleEmails(name, website)}</List>
+    </Container>
   );
 };
 
@@ -60,3 +52,20 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(PossibleEmails);
+
+const List = styled.ul`
+  list-style: none;
+  line-height: 20px;
+`;
+
+const Container = styled.div`
+  position: fixed;
+  right: 75px;
+  top: 57px;
+  padding: 0 5px;
+`;
+
+const Title = styled.p`
+  font-size: 20px;
+  padding-bottom: 10px;
+`;
