@@ -1,6 +1,7 @@
 const initialState = {
   hasJobs: false,
   jobs: [],
+  numberOfJobs: 0,
   currentJob: {}
 };
 
@@ -14,7 +15,11 @@ export default function(state = initialState, action) {
         jobs: [action.payload, ...state.jobs]
       };
     case "GET_JOBS":
-      return { ...state, jobs: action.payload };
+      return {
+        ...state,
+        jobs: action.payload,
+        numberOfJobs: action.payload.length
+      };
     case "CURRENT_JOB":
       const currentJob = state.jobs.filter(
         job => job._id === action.payload
