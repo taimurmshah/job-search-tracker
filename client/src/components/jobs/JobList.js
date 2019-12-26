@@ -13,6 +13,7 @@ const JobList = ({ jobs }) => {
       _id={job._id}
       company={job.company}
       status={job.status}
+      date={job.mostRecentEmailSent}
     />
   ));
 

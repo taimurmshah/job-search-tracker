@@ -82,10 +82,16 @@ router.post("/gmail/send/new", auth, async (req, res) => {
 
       console.log({ result });
 
-      job.status = "Waiting for response";
+      const date = new Date();
+      job.mostRecentEmailSent = date;
+      job.status = "Waiting for email response";
       employee.response = false;
 
-      employee.emailsSent = [...employee.emailsSent, { method: "custom" }];
+      employee.emailsSent = [
+        ...employee.emailsSent,
+        { method: "custom", time: date }
+      ];
+
       await employee.save();
       await job.save();
 
@@ -166,6 +172,7 @@ router.post("/gmail/send/template", auth, async (req, res) => {
       console.log({ result });
 
       employee.response = false;
+      const date = new Date();
 
       if (
         employee.emailsSent.length > 0 &&
@@ -179,16 +186,16 @@ router.post("/gmail/send/template", auth, async (req, res) => {
       if (typeof employee.emailsSent !== "number") {
         employee.emailsSent = [
           ...employee.emailsSent,
-          { method: "template", template_id: template._id }
+          { method: "template", template_id: template._id, time: date }
         ];
       } else {
         employee.emailsSent = [
           { method: "template", template_id: "5de53ba3fcfed33a8fc61e21" },
-          { method: "template", template_id: template._id }
+          { method: "template", template_id: template._id, time: date }
         ];
       }
-
-      job.status = "Waiting for response";
+      job.mostRecentEmailSent = date;
+      job.status = "Waiting for email response";
 
       await employee.save();
       await job.save();

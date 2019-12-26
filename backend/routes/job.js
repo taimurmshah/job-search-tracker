@@ -37,7 +37,7 @@ router.patch("/jobs/model-update", auth, async (req, res) => {
         } else if (e.emailsSent.length > 0) {
           // console.log(`${e.name}'s emailsSent:`, e.emailsSent);
 
-          job.status = "Waiting for response";
+          job.status = "Waiting for email response";
           if (e.response) response = true;
 
           let emails = e.emailsSent;
