@@ -62,6 +62,9 @@ class UpdateResponse extends Component {
               <p className="nav-link">Phone screen</p>
             </Span>
             <Span onClick={this.submit}>
+              <p className="nav-link">Code challenge</p>
+            </Span>
+            <Span onClick={this.submit}>
               <p className="nav-link">On-site</p>
             </Span>
             <Span onClick={this.submit}>
