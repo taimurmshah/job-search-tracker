@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import { updateJobThunk } from "../../redux/thunks/job";
 import {
   Span,
   HeaderContainer
@@ -15,11 +16,20 @@ class UpdateResponse extends Component {
     this.setState({ response: true });
   };
 
+  close = () => {
+    this.setState({ response: false });
+    this.props.closeModal();
+  };
+
+  submit = e => {
+    const update = { status: e.target.innerText };
+    this.props.submitHandler();
+    this.props.updateJobThunk(this.props._id, update);
+  };
+
   render() {
     const {
-      currentEmployee: { name },
-      closeModal,
-      submitHandler
+      currentEmployee: { name }
     } = this.props;
 
     if (!name) return null;
@@ -34,14 +44,33 @@ class UpdateResponse extends Component {
           </Span>
 
           <Span>
-            <button onClick={closeModal}>No</button>
+            <button onClick={this.close}>No</button>
           </Span>
         </ButtonContainer>
 
         {this.state.response && (
-          <Span>
-            <p>Statuses Here</p>
-          </Span>
+          <>
+            <HeaderContainer>
+              <p>Update Status</p>
+            </HeaderContainer>
+            <Span onClick={this.submit}>
+              <p className="nav-link">
+                Submitted application; waiting for company response
+              </p>
+            </Span>
+            <Span onClick={this.submit}>
+              <p className="nav-link">Phone screen</p>
+            </Span>
+            <Span onClick={this.submit}>
+              <p className="nav-link">On-site</p>
+            </Span>
+            <Span onClick={this.submit}>
+              <p className="nav-link">Offer</p>
+            </Span>
+            <Span onClick={this.submit}>
+              <p className="nav-link">Rejected</p>
+            </Span>
+          </>
         )}
       </Container>
     );
@@ -54,7 +83,16 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(UpdateResponse);
+const mapDispatchToProps = dispatch => {
+  return {
+    updateJobThunk: (jobId, updates) => dispatch(updateJobThunk(jobId, updates))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UpdateResponse);
 
 const Container = styled.div`
   display: flex;

@@ -20,8 +20,8 @@ export default SmallModal;
 const SmallModalMain = styled.section`
   position: fixed;
   background: #fff;
-  width: 300px;
-  height: 200px;
+  width: 500px;
+  height: 400px;
   top: 50%;
   left: 50%;
   padding-top: 35px;

@@ -219,6 +219,7 @@ class JobContainer extends Component {
           show={this.state.smallModal}
           component={
             <UpdateResponse
+              _id={this.props.job._id}
               closeModal={this.closeModal}
               submitHandler={this.responseSubmitHandler}
             />
