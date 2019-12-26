@@ -33,9 +33,11 @@ const jobSchema = new mongoose.Schema(
       type: String,
       enum: [
         "Haven't sent email yet",
-        "Waiting for response",
+        "Waiting for email response",
+        "Submitted application; waiting for company response",
         "Rejected",
-        "Interviewing",
+        "Phone Screen",
+        "On-site",
         "Offer"
       ],
       default: "Haven't sent email yet"

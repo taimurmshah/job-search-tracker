@@ -100,7 +100,7 @@ class Job extends Component {
         {this.state.status && (
           <Modal
             closeModal={this.closeModal}
-            component={<UpdateStatus closeModal={this.closeModal} />}
+            component={<UpdateStatus closeModal={this.closeModal} _id={_id} />}
             show={this.state.status}
           />
         )}
