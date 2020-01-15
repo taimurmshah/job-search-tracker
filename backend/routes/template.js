@@ -57,7 +57,13 @@ router.get("/templates/:id", auth, async (req, res) => {
 router.patch("/templates/:id", auth, async (req, res) => {
   const updates = Object.keys(req.body);
 
-  const allowedUpdates = ["name", "subject", "message"];
+  const allowedUpdates = [
+    "name",
+    "subject",
+    "message",
+    "withResume",
+    "interpolationValues"
+  ];
 
   for (let i = 0; i < updates.length; i++) {
     if (!allowedUpdates.includes(updates[i])) {

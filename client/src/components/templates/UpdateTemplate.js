@@ -8,6 +8,7 @@ import {
   HeaderContainer
 } from "../resusable-components/styledComponents";
 import Checkbox from "../resusable-components/Checkbox";
+import { updateTemplateThunk } from "../../redux/thunks/template";
 
 class UpdateTemplate extends Component {
   state = {
@@ -34,6 +35,12 @@ class UpdateTemplate extends Component {
     this.setState({
       withResume: !this.state.withResume
     });
+  };
+
+  submitHandler = () => {
+    //todo - check if an update has been made first
+    this.props.updateTemplateThunk(this.state, this.props.template._id);
+    this.props.closeModal();
   };
 
   render() {
@@ -95,7 +102,10 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    updateTemplateThunk: (templateObj, templateId) =>
+      dispatch(updateTemplateThunk(templateObj, templateId))
+  };
 };
 
 export default connect(

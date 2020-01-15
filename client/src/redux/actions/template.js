@@ -19,6 +19,13 @@ export const selectTemplate = templateId => {
   };
 };
 
+export const updateTemplate = template => {
+  return {
+    type: "UPDATE_TEMPLATE",
+    payload: template
+  };
+};
+
 export const clearTemplate = () => {
   return {
     type: "CLEAR_TEMPLATE"
