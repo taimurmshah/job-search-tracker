@@ -1,9 +1,24 @@
 import React from "react";
+import { connect } from "react-redux";
+import { selectTemplate } from "../../redux/actions/template";
 import styled from "styled-components";
 import { FormButton } from "../resusable-components/styledComponents";
 
-const TemplateListItem = ({ template, text, clickHandler, id }) => {
+const TemplateListItem = ({
+  template,
+  update,
+  select,
+  updateClickHandler,
+  selectClickHandler,
+  id,
+  selectTemplate
+}) => {
   console.log("template list item is mounted");
+
+  const updateHandler = () => {
+    selectTemplate(id);
+    updateClickHandler();
+  };
 
   return (
     <TemplateContainer>
@@ -11,15 +26,35 @@ const TemplateListItem = ({ template, text, clickHandler, id }) => {
         <p>{template.name}</p>
       </Span>
       <Span>
-        <FormButton onClick={clickHandler ? () => clickHandler(id) : null}>
-          {text}
-        </FormButton>
+        {update && (
+          <Span>
+            <FormButton onClick={updateHandler}>View/Update</FormButton>
+          </Span>
+        )}
+        {select && (
+          <Span>
+            <FormButton
+              onClick={selectClickHandler ? () => selectClickHandler(id) : null}
+            >
+              Select
+            </FormButton>
+          </Span>
+        )}
       </Span>
     </TemplateContainer>
   );
 };
 
-export default TemplateListItem;
+const mapDispatchToProps = dispatch => {
+  return {
+    selectTemplate: templateId => dispatch(selectTemplate(templateId))
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(TemplateListItem);
 
 const TemplateContainer = styled.div`
   display: flex;

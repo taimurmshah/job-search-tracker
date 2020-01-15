@@ -11,6 +11,7 @@ import Resume from "../resume/Resume";
 import Templates from "../templates/Templates";
 import { HeaderContainer } from "../resusable-components/styledComponents";
 import { readAllTemplatesThunk } from "../../redux/thunks/template";
+import { clearTemplate } from "../../redux/actions/template";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -35,6 +36,8 @@ class Dashboard extends Component {
   };
 
   closeModal = () => {
+    console.log("close modal is hit!");
+    this.props.clearTemplate();
     this.setState({ showModal: false, templates: false, resume: false });
   };
 
@@ -50,7 +53,12 @@ class Dashboard extends Component {
     } else if (this.state.templates === true) {
       return (
         <Modal
-          component={<Templates closeModal={this.closeModal} />}
+          component={
+            <Templates
+              closeModal={this.closeModal}
+              clearTemplate={this.props.clearTemplate}
+            />
+          }
           closeModal={this.closeModal}
           show={this.state.showModal}
         />
@@ -94,7 +102,8 @@ const mapDispatchToProps = dispatch => {
   return {
     jwtThunk: token => dispatch(jwtThunk(token)),
     readJobsThunk: () => dispatch(readJobsThunk()),
-    readAllTemplatesThunk: () => dispatch(readAllTemplatesThunk())
+    readAllTemplatesThunk: () => dispatch(readAllTemplatesThunk()),
+    clearTemplate: () => dispatch(clearTemplate())
   };
 };
 

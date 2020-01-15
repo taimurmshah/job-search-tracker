@@ -5,7 +5,8 @@ const replaceValues = (template, employee, job) => {
 
   let mapObj = {
     "<<employee_name>>": employee.name.split(" ")[0],
-    "<<company_name>>": job.company
+    "<<company_name>>": job.company,
+    "<<job_link>>": job.link
   };
 
   customTemplate.subject = customTemplate.subject.replace(
@@ -14,7 +15,7 @@ const replaceValues = (template, employee, job) => {
   );
 
   customTemplate.message = customTemplate.message.replace(
-    /<<employee_name>>|<<company_name>>/gm,
+    /<<employee_name>>|<<company_name>>|<<job_link>>/gm,
     matched => mapObj[matched]
   );
 

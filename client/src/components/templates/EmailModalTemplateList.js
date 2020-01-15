@@ -27,8 +27,8 @@ const EmailModalTemplateList = ({
         id={t._id}
         key={t._id}
         template={t}
-        text="Select"
-        clickHandler={templateEmailHandler}
+        select={true}
+        selectClickHandler={templateEmailHandler}
       />
     );
   });

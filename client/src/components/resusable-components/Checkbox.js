@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-const Checkbox = ({ clickHandler, text }) => {
+const Checkbox = ({ clickHandler, text, checked }) => {
   return (
     <CheckBoxSpan>
       <p>{text}</p>
-      <CheckboxInput onClick={clickHandler} />
+      <CheckboxInput defaultChecked={checked} onClick={clickHandler} />
     </CheckBoxSpan>
   );
 };

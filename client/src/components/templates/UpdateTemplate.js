@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { newTemplateThunk } from "../../redux/thunks/template";
 import styled from "styled-components";
 import {
   FormContainer,
@@ -10,13 +9,13 @@ import {
 } from "../resusable-components/styledComponents";
 import Checkbox from "../resusable-components/Checkbox";
 
-class NewTemplate extends Component {
+class UpdateTemplate extends Component {
   state = {
-    name: "",
-    subject: "",
-    message: "",
-    interpolationValues: false,
-    withResume: false
+    name: this.props.template.name,
+    subject: this.props.template.subject,
+    message: this.props.template.message,
+    interpolationValues: this.props.template.interpolationValues,
+    withResume: this.props.template.withResume
   };
 
   changeHandler = e => {
@@ -25,36 +24,21 @@ class NewTemplate extends Component {
     });
   };
 
-  submitHandler = e => {
-    e.preventDefault();
-    this.props.newTemplateThunk(this.state);
-    this.props.closeModal();
-    this.setState({ name: "", subject: "", message: "" });
-  };
-
   interpolationCheckHandler = () => {
-    this.setState(
-      {
-        interpolationValues: !this.state.interpolationValues
-      },
-      () => {
-        console.log("interpolationValues:", this.state.interpolationValues);
-      }
-    );
+    this.setState({
+      interpolationValues: !this.state.interpolationValues
+    });
   };
 
   resumeCheckHandler = () => {
-    this.setState(
-      {
-        withResume: !this.state.withResume
-      },
-      () => {
-        console.log("this.state.withResume:", this.state.withResume);
-      }
-    );
+    this.setState({
+      withResume: !this.state.withResume
+    });
   };
 
   render() {
+    console.log("template:", this.state);
+
     return (
       <FormContainer onSubmit={this.submitHandler}>
         <p>Name:</p>
@@ -82,12 +66,14 @@ class NewTemplate extends Component {
         />
 
         <Checkbox
+          checked={this.state.interpolationValues}
           text="Include custom values?*"
           clickHandler={this.interpolationCheckHandler}
         />
 
         {this.props.resume && (
           <Checkbox
+            checked={this.state.withResume}
             text="Attach Resume?"
             clickHandler={this.resumeCheckHandler}
           />
@@ -101,22 +87,21 @@ class NewTemplate extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    newTemplateThunk: templateObj => dispatch(newTemplateThunk(templateObj))
+    template: state.template.selectedTemplate,
+    resume: state.auth.currentUser.resume
   };
 };
 
-const mapStateToProps = state => {
-  return {
-    resume: state.auth.currentUser.resume
-  };
+const mapDispatchToProps = dispatch => {
+  return {};
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(NewTemplate);
+)(UpdateTemplate);
 
 const TextArea = styled.textarea`
   margin-top: 10px;

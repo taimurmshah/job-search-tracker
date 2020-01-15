@@ -11,3 +11,16 @@ export const readTemplates = templates => {
     payload: templates
   };
 };
+
+export const selectTemplate = templateId => {
+  return {
+    type: "SELECT_TEMPLATE",
+    payload: templateId
+  };
+};
+
+export const clearTemplate = () => {
+  return {
+    type: "CLEAR_TEMPLATE"
+  };
+};

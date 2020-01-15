@@ -51,7 +51,7 @@ const ModalNav = styled.div`
 `;
 
 const FormButton = styled.button`
-  width: 80px;
+  width: 110px;
   display: inline-block;
   padding: 5px;
   border: 1.5px black solid;

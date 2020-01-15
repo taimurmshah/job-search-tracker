@@ -3,12 +3,18 @@ import { connect } from "react-redux";
 import TemplateListItem from "./TemplateListItem";
 import styled from "styled-components";
 
-const ViewTemplates = ({ templates }) => {
+const ViewTemplates = ({ templates, update }) => {
   const allTemplates = templates.map(t => {
-    return <TemplateListItem id={t._id} key={t._id} template={t} text="View" />;
+    return (
+      <TemplateListItem
+        update={true}
+        id={t._id}
+        key={t._id}
+        template={t}
+        updateClickHandler={update}
+      />
+    );
   });
-
-  console.log({ allTemplates });
 
   return (
     <TemplateListContainer>
