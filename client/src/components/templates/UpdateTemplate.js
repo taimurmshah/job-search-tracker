@@ -39,6 +39,11 @@ class UpdateTemplate extends Component {
 
   submitHandler = () => {
     //todo - check if an update has been made first
+
+    if (this.state === this.props.template) {
+      return this.props.closeModal();
+    }
+
     this.props.updateTemplateThunk(this.state, this.props.template._id);
     this.props.closeModal();
   };
