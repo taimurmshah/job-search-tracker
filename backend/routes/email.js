@@ -85,7 +85,10 @@ router.post("/gmail/send/new", auth, async (req, res) => {
       const date = new Date();
       job.mostRecentEmailSent = date;
       job.status = "Waiting for email response";
-      employee.response = false;
+
+      if (!Object.keys(employee).includes("response")) {
+        employee.response = false;
+      }
 
       employee.emailsSent = [
         ...employee.emailsSent,
@@ -171,7 +174,11 @@ router.post("/gmail/send/template", auth, async (req, res) => {
 
       console.log({ result });
 
-      employee.response = false;
+      if (!Object.keys(employee).includes("response")) {
+        employee.response = false;
+      }
+
+      // employee.response = false;
       const date = new Date();
 
       if (
