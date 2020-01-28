@@ -36,7 +36,8 @@ const jobSchema = new mongoose.Schema(
         "Waiting for email response",
         "Submitted application; waiting for company response",
         "Rejected",
-        "Phone Screen",
+        "Recruiter phone call",
+        "Phone screen",
         "Code challenge",
         "On-site",
         "Offer"

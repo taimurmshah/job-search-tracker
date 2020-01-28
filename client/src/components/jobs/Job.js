@@ -45,7 +45,7 @@ class Job extends Component {
     } = this.props.job;
 
     website = "https://" + website;
-
+    // debugger;
     link = link.startsWith("http") ? link : "https://" + link;
 
     return (

@@ -35,6 +35,9 @@ const UpdateStatus = ({ _id, closeModal, updateJobThunk }) => {
           </p>
         </Span>
         <Span onClick={clickHandler}>
+          <p className="nav-link">Recruiter phone call</p>
+        </Span>
+        <Span onClick={clickHandler}>
           <p className="nav-link">Phone screen</p>
         </Span>
         <Span onClick={clickHandler}>
