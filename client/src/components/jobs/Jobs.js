@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
+import { readJobsThunk } from "../../redux/thunks/job";
 import { currentJob } from "../../redux/actions/job";
 import { getEmployeesThunk } from "../../redux/thunks/employee";
 import Modal from "../layout/Modal";
@@ -14,6 +14,10 @@ import {
 import styled from "styled-components";
 
 class Jobs extends Component {
+  componentDidMount() {
+    this.props.readJobsThunk();
+  }
+
   state = {
     showModal: false
   };
@@ -70,7 +74,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     currentJob: job => dispatch(currentJob(job)),
-    getEmployeesThunk: jobId => dispatch(getEmployeesThunk(jobId))
+    getEmployeesThunk: jobId => dispatch(getEmployeesThunk(jobId)),
+    readJobsThunk: () => dispatch(readJobsThunk())
   };
 };
 
