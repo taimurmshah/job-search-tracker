@@ -49,8 +49,6 @@ class UpdateTemplate extends Component {
   };
 
   render() {
-    console.log("template:", this.state);
-
     return (
       <FormContainer onSubmit={this.submitHandler}>
         <p>Name:</p>

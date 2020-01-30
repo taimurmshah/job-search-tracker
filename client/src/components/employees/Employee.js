@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
+import styled from "styled-components";
 import { updateEmployeeThunk } from "../../redux/thunks/employee";
 import linkedInLogo from "../../images/linkedInLogo.png";
+import { FormButton } from "../resusable-components/styledComponents";
 
 class Employee extends Component {
   state = {
@@ -30,8 +31,16 @@ class Employee extends Component {
     this.props.showSmallModal(this.props.employee._id);
   };
 
-  send = <button onClick={this.sendEmailButtonClickHandler}>Send Email</button>;
-  add = <button onClick={this.addEmailButtonClickHandler}>Add Email</button>;
+  send = (
+    <TableButton onClick={this.sendEmailButtonClickHandler}>
+      Send Email
+    </TableButton>
+  );
+  add = (
+    <TableButton onClick={this.addEmailButtonClickHandler}>
+      Add Email
+    </TableButton>
+  );
 
   render() {
     let {
@@ -49,10 +58,10 @@ class Employee extends Component {
     }
     return (
       <>
-        <tr key={_id}>
-          <td>{name}</td>
-          <td>{position}</td>
-          <td>
+        <TR key={_id}>
+          <TD>{name}</TD>
+          <TD>{position}</TD>
+          <TD>
             <a
               href={linkedIn[0] === "h" ? linkedIn : "https://" + linkedIn}
               target="_blank"
@@ -64,25 +73,25 @@ class Employee extends Component {
                 alt="linkedIn logo"
               />
             </a>
-          </td>
+          </TD>
 
           {emailsSent > 0 && (
-            <td>
+            <TD>
               {response ? (
                 <p>✅</p>
               ) : (
                 <button onClick={this.showSmallModal}>🚨</button>
               )}
-            </td>
+            </TD>
           )}
-          {emailsSent === 0 && <td>Email not sent</td>}
+          {emailsSent === 0 && <TD>Email not sent</TD>}
 
-          <td>{email ? email : ""}</td>
+          <TD>{email ? email : ""}</TD>
 
-          <td>{emailsSent}</td>
+          <TD>{emailsSent}</TD>
 
-          <td>{email ? this.send : this.add}</td>
-        </tr>
+          <TD>{email ? this.send : this.add}</TD>
+        </TR>
       </>
     );
   }
@@ -99,3 +108,33 @@ export default connect(
   null,
   mapDispatchToProps
 )(Employee);
+
+const TD = styled.td`
+  padding: 10px;
+  border: none;
+`;
+
+const TableButton = styled.button`
+  width: 115px;
+  padding: 10px;
+  border-radius: 4px;
+  outline: none;
+  border: 0;
+  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.25);
+  background-color: rgb(15, 174, 241);
+  font-weight: bold;
+  color: white;
+  transition: all 0.25s ease-in-out;
+  :hover {
+    box-shadow: 0;
+  }
+`;
+
+const TR = styled.tr`
+  :nth-of-type(odd) {
+    background-color: #eee;
+  }
+  :nth-of-type(even) {
+    background-color: #fff;
+  }
+`;

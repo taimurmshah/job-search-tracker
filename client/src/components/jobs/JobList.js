@@ -74,10 +74,6 @@ class JobList extends Component {
         />
       ));
 
-    console.log("jobs length:", jobs.length);
-    console.log("follow up length:", followUpJobs.length);
-    console.log("active length:", activeJobs.length);
-
     return (
       <Menu>
         {!this.state.active && (

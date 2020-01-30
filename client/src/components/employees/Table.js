@@ -4,6 +4,7 @@ import { updateEmployeeThunk } from "../../redux/thunks/employee";
 import Employee from "./Employee";
 import Loading from "../layout/Loading";
 import { HeaderContainer } from "../resusable-components/styledComponents";
+import styled from "styled-components";
 
 class Table extends Component {
   render() {
@@ -27,23 +28,20 @@ class Table extends Component {
 
     return (
       <div className="employees-table">
-        <HeaderContainer>
-          <h2>Employees</h2>
-        </HeaderContainer>
-        <table className="table">
+        <StyledTable>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Position</th>
-              <th>LinkedIn</th>
-              <th>Response</th>
-              <th>Email</th>
-              <th>Emails Sent</th>
-              <th>Action</th>
+              <TH>Name</TH>
+              <TH>Position</TH>
+              <TH>LinkedIn</TH>
+              <TH>Response</TH>
+              <TH>Email</TH>
+              <TH>Emails Sent</TH>
+              <TH>Action</TH>
             </tr>
           </thead>
           <tbody>{tableData}</tbody>
-        </table>
+        </StyledTable>
       </div>
     );
   }
@@ -60,3 +58,17 @@ export default connect(
   null,
   mapDispatchToProps
 )(Table);
+
+const StyledTable = styled.table`
+  font-size: 16px;
+  border: none;
+  padding: 3px;
+  border-collapse: collapse;
+  font-family: "Bitter", serif;
+  background-color: rgb(15, 174, 241);
+`;
+
+const TH = styled.th`
+  border: none;
+  font-size: 18px;
+`;
