@@ -132,7 +132,7 @@ const TableButton = styled.button`
 
 const TR = styled.tr`
   :nth-of-type(odd) {
-    background-color: #eee;
+    background-color: #a6a6a6;
   }
   :nth-of-type(even) {
     background-color: #fff;
