@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import { Menu, Span } from "../resusable-components/styledComponents";
+import styled from "styled-components";
+// import { Menu, Span } from "../resusable-components/styledComponents";
 import { connect } from "react-redux";
 import { currentJob } from "../../redux/actions/job";
 import { getEmployeesThunk } from "../../redux/thunks/employee";
 import JobCard from "./JobCard";
 import Checkbox from "../resusable-components/Checkbox";
-import JobListContainer from "./JobListContainer";
 import Job from "./Job";
 
-class JobList extends Component {
+class JobListContainer extends Component {
   state = {
     followUp: false,
     active: false
@@ -76,29 +76,17 @@ class JobList extends Component {
         />
       ));
 
-    // return <JobListContainer />;
-
     return (
-      <Menu>
-        {!this.state.active && (
-          <Checkbox
-            text={"Follow Up?"}
-            clickHandler={this.followUpHandler}
-            checked={this.state.followUp}
-          />
-        )}
-        {!this.state.followUp && (
-          <Checkbox
-            text={"Active Jobs"}
-            clickHandler={this.activeHandler}
-            checked={this.state.active}
-          />
-        )}
-        {/*{!this.state.followUp ? jobs : followUpJobs}*/}
-        {this.state.active === false && this.state.followUp === false && jobs}
-        {this.state.followUp && followUpJobs}
-        {this.state.active && activeJobs}
-      </Menu>
+      <Container>
+        <Header>
+          <TextContainer>
+            <p>RECENT JOBS</p>
+          </TextContainer>
+        </Header>
+        <Body>
+          <JobGrid>{jobs}</JobGrid>
+        </Body>
+      </Container>
     );
   }
 }
@@ -113,4 +101,50 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   null,
   mapDispatchToProps
-)(JobList);
+)(JobListContainer);
+
+const Container = styled.div`
+  width: 90%;
+  margin: auto;
+  background-color: white;
+  // border: 3px black solid;
+  height: 100px;
+  border-radius: 8px;
+`;
+
+const Header = styled.div`
+  width: 100%;
+  height: 40px;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  border-bottom: 1px solid grey;
+`;
+
+const TextContainer = styled.div`
+  margin-left: 30px;
+  margin-right: 30px;
+  padding-top: 10px;
+  font-size: 20px;
+`;
+
+const Body = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
+const JobGrid = styled.div`
+  margin-left: 10;
+  padding-left: 17px;
+  padding-top: 15px;
+  padding-bottom: 15px
+  width: 100%;
+  background: white;
+  display: grid;
+  grid-gap: 3px;
+  grid-template-columns: repeat(5, 250px);
+  grid-template-rows: auto;
+  margin-bottom: 30px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+`;

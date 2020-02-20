@@ -27,7 +27,7 @@ const InputContainer = styled.div`
 
 const HeaderContainer = styled.div`
   display: flex;
-  width: 100;
+  width: 100%;
   justify-content: center;
 `;
 

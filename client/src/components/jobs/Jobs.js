@@ -5,6 +5,7 @@ import { currentJob } from "../../redux/actions/job";
 import { getEmployeesThunk } from "../../redux/thunks/employee";
 import Modal from "../layout/Modal";
 import JobList from "./JobList";
+import JobListContainer from "./JobListContainer";
 import CreateJob from "./CreateJob";
 import Loading from "../layout/Loading";
 import {
@@ -41,9 +42,6 @@ class Jobs extends Component {
 
     return (
       <div>
-        <HeaderContainer>
-          <h1>Jobs</h1>
-        </HeaderContainer>
         <Span>
           <Add className="nav-link" onClick={this.showModal}>
             Add New Job +
@@ -58,7 +56,8 @@ class Jobs extends Component {
           />
         )}
 
-        <JobList jobs={this.props.jobs} />
+        {/*<JobList jobs={this.props.jobs} />*/}
+        <JobListContainer jobs={this.props.jobs} />
       </div>
     );
   }

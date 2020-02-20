@@ -68,7 +68,7 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   height: 180px;
-  margin: 10px;
+  margin: 5px;
 `;
 
 const Header = styled.div`
@@ -84,7 +84,7 @@ const Header = styled.div`
 
 const Body = styled.div`
   width: 100%;
-  background: #d3d3d3;
+  background: #f3f3f3;
   height: 150px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
