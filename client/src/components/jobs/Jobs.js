@@ -85,4 +85,5 @@ export default connect(
 
 const Add = styled.p`
   margin-left: 30px;
+  width: 111px;
 `;
