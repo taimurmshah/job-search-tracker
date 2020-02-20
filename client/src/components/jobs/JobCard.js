@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { currentJob } from "../../redux/actions/job";
 import { getEmployeesThunk } from "../../redux/thunks/employee";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Span } from "../resusable-components/styledComponents";
 import styled from "styled-components";
 import Moment from "react-moment";
@@ -15,9 +15,15 @@ const JobCard = ({
   getEmployeesThunk,
   date
 }) => {
+  const history = useHistory();
+
   return (
     <>
-      <Card>
+      <Card
+        onClick={() => {
+          history.push(`/jobs/${_id}`);
+        }}
+      >
         <Header>
           <Span>
             <Link
@@ -69,6 +75,7 @@ const Card = styled.div`
   flex-direction: column;
   height: 180px;
   margin: 5px;
+  cursor: pointer;
 `;
 
 const Header = styled.div`
