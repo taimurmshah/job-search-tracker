@@ -83,6 +83,8 @@ const Header = styled.div`
 `;
 
 const Body = styled.div`
+  display: grid;
+  grid-template-rows: 100px 10px 20px;
   width: 100%;
   background: #f3f3f3;
   height: 150px;
@@ -93,12 +95,10 @@ const Body = styled.div`
 const StatusContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding-left: 15px;
 `;
 
 const DaysContainer = styled.div`
-  position: relative;
-  top: 33px;
+  grid-row: 3/4;
 `;
 
 const P = styled.p`
