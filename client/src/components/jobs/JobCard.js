@@ -93,7 +93,7 @@ const Body = styled.div`
   display: grid;
   grid-template-rows: 100px 10px 20px;
   width: 100%;
-  background: #f3f3f3;
+  background: #bdbdbd;
   height: 150px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
