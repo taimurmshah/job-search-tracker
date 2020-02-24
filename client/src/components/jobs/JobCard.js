@@ -74,8 +74,8 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   height: 180px;
-  margin: 5px;
   cursor: pointer;
+  box-shadow: 4px 4px 10px 1px rgba(173, 173, 173, 1);
 `;
 
 const Header = styled.div`
@@ -93,7 +93,7 @@ const Body = styled.div`
   display: grid;
   grid-template-rows: 100px 10px 20px;
   width: 100%;
-  background: #bdbdbd;
+  background: #efecec;
   height: 150px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;

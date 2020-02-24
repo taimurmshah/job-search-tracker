@@ -100,13 +100,11 @@ class JobListContainer extends Component {
             </CheckFlex>
           </TextContainer>
         </Header>
-        <Body>
-          <JobGrid>
-            {this.state.all && jobs}
-            {this.state.followUp && followUpJobs}
-            {!this.state.all && !this.state.followUp && activeJobs}
-          </JobGrid>
-        </Body>
+        <JobGrid>
+          {this.state.all && jobs}
+          {this.state.followUp && followUpJobs}
+          {!this.state.all && !this.state.followUp && activeJobs}
+        </JobGrid>
       </Container>
     );
   }
@@ -125,7 +123,8 @@ export default connect(
 )(JobListContainer);
 
 const Container = styled.div`
-  width: 90%;
+  max-width: 1170px;
+  width: auto;
   margin: auto;
   background-color: white;
   height: 100px;
@@ -133,7 +132,6 @@ const Container = styled.div`
 `;
 
 const Header = styled.div`
-  width: 100%;
   height: 70px;
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
@@ -150,23 +148,13 @@ const TextContainer = styled.div`
   justify-content: space-between;
 `;
 
-const Body = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-`;
-
 const JobGrid = styled.div`
-  margin-left: 10;
-  padding-left: 17px;
-  padding-top: 15px;
-  padding-bottom: 15px
-  width: 100%;
+  padding: 20px;
+  max-width: 1200px;
   background: white;
   display: grid;
-  grid-gap: 3px;
-  grid-template-columns: repeat(5, 250px);
-  grid-template-rows: auto;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   margin-bottom: 30px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;

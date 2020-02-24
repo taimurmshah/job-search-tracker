@@ -41,7 +41,7 @@ class Jobs extends Component {
     }
 
     return (
-      <div>
+      <JobsDiv>
         <Span>
           <Add className="nav-link" onClick={this.showModal}>
             Add New Job +
@@ -55,10 +55,8 @@ class Jobs extends Component {
             component={<CreateJob closeModal={this.closeModal} />}
           />
         )}
-
-        {/*<JobList jobs={this.props.jobs} />*/}
         <JobListContainer jobs={this.props.jobs} />
-      </div>
+      </JobsDiv>
     );
   }
 }
@@ -86,4 +84,8 @@ export default connect(
 const Add = styled.p`
   margin-left: 30px;
   width: 111px;
+`;
+
+const JobsDiv = styled.div`
+  padding: 20px;
 `;
