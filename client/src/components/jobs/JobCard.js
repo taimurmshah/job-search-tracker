@@ -75,7 +75,7 @@ const Card = styled.div`
   flex-direction: column;
   height: 180px;
   cursor: pointer;
-  box-shadow: 4px 4px 10px 1px rgba(173, 173, 173, 1);
+  box-shadow: 4px 4px 10px -5px rgba(173, 173, 173, 1);
 `;
 
 const Header = styled.div`
@@ -97,6 +97,10 @@ const Body = styled.div`
   height: 150px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+
+  :hover {
+    background: #e6ffff;
+  }
 `;
 
 const StatusContainer = styled.div`

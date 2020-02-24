@@ -27,9 +27,9 @@ class Table extends Component {
     });
 
     return (
-      <div className="employees-table">
+      <Div>
         <StyledTable>
-          <thead>
+          <THead>
             <tr>
               <TH>Name</TH>
               <TH>Position</TH>
@@ -39,10 +39,10 @@ class Table extends Component {
               <TH>Emails Sent</TH>
               <TH>Action</TH>
             </tr>
-          </thead>
+          </THead>
           <tbody>{tableData}</tbody>
         </StyledTable>
-      </div>
+      </Div>
     );
   }
 }
@@ -59,6 +59,11 @@ export default connect(
   mapDispatchToProps
 )(Table);
 
+const Div = styled.div`
+  margin: auto;
+  max-width: 1000px;
+`;
+
 const StyledTable = styled.table`
   font-size: 16px;
   border: none;
@@ -66,9 +71,15 @@ const StyledTable = styled.table`
   border-collapse: collapse;
   font-family: "Bitter", serif;
   background-color: rgb(15, 174, 241);
+  border-radius: 5px;
+  margin-bottom: 80px;
 `;
 
 const TH = styled.th`
   border: none;
   font-size: 18px;
+`;
+
+const THead = styled.thead`
+  height: 100px;
 `;
