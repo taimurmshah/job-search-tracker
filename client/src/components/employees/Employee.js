@@ -127,6 +127,7 @@ const TableButton = styled.button`
   transition: all 0.25s ease-in-out;
   :hover {
     box-shadow: 0;
+    background-color: rgb(146, 211, 239);
   }
 `;
 

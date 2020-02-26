@@ -60,8 +60,10 @@ export default connect(
 )(Table);
 
 const Div = styled.div`
-  margin: auto;
-  max-width: 1000px;
+  display: flex;
+  width: 100%
+  flex-direction: row;
+  justify-content: center;
 `;
 
 const StyledTable = styled.table`
