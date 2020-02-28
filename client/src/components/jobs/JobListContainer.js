@@ -99,12 +99,9 @@ class JobListContainer extends Component {
               type="text"
               value={this.state.filter}
               onChange={e => {
-                this.setState(
-                  {
-                    filter: e.target.value.toLowerCase()
-                  },
-                  () => console.log("this.state.filter:", this.state.filter)
-                );
+                this.setState({
+                  filter: e.target.value.toLowerCase()
+                });
               }}
             />
 
@@ -127,9 +124,16 @@ class JobListContainer extends Component {
           </TextContainer>
         </Header>
         <JobGrid>
-          {this.props.jobs
-            .filter(j => j.company.toLowerCase().startsWith(this.state.filter))
-            .map(j => this.transformJob(j))}
+          {this.state.filter.length === 0 &&
+            this.props.jobs
+              .filter(j => j.status !== "Rejected")
+              .map(j => this.transformJob(j))}
+          {this.state.filter.length > 0 &&
+            this.props.jobs
+              .filter(j =>
+                j.company.toLowerCase().startsWith(this.state.filter)
+              )
+              .map(j => this.transformJob(j))}
         </JobGrid>
       </Container>
     );
