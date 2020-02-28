@@ -1,7 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-const Checkbox = ({ clickHandler, text, checked }) => {
+const Checkbox = ({ clickHandler, text, checked, show }) => {
+  // console.log("show:", show);
+
+  const CheckboxInput = styled.input.attrs({ type: "checkbox" })`
+    margin-left: 5px;
+    ${!show && "pointer-events: none"};
+  `;
   return (
     <CheckBoxSpan>
       <P>{text}</P>
@@ -16,10 +22,6 @@ const CheckBoxSpan = styled.span`
   flex-direction: row;
   margin: 5px;
   justify-content: flex-end;
-`;
-
-const CheckboxInput = styled.input.attrs({ type: "checkbox" })`
-  margin-left: 5px;
 `;
 
 const P = styled.p`

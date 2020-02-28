@@ -11,9 +11,8 @@ import { Menu } from "../resusable-components/styledComponents";
 
 class JobListContainer extends Component {
   state = {
-    checkBoxPointer: true,
     followUp: false,
-    all: false,
+    rejected: false,
     filter: ""
   };
 
@@ -24,10 +23,10 @@ class JobListContainer extends Component {
     });
   };
 
-  allHandler = () => {
+  rejectHandler = () => {
     this.setState({
       followUp: false,
-      all: !this.state.all
+      rejected: !this.state.rejected
     });
   };
 
@@ -42,16 +41,6 @@ class JobListContainer extends Component {
   );
 
   render() {
-    // const jobs = this.props.jobs.map(job => (
-    //   <JobCard
-    //     key={job._id}
-    //     _id={job._id}
-    //     company={job.company}
-    //     status={job.status}
-    //     date={job.mostRecentEmailSent}
-    //   />
-    // ));
-
     const today = new Date();
 
     let followUpJobs = this.props.jobs
@@ -79,15 +68,11 @@ class JobListContainer extends Component {
 
     const activeJobs = this.props.jobs
       .filter(j => j.status !== "Rejected")
-      .map(j => (
-        <JobCard
-          key={j._id}
-          _id={j._id}
-          company={j.company}
-          status={j.status}
-          date={j.mostRecentEmailSent}
-        />
-      ));
+      .map(j => this.transformJob(j));
+
+    const rejected = this.props.jobs
+      .filter(j => j.status === "Rejected")
+      .map(j => this.transformJob(j));
 
     return (
       <Container>
@@ -95,45 +80,50 @@ class JobListContainer extends Component {
           <TextContainer>
             <P>RECENT JOBS</P>
 
-            <input
-              type="text"
-              value={this.state.filter}
-              onChange={e => {
-                this.setState({
-                  filter: e.target.value.toLowerCase()
-                });
-              }}
-            />
+            {this.state.rejected === false && this.state.followUp === false && (
+              <input
+                type="text"
+                value={this.state.filter}
+                onChange={e => {
+                  this.setState({
+                    filter: e.target.value.toLowerCase()
+                  });
+                }}
+              />
+            )}
 
             <CheckFlex>
-              {!this.state.all && (
-                <Checkbox
-                  text={"Follow Up?" + " (" + followUpJobs.length + ")"}
-                  clickHandler={this.followUpHandler}
-                  checked={this.state.followUp}
-                />
-              )}
-              {!this.state.followUp && (
-                <Checkbox
-                  text={"All Jobs"}
-                  clickHandler={this.allHandler}
-                  checked={this.state.all}
-                />
-              )}
+              <Checkbox
+                text={"Follow Up?" + " (" + followUpJobs.length + ")"}
+                clickHandler={this.followUpHandler}
+                checked={this.state.followUp}
+                show={!(this.state.rejected || this.state.filter.length > 0)}
+              />
+
+              <Checkbox
+                text={"Rejected Jobs"}
+                clickHandler={this.rejectHandler}
+                checked={this.state.rejected}
+                show={!(this.state.followUp || this.state.filter.length > 0)}
+              />
             </CheckFlex>
           </TextContainer>
         </Header>
         <JobGrid>
-          {this.state.filter.length === 0 &&
-            this.props.jobs
-              .filter(j => j.status !== "Rejected")
-              .map(j => this.transformJob(j))}
-          {this.state.filter.length > 0 &&
+          {this.state.rejected === false &&
+            this.state.followUp === false &&
+            this.state.filter.length === 0 &&
+            activeJobs}
+          {this.state.rejected === false &&
+            this.state.followUp === false &&
+            this.state.filter.length > 0 &&
             this.props.jobs
               .filter(j =>
                 j.company.toLowerCase().startsWith(this.state.filter)
               )
               .map(j => this.transformJob(j))}
+          {this.state.rejected && rejected}
+          {this.state.followUp && followUpJobs}
         </JobGrid>
       </Container>
     );
