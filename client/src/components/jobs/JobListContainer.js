@@ -11,8 +11,10 @@ import { Menu } from "../resusable-components/styledComponents";
 
 class JobListContainer extends Component {
   state = {
+    checkBoxPointer: true,
     followUp: false,
-    all: false
+    all: false,
+    filter: ""
   };
 
   followUpHandler = () => {
@@ -29,16 +31,26 @@ class JobListContainer extends Component {
     });
   };
 
+  transformJob = job => (
+    <JobCard
+      key={job._id}
+      _id={job._id}
+      company={job.company}
+      status={job.status}
+      date={job.mostRecentEmailSent}
+    />
+  );
+
   render() {
-    const jobs = this.props.jobs.map(job => (
-      <JobCard
-        key={job._id}
-        _id={job._id}
-        company={job.company}
-        status={job.status}
-        date={job.mostRecentEmailSent}
-      />
-    ));
+    // const jobs = this.props.jobs.map(job => (
+    //   <JobCard
+    //     key={job._id}
+    //     _id={job._id}
+    //     company={job.company}
+    //     status={job.status}
+    //     date={job.mostRecentEmailSent}
+    //   />
+    // ));
 
     const today = new Date();
 
@@ -82,6 +94,20 @@ class JobListContainer extends Component {
         <Header>
           <TextContainer>
             <P>RECENT JOBS</P>
+
+            <input
+              type="text"
+              value={this.state.filter}
+              onChange={e => {
+                this.setState(
+                  {
+                    filter: e.target.value.toLowerCase()
+                  },
+                  () => console.log("this.state.filter:", this.state.filter)
+                );
+              }}
+            />
+
             <CheckFlex>
               {!this.state.all && (
                 <Checkbox
@@ -101,9 +127,9 @@ class JobListContainer extends Component {
           </TextContainer>
         </Header>
         <JobGrid>
-          {this.state.all && jobs}
-          {this.state.followUp && followUpJobs}
-          {!this.state.all && !this.state.followUp && activeJobs}
+          {this.props.jobs
+            .filter(j => j.company.toLowerCase().startsWith(this.state.filter))
+            .map(j => this.transformJob(j))}
         </JobGrid>
       </Container>
     );
