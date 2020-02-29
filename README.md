@@ -23,16 +23,16 @@ when I'd use them, I created a project to store all that information in one plac
 This app:
 - Is built with the MERN stack
 - Uses Google OAuth and gmail APIs to authenticate users
-- Uses Nodemailer to send emails from within the app
+- Allows users to upload their resumes
+- Uses Nodemailer to send emails (integrated with gmail) from within the app
 - Uses Redux for state management
-- Has data visualization with D3; visually displays much of the useful job-outreach-related metrics
+- Has data visualization with D3; visually displays some useful job-outreach related metrics
 - Allows users to create email templates so that they can send emails in-app with customized values
 
 ### Thoughts
 At bootcamp, I built a handful of fullstack projects. Some of them were impressive and fun to work on, but none of them 
 felt important. I built a game, a mock social media platform, and other such projects. This project represents a phase-shift
 in my feeling and skill-level as an engineer. The idea for the project originated from a frustrating problem I had to deal with.
-Instead of working harder, I tried working smarter. To that end, my job search process has become FAR more efficient. With this
-project I feel for the first time exactly why the ability to write software is powerful. 
+Instead of working harder, I tried working smarter. To that end, my job search process has become FAR more efficient. With this project I feel for the first time exactly why the ability to write software is powerful. 
 
 I will continue to work on this project, as I think it will be helpful to other job-seekers. 
