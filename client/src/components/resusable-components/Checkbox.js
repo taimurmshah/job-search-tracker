@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 const Checkbox = ({ clickHandler, text, checked, show }) => {
-  // console.log("show:", show);
+  console.log({ checked });
 
   const CheckboxInput = styled.input.attrs({ type: "checkbox" })`
     margin-left: 5px;
-    ${!show && "pointer-events: none"};
+    ${show === false && "pointer-events: none"};
   `;
   return (
     <CheckBoxSpan>

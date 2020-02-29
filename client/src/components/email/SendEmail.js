@@ -67,6 +67,7 @@ class SendEmail extends Component {
               <Checkbox
                 text="Attach Resume?"
                 clickHandler={this.checkHandler}
+                checked={this.state.withResume}
               />
             )}
           </InputContainer>
