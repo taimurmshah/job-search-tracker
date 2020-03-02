@@ -80,7 +80,7 @@ class Employee extends Component {
               {response ? (
                 <p>✅</p>
               ) : (
-                <button onClick={this.showSmallModal}>🚨</button>
+                <NoButton onClick={this.showSmallModal}>🚨</NoButton>
               )}
             </TD>
           )}
@@ -108,6 +108,11 @@ export default connect(
   null,
   mapDispatchToProps
 )(Employee);
+
+const NoButton = styled.button`
+  border: none;
+  background: inherit;
+`;
 
 const TD = styled.td`
   padding: 10px;

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Modal from "../layout/Modal";
 import UpdateStatus from "./UpdateStatus";
 import JobNotes from "./JobNotes";
+import styled from "styled-components";
 import {
   HeaderContainer,
   Menu,

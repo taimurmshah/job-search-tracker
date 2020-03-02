@@ -24,6 +24,8 @@ import {
 } from "../../redux/thunks/employee";
 import { sendNewGmailThunk } from "../../redux/thunks/email";
 import { readAllTemplatesThunk } from "../../redux/thunks/template";
+import styled from "styled-components";
+import { HeaderContainer } from "../resusable-components/styledComponents";
 
 //todo:
 // - create job description component
@@ -194,6 +196,13 @@ class JobContainer extends Component {
     return (
       <div>
         <Job job={this.props.job} />
+
+        <AddFlex>
+          <TableButton onClick={this.newEmployeeFormHandler}>
+            Add Employee
+          </TableButton>
+        </AddFlex>
+
         {this.props.employees.length > 0 && (
           <Table
             employees={this.props.employees}
@@ -203,10 +212,6 @@ class JobContainer extends Component {
             showSmallModal={this.showSmallModal}
           />
         )}
-
-        <div className="add-employee-button">
-          <button onClick={this.newEmployeeFormHandler}>Add Employee</button>
-        </div>
 
         <Modal
           closeModal={this.closeModal}
@@ -262,3 +267,28 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(JobContainer);
+
+const TableButton = styled.button`
+  width: 140px;
+  padding: 10px;
+  border-radius: 4px;
+  outline: none;
+  border: 0;
+  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.25);
+  background-color: rgb(15, 174, 241);
+  font-weight: bold;
+  color: white;
+  transition: all 0.25s ease-in-out;
+  :hover {
+    box-shadow: 0;
+    background-color: rgb(146, 211, 239);
+  }
+`;
+
+const AddFlex = styled.div`
+  display: flex;
+  margin-bottom: 20px;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+`;

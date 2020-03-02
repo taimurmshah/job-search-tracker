@@ -149,6 +149,7 @@ const Container = styled.div`
   background-color: white;
   height: 100px;
   border-radius: 8px;
+  // box-shadow: 10px 10px 5px -6px rgba(0, 0, 0, 0.75);
 `;
 
 const Header = styled.div`
@@ -178,6 +179,7 @@ const JobGrid = styled.div`
   margin-bottom: 30px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+  // box-shadow: 10px 10px 5px -6px rgba(0, 0, 0, 0.75);
 `;
 
 const CheckFlex = styled.div`
