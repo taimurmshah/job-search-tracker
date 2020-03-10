@@ -84,12 +84,14 @@ class NewTemplate extends Component {
         <Checkbox
           text="Include custom values?*"
           clickHandler={this.interpolationCheckHandler}
+          checked={this.state.interpolationValues}
         />
 
         {this.props.resume && (
           <Checkbox
             text="Attach Resume?"
             clickHandler={this.resumeCheckHandler}
+            checked={this.state.withResume}
           />
         )}
         <HeaderContainer>
