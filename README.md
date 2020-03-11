@@ -7,15 +7,13 @@ I graduated from Flatiron School's coding bootcamp back in March. I felt confide
 but I hadn't anticipated how much of a full-time grind the job search process would be. Between conversations I'd had 
 with experienced engineers and blogposts I'd read online, it seemed like submitting cold applications was the worst 
 path forward. The best approach seemed to be all about volume: lots of networking, lots of cold-emailing, lots of coffees, 
-lots of projects, etc. I accepted the process, but quickly found myself feeling burnt-out from all the emailing. I wondered 
-if there was an easier way. 
+lots of projects, etc. I accepted the process, but quickly found myself feeling burnt-out from all the emailing. A question 
+then popped in my head: "Could I make this process easier?" I figured I could. 
 
-At some point, I realized I was one of the last from my bootcamp to get a job. I felt like one of the strongest graduates from my bootcamp cohort.
-I realized my weakness was that the volume of my job outreach was quite low. A question then popped in my head: "Could I make this process easier?" I figured I could. 
 So I created this project. 
 
 ### What it does
-I wanted basically to reduce the complexity of the job search process I believed to be helpful. So, instead of having a million 
+I wanted basically to reduce the complexity of the job search process. So, instead of having a million 
 different tabs open, having to manually enter metrics into a spreadsheet, having to copy and paste my cold-email templates in cases
 when I'd use them, I created a project to store all that information in one place. 
 
