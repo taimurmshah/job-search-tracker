@@ -1,7 +1,5 @@
 # job-search-tracker
 
-*still in development - MVP has been achieved.
-
 ### Backstory
 I graduated from Flatiron School's coding bootcamp back in March. I felt confident in my skill and learning capacity, 
 but I hadn't anticipated how much of a full-time grind the job search process would be. Between conversations I'd had 
