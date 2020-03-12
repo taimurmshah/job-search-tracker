@@ -30,7 +30,7 @@ Here's the dashboard, once a user has logged in. (I've logged in here through th
 
 ![Dashboard](https://i.imgur.com/tQ8tjvc.png)
 
-From the menu on the right, a user can select to navigate to the jobs page, to create/view email templates, and to upload a resume. Here I'm creating an example email template. Right now, 
+From the menu on the left, a user can select to navigate to the jobs page, to create/view email templates, and to upload a resume. Here I'm creating an example email template. Right now, 
 a user can use up to three interpolation values, and can choose to attach their resume to the email. I built this feature because I was using variants of the same introduction email when 
 I'd contact recruiters or hiring managers for the first time. I also used a template for my follow up email; automating this feature allowed me to save time, where before I was copy and pasting
 from an Evernote document into gmail, which was tedious.
