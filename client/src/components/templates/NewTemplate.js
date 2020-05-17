@@ -9,6 +9,7 @@ import {
   HeaderContainer
 } from "../resusable-components/styledComponents";
 import Checkbox from "../resusable-components/Checkbox";
+import { Editor, EditorState } from "draft-js";
 
 class NewTemplate extends Component {
   state = {

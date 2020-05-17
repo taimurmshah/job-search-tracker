@@ -28,14 +28,13 @@ class Login extends Component {
 
     return (
       <div>
-        <p>Login:</p>
         <div className="auth-buttons">
-          <button
-            className="login-page-button local-button"
-            onClick={this.openModal}
-          >
-            Log In
-          </button>
+          {/*<button*/}
+          {/*  className="login-page-button local-button"*/}
+          {/*  onClick={this.openModal}*/}
+          {/*>*/}
+          {/*  Log In*/}
+          {/*</button>*/}
           <GoogleOAuth type="Log in" />
         </div>
         {this.state.showModal && (
