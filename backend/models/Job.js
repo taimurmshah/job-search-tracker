@@ -56,9 +56,9 @@ const jobSchema = new mongoose.Schema(
         type: String,
         enum: [
           "Applied",
-          "Phone Screen",
+          "Recruiter Call",
+          "Technical Call",
           "Code Challenge",
-          "Technical Interview",
           "Onsite",
           "Offer"
         ],

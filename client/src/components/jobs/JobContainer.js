@@ -25,7 +25,7 @@ import {
 import { sendNewGmailThunk } from "../../redux/thunks/email";
 import { readAllTemplatesThunk } from "../../redux/thunks/template";
 import styled from "styled-components";
-import { HeaderContainer } from "../resusable-components/styledComponents";
+import { TableButton } from "../resusable-components/styledComponents";
 
 //todo:
 // - create job description component
@@ -268,22 +268,22 @@ export default connect(
   mapDispatchToProps
 )(JobContainer);
 
-const TableButton = styled.button`
-  width: 140px;
-  padding: 10px;
-  border-radius: 4px;
-  outline: none;
-  border: 0;
-  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.25);
-  background-color: rgb(15, 174, 241);
-  font-weight: bold;
-  color: white;
-  transition: all 0.25s ease-in-out;
-  :hover {
-    box-shadow: 0;
-    background-color: rgb(146, 211, 239);
-  }
-`;
+// const TableButton = styled.button`
+//   width: 140px;
+//   padding: 10px;
+//   border-radius: 4px;
+//   outline: none;
+//   border: 0;
+//   box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.25);
+//   background-color: rgb(15, 174, 241);
+//   font-weight: bold;
+//   color: white;
+//   transition: all 0.25s ease-in-out;
+//   :hover {
+//     box-shadow: 0;
+//     background-color: rgb(146, 211, 239);
+//   }
+// `;
 
 const AddFlex = styled.div`
   display: flex;

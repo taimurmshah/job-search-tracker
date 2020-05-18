@@ -6,7 +6,8 @@ import {
   HeaderContainer,
   List,
   Span,
-  FormButton
+  FormButton,
+  TableButton
 } from "../resusable-components/styledComponents";
 import styled from "styled-components";
 
@@ -23,7 +24,7 @@ class UpdateProgress extends Component {
         () => console.log("this.state:", this.state)
       );
     } else {
-      let newProg = [...this.state.progress].filter(t => t !== text);
+      let newProg = this.state.progress.filter(t => t !== text);
       this.setState({ progress: newProg }, () =>
         console.log("this.state:", this.state)
       );
@@ -58,10 +59,10 @@ class UpdateProgress extends Component {
           </Span>
           <Span>
             <Checkbox
-              text="Phone Screen"
+              text="Recruiter Call"
               clickHandler={this.clickHandler}
               position="flex-start"
-              checked={this.state.progress.includes("Phone Screen")}
+              checked={this.state.progress.includes("Recruiter Call")}
             />
           </Span>
           <Span>
@@ -74,10 +75,10 @@ class UpdateProgress extends Component {
           </Span>
           <Span>
             <Checkbox
-              text="Technical Interview"
+              text="Technical Call"
               clickHandler={this.clickHandler}
               position="flex-start"
-              checked={this.state.progress.includes("Technical Interview")}
+              checked={this.state.progress.includes("Technical Call")}
             />
           </Span>
           <Span>
@@ -98,8 +99,9 @@ class UpdateProgress extends Component {
           </Span>
         </List>
         <HeaderContainer>
-          <FormButton onClick={this.submitHandler}>Save</FormButton>
-          <FormButton onClick={this.props.closeModal}>Close</FormButton>
+          <TableButton onClick={this.submitHandler}>Save</TableButton>
+          <Span />
+          <TableButton onClick={this.props.closeModal}>Close</TableButton>
         </HeaderContainer>
       </>
     );

@@ -4,7 +4,8 @@ import { updateJobThunk } from "../../redux/thunks/job";
 import {
   HeaderContainer,
   InputContainer,
-  FormButton
+  TableButton,
+  Span
 } from "../resusable-components/styledComponents";
 import styled from "styled-components";
 
@@ -47,8 +48,9 @@ class JobNotes extends Component {
           />
         </InputContainer>
         <HeaderContainer>
-          <FormButton onClick={this.submitHandler}>Save</FormButton>
-          <FormButton onClick={this.props.closeModal}>Close</FormButton>
+          <TableButton onClick={this.submitHandler}>Save</TableButton>
+          <Span />
+          <TableButton onClick={this.props.closeModal}>Close</TableButton>
         </HeaderContainer>
       </div>
     );

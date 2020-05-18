@@ -18,7 +18,29 @@ router.patch("/jobs/model-update", auth, async (req, res) => {
     let jobs = user.jobs;
 
     for (let i = 0; i < jobs.length; i++) {
-      jobs[i].progress.push("Applied");
+      if (jobs[i].progress.includes("Phone Screen")) {
+        console.log(
+          jobs[i].company +
+            "includes Phone Screen, here's it's progress BEFORE:",
+          jobs[i].progress
+        );
+        jobs[i].progress = jobs[i].progress.filter(t => t !== "Phone Screen");
+        jobs[i].progress.push("Recruiter Call");
+      }
+
+      if (jobs[i].progress.includes("Technical Interview")) {
+        console.log(
+          jobs[i].company +
+            "includes Technical Interview, here's it's progress BEFORE:",
+          jobs[i].progress
+        );
+        jobs[i].progress = jobs[i].progress.filter(
+          t => t !== "Technical Interview"
+        );
+        jobs[i].progress.push("Technical Call");
+      }
+      console.log(jobs[i].company + "'s progress after:", jobs[i].progress);
+
       await jobs[i].save();
     }
 
@@ -26,7 +48,7 @@ router.patch("/jobs/model-update", auth, async (req, res) => {
 
     res.send("success");
   } catch (err) {
-    console.log("In the error, here's the error:", err);
+    // console.log("In the error, here's the error:", err);
     res.status(500).send(err);
   }
 });
