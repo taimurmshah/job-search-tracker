@@ -71,6 +71,7 @@ export const getJobByIdThunk = jobId => async dispatch => {
 };
 
 export const updateJobThunk = (jobId, updates) => async dispatch => {
+  console.log("in updateJobThunk, here are the updates:", updates);
   const token = localStorage.getItem("token");
   try {
     let res = await fetch(`${process.env.REACT_APP_URL}/jobs/${jobId}`, {
