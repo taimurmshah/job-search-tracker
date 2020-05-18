@@ -51,6 +51,21 @@ const jobSchema = new mongoose.Schema(
       type: String,
       trim: true
     },
+    progress: [
+      {
+        stage: {
+          type: String,
+          enum: [
+            "Applied",
+            "Phone Call",
+            "Code Challenge",
+            "Technical Interview",
+            "Onsite",
+            "Offer"
+          ]
+        }
+      }
+    ],
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
