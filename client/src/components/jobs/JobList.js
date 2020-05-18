@@ -85,6 +85,7 @@ class JobList extends Component {
             text={"Follow Up?"}
             clickHandler={this.followUpHandler}
             checked={this.state.followUp}
+            position="flex-end"
           />
         )}
         {!this.state.followUp && (
@@ -92,6 +93,7 @@ class JobList extends Component {
             text={"Active Jobs"}
             clickHandler={this.activeHandler}
             checked={this.state.active}
+            position="flex-end"
           />
         )}
         {/*{!this.state.followUp ? jobs : followUpJobs}*/}

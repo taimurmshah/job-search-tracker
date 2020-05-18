@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 import { updateJobThunk } from "../../redux/thunks/job";
 import {
   HeaderContainer,
-  Span
+  Span,
+  List
 } from "../resusable-components/styledComponents";
 import styled from "styled-components";
 
 const UpdateStatus = ({ _id, closeModal, updateJobThunk }) => {
   const clickHandler = e => {
-    console.log(e.target.innerText);
     const update = {
       status: e.target.innerText
     };
@@ -68,10 +68,10 @@ export default connect(
   mapDispatchToProps
 )(UpdateStatus);
 
-const List = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-left: 20px;
-  padding: 10px;
-`;
+// const List = styled.div`
+//   width: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   margin-left: 20px;
+//   padding: 10px;
+// `;

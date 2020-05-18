@@ -67,6 +67,14 @@ const FormButton = styled.button`
   transition: all 0.2s;
 `;
 
+const List = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  padding: 10px;
+`;
+
 export {
   FormContainer,
   Input,
@@ -75,5 +83,6 @@ export {
   Menu,
   Span,
   ModalNav,
-  FormButton
+  FormButton,
+  List
 };

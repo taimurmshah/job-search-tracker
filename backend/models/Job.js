@@ -53,17 +53,16 @@ const jobSchema = new mongoose.Schema(
     },
     progress: [
       {
-        stage: {
-          type: String,
-          enum: [
-            "Applied",
-            "Phone Call",
-            "Code Challenge",
-            "Technical Interview",
-            "Onsite",
-            "Offer"
-          ]
-        }
+        type: String,
+        enum: [
+          "Applied",
+          "Phone Screen",
+          "Code Challenge",
+          "Technical Interview",
+          "Onsite",
+          "Offer"
+        ],
+        default: "Applied"
       }
     ],
     owner: {

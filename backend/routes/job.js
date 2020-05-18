@@ -5,6 +5,7 @@ const Employee = require("../models/Employee");
 
 const router = new express.Router();
 
+//this was after an update to the schema.
 router.patch("/jobs/model-update", auth, async (req, res) => {
   try {
     const user = req.user;
@@ -17,67 +18,15 @@ router.patch("/jobs/model-update", auth, async (req, res) => {
     let jobs = user.jobs;
 
     for (let i = 0; i < jobs.length; i++) {
-      let mostRecentDate = null;
-      let response = false;
-      const job = jobs[i];
-      console.log("current Job:", job.company);
-      await job
-        .populate({
-          path: "employees"
-        })
-        .execPopulate();
-
-      let employees = job.employees;
-
-      for (let j = 0; j < employees.length; j++) {
-        const e = employees[j];
-        console.log("current Employee:", e.name);
-        if (e.emailsSent.length === 0) {
-          job.status = "Haven't sent email yet";
-        } else if (e.emailsSent.length > 0) {
-          // console.log(`${e.name}'s emailsSent:`, e.emailsSent);
-
-          job.status = "Waiting for email response";
-          if (e.response) response = true;
-
-          let emails = e.emailsSent;
-
-          for (let k = 0; k < emails.length; k++) {
-            if (!e.emailsSent[k].method) {
-              e.emailsSent[k].method = "template";
-              e.emailsSent[k].template_id = "5de53ba3fcfed33a8fc61e21";
-            }
-
-            if (typeof e.emailsSent[k] === "number") {
-              e.emailsSent[k] = {
-                method: "template",
-                template_id: "5de53ba3fcfed33a8fc61e21",
-                time: new Date()
-              };
-            }
-            let newTime = new Date(e.emailsSent[k].time);
-            e.emailsSent[k].time = newTime;
-          }
-
-          let last = emails.length - 1;
-
-          if (mostRecentDate === null) {
-            mostRecentDate = e.emailsSent[last].time;
-          } else {
-            e.emailsSent[last].time > mostRecentDate &&
-              (mostRecentDate = e.emailsSent[last].time);
-          }
-          // console.log("did I make it here?");
-          await e.save();
-        }
-      }
-      // console.log("out of here?");
-      job.mostRecentEmailSent = mostRecentDate;
-
-      await job.save();
+      jobs[i].progress.push("Applied");
+      await jobs[i].save();
     }
-    res.send();
+
+    console.log("before the save?");
+
+    res.send("success");
   } catch (err) {
+    console.log("In the error, here's the error:", err);
     res.status(500).send(err);
   }
 });
@@ -141,7 +90,7 @@ router.patch("/jobs/:id", auth, async (req, res) => {
   const updates = Object.keys(req.body);
   // console.log("updates:", updates);
 
-  const allowedUpdates = ["response", "status", "notes"];
+  const allowedUpdates = ["response", "status", "notes", "progress"];
 
   for (let i = 0; i < updates.length; i++) {
     if (!allowedUpdates.includes(updates[i])) {

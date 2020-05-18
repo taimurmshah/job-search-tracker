@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Modal from "../layout/Modal";
 import UpdateStatus from "./UpdateStatus";
+import UpdateProgress from "./UpdateProgress";
 import JobNotes from "./JobNotes";
 import styled from "styled-components";
 import {
@@ -12,7 +13,14 @@ import {
 class Job extends Component {
   state = {
     status: false,
-    notes: false
+    notes: false,
+    progress: false
+  };
+
+  showProgress = () => {
+    this.setState({
+      progress: true
+    });
   };
 
   showStatus = () => {
@@ -30,7 +38,8 @@ class Job extends Component {
   closeModal = () => {
     this.setState({
       status: false,
-      notes: false
+      notes: false,
+      progress: false
     });
   };
 
@@ -42,7 +51,8 @@ class Job extends Component {
       link,
       website,
       notes,
-      status
+      status,
+      progress
     } = this.props.job;
 
     website = "https://" + website;
@@ -92,6 +102,11 @@ class Job extends Component {
             </p>
           </Span>
           <Span>
+            <p className="nav-link" onClick={this.showProgress}>
+              Progress
+            </p>
+          </Span>
+          <Span>
             <p className="nav-link" onClick={this.showNotes}>
               Notes
             </p>
@@ -117,6 +132,19 @@ class Job extends Component {
               />
             }
             show={this.state.notes}
+          />
+        )}
+        {this.state.progress && (
+          <Modal
+            closeModal={this.closeModal}
+            component={
+              <UpdateProgress
+                closeModal={this.closeModal}
+                _id={_id}
+                progress={progress}
+              />
+            }
+            show={this.state.progress}
           />
         )}
       </div>

@@ -98,6 +98,7 @@ class JobListContainer extends Component {
                 clickHandler={this.followUpHandler}
                 checked={this.state.followUp}
                 show={!(this.state.rejected || this.state.filter.length > 0)}
+                position="flex-end"
               />
 
               <Checkbox
@@ -105,6 +106,7 @@ class JobListContainer extends Component {
                 clickHandler={this.rejectHandler}
                 checked={this.state.rejected}
                 show={!(this.state.followUp || this.state.filter.length > 0)}
+                position="flex-end"
               />
             </CheckFlex>
           </TextContainer>

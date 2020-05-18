@@ -1,29 +1,44 @@
 import React from "react";
 import styled from "styled-components";
 
-const Checkbox = ({ clickHandler, text, checked, show }) => {
+const Checkbox = ({ clickHandler, text, checked, show, position }) => {
   console.log({ checked });
+
+  const CheckBoxSpan = styled.span`
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    justify-content: ${position};
+  `;
+
+  const Span = styled.span`
+    margin: 5px;
+  `;
+  const P = styled.p`
+    font-size: ${position === "flex-start" ? "16px" : "13px"};
+  `;
 
   const CheckboxInput = styled.input.attrs({ type: "checkbox" })`
     margin-left: 5px;
     ${show === false && "pointer-events: none"};
   `;
+
   return (
     <CheckBoxSpan>
-      <P>{text}</P>
-      <CheckboxInput defaultChecked={checked} onClick={clickHandler} />
+      {position === "flex-start" ? (
+        <>
+          <CheckboxInput defaultChecked={checked} onClick={clickHandler} />
+          <Span />
+          <P>{text}</P>
+        </>
+      ) : (
+        <>
+          <P>{text}</P>
+          <CheckboxInput defaultChecked={checked} onClick={clickHandler} />
+        </>
+      )}
     </CheckBoxSpan>
   );
 };
 
 export default Checkbox;
-const CheckBoxSpan = styled.span`
-  display: flex;
-  flex-direction: row;
-  margin: 5px;
-  justify-content: flex-end;
-`;
-
-const P = styled.p`
-  font-size: 13px;
-`;
