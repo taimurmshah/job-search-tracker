@@ -19,33 +19,17 @@ router.patch("/jobs/model-update", auth, async (req, res) => {
 
     for (let i = 0; i < jobs.length; i++) {
       if (jobs[i].progress.includes("Phone Screen")) {
-        console.log(
-          jobs[i].company +
-            "includes Phone Screen, here's it's progress BEFORE:",
-          jobs[i].progress
-        );
         jobs[i].progress = jobs[i].progress.filter(t => t !== "Phone Screen");
         jobs[i].progress.push("Recruiter Call");
       }
-
       if (jobs[i].progress.includes("Technical Interview")) {
-        console.log(
-          jobs[i].company +
-            "includes Technical Interview, here's it's progress BEFORE:",
-          jobs[i].progress
-        );
         jobs[i].progress = jobs[i].progress.filter(
           t => t !== "Technical Interview"
         );
         jobs[i].progress.push("Technical Call");
       }
-      console.log(jobs[i].company + "'s progress after:", jobs[i].progress);
-
       await jobs[i].save();
     }
-
-    console.log("before the save?");
-
     res.send("success");
   } catch (err) {
     // console.log("In the error, here's the error:", err);
@@ -147,6 +131,39 @@ router.delete("/jobs/:id", auth, async (req, res) => {
     if (!job) return res.status(400).send();
 
     res.send(job);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+//job progress stats for d3
+router.get("/jobs/d3", auth, async (req, res) => {
+  const d3Info = {
+    Applied: 0,
+    "Recruiter Call": 0,
+    "Technical Call": 0,
+    "Code Challenge": 0,
+    Onsite: 0,
+    Offer: 0
+  };
+  try {
+    const user = req.user;
+    await user
+      .populate({
+        path: "jobs"
+      })
+      .execPopulate();
+
+    let jobs = user.jobs;
+
+    for (let i = 0; i < jobs.length; i++) {
+      let prog = jobs[i].progress;
+      for (let j = 0; j < prog.length; j++) {
+        d3Info[prog[i]]++;
+      }
+    }
+
+    res.send(d3Info);
   } catch (err) {
     res.status(500).send(err);
   }
