@@ -30,7 +30,7 @@ class JobNotes extends Component {
   };
 
   render() {
-    let { company, notes } = this.props;
+    let { company } = this.props;
     return (
       <div>
         <HeaderContainer>
@@ -75,11 +75,3 @@ const Title = styled.h3`
 const Notes = styled.textarea`
   margin: 15px;
 `;
-
-// const ButtonFlex = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   width: 100%;
-//   justify-content: center;
-//   padding: 10px;
-// `;

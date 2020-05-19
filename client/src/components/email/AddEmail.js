@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PossibleEmails from "./PossibleEmails";
 import {
-  FormContainer,
   InputContainer,
   Input
 } from "../resusable-components/styledComponents";

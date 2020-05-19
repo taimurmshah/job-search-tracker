@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { logoutThunk } from "../../redux/thunks/auth";
-import { GoogleLogout } from "react-google-login";
 
 const Logout = ({ logoutThunk, method }) => {
   const token = localStorage.getItem("token");

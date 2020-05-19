@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { clearTemplate } from "../../redux/actions/template";
 import TemplateNavbar from "./TemplateNavbar";
 import NewTemplate from "./NewTemplate";
 import ViewTemplates from "./ViewTemplates";

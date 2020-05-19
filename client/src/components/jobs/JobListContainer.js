@@ -6,9 +6,6 @@ import { getEmployeesThunk } from "../../redux/thunks/employee";
 import JobCard from "./JobCard";
 import Checkbox from "../resusable-components/Checkbox";
 
-import Job from "./Job";
-import { Menu } from "../resusable-components/styledComponents";
-
 class JobListContainer extends Component {
   state = {
     followUp: false,
@@ -94,7 +91,7 @@ class JobListContainer extends Component {
 
             <CheckFlex>
               <Checkbox
-                text={"Follow Up?" + " (" + followUpJobs.length + ")"}
+                text={"Follow Up? (" + followUpJobs.length + ")"}
                 clickHandler={this.followUpHandler}
                 checked={this.state.followUp}
                 show={!(this.state.rejected || this.state.filter.length > 0)}

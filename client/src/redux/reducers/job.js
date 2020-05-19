@@ -2,8 +2,8 @@ const initialState = {
   hasJobs: false,
   jobs: [],
   numberOfJobs: 0,
-  currentJob: {}
-  // jobsProgress: {}
+  currentJob: {},
+  jobsProgress: {}
 };
 
 export default function(state = initialState, action) {
@@ -47,8 +47,8 @@ export default function(state = initialState, action) {
       return { ...state, currentJob: action.payload };
     case "REMOVE_CURRENT_JOB":
       return { ...state, currentJob: {} };
-    // case "GET_PROGRESS_INFO":
-    //   return { ...state, jobsProgress: action.payload };
+    case "GET_PROGRESS_INFO":
+      return { ...state, jobsProgress: action.payload };
     default:
       return state;
   }

@@ -6,7 +6,6 @@ import {
   Span,
   List
 } from "../resusable-components/styledComponents";
-import styled from "styled-components";
 
 const UpdateStatus = ({ _id, closeModal, updateJobThunk }) => {
   const clickHandler = e => {

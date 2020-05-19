@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { updateEmployeeThunk } from "../../redux/thunks/employee";
 import linkedInLogo from "../../images/linkedInLogo.png";
-import { FormButton } from "../resusable-components/styledComponents";
+// import { FormButton } from "../resusable-components/styledComponents";
 
 class Employee extends Component {
   state = {
@@ -78,9 +78,15 @@ class Employee extends Component {
           {emailsSent > 0 && (
             <TD>
               {response ? (
-                <p>✅</p>
+                <span role="img" aria-label="check">
+                  ✅
+                </span>
               ) : (
-                <NoButton onClick={this.showSmallModal}>🚨</NoButton>
+                <NoButton onClick={this.showSmallModal}>
+                  <span role="img" aria-label="siren">
+                    🚨
+                  </span>
+                </NoButton>
               )}
             </TD>
           )}

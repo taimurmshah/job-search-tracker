@@ -6,10 +6,8 @@ import {
   HeaderContainer,
   List,
   Span,
-  FormButton,
   TableButton
 } from "../resusable-components/styledComponents";
-import styled from "styled-components";
 
 class UpdateProgress extends Component {
   state = { progress: this.props.progress };

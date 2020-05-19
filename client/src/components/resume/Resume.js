@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-//to link to view resume
-import { Link } from "react-router-dom";
+
 import ResumeNavbar from "./ResumeNavbar";
 import Upload from "./Upload";
 import ViewResume from "./ViewResume";
 import DeleteResume from "./DeleteResume";
-import styled from "styled-components";
+// import styled from "styled-components";
 
 class Resume extends Component {
   state = {
@@ -78,14 +77,14 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(Resume);
-
-const Nav = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-`;
-
-const Span = styled.span`
-  padding: 10px;
-  margin: 5px;
-`;
+//
+// const Nav = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   width: 100%;
+// `;
+//
+// const Span = styled.span`
+//   padding: 10px;
+//   margin: 5px;
+// `;

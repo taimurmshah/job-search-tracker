@@ -3,7 +3,7 @@ import Modal from "../layout/Modal";
 import UpdateStatus from "./UpdateStatus";
 import UpdateProgress from "./UpdateProgress";
 import JobNotes from "./JobNotes";
-import styled from "styled-components";
+
 import {
   HeaderContainer,
   Menu,
@@ -51,7 +51,7 @@ class Job extends Component {
       link,
       website,
       notes,
-      status,
+      // status,
       progress
     } = this.props.job;
 

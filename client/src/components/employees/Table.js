@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { updateEmployeeThunk } from "../../redux/thunks/employee";
 import Employee from "./Employee";
 import Loading from "../layout/Loading";
-import { HeaderContainer } from "../resusable-components/styledComponents";
 import styled from "styled-components";
 
 class Table extends Component {

@@ -92,7 +92,6 @@ export const updateJobThunk = (jobId, updates) => async dispatch => {
 };
 
 export const progressThunk = () => async dispatch => {
-  console.log("in the progress thunk");
   const token = localStorage.getItem("token");
   try {
     let res = await fetch(`${process.env.REACT_APP_URL}/jobs/d3/progress`, {
@@ -105,7 +104,6 @@ export const progressThunk = () => async dispatch => {
     });
 
     let info = await res.json();
-    console.log("progress:", info);
     dispatch(getProgressInfo(info));
   } catch (err) {
     //todo configure auth errors with redux...

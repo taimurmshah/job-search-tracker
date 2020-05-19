@@ -4,14 +4,11 @@ import { readJobsThunk } from "../../redux/thunks/job";
 import { currentJob } from "../../redux/actions/job";
 import { getEmployeesThunk } from "../../redux/thunks/employee";
 import Modal from "../layout/Modal";
-import JobList from "./JobList";
+
 import JobListContainer from "./JobListContainer";
 import CreateJob from "./CreateJob";
 import Loading from "../layout/Loading";
-import {
-  HeaderContainer,
-  Span
-} from "../resusable-components/styledComponents";
+import { Span } from "../resusable-components/styledComponents";
 import styled from "styled-components";
 
 class Jobs extends Component {

@@ -5,7 +5,7 @@ import { jwtThunk } from "../../redux/thunks/auth";
 //todo might not need progressThunk here; it might not need to be in redux at all
 import { readJobsThunk, progressThunk } from "../../redux/thunks/job";
 import Loading from "../layout/Loading";
-// import Upload from "../resume/Upload"
+
 import Modal from "../layout/Modal";
 import DashboardLinks from "./DashboardLinks";
 import Resume from "../resume/Resume";
@@ -13,7 +13,8 @@ import Templates from "../templates/Templates";
 import { HeaderContainer } from "../resusable-components/styledComponents";
 import { readAllTemplatesThunk } from "../../redux/thunks/template";
 import { clearTemplate } from "../../redux/actions/template";
-import ProgressD3 from "./ProgressD3";
+import BarChart2 from "./BarChart2";
+import BarChart from "./BarChart";
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -21,7 +22,7 @@ class Dashboard extends Component {
       this.props.readJobsThunk();
     }
     console.log("in component did mount");
-    // this.props.progressThunk();
+    this.props.progressThunk();
   }
 
   state = {
@@ -89,7 +90,8 @@ class Dashboard extends Component {
           openResume={this.openResume}
           openTemplates={this.openTemplates}
         />
-        <ProgressD3 />
+        <BarChart2 />
+        <BarChart />
       </div>
     );
   }

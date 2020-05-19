@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import { Menu, Span } from "../resusable-components/styledComponents";
+import { Menu } from "../resusable-components/styledComponents";
 import { connect } from "react-redux";
 import { currentJob } from "../../redux/actions/job";
 import { getEmployeesThunk } from "../../redux/thunks/employee";
 import JobCard from "./JobCard";
 import Checkbox from "../resusable-components/Checkbox";
-import JobListContainer from "./JobListContainer";
-import Job from "./Job";
 
 class JobList extends Component {
   state = {
