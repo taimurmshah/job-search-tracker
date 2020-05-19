@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { jwtThunk } from "../../redux/thunks/auth";
-import { readJobsThunk } from "../../redux/thunks/job";
+//todo might not need progressThunk here; it might not need to be in redux at all
+import { readJobsThunk, progressThunk } from "../../redux/thunks/job";
 import Loading from "../layout/Loading";
 // import Upload from "../resume/Upload"
 import Modal from "../layout/Modal";
@@ -12,12 +13,15 @@ import Templates from "../templates/Templates";
 import { HeaderContainer } from "../resusable-components/styledComponents";
 import { readAllTemplatesThunk } from "../../redux/thunks/template";
 import { clearTemplate } from "../../redux/actions/template";
+import ProgressD3 from "./ProgressD3";
 
 class Dashboard extends Component {
   componentDidMount() {
     if (!this.props.hasJobs) {
       this.props.readJobsThunk();
     }
+    console.log("in component did mount");
+    // this.props.progressThunk();
   }
 
   state = {
@@ -85,6 +89,7 @@ class Dashboard extends Component {
           openResume={this.openResume}
           openTemplates={this.openTemplates}
         />
+        <ProgressD3 />
       </div>
     );
   }
@@ -103,7 +108,8 @@ const mapDispatchToProps = dispatch => {
     jwtThunk: token => dispatch(jwtThunk(token)),
     readJobsThunk: () => dispatch(readJobsThunk()),
     readAllTemplatesThunk: () => dispatch(readAllTemplatesThunk()),
-    clearTemplate: () => dispatch(clearTemplate())
+    clearTemplate: () => dispatch(clearTemplate()),
+    progressThunk: () => dispatch(progressThunk())
   };
 };
 

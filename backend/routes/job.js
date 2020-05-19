@@ -137,7 +137,7 @@ router.delete("/jobs/:id", auth, async (req, res) => {
 });
 
 //job progress stats for d3
-router.get("/jobs/d3", auth, async (req, res) => {
+router.get("/jobs/d3/progress", auth, async (req, res) => {
   const d3Info = {
     Applied: 0,
     "Recruiter Call": 0,
@@ -158,8 +158,14 @@ router.get("/jobs/d3", auth, async (req, res) => {
 
     for (let i = 0; i < jobs.length; i++) {
       let prog = jobs[i].progress;
+
+      if (
+        jobs[i].company === "Friends" ||
+        jobs[i].company === "Example (Github)"
+      )
+        continue;
       for (let j = 0; j < prog.length; j++) {
-        d3Info[prog[i]]++;
+        d3Info[prog[j]]++;
       }
     }
 

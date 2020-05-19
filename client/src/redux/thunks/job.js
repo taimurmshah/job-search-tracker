@@ -3,7 +3,8 @@ import {
   newJob,
   refreshCurrentJob,
   hasJobs,
-  updateJob
+  updateJob,
+  getProgressInfo
 } from "../actions/job";
 
 export const newJobThunk = jobObj => async dispatch => {
@@ -71,7 +72,6 @@ export const getJobByIdThunk = jobId => async dispatch => {
 };
 
 export const updateJobThunk = (jobId, updates) => async dispatch => {
-  console.log("in updateJobThunk, here are the updates:", updates);
   const token = localStorage.getItem("token");
   try {
     let res = await fetch(`${process.env.REACT_APP_URL}/jobs/${jobId}`, {
@@ -86,6 +86,27 @@ export const updateJobThunk = (jobId, updates) => async dispatch => {
 
     let response = await res.json();
     dispatch(updateJob(response));
+  } catch (err) {
+    //todo configure auth errors with redux...
+  }
+};
+
+export const progressThunk = () => async dispatch => {
+  console.log("in the progress thunk");
+  const token = localStorage.getItem("token");
+  try {
+    let res = await fetch(`${process.env.REACT_APP_URL}/jobs/d3/progress`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: token
+      }
+    });
+
+    let info = await res.json();
+    console.log("progress:", info);
+    dispatch(getProgressInfo(info));
   } catch (err) {
     //todo configure auth errors with redux...
   }

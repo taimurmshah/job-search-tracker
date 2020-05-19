@@ -44,3 +44,10 @@ export const removeCurrentJob = () => {
     type: "REMOVE_CURRENT_JOB"
   };
 };
+
+export const getProgressInfo = info => {
+  return {
+    type: "GET_PROGRESS_INFO",
+    payload: info
+  };
+};
