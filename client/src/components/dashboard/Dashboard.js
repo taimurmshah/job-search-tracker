@@ -13,7 +13,6 @@ import Templates from "../templates/Templates";
 import { HeaderContainer } from "../resusable-components/styledComponents";
 import { readAllTemplatesThunk } from "../../redux/thunks/template";
 import { clearTemplate } from "../../redux/actions/template";
-import BarChart2 from "./BarChart2";
 import BarChart from "./BarChart";
 
 class Dashboard extends Component {
@@ -90,7 +89,6 @@ class Dashboard extends Component {
           openResume={this.openResume}
           openTemplates={this.openTemplates}
         />
-        <BarChart2 />
         <BarChart />
       </div>
     );
