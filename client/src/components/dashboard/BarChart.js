@@ -6,21 +6,11 @@ import styled from "styled-components";
 
 const BarChart = ({ data }) => {
   const svgRef = useRef();
-
   useEffect(() => {
-    // const nums = [25, 30, 45, 60, 20, 64, 75];
-    data = [
-      { stage: "Applied", number: data.Applied },
-      { stage: "Recruiter Call", number: data["Recruiter Call"] },
-      { stage: "Code Challenge", number: data["Code Challenge"] },
-      { stage: "Technical Call", number: data["Technical Call"] },
-      { stage: "Onsite", number: data.Onsite },
-      { stage: "Offer", number: data.Offer }
-    ];
+    if (Object.keys(data).length === 0) return;
 
-    let margin = { left: 80, right: 20, top: 50, bottom: 100 };
+    // let margin = { left: 80, right: 20, top: 50, bottom: 100 };
 
-    //what is the reason for these?
     let width = 700; //- margin.left - margin.right;
     let height = 400; //- margin.top - margin.bottom;
     const svg = d3
@@ -43,6 +33,17 @@ const BarChart = ({ data }) => {
       .domain([0, Math.ceil(data[0].number / 10) * 10]) //want to have the domain as number of jobs applied to rounded to nearest top 10
       .range([height, 0]); //range value is the value of the length of the y axis
 
+    //y lines
+    const makeYLines = () => d3.axisLeft().scale(y);
+    svg
+      .append("g")
+      .attr("class", "grid")
+      .call(
+        makeYLines()
+          .tickSize(-width, 0, 0)
+          .tickFormat("")
+      );
+
     //axes
     let xAxisCall = d3.axisBottom(x);
     svg
@@ -57,24 +58,38 @@ const BarChart = ({ data }) => {
     svg.select(".y-axis").call(yAxisCall);
 
     //labels
-    //x label
+    //x label bottom
     svg
       .append("text")
+      .attr("class", "d3-label")
       .attr("y", height + 70)
       .attr("x", width / 2)
-      .attr("font-size", "30px")
+      .attr("font-size", "25px")
       .attr("text-anchor", "middle")
       .text("Stages");
 
     //top x label
     svg
       .append("text")
+      .attr("class", "d3-label")
       .attr("y", -15)
       .attr("x", width / 2)
       .attr("font-size", "30px")
       .attr("text-anchor", "middle")
       // .attr("transform", "rotate(-90)")
       .text("Job Hunt Progress");
+
+    //y label
+    svg
+      .append("text")
+      .attr("class", "d3-label")
+      .attr("y", -60)
+      .attr("x", -(height / 2))
+      .attr("font-size", "25px")
+      // .style("color", "white")
+      .attr("text-anchor", "middle")
+      .attr("transform", "rotate(-90)")
+      .text("Number of Companies");
 
     //bars
     svg
@@ -84,11 +99,14 @@ const BarChart = ({ data }) => {
       // .append("rect")
       .join("rect")
       .attr("class", "bar")
+      .style("transform", "scale(1, -1)")
       .attr("x", d => x(d.stage) + x.bandwidth() / 4)
-      .attr("y", d => y(d.number))
-      .attr("height", d => height - y(d.number))
+      // .attr("y", d => y(d.number))
+      .attr("y", -height)
       .attr("width", x.bandwidth() / 2)
-      .attr("fill", "grey");
+      .transition()
+      .attr("height", d => height - y(d.number))
+      .attr("fill", "#80cbc4");
   }, [data]);
 
   return (
@@ -107,6 +125,7 @@ const SVG = styled.svg`
   background: #eee;
   overflow: visible;
   margin-bottom: 100px;
+  background-color: #2f4a6d;
 `;
 
 const ChartArea = styled.div`
@@ -116,8 +135,9 @@ const ChartArea = styled.div`
   padding-top: 50px
   height: 500px;
   width: 900px;
-  border: black 1px solid;
   margin-bottom: 20px;
+  background-color: #2F4A6D;
+  color: white;
 `;
 
 const mapStateToProps = state => ({ data: state.job.jobsProgress });

@@ -12,6 +12,11 @@ p {
     font-family: 'Bitter', serif;
 }
 
+.d3-label {
+    font-family: 'Bitter', serif;
+    fill: white;
+}
+
 
 h1 {
     font-family: 'Patua One', cursive;

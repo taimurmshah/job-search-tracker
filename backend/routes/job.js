@@ -138,7 +138,7 @@ router.delete("/jobs/:id", auth, async (req, res) => {
 
 //job progress stats for d3
 router.get("/jobs/d3/progress", auth, async (req, res) => {
-  const d3Info = {
+  let d3Info = {
     Applied: 0,
     "Recruiter Call": 0,
     "Technical Call": 0,
@@ -146,6 +146,7 @@ router.get("/jobs/d3/progress", auth, async (req, res) => {
     Onsite: 0,
     Offer: 0
   };
+
   try {
     const user = req.user;
     await user
@@ -168,6 +169,15 @@ router.get("/jobs/d3/progress", auth, async (req, res) => {
         d3Info[prog[j]]++;
       }
     }
+
+    d3Info = [
+      { stage: "Applied", number: d3Info.Applied },
+      { stage: "Recruiter Call", number: d3Info["Recruiter Call"] },
+      { stage: "Code Challenge", number: d3Info["Code Challenge"] },
+      { stage: "Technical Call", number: d3Info["Technical Call"] },
+      { stage: "Onsite", number: d3Info.Onsite },
+      { stage: "Offer", number: d3Info.Offer }
+    ];
 
     res.send(d3Info);
   } catch (err) {
