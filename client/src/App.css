@@ -12,10 +12,15 @@ p {
     font-family: 'Bitter', serif;
 }
 
-.d3-label {
+.d3-label, .tooltip {
     font-family: 'Bitter', serif;
     fill: white;
 }
+
+
+.bar {
+        fill: #80cbc4 !important;
+    }
 
 
 h1 {

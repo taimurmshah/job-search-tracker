@@ -6,8 +6,18 @@ import styled from "styled-components";
 
 const BarChart = ({ data }) => {
   const svgRef = useRef();
+
+  const round = n => n.toString().slice(0, 4);
+
   useEffect(() => {
     if (Object.keys(data).length === 0) return;
+
+    const max = data[0].number;
+    const returnPercent = n => {
+      if (n === 0) return "";
+      if (n < max) return ((n / max) * 100).toString().slice(0, 3) + "%";
+      else return max;
+    };
 
     // let margin = { left: 80, right: 20, top: 50, bottom: 100 };
 
@@ -95,18 +105,55 @@ const BarChart = ({ data }) => {
     svg
       .selectAll(".bar")
       .data(data)
-      // .enter()
-      // .append("rect")
+
       .join("rect")
       .attr("class", "bar")
       .style("transform", "scale(1, -1)")
       .attr("x", d => x(d.stage) + x.bandwidth() / 4)
-      // .attr("y", d => y(d.number))
+
       .attr("y", -height)
       .attr("width", x.bandwidth() / 2)
+      // .on("mouseenter", () => {
+      //   svg.selectAll(".tooltip").remove();
+      // })
+      // .on("mouseenter", v => {
+      //   svg
+      //     .selectAll(".num")
+      //     .data([v.number])
+      //     .join("text")
+      //     .attr("class", "num")
+      //     .text(v.number)
+      //     .attr("fill", "#fff")
+      //     .attr("x", x(v.stage) + x.bandwidth() / (v.number > 10 ? 2.3 : 2.9))
+      //     .attr("y", y(v.number) + (v.number > 4 ? 20 : 17))
+      //     .transition()
+      //     .attr("opacity", 1);
+      // })
+      // .on("mouseleave", () => svg.selectAll(".tooltip").remove())
       .transition()
       .attr("height", d => height - y(d.number))
-      .attr("fill", "#80cbc4");
+      .attr("fill", "#80cbc4 !important");
+
+    const placement = n => {
+      if (n === max) {
+        if (n < 100) return 2.4;
+        else return 2.2;
+      } else return 2.9;
+    };
+
+    svg
+      .selectAll(".tooltip")
+      .data(data)
+      .join("text")
+      .attr("class", "tooltip")
+      // .text(v => (v.number !== max ? returnPercent(v.number) + " %" : v.number))
+      .text(v => returnPercent(v.number))
+      .attr("fill", "#fff")
+      // .attr("x", v => x(v.stage) + x.bandwidth() / (v.number > 10 ? 2.4 : 2.9))
+      .attr("x", v => x(v.stage) + x.bandwidth() / placement(v.number))
+      .attr("y", v => y(v.number) + (v.number > 4 ? 20 : 17))
+      .transition()
+      .attr("opacity", 1);
   }, [data]);
 
   return (
@@ -126,6 +173,9 @@ const SVG = styled.svg`
   overflow: visible;
   margin-bottom: 100px;
   background-color: #2f4a6d;
+  @media screen and (prefers-color-scheme: light) {
+    background-color: #2f4a6d;
+  }
 `;
 
 const ChartArea = styled.div`
@@ -138,6 +188,9 @@ const ChartArea = styled.div`
   margin-bottom: 20px;
   background-color: #2F4A6D;
   color: white;
+  @media screen and (prefers-color-scheme: light) {
+    background-color: #2f4a6d;
+  }
 `;
 
 const mapStateToProps = state => ({ data: state.job.jobsProgress });
