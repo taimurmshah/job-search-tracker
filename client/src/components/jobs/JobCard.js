@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { currentJob } from "../../redux/actions/job";
 import { getEmployeesThunk } from "../../redux/thunks/employee";
@@ -16,12 +16,19 @@ const JobCard = ({
   date
 }) => {
   const history = useHistory();
+  const [hover, setHover] = useState(false);
 
   return (
     <>
       <Card
         onClick={() => {
           history.push(`/jobs/${_id}`);
+        }}
+        onMouseEnter={() => {
+          setHover(true);
+        }}
+        onMouseLeave={() => {
+          setHover(false);
         }}
       >
         <Header>
@@ -38,7 +45,7 @@ const JobCard = ({
             </Link>
           </Span>
         </Header>
-        <Body>
+        <Body hover={hover}>
           <Span>
             <StatusContainer>
               <P>Status:</P>
@@ -93,14 +100,10 @@ const Body = styled.div`
   display: grid;
   grid-template-rows: 100px 10px 20px;
   width: 100%;
-  background: #efecec;
+  background: ${props => (props.hover === true ? "#e6ffff" : "#efecec")};
   height: 150px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-
-  :hover {
-    background: #e6ffff;
-  }
 `;
 
 const StatusContainer = styled.div`
