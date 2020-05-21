@@ -172,6 +172,7 @@ router.get("/jobs/d3/progress", auth, async (req, res) => {
 
     d3Info = [
       { stage: "Applied", number: d3Info.Applied },
+      // { stage: "Applied", number: 100 },
       { stage: "Recruiter Call", number: d3Info["Recruiter Call"] },
       { stage: "Code Challenge", number: d3Info["Code Challenge"] },
       { stage: "Technical Call", number: d3Info["Technical Call"] },

@@ -7,8 +7,6 @@ import styled from "styled-components";
 const BarChart = ({ data }) => {
   const svgRef = useRef();
 
-  const round = n => n.toString().slice(0, 4);
-
   useEffect(() => {
     if (Object.keys(data).length === 0) return;
 
@@ -137,7 +135,7 @@ const BarChart = ({ data }) => {
     const placement = n => {
       if (n === max) {
         if (n < 100) return 2.4;
-        else return 2.2;
+        else return 2.6;
       } else return 2.9;
     };
 
