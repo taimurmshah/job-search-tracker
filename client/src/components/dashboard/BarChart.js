@@ -19,8 +19,8 @@ const BarChart = ({ data }) => {
 
     // let margin = { left: 80, right: 20, top: 50, bottom: 100 };
 
-    let width = 700; //- margin.left - margin.right;
-    let height = 400; //- margin.top - margin.bottom;
+    let width = 800; //- margin.left - margin.right;
+    let height = 500; //- margin.top - margin.bottom;
     const svg = d3
       .select(svgRef.current)
       .attr("height", height /* + margin.top + margin.bottom */)
@@ -134,9 +134,9 @@ const BarChart = ({ data }) => {
 
     const placement = n => {
       if (n === max) {
-        if (n < 100) return 2.4;
+        if (n < 100) return 2.3;
         else return 2.6;
-      } else return 2.9;
+      } else return 2.7;
     };
 
     svg
@@ -181,9 +181,9 @@ const ChartArea = styled.div`
   align-items: center;
   justify-content: center;
   padding-top: 50px
-  height: 500px;
-  width: 900px;
-  margin-bottom: 20px;
+  height: 650px;
+  width: 1000px;
+  margin-bottom: 100px;
   background-color: #2F4A6D;
   color: white;
   @media screen and (prefers-color-scheme: light) {

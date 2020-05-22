@@ -204,6 +204,7 @@ table, th, td {
 
 .close-thick {
     /*color: white;*/
+    border: none;
     font: 18px/100% arial, sans-serif;
     position: absolute;
     right: 5px;

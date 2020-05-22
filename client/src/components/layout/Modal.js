@@ -8,7 +8,7 @@ const Modal = ({ closeModal, show, component }) => {
     <div className={showHideClassName}>
       <ModalMain>
         <div className="dialog">
-          <a href="/#" onClick={closeModal} className="close-thick" />
+          <button onClick={closeModal} className="close-thick" />
         </div>
         {component}
       </ModalMain>
