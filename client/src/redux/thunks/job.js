@@ -85,7 +85,25 @@ export const updateJobThunk = (jobId, updates) => async dispatch => {
     });
 
     let response = await res.json();
+    // debugger;
     dispatch(updateJob(response));
+  } catch (err) {
+    //todo configure auth errors with redux...
+  }
+};
+
+export const deleteJobThunk = jobId => async dispatch => {
+  const token = localStorage.getItem("token");
+  try {
+    let res = await fetch(`${process.env.REACT_APP_URL}/jobs/${jobId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: token
+      }
+    });
+    let job = await res.json();
   } catch (err) {
     //todo configure auth errors with redux...
   }

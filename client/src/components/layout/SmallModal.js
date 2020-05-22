@@ -7,7 +7,7 @@ const SmallModal = ({ closeModal, show, component }) => {
     <div className={showHideClassName}>
       <SmallModalMain>
         <div className="dialog">
-          <a href="/#" onClick={closeModal} className="close-thick" />
+          <button onClick={closeModal} className="close-thick" />
         </div>
         {component}
       </SmallModalMain>

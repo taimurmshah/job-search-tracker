@@ -37,10 +37,10 @@ const PossibleEmails = ({ name, website }) => {
     return emails.map((e, i) => <li key={i}>{e}</li>);
   };
   return (
-    <Container>
+    <>
       <Title>Possible Emails</Title>
       <List className="poss-email-list">{possibleEmails(name, website)}</List>
-    </Container>
+    </>
   );
 };
 

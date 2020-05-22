@@ -73,7 +73,7 @@ const StyledTable = styled.table`
   font-family: "Bitter", serif;
   background-color: rgb(15, 174, 241);
   border-radius: 5px;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
 `;
 
 const TH = styled.th`

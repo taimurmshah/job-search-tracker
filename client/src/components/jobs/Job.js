@@ -3,6 +3,7 @@ import Modal from "../layout/Modal";
 import UpdateStatus from "./UpdateStatus";
 import UpdateProgress from "./UpdateProgress";
 import JobNotes from "./JobNotes";
+import UpdateJob from "./UpdateJob";
 
 import {
   HeaderContainer,
@@ -14,7 +15,12 @@ class Job extends Component {
   state = {
     status: false,
     notes: false,
-    progress: false
+    progress: false,
+    update: false
+  };
+
+  showUpdate = () => {
+    this.setState({ update: true });
   };
 
   showProgress = () => {
@@ -39,7 +45,8 @@ class Job extends Component {
     this.setState({
       status: false,
       notes: false,
-      progress: false
+      progress: false,
+      update: false
     });
   };
 
@@ -65,6 +72,11 @@ class Job extends Component {
           <h1>{company}</h1>
         </HeaderContainer>
         <Menu>
+          <Span>
+            <p className="nav-link" onClick={this.showUpdate}>
+              Update
+            </p>
+          </Span>
           <Span>
             <a
               className="nav-link"
@@ -145,6 +157,19 @@ class Job extends Component {
               />
             }
             show={this.state.progress}
+          />
+        )}
+        {this.state.update && (
+          <Modal
+            closeModal={this.closeModal}
+            component={
+              <UpdateJob
+                job={this.props.job}
+                closeModal={this.closeModal}
+                _id={_id}
+              />
+            }
+            show={this.state.update}
           />
         )}
       </div>

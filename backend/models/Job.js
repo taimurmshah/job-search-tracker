@@ -47,6 +47,10 @@ const jobSchema = new mongoose.Schema(
     mostRecentEmailSent: {
       type: Date
     },
+    numOfEmailsSent: {
+      type: Number,
+      default: 0
+    },
     notes: {
       type: String,
       trim: true
@@ -61,8 +65,7 @@ const jobSchema = new mongoose.Schema(
           "Code Challenge",
           "Onsite",
           "Offer"
-        ],
-        default: "Applied"
+        ]
       }
     ],
     owner: {

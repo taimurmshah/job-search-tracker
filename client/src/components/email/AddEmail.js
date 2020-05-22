@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import PossibleEmails from "./PossibleEmails";
 import {
   InputContainer,
-  Input
+  Input,
+  List
 } from "../resusable-components/styledComponents";
 import styled from "styled-components";
 
@@ -25,25 +26,28 @@ class AddEmail extends Component {
 
   render() {
     return (
-      <div className="add-email-container">
-        <Form onSubmit={this.submitHandler}>
-          <InputContainer>
-            <p>Email:</p>
-            <Input
-              type="text"
-              name="email"
-              value={this.state.email}
-              onChange={this.changeHandler}
-            />
-          </InputContainer>
-
-          <div className="modal-buttons">
-            <button type="submit">Submit</button>
-            <button onClick={this.props.closeModal}>Close</button>
-          </div>
-        </Form>
-        <PossibleEmails />
-      </div>
+      // <div className="add-email-container">
+      <>
+        <List>
+          <Form onSubmit={this.submitHandler}>
+            <InputContainer>
+              <p>Email:</p>
+              <Input
+                type="text"
+                name="email"
+                value={this.state.email}
+                onChange={this.changeHandler}
+              />
+            </InputContainer>
+            <PossibleEmails />
+          </Form>
+        </List>
+        <div className="modal-buttons">
+          <button onClick={this.submitHandler}>Submit</button>
+          <button onClick={this.props.closeModal}>Close</button>
+        </div>
+      </>
+      // </div>
     );
   }
 }

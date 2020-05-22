@@ -95,6 +95,18 @@ router.post("/gmail/send/new", auth, async (req, res) => {
         { method: "custom", time: date }
       ];
 
+      if (job.numOfEmailsSent === 0) {
+        console.log(
+          `this is the first email you sent to ${
+            job.company
+          }! You've now applied!`
+        );
+        job.progress = ["Applied"];
+      }
+
+      job.numOfEmailsSent++;
+      console.log("record of first email sent:", job.numOfEmailsSent);
+
       await employee.save();
       await job.save();
 
@@ -204,6 +216,17 @@ router.post("/gmail/send/template", auth, async (req, res) => {
       job.mostRecentEmailSent = date;
       job.status = "Waiting for email response";
 
+      if (job.numOfEmailsSent === 0) {
+        console.log(
+          `this is the first email you sent to ${
+            job.company
+          }! You've now applied!`
+        );
+        job.progress = ["Applied"];
+      }
+
+      job.numOfEmailsSent++;
+      console.log("record of first email sent:", job.numOfEmailsSent);
       await employee.save();
       await job.save();
 

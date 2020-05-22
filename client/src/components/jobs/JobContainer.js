@@ -15,8 +15,9 @@ import {
   removeCurrentEmployee,
   removeEmployees
 } from "../../redux/actions/employee";
+import { useHistory } from "react-router-dom";
 
-import { getJobByIdThunk } from "../../redux/thunks/job";
+import { getJobByIdThunk, deleteJobThunk } from "../../redux/thunks/job";
 import {
   getEmployeesThunk,
   updateEmployeeThunk,
@@ -26,6 +27,7 @@ import { sendNewGmailThunk } from "../../redux/thunks/email";
 import { readAllTemplatesThunk } from "../../redux/thunks/template";
 import styled from "styled-components";
 import { TableButton } from "../resusable-components/styledComponents";
+import DeleteJob from "./DeleteJob";
 
 //todo:
 // - create job description component
@@ -38,7 +40,8 @@ class JobContainer extends Component {
     sendEmailForm: false,
     employeeId: "",
     showModal: false,
-    smallModal: false
+    responseModal: false,
+    deleteModal: false
   };
 
   componentDidMount() {
@@ -120,13 +123,14 @@ class JobContainer extends Component {
       sendEmailForm: false,
       newEmployeeForm: false,
       employeeId: "",
-      smallModal: false
+      responseModal: false,
+      deleteModal: false
     });
   };
 
-  showSmallModal = employeeId => {
+  showResponseModal = employeeId => {
     this.props.currentEmployee(employeeId);
-    this.setState({ smallModal: true }, () => {
+    this.setState({ responseModal: true }, () => {
       console.log("state:", this.state);
     });
   };
@@ -144,8 +148,20 @@ class JobContainer extends Component {
       sendEmailForm: false,
       employeeId: "",
       showModal: false,
-      smallModal: false
+      responseModal: false,
+      deleteModal: false
     });
+  };
+
+  showDeleteModal = () => {
+    this.setState({ deleteModal: true });
+  };
+
+  deleteHandler = () => {
+    //todo redirect to dashboard
+    this.props.deleteJobThunk(this.props.job._id);
+    this.closeModal();
+    this.props.history.push("/dashboard");
   };
 
   componentPassToModal = () => {
@@ -209,9 +225,15 @@ class JobContainer extends Component {
             jobId={this.props.job._id}
             addEmailButtonClickHandler={this.addEmailButtonClickHandler}
             sendEmailButtonClickHandler={this.sendEmailButtonClickHandler}
-            showSmallModal={this.showSmallModal}
+            showSmallModal={this.showResponseModal}
           />
         )}
+
+        <AddFlex>
+          <DeleteButton onClick={this.showDeleteModal}>
+            Delete Job?
+          </DeleteButton>
+        </AddFlex>
 
         <Modal
           closeModal={this.closeModal}
@@ -219,17 +241,34 @@ class JobContainer extends Component {
           component={this.componentPassToModal()}
         />
 
-        <SmallModal
-          closeModal={this.closeModal}
-          show={this.state.smallModal}
-          component={
-            <UpdateResponse
-              _id={this.props.job._id}
-              closeModal={this.closeModal}
-              submitHandler={this.responseSubmitHandler}
-            />
-          }
-        />
+        {this.state.responseModal && (
+          <SmallModal
+            closeModal={this.closeModal}
+            show={this.state.responseModal}
+            component={
+              <UpdateResponse
+                _id={this.props.job._id}
+                closeModal={this.closeModal}
+                submitHandler={this.responseSubmitHandler}
+              />
+            }
+          />
+        )}
+
+        {this.state.deleteModal && (
+          <SmallModal
+            closeModal={this.closeModal}
+            show={this.state.deleteModal}
+            component={
+              <DeleteJob
+                _id={this.props.job._id}
+                job={this.props.job}
+                closeModal={this.closeModal}
+                submitHandler={this.deleteHandler}
+              />
+            }
+          />
+        )}
       </div>
     );
   }
@@ -259,7 +298,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(sendNewGmailThunk(employeeId, emailObj)),
     removeEmployees: () => dispatch(removeEmployees()),
     removeCurrentJob: () => dispatch(removeCurrentJob()),
-    readAllTemplatesThunk: () => dispatch(readAllTemplatesThunk())
+    readAllTemplatesThunk: () => dispatch(readAllTemplatesThunk()),
+    deleteJobThunk: jobId => dispatch(deleteJobThunk(jobId))
   };
 };
 
@@ -291,4 +331,12 @@ const AddFlex = styled.div`
   width: 100%;
   flex-direction: row;
   justify-content: center;
+`;
+
+const DeleteButton = styled(TableButton)`
+  background-color: red;
+  :hover {
+    box-shadow: 0;
+    background-color: #edadad;
+  }
 `;

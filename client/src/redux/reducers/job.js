@@ -43,6 +43,16 @@ export default function(state = initialState, action) {
         jobs: updatedJobs,
         currentJob: action.payload
       };
+
+    case "DELETE_JOB":
+      let newJobs = [...state.jobs];
+      newJobs = newJobs.filter(j => j.company !== action.payload.company);
+      return {
+        ...state,
+        jobs: newJobs,
+        currentJob: {}
+      };
+
     case "REFRESH_CURRENT_JOB":
       return { ...state, currentJob: action.payload };
     case "REMOVE_CURRENT_JOB":

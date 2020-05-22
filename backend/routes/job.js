@@ -18,18 +18,25 @@ router.patch("/jobs/model-update", auth, async (req, res) => {
     let jobs = user.jobs;
 
     for (let i = 0; i < jobs.length; i++) {
-      if (jobs[i].progress.includes("Phone Screen")) {
-        jobs[i].progress = jobs[i].progress.filter(t => t !== "Phone Screen");
-        jobs[i].progress.push("Recruiter Call");
+      const job = jobs[i];
+      let numOfEmailsSent = 0;
+      await job
+        .populate({
+          path: "employees"
+        })
+        .execPopulate();
+
+      const employees = job.employees;
+      for (let j = 0; j < employees.length; j++) {
+        const employee = employees[j];
+        numOfEmailsSent += employee.emailsSent.length;
       }
-      if (jobs[i].progress.includes("Technical Interview")) {
-        jobs[i].progress = jobs[i].progress.filter(
-          t => t !== "Technical Interview"
-        );
-        jobs[i].progress.push("Technical Call");
-      }
-      await jobs[i].save();
+
+      job.numOfEmailsSent = numOfEmailsSent;
+      console.log("current Job:", job.company, "emails Sent:", numOfEmailsSent);
+      await job.save();
     }
+
     res.send("success");
   } catch (err) {
     // console.log("In the error, here's the error:", err);
@@ -40,11 +47,13 @@ router.patch("/jobs/model-update", auth, async (req, res) => {
 //create new job
 router.post("/jobs", auth, async (req, res) => {
   if (req.body.website[0] === "h") {
-    console.log("in the edit");
     req.body.website = req.body.website.split("/")[2];
   }
 
-  const job = new Job({ ...req.body, owner: req.user._id });
+  const job = new Job({
+    ...req.body,
+    owner: req.user._id
+  });
 
   try {
     await job.save();
@@ -96,7 +105,16 @@ router.patch("/jobs/:id", auth, async (req, res) => {
   const updates = Object.keys(req.body);
   // console.log("updates:", updates);
 
-  const allowedUpdates = ["response", "status", "notes", "progress"];
+  const allowedUpdates = [
+    "response",
+    "status",
+    "notes",
+    "progress",
+    "link",
+    "company",
+    "linkedIn",
+    "website"
+  ];
 
   for (let i = 0; i < updates.length; i++) {
     if (!allowedUpdates.includes(updates[i])) {
@@ -114,7 +132,7 @@ router.patch("/jobs/:id", auth, async (req, res) => {
     updates.forEach(update => (job[update] = req.body[update]));
 
     await job.save();
-
+    console.log("Job:", job);
     res.send(job);
   } catch (err) {
     res.status(400).send(err);
