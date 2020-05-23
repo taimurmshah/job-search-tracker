@@ -26,12 +26,12 @@ This app:
 
 Here's the dashboard, once a user has logged in. (I've logged in here through the Google OAuth2 API, and the profile image in the upper right hand corner is from my google profile.):
 
-![Dashboard](https://i.imgur.com/tQ8tjvc.png)
+![Dashboard](https://i.imgur.com/NoSczpz.png)
 
 From the menu on the left, a user can select to navigate to the jobs page, to create/view email templates, and to upload a resume. Here I'm creating an example email template. Right now, 
 a user can use up to three interpolation values, and can choose to attach their resume to the email. I built this feature because I was using variants of the same introduction email when 
 I'd contact recruiters or hiring managers for the first time. I also used a template for my follow up email; automating this feature allowed me to save time, where before I was copy and pasting
-from an Evernote document into gmail, which was tedious.
+from an Evernote document into gmail, which was tedious. Also I built a bar chart using D3 to visualize my progress in my job search.
 
 ![Create Template](https://i.imgur.com/KNqZZhc.png)
 

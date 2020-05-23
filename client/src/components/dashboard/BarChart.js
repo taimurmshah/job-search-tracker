@@ -13,8 +13,12 @@ const BarChart = ({ data }) => {
     const max = data[0].number;
     const returnPercent = n => {
       if (n === 0) return "";
-      if (n < max) return ((n / max) * 100).toString().slice(0, 3) + "%";
-      else return max;
+      if (n < max) {
+        const p = (n / max) * 100;
+        return p > 10
+          ? p.toString().slice(0, 4) + "%"
+          : p.toString().slice(0, 3) + "%";
+      } else return max;
     };
 
     // let margin = { left: 80, right: 20, top: 50, bottom: 100 };

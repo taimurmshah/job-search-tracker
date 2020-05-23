@@ -57,4 +57,6 @@ export default connect(
 const ListContainer = styled.div`
   display: flex;
   flex-direction: column;
+  height: 400px;
+  overflow: scroll;
 `;

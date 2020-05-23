@@ -54,9 +54,7 @@ const JobCard = ({
           </Span>
 
           <DaysContainer>
-            <Span>
-              <Moment fromNow date={date} />
-            </Span>
+            <Span>{date && <Moment fromNow date={date} />}</Span>
           </DaysContainer>
         </Body>
       </Card>

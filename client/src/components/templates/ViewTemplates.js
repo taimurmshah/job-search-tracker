@@ -39,4 +39,6 @@ const TemplateListContainer = styled.div`
   justify-content: center;
   margin-left: 30px;
   margin-right: 20px;
+  height: 400px;
+  overflow: scroll;
 `;
