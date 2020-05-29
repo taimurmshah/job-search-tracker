@@ -143,16 +143,24 @@ const BarChart = ({ data }) => {
       } else return 2.7;
     };
 
+    const numPlacement = n => {
+      if (n > 100) return 2.4;
+      if (n > 10) return 2.3;
+      return 2.16;
+    };
+
     svg
       .selectAll(".tooltip")
       .data(data)
       .join("text")
       .attr("class", "tooltip")
       // .text(v => (v.number !== max ? returnPercent(v.number) + " %" : v.number))
-      .text(v => returnPercent(v.number))
+      // .text(v => returnPercent(v.number))
+      .text(v => (v.number > 0 ? v.number : null))
       .attr("fill", "#fff")
       // .attr("x", v => x(v.stage) + x.bandwidth() / (v.number > 10 ? 2.4 : 2.9))
-      .attr("x", v => x(v.stage) + x.bandwidth() / placement(v.number))
+      // .attr("x", v => x(v.stage) + x.bandwidth() / placement(v.number))
+      .attr("x", v => x(v.stage) + x.bandwidth() / numPlacement(v.number))
       .attr("y", v => y(v.number) + (v.number > 4 ? 20 : 17))
       .transition()
       .attr("opacity", 1);
