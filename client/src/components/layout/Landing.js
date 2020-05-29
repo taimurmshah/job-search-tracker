@@ -10,7 +10,7 @@ class Landing extends Component {
     }
     return (
       <HeaderContainer>
-        <h1>Landing</h1>
+        <h1>Job Search Tracker</h1>
       </HeaderContainer>
     );
   }

@@ -6,7 +6,7 @@ import {
   Input
 } from "../resusable-components/styledComponents";
 
-class NewEmployee extends Component {
+class UpdateEmployee extends Component {
   state = {
     firstName: "",
     lastName: "",
@@ -29,8 +29,6 @@ class NewEmployee extends Component {
       linkedIn: this.state.linkedIn,
       email: this.state.email
     };
-
-    this.props.submitHandler(employee);
   };
 
   render() {
@@ -106,8 +104,8 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   null,
   mapDispatchToProps
-)(NewEmployee);
+)(UpdateEmployee);
 
-// const NewEmployeeForm = styled(FormContainer)`
+// const UpdateEmployeeForm = styled(FormContainer)`
 //   height: 100%;
 // `;

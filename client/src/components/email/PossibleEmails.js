@@ -58,12 +58,12 @@ const List = styled.ul`
   line-height: 20px;
 `;
 
-const Container = styled.div`
-  position: fixed;
-  right: 75px;
-  top: 57px;
-  padding: 0 5px;
-`;
+// const Container = styled.div`
+//   position: fixed;
+//   right: 75px;
+//   top: 57px;
+//   padding: 0 5px;
+// `;
 
 const Title = styled.p`
   font-size: 20px;

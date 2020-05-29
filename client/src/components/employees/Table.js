@@ -2,10 +2,25 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateEmployeeThunk } from "../../redux/thunks/employee";
 import Employee from "./Employee";
+import UpdateEmployee from "./UpdateEmployee";
+import Modal from "../layout/Modal";
 import Loading from "../layout/Loading";
 import styled from "styled-components";
 
 class Table extends Component {
+  state = {
+    updateModal: false,
+    currentEmployee: {}
+  };
+
+  closeModal = () => {
+    this.setState({ updateModal: false, currentEmployee: {} });
+  };
+
+  openUpdateModal = emp => {
+    this.setState({ updateModal: true, currentEmployee: emp });
+  };
+
   render() {
     console.log("Table is mounted, here are the props:", this.props);
 
@@ -21,6 +36,7 @@ class Table extends Component {
           addEmailButtonClickHandler={this.props.addEmailButtonClickHandler}
           sendEmailButtonClickHandler={this.props.sendEmailButtonClickHandler}
           showSmallModal={this.props.showSmallModal}
+          openUpdateModal={this.openUpdateModal}
         />
       );
     });
@@ -41,6 +57,14 @@ class Table extends Component {
           </THead>
           <tbody>{tableData}</tbody>
         </StyledTable>
+
+        {this.state.updateModal && (
+          <Modal
+            show={this.state.updateModal}
+            closeModal={this.closeModal}
+            component={<UpdateEmployee />}
+          />
+        )}
       </Div>
     );
   }

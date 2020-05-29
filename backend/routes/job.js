@@ -105,6 +105,10 @@ router.patch("/jobs/:id", auth, async (req, res) => {
   const updates = Object.keys(req.body);
   // console.log("updates:", updates);
 
+  if (req.body.website && req.body.website[0] === "h") {
+    req.body.website = req.body.website.split("/")[2];
+  }
+
   const allowedUpdates = [
     "response",
     "status",
@@ -132,7 +136,7 @@ router.patch("/jobs/:id", auth, async (req, res) => {
     updates.forEach(update => (job[update] = req.body[update]));
 
     await job.save();
-    console.log("Job:", job);
+
     res.send(job);
   } catch (err) {
     res.status(400).send(err);

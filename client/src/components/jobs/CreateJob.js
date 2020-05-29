@@ -36,6 +36,7 @@ class CreateJob extends Component {
           <p>Company Name:</p>
           <Input
             required
+            autoComplete="off"
             type="text"
             name="company"
             value={this.state.company}
@@ -46,6 +47,7 @@ class CreateJob extends Component {
             required
             type="text"
             name="link"
+            autoComplete="off"
             value={this.state.link}
             onChange={this.changeHandler}
           />
@@ -54,6 +56,7 @@ class CreateJob extends Component {
             required
             type="text"
             name="linkedIn"
+            autoComplete="off"
             value={this.state.linkedIn}
             onChange={this.changeHandler}
           />
@@ -62,6 +65,7 @@ class CreateJob extends Component {
             required
             type="text"
             name="website"
+            autoComplete="off"
             value={this.state.website}
             onChange={this.changeHandler}
           />

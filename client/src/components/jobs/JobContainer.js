@@ -15,7 +15,6 @@ import {
   removeCurrentEmployee,
   removeEmployees
 } from "../../redux/actions/employee";
-import { useHistory } from "react-router-dom";
 
 import { getJobByIdThunk, deleteJobThunk } from "../../redux/thunks/job";
 import {
@@ -307,23 +306,6 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(JobContainer);
-
-// const TableButton = styled.button`
-//   width: 140px;
-//   padding: 10px;
-//   border-radius: 4px;
-//   outline: none;
-//   border: 0;
-//   box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.25);
-//   background-color: rgb(15, 174, 241);
-//   font-weight: bold;
-//   color: white;
-//   transition: all 0.25s ease-in-out;
-//   :hover {
-//     box-shadow: 0;
-//     background-color: rgb(146, 211, 239);
-//   }
-// `;
 
 const AddFlex = styled.div`
   display: flex;

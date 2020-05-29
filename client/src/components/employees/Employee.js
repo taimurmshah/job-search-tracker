@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { updateEmployeeThunk } from "../../redux/thunks/employee";
 import linkedInLogo from "../../images/linkedInLogo.png";
-// import { FormButton } from "../resusable-components/styledComponents";
 
 class Employee extends Component {
   state = {
@@ -42,6 +41,12 @@ class Employee extends Component {
     </TableButton>
   );
 
+  nameClick = e => {
+    // const empId = e.target.parentElement.parentElement.dataset.id;
+    this.props.openUpdateModal(this.props.employee);
+    // console.log({ empId });
+  };
+
   render() {
     let {
       _id,
@@ -58,8 +63,13 @@ class Employee extends Component {
     }
     return (
       <>
-        <TR key={_id}>
-          <TD>{name}</TD>
+        <TR key={_id} data-id={_id}>
+          <TD>
+            <UPDATE onClick={this.nameClick} role="img" aria-label="siren">
+              ✎
+            </UPDATE>
+            {" " + name}
+          </TD>
           <TD>{position}</TD>
           <TD>
             <a
@@ -123,6 +133,10 @@ const NoButton = styled.button`
 const TD = styled.td`
   padding: 10px;
   border: none;
+`;
+
+const UPDATE = styled.span`
+  cursor: pointer;
 `;
 
 const TableButton = styled.button`
