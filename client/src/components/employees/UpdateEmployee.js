@@ -1,18 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
+  HeaderContainer,
   FormContainer,
   InputContainer,
-  Input
+  Input,
+  TableButton
 } from "../resusable-components/styledComponents";
+import { updateEmployeeThunk } from "../../redux/thunks/employee";
+import styled from "styled-components";
 
 class UpdateEmployee extends Component {
   state = {
-    firstName: "",
-    lastName: "",
-    position: "",
-    linkedIn: "",
-    email: ""
+    firstName: this.props.employee.name.split(" ")[0],
+    lastName: this.props.employee.name.split(" ")[1],
+    position: this.props.employee.position,
+    linkedIn: this.props.employee.linkedIn,
+    email: this.props.employee.email
   };
 
   changeHandler = e => {
@@ -29,6 +33,14 @@ class UpdateEmployee extends Component {
       linkedIn: this.state.linkedIn,
       email: this.state.email
     };
+
+    this.props.updateEmployeeThunk(
+      this.props.jobId,
+      this.props.employee._id,
+      employee
+    );
+
+    this.props.closeModal();
   };
 
   render() {
@@ -94,18 +106,28 @@ class UpdateEmployee extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    jobId: state.job.currentJob._id
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
-    // newEmployeeThunk: (employee, token) =>
-    //   dispatch(newEmployeeThunk(employee, token))
+    updateEmployeeThunk: (jobId, employeeId, updates) =>
+      dispatch(updateEmployeeThunk(jobId, employeeId, updates))
   };
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(UpdateEmployee);
 
-// const UpdateEmployeeForm = styled(FormContainer)`
-//   height: 100%;
-// `;
+const DeleteButton = styled(TableButton)`
+  background-color: red;
+  :hover {
+    box-shadow: 0;
+    background-color: #edadad;
+  }
+`;

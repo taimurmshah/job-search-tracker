@@ -37,3 +37,10 @@ export const removeCurrentEmployee = () => {
     type: "REMOVE_CURRENT_EMPLOYEE"
   };
 };
+
+export const deleteEmployee = employee => {
+  return {
+    type: "DELETE_EMPLOYEE",
+    payload: employee
+  };
+};

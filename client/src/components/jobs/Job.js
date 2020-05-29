@@ -64,7 +64,8 @@ class Job extends Component {
 
     website = "https://" + website;
     // debugger;
-    link = link.startsWith("http") ? link : "https://" + link;
+
+    link = link && link.startsWith("http") ? link : "https://" + link;
 
     return (
       <div>

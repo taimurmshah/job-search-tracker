@@ -1,29 +1,49 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateEmployeeThunk } from "../../redux/thunks/employee";
+import {
+  updateEmployeeThunk,
+  deleteEmployeeThunk
+} from "../../redux/thunks/employee";
 import Employee from "./Employee";
 import UpdateEmployee from "./UpdateEmployee";
 import Modal from "../layout/Modal";
+import SmallModal from "../layout/SmallModal";
 import Loading from "../layout/Loading";
 import styled from "styled-components";
+import DeleteEmployee from "./DeleteEmployee";
 
 class Table extends Component {
   state = {
+    currentEmployee: {},
     updateModal: false,
-    currentEmployee: {}
+    deleteModal: false
   };
 
   closeModal = () => {
-    this.setState({ updateModal: false, currentEmployee: {} });
+    this.setState({
+      updateModal: false,
+      currentEmployee: {},
+      deleteModal: false
+    });
   };
 
   openUpdateModal = emp => {
     this.setState({ updateModal: true, currentEmployee: emp });
   };
 
-  render() {
-    console.log("Table is mounted, here are the props:", this.props);
+  openDeleteModal = emp => {
+    this.setState({ deleteModal: true, currentEmployee: emp });
+  };
 
+  deleteHandler = () => {
+    this.props.deleteEmployeeThunk(
+      this.props.jobId,
+      this.state.currentEmployee._id
+    );
+    this.closeModal();
+  };
+
+  render() {
     if (!this.props.employees) {
       return <Loading />;
     }
@@ -37,6 +57,7 @@ class Table extends Component {
           sendEmailButtonClickHandler={this.props.sendEmailButtonClickHandler}
           showSmallModal={this.props.showSmallModal}
           openUpdateModal={this.openUpdateModal}
+          openDeleteModal={this.openDeleteModal}
         />
       );
     });
@@ -62,7 +83,27 @@ class Table extends Component {
           <Modal
             show={this.state.updateModal}
             closeModal={this.closeModal}
-            component={<UpdateEmployee />}
+            component={
+              <UpdateEmployee
+                employee={this.state.currentEmployee}
+                closeModal={this.closeModal}
+                openDeleteModal={this.openDeleteModal}
+              />
+            }
+          />
+        )}
+
+        {this.state.deleteModal && (
+          <SmallModal
+            closeModal={this.closeModal}
+            show={this.state.deleteModal}
+            component={
+              <DeleteEmployee
+                employee={this.state.currentEmployee}
+                deleteHandler={this.deleteHandler}
+                closeModal={this.closeModal}
+              />
+            }
           />
         )}
       </Div>
@@ -73,7 +114,9 @@ class Table extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     updateEmployeeThunk: (jobId, employeeId, updates) =>
-      dispatch(updateEmployeeThunk(jobId, employeeId, updates))
+      dispatch(updateEmployeeThunk(jobId, employeeId, updates)),
+    deleteEmployeeThunk: (jobId, employeeId) =>
+      dispatch(deleteEmployeeThunk(jobId, employeeId))
   };
 };
 

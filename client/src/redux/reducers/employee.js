@@ -24,6 +24,14 @@ export default function(state = initialState, action) {
         ...state,
         employees: updatedEmployees
       };
+    case "DELETE_EMPLOYEE":
+      let removed = [...state.employees].filter(
+        e => e._id !== action.payload._id
+      );
+      return {
+        ...state,
+        employees: removed
+      };
     case "CURRENT_EMPLOYEE":
       const currentEmployee = state.employees.filter(
         e => e._id === action.payload
@@ -34,6 +42,7 @@ export default function(state = initialState, action) {
         ...state,
         currentEmployee: {}
       };
+
     default:
       return state;
   }

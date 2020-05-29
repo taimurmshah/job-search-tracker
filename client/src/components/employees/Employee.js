@@ -47,6 +47,10 @@ class Employee extends Component {
     // console.log({ empId });
   };
 
+  deleteClick = e => {
+    this.props.openDeleteModal(this.props.employee);
+  };
+
   render() {
     let {
       _id,
@@ -65,10 +69,14 @@ class Employee extends Component {
       <>
         <TR key={_id} data-id={_id}>
           <TD>
-            <UPDATE onClick={this.nameClick} role="img" aria-label="siren">
+            <HOVER onClick={this.nameClick} role="img" aria-label="siren">
               ✎
-            </UPDATE>
-            {" " + name}
+            </HOVER>
+
+            {" " + name + " "}
+            <HOVER onClick={this.deleteClick} role="img" aria-label="siren">
+              ❌
+            </HOVER>
           </TD>
           <TD>{position}</TD>
           <TD>
@@ -135,7 +143,7 @@ const TD = styled.td`
   border: none;
 `;
 
-const UPDATE = styled.span`
+const HOVER = styled.span`
   cursor: pointer;
 `;
 
