@@ -92,6 +92,14 @@ const TableButton = styled.button`
   }
 `;
 
+const TextArea = styled.textarea`
+  margin-top: 10px;
+  margin-bottom: 0px;
+  height: 300px;
+  width: 600px;
+  resize: none;
+`;
+
 export {
   FormContainer,
   Input,
@@ -102,5 +110,6 @@ export {
   ModalNav,
   FormButton,
   List,
-  TableButton
+  TableButton,
+  TextArea
 };

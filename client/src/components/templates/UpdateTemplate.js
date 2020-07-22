@@ -5,7 +5,8 @@ import {
   FormContainer,
   Input,
   FormButton,
-  HeaderContainer
+  HeaderContainer,
+  TextArea
 } from "../resusable-components/styledComponents";
 import Checkbox from "../resusable-components/Checkbox";
 import { updateTemplateThunk } from "../../redux/thunks/template";
@@ -116,9 +117,9 @@ export default connect(
   mapDispatchToProps
 )(UpdateTemplate);
 
-const TextArea = styled.textarea`
-  margin-top: 10px;
-  margin-bottom: 0px;
-  height: 150px;
-  width: 400px;
-`;
+// const TextArea = styled.textarea`
+//   margin-top: 10px;
+//   margin-bottom: 0px;
+//   height: 150px;
+//   width: 400px;
+// `;
