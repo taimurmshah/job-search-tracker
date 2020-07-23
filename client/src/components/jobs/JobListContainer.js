@@ -75,10 +75,10 @@ class JobListContainer extends Component {
       <Container>
         <Header>
           <TextContainer>
-            <P>RECENT JOBS</P>
+            <P>Recent Jobs</P>
 
             {this.state.rejected === false && this.state.followUp === false && (
-              <input
+              <Input
                 type="text"
                 value={this.state.filter}
                 onChange={e => {
@@ -189,3 +189,5 @@ const CheckFlex = styled.div`
 const P = styled.p`
   padding-top: 16px;
 `;
+
+const Input = styled.input``;

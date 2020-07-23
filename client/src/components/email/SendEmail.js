@@ -5,7 +5,8 @@ import {
   FormContainer,
   InputContainer,
   Input,
-  FormButton
+  FormButton,
+  TextArea
 } from "../resusable-components/styledComponents";
 
 class SendEmail extends Component {
@@ -52,7 +53,7 @@ class SendEmail extends Component {
             />
 
             <p>Message:</p>
-            <textarea
+            <TextArea
               required
               name="message"
               value={this.state.message}
