@@ -1,6 +1,6 @@
 const express = require("express");
 const auth = require("../middleware/auth");
-const Template = require("../models/Template");
+const Template = require("../models/v1/Template");
 
 const router = new express.Router();
 
