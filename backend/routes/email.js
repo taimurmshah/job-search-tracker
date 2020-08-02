@@ -1,7 +1,7 @@
 const express = require("express");
-const Employee = require("../models/v1/Employee");
-const Template = require("../models/v1/Template");
-const Job = require("../models/v1/Job");
+const Employee = require("../models/Employee");
+const Template = require("../models/Template");
+const Job = require("../models/Job");
 const auth = require("../middleware/auth");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
