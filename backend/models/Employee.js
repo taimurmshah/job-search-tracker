@@ -59,14 +59,6 @@ const employeeSchema = new mongoose.Schema(
   }
 );
 
-// employeeSchema.pre("save", async function(next) {
-//   const employee = this;
-//
-//   //todo cleanup
-//
-//   next();
-// });
-
 employeeSchema.set("autoIndex", false);
 
 const Employee = mongoose.model("Employee", employeeSchema);

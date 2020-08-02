@@ -8,8 +8,6 @@ const router = new express.Router();
 
 //create new user
 router.post("/users", async (req, res) => {
-  console.log("req.body:", req.body);
-
   const { method, email, name, password } = req.body;
 
   const user = new User({
@@ -19,22 +17,17 @@ router.post("/users", async (req, res) => {
     name
   });
 
-  console.log({ user });
-
   try {
-    console.log("in the try");
     await user.save();
     const token = await user.generateAuthToken();
     res.status(201).send({ user, token });
   } catch (err) {
-    console.log("in the catch, here's the error:", err);
     res.status(400).send({ err });
   }
 });
 
 //login
 router.post("/login", async (req, res) => {
-  console.log("login route, req.body:", req.body);
   const { email, password } = req.body;
 
   try {
@@ -51,11 +44,10 @@ router.post("/login", async (req, res) => {
 router.post("/oauth/google", googleOAuth, async (req, res) => {
   try {
     const user = req.user;
-    console.log({ user });
+
     const token = await user.generateAuthToken();
     res.send({ user, token });
   } catch (err) {
-    console.log("google oauth route err:", err);
     res.status(400).send(err);
   }
 });
@@ -195,25 +187,14 @@ router.patch(
   upload.single("resume"),
   async (req, res) => {
     try {
-      console.log(
-        "I'm in the route to update a user's resume. I'm in the try, where does it break?"
-      );
       req.user.resume = req.file.buffer;
       await req.user.save();
       res.send();
     } catch (err) {
-      console.log(
-        "in the route to update user resume, in the first catch, here's the error:",
-        err
-      );
       res.status(400).send({ err });
     }
   },
   (error, req, res, next) => {
-    console.log(
-      "in the update resume error callback, here's the error:",
-      error
-    );
     res.status(400).send({ error: error.message });
   }
 );
@@ -229,7 +210,6 @@ router.delete("/users/me/resume", auth, async (req, res) => {
 
     res.send({ user, message: "Resume has been deleted" });
   } catch (err) {
-    console.log("error:", err);
     res.status(400).send({ err });
   }
 });

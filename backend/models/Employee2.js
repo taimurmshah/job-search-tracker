@@ -59,16 +59,8 @@ const employee2Schema = new mongoose.Schema(
   }
 );
 
-// employee2Schema.pre("save", async function(next) {
-//   const employee = this;
-//
-//   //todo cleanup
-//
-//   next();
-// });
-
 employee2Schema.set("autoIndex", false);
 
-const Employee2 = mongoose.model("Employee", employee2Schema);
+const Employee2 = mongoose.model("Employee2", employee2Schema);
 
 module.exports = Employee2;
