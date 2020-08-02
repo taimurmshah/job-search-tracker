@@ -1,4 +1,4 @@
-const User = require("../models/v1/User");
+const User = require("../models/User");
 require("dotenv").config();
 const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
