@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const Job = require("./Job2");
+const Job2 = require("./Job2");
+const Employee2 = require("./Employee2");
 
 const companySchema = new mongoose.Schema(
   {
@@ -28,15 +29,22 @@ const companySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-companySchema.virtual("jobs", {
-  ref: "Job",
+companySchema.virtual("jobs2", {
+  ref: "Job2",
+  localField: "_id",
+  foreignField: "owner"
+});
+
+companySchema.virtual("employees2", {
+  ref: "Employee2",
   localField: "_id",
   foreignField: "owner"
 });
 
 companySchema.pre("remove", async function(next) {
   const company = this;
-  await Job.deleteMany({ owner: company._id });
+  await Job2.deleteMany({ owner: company._id });
+  await Employee2.deleteMany({ owner: company._id });
   next();
 });
 
