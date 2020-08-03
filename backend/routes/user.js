@@ -51,7 +51,8 @@ router.post("/login", async (req, res) => {
 router.post("/oauth/google", googleOAuth, async (req, res) => {
   try {
     const user = req.user;
-    console.log({ user });
+    const code = req.body.code;
+
     const token = await user.generateAuthToken();
     res.send({ user, token });
   } catch (err) {

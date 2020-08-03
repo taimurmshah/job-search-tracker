@@ -60,13 +60,10 @@ const googleOAuth = async (req, res, next) => {
     const code = req.body.code;
 
     const tokens = await getTokens(code);
-
+    console.log({ tokens });
     const access_token = tokens.access_token;
     let refresh_token;
-    if (tokens.refresh_token) {
-      console.log("there was a new refreshToken");
-      refresh_token = tokens.refresh_token;
-    }
+
     const userProfile = await fetchUserProfile(access_token);
 
     const googleId = userProfile.sub;
@@ -76,6 +73,8 @@ const googleOAuth = async (req, res, next) => {
       method: "google",
       "google.id": googleId
     });
+
+    if (tokens.refresh_token) refresh_token = tokens.refresh_token;
 
     //create new user
     if (!existingUser) {
@@ -91,10 +90,12 @@ const googleOAuth = async (req, res, next) => {
 
     existingUser.google.access_token = access_token;
 
-    // if (refresh_token) {
-    //   console.log("setting up a new refresh token");
-    //   existingUser.refresh_token = refresh_token;
-    // }
+    if (refresh_token) {
+      console.log("setting up a new refresh token for the existing user.");
+      console.log("before:", existingUser.google.refresh_token);
+      existingUser.google.refresh_token = refresh_token;
+      console.log("after:", existingUser.google.refresh_token);
+    }
 
     await existingUser.save();
 
