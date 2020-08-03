@@ -3,9 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "acorn": "^7.1.1",
     "d3": "5.12.0",
+    "dot-prop": "^5.1.1",
     "draft-js": "^0.11.5",
+    "elliptic": "^6.5.3",
     "es6-shim": "^0.35.5",
+    "kind-of": "^6.0.3",
+    "lodash": "^4.17.19",
+    "minimist": "^0.2.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-google-login": "5.0.7",
@@ -15,7 +21,9 @@
     "react-scripts": "3.2.0",
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "serialize-javascript": "^2.1.1",
+    "websocket-extensions": "^0.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
