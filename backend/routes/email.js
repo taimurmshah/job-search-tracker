@@ -9,10 +9,6 @@ const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
 const replaceValues = require("../helper-methods/email-helpers");
 
-const {
-  accessTokenRemainingTime
-} = require("../helper-methods/google-oauth-helpers");
-
 const router = new express.Router();
 
 router.post("/gmail/send/new", auth, async (req, res) => {
@@ -22,23 +18,23 @@ router.post("/gmail/send/new", auth, async (req, res) => {
   const firstName = user.name.split(" ")[0];
   const lastName = user.name.split(" ")[1];
   const myEmail = user.google.email;
-  const refresh_token = user.google.refresh_token;
-  let access_token = user.google.access_token;
+  const refreshToken = user.google.refresh_token;
+  let accessToken = user.google.access_token;
 
   const employee = await Employee.findOne({ _id: req.body.employeeId });
   const job = await Job.findOne({ _id: employee.owner });
 
   const employeeEmail = employee.email;
   try {
-    const oauth2Client = new OAuth2(
-      process.env.OAUTH_CLIENT,
-      process.env.OAUTH_SECRET,
-      process.env.REDIRECT_URI
-    );
-
-    oauth2Client.setCredentials({
-      refresh_token: refresh_token
-    });
+    // const oauth2Client = new OAuth2(
+    //   process.env.OAUTH_CLIENT,
+    //   process.env.OAUTH_SECRET,
+    //   process.env.REDIRECT_URI
+    // );
+    //
+    // oauth2Client.setCredentials({
+    //   refresh_token: refresh_token
+    // });
 
     const smtpTransport = nodemailer.createTransport({
       service: "gmail",
@@ -47,6 +43,9 @@ router.post("/gmail/send/new", auth, async (req, res) => {
       },
       auth: {
         type: "OAuth2",
+        user: myEmail,
+        accessToken,
+        refreshToken,
         clientId: process.env.OAUTH_CLIENT,
         clientSecret: process.env.OAUTH_SECRET
       }
@@ -56,12 +55,7 @@ router.post("/gmail/send/new", auth, async (req, res) => {
       from: myEmail,
       to: employeeEmail,
       subject: req.body.emailObj.subject,
-      text: req.body.emailObj.message,
-      auth: {
-        user: myEmail,
-        refreshToken: refresh_token,
-        expires: Date.now()
-      }
+      text: req.body.emailObj.message
     };
 
     if (req.body.emailObj.withResume) {
@@ -127,21 +121,11 @@ router.post("/gmail/send/template", auth, async (req, res) => {
   const lastName = user.name.split(" ")[1];
   const myEmail = user.google.email;
   const accessToken = user.google.access_token;
-  const refresh_token = user.google.refresh_token;
+  const refreshToken = user.google.refresh_token;
   let emailsSent = employee.emailsSent;
 
   const employeeEmail = employee.email;
   try {
-    const oauth2Client = new OAuth2(
-      process.env.OAUTH_CLIENT,
-      process.env.OAUTH_SECRET,
-      process.env.REDIRECT_URI
-    );
-
-    oauth2Client.setCredentials({
-      refresh_token: refresh_token
-    });
-
     const smtpTransport = nodemailer.createTransport({
       service: "gmail",
       tls: {
@@ -149,9 +133,14 @@ router.post("/gmail/send/template", auth, async (req, res) => {
       },
       auth: {
         type: "OAuth2",
+        user: myEmail,
+        accessToken,
+        refreshToken,
         clientId: process.env.OAUTH_CLIENT,
         clientSecret: process.env.OAUTH_SECRET
       }
+      // debug: true, // show debug output
+      // logger: true // log information in console
     });
 
     if (template.interpolationValues) {
@@ -162,12 +151,13 @@ router.post("/gmail/send/template", auth, async (req, res) => {
       from: myEmail,
       to: employeeEmail,
       subject: template.subject,
-      text: template.message,
-      auth: {
-        user: myEmail,
-        refreshToken: refresh_token,
-        expires: Date.now()
-      }
+      text: template.message
+      // auth: {
+      //   user: myEmail,
+      //   // accessToken,
+      //   refreshToken,
+      //   expires: Date.now()
+      // }
     };
 
     if (template.withResume) {
