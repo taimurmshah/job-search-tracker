@@ -126,6 +126,7 @@ router.post("/gmail/send/template", auth, async (req, res) => {
   const firstName = user.name.split(" ")[0];
   const lastName = user.name.split(" ")[1];
   const myEmail = user.google.email;
+  const accessToken = user.google.access_token;
   const refresh_token = user.google.refresh_token;
   let emailsSent = employee.emailsSent;
 
