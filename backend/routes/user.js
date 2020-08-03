@@ -59,6 +59,8 @@ router.post("/logout", auth, async (req, res) => {
 
     user.tokens = user.tokens.filter(token => token.token !== req.token);
 
+    // user.tokens = [];
+
     await user.save();
 
     res.send({ message: "You have successfully logged out" });

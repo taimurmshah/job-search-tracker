@@ -127,6 +127,7 @@ router.post("/gmail/send/template", auth, async (req, res) => {
   const lastName = user.name.split(" ")[1];
   const myEmail = user.google.email;
   const refresh_token = user.google.refresh_token;
+  console.log({ refresh_token });
   let emailsSent = employee.emailsSent;
 
   const employeeEmail = employee.email;
@@ -152,6 +153,8 @@ router.post("/gmail/send/template", auth, async (req, res) => {
         clientSecret: process.env.OAUTH_SECRET
       }
     });
+
+    // console.log({ smtpTransport });
 
     if (template.interpolationValues) {
       template = replaceValues(template, employee, job);
@@ -180,7 +183,9 @@ router.post("/gmail/send/template", auth, async (req, res) => {
 
     await smtpTransport.sendMail(mailOptions, async (err, result) => {
       if (err) {
-        console.log("in sendmail err", { err });
+        console.log("in sendmail err");
+        console.log({ err });
+
         return smtpTransport.close();
       }
 

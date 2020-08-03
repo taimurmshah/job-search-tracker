@@ -57,6 +57,7 @@ const registerUser = async (userProfile, refresh_token, access_token) => {
 
 const googleOAuth = async (req, res, next) => {
   try {
+    console.log("I am in the google authenticate method");
     const code = req.body.code;
 
     const tokens = await getTokens(code);
@@ -64,7 +65,6 @@ const googleOAuth = async (req, res, next) => {
     const access_token = tokens.access_token;
     let refresh_token;
     if (tokens.refresh_token) {
-      console.log("there was a new refreshToken");
       refresh_token = tokens.refresh_token;
     }
     const userProfile = await fetchUserProfile(access_token);
@@ -99,6 +99,11 @@ const googleOAuth = async (req, res, next) => {
     await existingUser.save();
 
     req.user = existingUser;
+    console.log(
+      "im in the end of the google oauth method, it seems like it's working."
+    );
+    console.log("here's the existing user:", existingUser);
+
     next();
   } catch (err) {
     res.status(400).send(err);
