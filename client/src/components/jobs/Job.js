@@ -6,10 +6,11 @@ import JobNotes from "./JobNotes";
 import UpdateJob from "./UpdateJob";
 
 import {
-  HeaderContainer,
+  // HeaderContainer,
   Menu,
   Span
 } from "../resusable-components/styledComponents";
+import styled from "styled-components";
 
 class Job extends Component {
   state = {
@@ -68,10 +69,10 @@ class Job extends Component {
     link = link && link.startsWith("http") ? link : "https://" + link;
 
     return (
-      <div>
-        <HeaderContainer>
-          <h1>{company}</h1>
-        </HeaderContainer>
+      <Container>
+        {/*<HeaderContainer>*/}
+        {/*  <h1>{company}</h1>*/}
+        {/*</HeaderContainer>*/}
         <Menu>
           <Span>
             <p className="nav-link" onClick={this.showUpdate}>
@@ -173,9 +174,13 @@ class Job extends Component {
             show={this.state.update}
           />
         )}
-      </div>
+      </Container>
     );
   }
 }
+
+const Container = styled.div`
+  width: 100px;
+`;
 
 export default Job;

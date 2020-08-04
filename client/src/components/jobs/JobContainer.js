@@ -25,7 +25,10 @@ import {
 import { sendNewGmailThunk } from "../../redux/thunks/email";
 import { readAllTemplatesThunk } from "../../redux/thunks/template";
 import styled from "styled-components";
-import { TableButton } from "../resusable-components/styledComponents";
+import {
+  HeaderContainer,
+  TableButton
+} from "../resusable-components/styledComponents";
 import DeleteJob from "./DeleteJob";
 
 //todo:
@@ -210,6 +213,9 @@ class JobContainer extends Component {
 
     return (
       <div>
+        <HeaderContainer>
+          <h1>{this.props.job.company}</h1>
+        </HeaderContainer>
         <Job job={this.props.job} />
 
         <AddFlex>
