@@ -70,9 +70,6 @@ class Job extends Component {
 
     return (
       <Container>
-        {/*<HeaderContainer>*/}
-        {/*  <h1>{company}</h1>*/}
-        {/*</HeaderContainer>*/}
         <Menu>
           <Span>
             <p className="nav-link" onClick={this.showUpdate}>

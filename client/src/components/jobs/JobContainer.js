@@ -216,30 +216,33 @@ class JobContainer extends Component {
         <HeaderContainer>
           <h1>{this.props.job.company}</h1>
         </HeaderContainer>
-        <Job job={this.props.job} />
 
-        <AddFlex>
-          <TableButton onClick={this.newEmployeeFormHandler}>
-            Add Employee
-          </TableButton>
-        </AddFlex>
+        <PageContainer>
+          <Job job={this.props.job} />
+          <TableDiv>
+            <AddFlex>
+              <TableButton onClick={this.newEmployeeFormHandler}>
+                Add Employee
+              </TableButton>
+            </AddFlex>
 
-        {this.props.employees.length > 0 && (
-          <Table
-            employees={this.props.employees}
-            jobId={this.props.job._id}
-            addEmailButtonClickHandler={this.addEmailButtonClickHandler}
-            sendEmailButtonClickHandler={this.sendEmailButtonClickHandler}
-            showSmallModal={this.showResponseModal}
-          />
-        )}
+            {this.props.employees.length > 0 && (
+              <Table
+                employees={this.props.employees}
+                jobId={this.props.job._id}
+                addEmailButtonClickHandler={this.addEmailButtonClickHandler}
+                sendEmailButtonClickHandler={this.sendEmailButtonClickHandler}
+                showSmallModal={this.showResponseModal}
+              />
+            )}
 
-        <AddFlex>
-          <DeleteButton onClick={this.showDeleteModal}>
-            Delete Job?
-          </DeleteButton>
-        </AddFlex>
-
+            <AddFlex>
+              <DeleteButton onClick={this.showDeleteModal}>
+                Delete Job?
+              </DeleteButton>
+            </AddFlex>
+          </TableDiv>
+        </PageContainer>
         <Modal
           closeModal={this.closeModal}
           show={this.state.showModal}
@@ -327,4 +330,13 @@ const DeleteButton = styled(TableButton)`
     box-shadow: 0;
     background-color: #edadad;
   }
+`;
+
+const TableDiv = styled.div``;
+
+const PageContainer = styled.div`
+  height: auto;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
 `;
