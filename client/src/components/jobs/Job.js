@@ -177,6 +177,7 @@ class Job extends Component {
 }
 
 const Container = styled.div`
+  margin-top: 3em;
   width: 100px;
 `;
 

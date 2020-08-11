@@ -335,8 +335,7 @@ const DeleteButton = styled(TableButton)`
 const TableDiv = styled.div``;
 
 const PageContainer = styled.div`
-  height: auto;
-  display: flex;
-  width: 100%;
-  flex-direction: column;
+  margin-top: 2em;
+  display: grid;
+  grid-template-columns: 1fr 6fr 1fr;
 `;
