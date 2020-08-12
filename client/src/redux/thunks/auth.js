@@ -87,6 +87,7 @@ export const jwtThunk = token => async dispatch => {
 };
 
 export const logoutThunk = token => async dispatch => {
+  console.log("LogoutThunk is hit!");
   try {
     await fetch(`${process.env.REACT_APP_URL}/logout`, {
       method: "POST",

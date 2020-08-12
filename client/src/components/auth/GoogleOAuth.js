@@ -8,7 +8,6 @@ import { googleOAuthThunk } from "../../redux/thunks/auth";
 const GoogleOAuth = props => {
   const googleResponse = response => {
     const code = response.code;
-    console.log({ response });
     props.googleOAuthThunk(code);
   };
 

@@ -8,6 +8,7 @@ import PrivateRoute from "./components/auth/PrivateRoute";
 
 import Landing from "./components/layout/Landing";
 import Navbar from "./components/layout/Navbar";
+
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Dashboard from "./components/dashboard/Dashboard";
