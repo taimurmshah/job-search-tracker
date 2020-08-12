@@ -61,7 +61,7 @@ export default connect(
 const ListContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50vw;
-  height: 60vh;
+  width: 38vw;
+  height: 58vh;
   overflow: scroll;
 `;

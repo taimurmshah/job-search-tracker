@@ -20,7 +20,6 @@ export default Modal;
 
 const ModalMain = styled.section`
   position: fixed;
-  // background: #fff;
   background: linear-gradient(
       102deg,
       rgba(254, 254, 254, 0.03) 0%,
@@ -75,8 +74,10 @@ const ModalMain = styled.section`
     ),
     linear-gradient(90deg, rgb(215, 215, 215), rgb(203, 203, 203));
 
-  width: 800px;
-  height: 650px;
+  // width: 800px;
+  // height: 650px;
+  width: 45vw;
+  height: 70vh;
   top: 50%;
   left: 50%;
   padding-top: 35px;
