@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import TemplateListItem from "./TemplateListItem";
 import { sendTemplateGmailThunk } from "../../redux/thunks/email";
-
+import { HeaderContainer } from "../resusable-components/styledComponents";
 import styled from "styled-components";
 
 const EmailModalTemplateList = ({
@@ -32,7 +32,11 @@ const EmailModalTemplateList = ({
       />
     );
   });
-  return <ListContainer>{allTemplates}</ListContainer>;
+  return (
+    <HeaderContainer>
+      <ListContainer>{allTemplates}</ListContainer>
+    </HeaderContainer>
+  );
 };
 
 const mapStateToProps = state => {
@@ -57,6 +61,7 @@ export default connect(
 const ListContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 400px;
+  width: 50vw;
+  height: 60vh;
   overflow: scroll;
 `;

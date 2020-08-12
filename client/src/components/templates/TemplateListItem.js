@@ -2,7 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import { selectTemplate } from "../../redux/actions/template";
 import styled from "styled-components";
-import { FormButton } from "../resusable-components/styledComponents";
+import {
+  FormButton,
+  TableButton
+} from "../resusable-components/styledComponents";
 
 const TemplateListItem = ({
   template,
@@ -13,8 +16,6 @@ const TemplateListItem = ({
   id,
   selectTemplate
 }) => {
-  console.log("template list item is mounted");
-
   const updateHandler = () => {
     selectTemplate(id);
     updateClickHandler();
@@ -22,22 +23,22 @@ const TemplateListItem = ({
 
   return (
     <TemplateContainer>
-      <Span>
+      <TitleSpan>
         <p>{template.name}</p>
-      </Span>
+      </TitleSpan>
       <Span>
         {update && (
           <Span>
-            <FormButton onClick={updateHandler}>View/Update</FormButton>
+            <TableButton onClick={updateHandler}>View/Update</TableButton>
           </Span>
         )}
         {select && (
           <Span>
-            <FormButton
+            <TableButton
               onClick={selectClickHandler ? () => selectClickHandler(id) : null}
             >
               Select
-            </FormButton>
+            </TableButton>
           </Span>
         )}
       </Span>
@@ -60,9 +61,20 @@ const TemplateContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  :nth-of-type(odd) {
+    background-color: #e7e5e5;
+  }
+  :nth-of-type(even) {
+    background-color: #fff;
+  }
 `;
 
 const Span = styled.span`
   padding: 10px;
   margin: 0 5px;
+`;
+
+const TitleSpan = styled.span`
+  padding: 10px;
+  margin: 1vh 5px;
 `;
