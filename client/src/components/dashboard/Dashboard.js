@@ -1,11 +1,8 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { jwtThunk } from "../../redux/thunks/auth";
-//todo might not need progressThunk here; it might not need to be in redux at all
 import { readJobsThunk, progressThunk } from "../../redux/thunks/job";
 import Loading from "../layout/Loading";
-
 import Modal from "../layout/Modal";
 import DashboardLinks from "./DashboardLinks";
 import Resume from "../resume/Resume";
@@ -15,97 +12,87 @@ import { readAllTemplatesThunk } from "../../redux/thunks/template";
 import { clearTemplate } from "../../redux/actions/template";
 import BarChart from "./BarChart";
 
-class Dashboard extends Component {
-  componentDidMount() {
-    if (!this.props.hasJobs) {
-      this.props.readJobsThunk();
-    }
-    console.log("in component did mount");
-    this.props.progressThunk();
-  }
+const Dashboard = ({
+  isLoggedIn,
+  hasJobs,
+  readJobsThunk,
+  readAllTemplatesThunk,
+  clearTemplate,
+  progressThunk
+}) => {
+  useEffect(() => {
+    if (!hasJobs) readJobsThunk();
+    progressThunk();
+  });
 
-  state = {
-    showModal: false,
-    templates: false,
-    resume: false
+  const [template, setTemplate] = useState(false);
+  const [resume, setResume] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  const closeModal = () => {
+    clearTemplate();
+    setShowModal(false);
+    setTemplate(false);
+    setResume(false);
   };
 
-  openResume = () => {
-    this.setState({ showModal: true, resume: true });
+  const openResume = () => {
+    setResume(true);
+    setShowModal(true);
   };
 
-  openTemplates = () => {
-    this.props.readAllTemplatesThunk();
-    this.setState({ showModal: true, templates: true });
+  const openTemplates = () => {
+    readAllTemplatesThunk();
+    setTemplate(true);
+    setShowModal(true);
   };
 
-  closeModal = () => {
-    console.log("close modal is hit!");
-    this.props.clearTemplate();
-    this.setState({ showModal: false, templates: false, resume: false });
-  };
-
-  componentToPassToModal = () => {
-    if (this.state.resume === true) {
+  const componentToPassToModal = () => {
+    if (resume) {
       return (
         <Modal
-          component={<Resume closeModal={this.closeModal} />}
-          closeModal={this.closeModal}
-          show={this.state.showModal}
+          component={<Resume closeModal={closeModal} />}
+          closeModal={closeModal}
+          show={showModal}
         />
       );
-    } else if (this.state.templates === true) {
+    } else if (template) {
       return (
         <Modal
           component={
-            <Templates
-              closeModal={this.closeModal}
-              clearTemplate={this.props.clearTemplate}
-            />
+            <Templates closeModal={closeModal} clearTemplate={clearTemplate} />
           }
-          closeModal={this.closeModal}
-          show={this.state.showModal}
+          closeModal={closeModal}
+          show={showModal}
         />
       );
     }
   };
 
-  render() {
-    if (!this.props.isLoggedIn) {
-      return <Loading />;
-    }
+  if (!isLoggedIn) return <Loading />;
+  if (!localStorage.getItem("token")) return <Redirect to="/" />;
 
-    if (!localStorage.getItem("token")) {
-      return <Redirect to="/" />;
-    }
-
-    return (
-      <div>
-        <HeaderContainer>
-          <h1>Dashboard</h1>
-        </HeaderContainer>
-        {this.state.showModal && this.componentToPassToModal()}
-        <DashboardLinks
-          openResume={this.openResume}
-          openTemplates={this.openTemplates}
-        />
-        <BarChart />
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <HeaderContainer>
+        <h1>Dashboard</h1>
+      </HeaderContainer>
+      {showModal && componentToPassToModal()}
+      <DashboardLinks openResume={openResume} openTemplates={openTemplates} />
+      <BarChart />
+    </div>
+  );
+};
 
 const mapStateToProps = state => {
   return {
     isLoggedIn: state.auth.isLoggedIn,
-    hasJobs: state.job.hasJobs,
-    currentUser: state.auth.currentUser
+    hasJobs: state.job.hasJobs
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    jwtThunk: token => dispatch(jwtThunk(token)),
     readJobsThunk: () => dispatch(readJobsThunk()),
     readAllTemplatesThunk: () => dispatch(readAllTemplatesThunk()),
     clearTemplate: () => dispatch(clearTemplate()),

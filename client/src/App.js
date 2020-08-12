@@ -11,7 +11,9 @@ import Navbar from "./components/layout/Navbar";
 
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
+
 import Dashboard from "./components/dashboard/Dashboard";
+
 import Jobs from "./components/jobs/Jobs";
 import Job from "./components/jobs/JobContainer";
 import CreateJob from "./components/jobs/CreateJob";
@@ -33,7 +35,6 @@ class App extends Component {
       <div>
         <>
           <Navbar />
-
           <Switch>
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
@@ -50,12 +51,6 @@ class App extends Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     isLoggedIn: state.auth.isLoggedIn
-//   };
-// };
-
 const mapDispatchToProps = dispatch => {
   return {
     jwtThunk: token => dispatch(jwtThunk(token)),
@@ -67,5 +62,3 @@ export default connect(
   null,
   mapDispatchToProps
 )(App);
-
-//need to be able to log in & sign up
