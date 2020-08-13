@@ -10,18 +10,11 @@ const BarChart = ({ data }) => {
   useEffect(() => {
     if (Object.keys(data).length === 0) return;
 
-    const max = data[0].number;
-    const returnPercent = n => {
-      if (n === 0) return "";
-      if (n < max) {
-        const p = (n / max) * 100;
-        return p > 10
-          ? p.toString().slice(0, 4) + "%"
-          : p.toString().slice(0, 3) + "%";
-      } else return max;
+    const numPlacement = n => {
+      if (n > 100) return 2.4;
+      if (n > 10) return 2.3;
+      return 2.16;
     };
-
-    // let margin = { left: 80, right: 20, top: 50, bottom: 100 };
 
     let width = 800; //- margin.left - margin.right;
     let height = 500; //- margin.top - margin.bottom;
@@ -36,25 +29,10 @@ const BarChart = ({ data }) => {
       .domain(data.map(d => d.stage))
       .range([0, width]);
 
-    data.forEach(d => {
-      console.log("x(d.stage):", x(d.stage));
-    });
-
     let y = d3
       .scaleLinear()
       .domain([0, Math.ceil(data[0].number / 10) * 10]) //want to have the domain as number of jobs applied to rounded to nearest top 10
       .range([height, 0]); //range value is the value of the length of the y axis
-
-    //y lines
-    const makeYLines = () => d3.axisLeft().scale(y);
-    svg
-      .append("g")
-      .attr("class", "grid")
-      .call(
-        makeYLines()
-          .tickSize(-width, 0, 0)
-          .tickFormat("")
-      );
 
     //axes
     let xAxisCall = d3.axisBottom(x);
@@ -88,7 +66,6 @@ const BarChart = ({ data }) => {
       .attr("x", width / 2)
       .attr("font-size", "30px")
       .attr("text-anchor", "middle")
-      // .attr("transform", "rotate(-90)")
       .text("Job Hunt Progress");
 
     //y label
@@ -98,10 +75,21 @@ const BarChart = ({ data }) => {
       .attr("y", -60)
       .attr("x", -(height / 2))
       .attr("font-size", "25px")
-      // .style("color", "white")
       .attr("text-anchor", "middle")
       .attr("transform", "rotate(-90)")
       .text("Number of Companies");
+
+    // y lines
+    const makeYLines = () => d3.axisLeft().scale(y);
+    svg
+      .append("g")
+      .attr("class", "grid")
+      // .attr("id", "links")
+      .call(
+        makeYLines()
+          .tickSize(-width, 0, 0)
+          .tickFormat("")
+      );
 
     //bars
     svg
@@ -115,55 +103,22 @@ const BarChart = ({ data }) => {
 
       .attr("y", -height)
       .attr("width", x.bandwidth() / 2)
-      // .on("mouseenter", () => {
-      //   svg.selectAll(".tooltip").remove();
-      // })
-      // .on("mouseenter", v => {
-      //   svg
-      //     .selectAll(".num")
-      //     .data([v.number])
-      //     .join("text")
-      //     .attr("class", "num")
-      //     .text(v.number)
-      //     .attr("fill", "#fff")
-      //     .attr("x", x(v.stage) + x.bandwidth() / (v.number > 10 ? 2.3 : 2.9))
-      //     .attr("y", y(v.number) + (v.number > 4 ? 20 : 17))
-      //     .transition()
-      //     .attr("opacity", 1);
-      // })
-      // .on("mouseleave", () => svg.selectAll(".tooltip").remove())
       .transition()
       .attr("height", d => height - y(d.number))
-      .attr("fill", "#80cbc4 !important");
-
-    const placement = n => {
-      if (n === max) {
-        if (n < 100) return 2.3;
-        else return 2.6;
-      } else return 2.7;
-    };
-
-    const numPlacement = n => {
-      if (n > 100) return 2.4;
-      if (n > 10) return 2.3;
-      return 2.16;
-    };
+      .attr("fill", "#80cbc4 !important")
+      .attr("opacity", 1);
 
     svg
       .selectAll(".tooltip")
       .data(data)
       .join("text")
       .attr("class", "tooltip")
-      // .text(v => (v.number !== max ? returnPercent(v.number) + " %" : v.number))
-      // .text(v => returnPercent(v.number))
       .text(v => (v.number > 0 ? v.number : null))
       .attr("fill", "#fff")
-      // .attr("x", v => x(v.stage) + x.bandwidth() / (v.number > 10 ? 2.4 : 2.9))
-      // .attr("x", v => x(v.stage) + x.bandwidth() / placement(v.number))
       .attr("x", v => x(v.stage) + x.bandwidth() / numPlacement(v.number))
       .attr("y", v => y(v.number) + (v.number > 4 ? 20 : 17))
       .transition()
-      .attr("opacity", 1);
+      .attr("opacity", 2);
   }, [data]);
 
   return (
