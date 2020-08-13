@@ -6,12 +6,8 @@ const replaceValues = (template, employee, job) => {
   let link = job.link;
 
   if (job.link[0] !== "h") {
-    console.log("adding shit");
     link = "https://" + link;
   }
-
-  console.log("job link:", job.link);
-  console.log("new link:", link);
 
   let mapObj = {
     "<<employee_name>>": employee.name.split(" ")[0],

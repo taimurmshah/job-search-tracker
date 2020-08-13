@@ -8,8 +8,6 @@ const router = new express.Router();
 
 //create new user
 router.post("/users", async (req, res) => {
-  console.log("req.body:", req.body);
-
   const { method, email, name, password } = req.body;
 
   const user = new User({
@@ -19,10 +17,7 @@ router.post("/users", async (req, res) => {
     name
   });
 
-  console.log({ user });
-
   try {
-    console.log("in the try");
     await user.save();
     const token = await user.generateAuthToken();
     res.status(201).send({ user, token });
@@ -34,7 +29,6 @@ router.post("/users", async (req, res) => {
 
 //login
 router.post("/login", async (req, res) => {
-  console.log("login route, req.body:", req.body);
   const { email, password } = req.body;
 
   try {
@@ -161,7 +155,6 @@ router.post(
   upload.single("resume"),
   async (req, res) => {
     try {
-      console.log("upload resume try");
       req.user.resume = req.file.buffer;
       await req.user.save();
       res.send();
@@ -196,9 +189,6 @@ router.patch(
   upload.single("resume"),
   async (req, res) => {
     try {
-      console.log(
-        "I'm in the route to update a user's resume. I'm in the try, where does it break?"
-      );
       req.user.resume = req.file.buffer;
       await req.user.save();
       res.send();

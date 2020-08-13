@@ -60,7 +60,7 @@ const googleOAuth = async (req, res, next) => {
     const code = req.body.code;
 
     const tokens = await getTokens(code);
-    console.log({ tokens });
+
     const access_token = tokens.access_token;
     let refresh_token;
 
@@ -78,8 +78,6 @@ const googleOAuth = async (req, res, next) => {
 
     //create new user
     if (!existingUser) {
-      console.log("registering new user");
-
       const user = await registerUser(userProfile, refresh_token, access_token);
 
       await user.save();
