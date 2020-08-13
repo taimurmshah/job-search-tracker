@@ -94,9 +94,9 @@ const TableButton = styled.button`
 
 const TextArea = styled.textarea`
   margin-top: 10px;
-  margin-bottom: 0px;
-  height: 300px;
-  width: 600px;
+  margin-bottom: 1vh;
+  height: 29vh;
+  width: 40vw;
   resize: none;
 `;
 

@@ -84,6 +84,7 @@ const BarChart = ({ data }) => {
     svg
       .append("g")
       .attr("class", "grid")
+      .attr("opacity", 1)
       // .attr("id", "links")
       .call(
         makeYLines()
@@ -106,7 +107,7 @@ const BarChart = ({ data }) => {
       .transition()
       .attr("height", d => height - y(d.number))
       .attr("fill", "#80cbc4 !important")
-      .attr("opacity", 1);
+      .attr("opacity", 3);
 
     svg
       .selectAll(".tooltip")

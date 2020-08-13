@@ -45,14 +45,9 @@ class NewTemplate extends Component {
   };
 
   resumeCheckHandler = () => {
-    this.setState(
-      {
-        withResume: !this.state.withResume
-      },
-      () => {
-        console.log("this.state.withResume:", this.state.withResume);
-      }
-    );
+    this.setState({
+      withResume: !this.state.withResume
+    });
   };
 
   render() {
