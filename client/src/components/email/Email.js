@@ -1,45 +1,33 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import EmailNavbar from "./EmailNavbar";
 import SendEmail from "./SendEmail";
 import EmailModalTemplateList from "../templates/EmailModalTemplateList";
 
-class Email extends Component {
-  state = {
-    template: false,
-    newEmail: false
+const Email = ({ sendEmailSubmitHandler, closeModal }) => {
+  const [template, setTemplate] = useState(false);
+  const [newEmail, setNewEmail] = useState(false);
+
+  const selectTemplate = () => {
+    setTemplate(true);
+    setNewEmail(false);
   };
 
-  template = () => {
-    this.setState({
-      template: true,
-      newEmail: false
-    });
+  const selectNewEmail = () => {
+    setTemplate(false);
+    setNewEmail(true);
   };
 
-  newEmail = () => {
-    this.setState({
-      template: false,
-      newEmail: true
-    });
-  };
+  return (
+    <div>
+      <EmailNavbar template={selectTemplate} newEmail={selectNewEmail} />
 
-  render() {
-    return (
-      <div>
-        <EmailNavbar template={this.template} newEmail={this.newEmail} />
+      {newEmail && (
+        <SendEmail sendEmailSubmitHandler={sendEmailSubmitHandler} />
+      )}
 
-        {this.state.newEmail && (
-          <SendEmail
-            sendEmailSubmitHandler={this.props.sendEmailSubmitHandler}
-          />
-        )}
-
-        {this.state.template && (
-          <EmailModalTemplateList closeModal={this.props.closeModal} />
-        )}
-      </div>
-    );
-  }
-}
+      {template && <EmailModalTemplateList closeModal={closeModal} />}
+    </div>
+  );
+};
 
 export default Email;

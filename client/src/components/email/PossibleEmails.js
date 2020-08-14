@@ -3,9 +3,6 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 
 const PossibleEmails = ({ name, website }) => {
-  console.log({ name });
-  console.log({ website });
-
   if (website.startsWith("www.")) {
     website = website.split("www.")[1];
   }

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import Checkbox from "../resusable-components/Checkbox";
 import {
@@ -9,78 +9,61 @@ import {
   TextArea
 } from "../resusable-components/styledComponents";
 
-class SendEmail extends Component {
-  state = {
-    subject: "",
-    message: "",
-    withResume: false
-  };
+const SendEmail = ({ hasResume, sendEmailSubmitHandler, closeModal }) => {
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+  const [withResume, setWithResume] = useState(false);
 
-  changeHandler = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
-
-  submitHandler = e => {
+  const submitHandler = e => {
     e.preventDefault();
-
-    this.props.sendEmailSubmitHandler(this.state);
-    this.setState({ subject: "", message: "" });
+    sendEmailSubmitHandler({ subject, message, withResume });
+    setSubject("");
+    setMessage("");
   };
 
-  checkHandler = () => {
-    this.setState({ withResume: !this.state.withResume }, () => {
-      console.log("withResume:", this.state.withResume);
-    });
-  };
+  return (
+    <div className="send-email-container">
+      <FormContainer className="send-email-form" onSubmit={submitHandler}>
+        <InputContainer>
+          <p>Subject:</p>
+          <Input
+            required
+            type="text"
+            name="subject"
+            value={subject}
+            onChange={e => {
+              setSubject(e.target.value);
+            }}
+          />
 
-  render() {
-    return (
-      <div className="send-email-container">
-        <FormContainer
-          className="send-email-form"
-          onSubmit={this.submitHandler}
-        >
-          <InputContainer>
-            <p>Subject:</p>
-            <Input
-              required
-              type="text"
-              name="subject"
-              value={this.state.subject}
-              onChange={this.changeHandler}
+          <p>Message:</p>
+          <TextArea
+            required
+            name="message"
+            value={message}
+            onChange={e => setMessage(e.target.value)}
+            id=""
+            cols="30"
+            rows="10"
+          />
+
+          {hasResume && (
+            <Checkbox
+              text="Attach Resume?"
+              clickHandler={() => setWithResume(!withResume)}
+              checked={withResume}
             />
+          )}
+        </InputContainer>
 
-            <p>Message:</p>
-            <TextArea
-              required
-              name="message"
-              value={this.state.message}
-              onChange={this.changeHandler}
-              id=""
-              cols="30"
-              rows="10"
-            />
-
-            {this.props.hasResume && (
-              <Checkbox
-                text="Attach Resume?"
-                clickHandler={this.checkHandler}
-                checked={this.state.withResume}
-              />
-            )}
-          </InputContainer>
-
-          <div className="modal-buttons">
-            <FormButton type="submit">Submit</FormButton>
-            <FormButton onClick={this.props.closeModal}>Close</FormButton>
-          </div>
-        </FormContainer>
-      </div>
-    );
-  }
-}
+        <div className="modal-buttons">
+          <FormButton type="submit">Submit</FormButton>
+          <FormButton onClick={closeModal}>Close</FormButton>
+        </div>
+      </FormContainer>
+    </div>
+  );
+};
 
 const mapStateToProps = state => {
   return {
