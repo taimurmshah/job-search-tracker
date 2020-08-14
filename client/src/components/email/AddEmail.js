@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import PossibleEmails from "./PossibleEmails";
 import {
   InputContainer,
@@ -7,50 +7,38 @@ import {
 } from "../resusable-components/styledComponents";
 import styled from "styled-components";
 
-class AddEmail extends Component {
-  state = {
-    email: ""
-  };
+const AddEmail = ({ closeModal, updateEmployeeSubmitHandler }) => {
+  const [email, setEmail] = useState("");
 
-  changeHandler = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
-
-  submitHandler = e => {
+  const submitHandler = e => {
     e.preventDefault();
-    this.props.updateEmployeeSubmitHandler(this.state);
-    this.setState({ email: "" });
+    updateEmployeeSubmitHandler({ email });
+    setEmail("");
   };
 
-  render() {
-    return (
-      // <div className="add-email-container">
-      <>
-        <List>
-          <Form onSubmit={this.submitHandler}>
-            <InputContainer>
-              <p>Email:</p>
-              <Input
-                type="text"
-                name="email"
-                value={this.state.email}
-                onChange={this.changeHandler}
-              />
-            </InputContainer>
-            <PossibleEmails />
-          </Form>
-        </List>
-        <div className="modal-buttons">
-          <button onClick={this.submitHandler}>Submit</button>
-          <button onClick={this.props.closeModal}>Close</button>
-        </div>
-      </>
-      // </div>
-    );
-  }
-}
+  return (
+    <>
+      <List>
+        <Form onSubmit={submitHandler}>
+          <InputContainer>
+            <p>Email:</p>
+            <Input
+              type="text"
+              name="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+          </InputContainer>
+          <PossibleEmails />
+        </Form>
+      </List>
+      <div className="modal-buttons">
+        <button onClick={submitHandler}>Submit</button>
+        <button onClick={closeModal}>Close</button>
+      </div>
+    </>
+  );
+};
 
 export default AddEmail;
 

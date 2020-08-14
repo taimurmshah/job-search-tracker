@@ -60,6 +60,7 @@ export const updateEmployeeThunk = (
   updates
 ) => async dispatch => {
   const token = localStorage.getItem("token");
+
   try {
     let res = await fetch(
       `${process.env.REACT_APP_URL}/jobs/${jobId}/employees/${employeeId}`,
