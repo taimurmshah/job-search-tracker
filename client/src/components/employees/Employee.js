@@ -1,125 +1,99 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { updateEmployeeThunk } from "../../redux/thunks/employee";
 import linkedInLogo from "../../images/linkedInLogo.png";
 
-class Employee extends Component {
-  state = {
-    addEmail: false
-  };
+const Employee = ({
+  addEmailButtonClickHandler,
+  sendEmailButtonClickHandler,
+  showSmallModal,
+  openUpdateModal,
+  openDeleteModal,
+  employee
+}) => {
+  let { _id, name, position, linkedIn, email, response, emailsSent } = employee;
 
-  newEmailSubmit = email => {
-    this.setState({ addEmail: false });
-    this.props.updateEmployeeThunk(
-      this.props.jobId,
-      this.props.employee._id,
-      email
-    );
-  };
-
-  addEmailButtonClickHandler = () => {
-    this.props.addEmailButtonClickHandler(this.props.employee._id);
-  };
-
-  sendEmailButtonClickHandler = () => {
-    this.props.sendEmailButtonClickHandler(this.props.employee._id);
-  };
-
-  showSmallModal = () => {
-    this.props.showSmallModal(this.props.employee._id);
-  };
-
-  send = (
-    <TableButton onClick={this.sendEmailButtonClickHandler}>
-      Send Email
-    </TableButton>
-  );
-  add = (
-    <TableButton onClick={this.addEmailButtonClickHandler}>
-      Add Email
-    </TableButton>
-  );
-
-  nameClick = e => {
-    // const empId = e.target.parentElement.parentElement.dataset.id;
-    this.props.openUpdateModal(this.props.employee);
-    // console.log({ empId });
-  };
-
-  deleteClick = e => {
-    this.props.openDeleteModal(this.props.employee);
-  };
-
-  render() {
-    let {
-      _id,
-      name,
-      position,
-      linkedIn,
-      email,
-      response,
-      emailsSent
-    } = this.props.employee;
-
-    if (typeof emailsSent !== "number") {
-      emailsSent = emailsSent.length;
-    }
-    return (
-      <>
-        <TR key={_id} data-id={_id}>
-          <TD>
-            <HOVER onClick={this.nameClick} role="img" aria-label="siren">
-              ✎
-            </HOVER>
-
-            {" " + name + " "}
-            <HOVER onClick={this.deleteClick} role="img" aria-label="siren">
-              ❌
-            </HOVER>
-          </TD>
-          <TD>{position}</TD>
-          <TD>
-            <a
-              href={linkedIn[0] === "h" ? linkedIn : "https://" + linkedIn}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                className="linkedIn-logo"
-                src={linkedInLogo}
-                alt="linkedIn logo"
-              />
-            </a>
-          </TD>
-
-          {emailsSent > 0 && (
-            <TD>
-              {response ? (
-                <span role="img" aria-label="check">
-                  ✅
-                </span>
-              ) : (
-                <NoButton onClick={this.showSmallModal}>
-                  <span role="img" aria-label="siren">
-                    🚨
-                  </span>
-                </NoButton>
-              )}
-            </TD>
-          )}
-          {emailsSent === 0 && <TD>Email not sent</TD>}
-
-          <TD>{email ? email : ""}</TD>
-
-          <TD>{emailsSent}</TD>
-
-          <TD>{email ? this.send : this.add}</TD>
-        </TR>
-      </>
-    );
+  if (emailsSent && typeof emailsSent !== "number") {
+    emailsSent = emailsSent.length;
   }
-}
+
+  return (
+    <>
+      <TR key={_id} data-id={_id}>
+        <TD>
+          <HOVER
+            onClick={() => openUpdateModal(employee)}
+            role="img"
+            aria-label="siren"
+          >
+            ✎
+          </HOVER>
+
+          {" " + name + " "}
+          <HOVER
+            onClick={() => openDeleteModal(employee)}
+            role="img"
+            aria-label="siren"
+          >
+            ❌
+          </HOVER>
+        </TD>
+        <TD>{position}</TD>
+        <TD>
+          <a
+            href={linkedIn[0] === "h" ? linkedIn : "https://" + linkedIn}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              className="linkedIn-logo"
+              src={linkedInLogo}
+              alt="linkedIn logo"
+            />
+          </a>
+        </TD>
+
+        {emailsSent > 0 && (
+          <TD>
+            {response ? (
+              <span role="img" aria-label="check">
+                ✅
+              </span>
+            ) : (
+              <NoButton onClick={() => showSmallModal(employee._id)}>
+                <span role="img" aria-label="siren">
+                  🚨
+                </span>
+              </NoButton>
+            )}
+          </TD>
+        )}
+        {emailsSent === 0 && <TD>Email not sent</TD>}
+
+        <TD>{email ? email : ""}</TD>
+
+        <TD>{emailsSent}</TD>
+
+        <TD>
+          {email ? (
+            <TableButton
+              onClick={() => sendEmailButtonClickHandler(employee._id)}
+            >
+              Send Email
+            </TableButton>
+          ) : (
+            <TableButton
+              onClick={() => addEmailButtonClickHandler(employee._id)}
+            >
+              Add Email
+            </TableButton>
+          )}
+        </TD>
+      </TR>
+    </>
+  );
+};
 
 const mapDispatchToProps = dispatch => {
   return {

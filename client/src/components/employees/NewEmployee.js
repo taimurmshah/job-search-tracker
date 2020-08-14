@@ -1,113 +1,89 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { useState } from "react";
 import {
   FormContainer,
   InputContainer,
   Input
 } from "../resusable-components/styledComponents";
 
-class NewEmployee extends Component {
-  state = {
-    firstName: "",
-    lastName: "",
-    position: "",
-    linkedIn: "",
-    email: ""
-  };
+const NewEmployee = ({ closeModal, submitHandler }) => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [position, setPosition] = useState("");
+  const [linkedIn, setLinkedIn] = useState("");
+  const [email, setEmail] = useState("");
 
-  changeHandler = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
-
-  submitHandler = e => {
+  const submit = e => {
     e.preventDefault();
     let employee = {
-      name: this.state.firstName + " " + this.state.lastName,
-      position: this.state.position,
-      linkedIn: this.state.linkedIn,
-      email: this.state.email
+      name: firstName + " " + lastName,
+      position,
+      linkedIn,
+      email
     };
-
-    this.props.submitHandler(employee);
+    submitHandler(employee);
   };
 
-  render() {
-    return (
-      <div>
-        <FormContainer onSubmit={this.submitHandler}>
-          <InputContainer>
-            <p>First Name:</p>
-            <Input
-              type="text"
-              name="firstName"
-              autoComplete="off"
-              value={this.state.firstName}
-              onChange={this.changeHandler}
-              required
-            />
-            <p>Last Name:</p>
-            <Input
-              type="text"
-              name="lastName"
-              autoComplete="off"
-              value={this.state.lastName}
-              onChange={this.changeHandler}
-              required
-            />
-            <p>Position:</p>
-            <Input
-              type="text"
-              name="position"
-              value={this.state.position}
-              onChange={this.changeHandler}
-              required
-            />
-            <p>LinkedIn Profile:</p>
-            <Input
-              type="text"
-              name="linkedIn"
-              autoComplete="off"
-              value={this.state.linkedIn}
-              onChange={this.changeHandler}
-              required
-            />
-            <p>Email: (not required)</p>
-            <Input
-              type="text"
-              name="email"
-              autoComplete="off"
-              value={this.state.email}
-              onChange={this.changeHandler}
-            />
-          </InputContainer>
-          <div className="modal-buttons">
-            <button className="button" type="submit">
-              Submit
-            </button>
-            <button className="button" onClick={this.props.closeModal}>
-              Close
-            </button>
-          </div>
-        </FormContainer>
-      </div>
-    );
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    // newEmployeeThunk: (employee, token) =>
-    //   dispatch(newEmployeeThunk(employee, token))
-  };
+  return (
+    <div>
+      <FormContainer onSubmit={submit}>
+        <InputContainer>
+          <p>First Name:</p>
+          <Input
+            type="text"
+            name="firstName"
+            autoComplete="off"
+            value={firstName}
+            onChange={e => setFirstName(e.target.value)}
+            required
+          />
+          <p>Last Name:</p>
+          <Input
+            type="text"
+            name="lastName"
+            autoComplete="off"
+            value={lastName}
+            onChange={e => setLastName(e.target.value)}
+            required
+          />
+          <p>Position:</p>
+          <Input
+            type="text"
+            name="position"
+            value={position}
+            onChange={e => setPosition(e.target.value)}
+            required
+          />
+          <p>LinkedIn Profile:</p>
+          <Input
+            type="text"
+            name="linkedIn"
+            autoComplete="off"
+            value={linkedIn}
+            onChange={e => {
+              setLinkedIn(e.target.value);
+            }}
+            required
+          />
+          <p>Email: (not required)</p>
+          <Input
+            type="text"
+            name="email"
+            autoComplete="off"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
+        </InputContainer>
+        <div className="modal-buttons">
+          <button className="button" type="submit">
+            Submit
+          </button>
+          <button className="button" onClick={closeModal}>
+            Close
+          </button>
+        </div>
+      </FormContainer>
+    </div>
+  );
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(NewEmployee);
-
-// const NewEmployeeForm = styled(FormContainer)`
-//   height: 100%;
-// `;
+export default NewEmployee;

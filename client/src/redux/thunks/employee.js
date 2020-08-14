@@ -28,6 +28,8 @@ export const newEmployeeThunk = (employee, jobId) => async dispatch => {
     return dispatch(newEmployee(res));
   } catch (err) {
     //todo handle error
+
+    debugger;
   }
 };
 
