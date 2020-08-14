@@ -11,6 +11,7 @@ import { HeaderContainer } from "../resusable-components/styledComponents";
 import { readAllTemplatesThunk } from "../../redux/thunks/template";
 import { clearTemplate } from "../../redux/actions/template";
 import BarChart from "./BarChart";
+import BarChart2 from "./BarChart2";
 
 const Dashboard = ({
   isLoggedIn,
@@ -79,7 +80,8 @@ const Dashboard = ({
       </HeaderContainer>
       {showModal && componentToPassToModal()}
       <DashboardLinks openResume={openResume} openTemplates={openTemplates} />
-      <BarChart />
+      {/*<BarChart />*/}
+      <BarChart2 />
     </div>
   );
 };
