@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { connect } from "react-redux";
 import {
   HeaderContainer,
@@ -10,101 +10,100 @@ import {
 import { updateEmployeeThunk } from "../../redux/thunks/employee";
 import styled from "styled-components";
 
-class UpdateEmployee extends Component {
-  state = {
-    firstName: this.props.employee.name.split(" ")[0],
-    lastName: this.props.employee.name.split(" ")[1],
-    position: this.props.employee.position,
-    linkedIn: this.props.employee.linkedIn,
-    email: this.props.employee.email
-  };
+const UpdateEmployee = ({
+  employee,
+  updateEmployeeThunk,
+  jobId,
+  closeModal
+}) => {
+  const [firstName, setFirstName] = useState(employee.name.split(" ")[0]);
+  const [lastName, setLastName] = useState(employee.name.split(" ")[1]);
+  const [position, setPosition] = useState(employee.position);
+  const [linkedIn, setLinkedIn] = useState(employee.linkedIn);
+  const [email, setEmail] = useState(employee.email);
 
-  changeHandler = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
-
-  submitHandler = e => {
+  const submitHandler = e => {
     e.preventDefault();
-    let employee = {
-      name: this.state.firstName + " " + this.state.lastName,
-      position: this.state.position,
-      linkedIn: this.state.linkedIn,
-      email: this.state.email
+    let updatedEmployee = {
+      name: firstName + " " + lastName,
+      position,
+      linkedIn,
+      email
     };
 
-    this.props.updateEmployeeThunk(
-      this.props.jobId,
-      this.props.employee._id,
-      employee
-    );
+    updateEmployeeThunk(jobId, employee._id, updatedEmployee);
 
-    this.props.closeModal();
+    closeModal();
   };
 
-  render() {
-    return (
-      <div>
-        <FormContainer onSubmit={this.submitHandler}>
-          <InputContainer>
-            <p>First Name:</p>
-            <Input
-              type="text"
-              name="firstName"
-              autoComplete="off"
-              value={this.state.firstName}
-              onChange={this.changeHandler}
-              required
-            />
-            <p>Last Name:</p>
-            <Input
-              type="text"
-              name="lastName"
-              autoComplete="off"
-              value={this.state.lastName}
-              onChange={this.changeHandler}
-              required
-            />
-            <p>Position:</p>
-            <Input
-              type="text"
-              name="position"
-              value={this.state.position}
-              onChange={this.changeHandler}
-              required
-            />
-            <p>LinkedIn Profile:</p>
-            <Input
-              type="text"
-              name="linkedIn"
-              autoComplete="off"
-              value={this.state.linkedIn}
-              onChange={this.changeHandler}
-              required
-            />
-            <p>Email: (not required)</p>
-            <Input
-              type="text"
-              name="email"
-              autoComplete="off"
-              value={this.state.email}
-              onChange={this.changeHandler}
-            />
-          </InputContainer>
-          <div className="modal-buttons">
-            <button className="button" type="submit">
-              Submit
-            </button>
-            <button className="button" onClick={this.props.closeModal}>
-              Close
-            </button>
-          </div>
-        </FormContainer>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <FormContainer onSubmit={submitHandler}>
+        <InputContainer>
+          <p>First Name:</p>
+          <Input
+            type="text"
+            name="firstName"
+            autoComplete="off"
+            value={firstName}
+            onChange={e => {
+              setFirstName(e.target.value);
+            }}
+            required
+          />
+          <p>Last Name:</p>
+          <Input
+            type="text"
+            name="lastName"
+            autoComplete="off"
+            value={lastName}
+            onChange={e => {
+              setLastName(e.target.value);
+            }}
+            required
+          />
+          <p>Position:</p>
+          <Input
+            type="text"
+            name="position"
+            value={position}
+            onChange={e => {
+              setPosition(e.target.value);
+            }}
+            required
+          />
+          <p>LinkedIn Profile:</p>
+          <Input
+            type="text"
+            name="linkedIn"
+            autoComplete="off"
+            value={linkedIn}
+            onChange={e => {
+              setLinkedIn(e.target.value);
+            }}
+            required
+          />
+          <p>Email: (not required)</p>
+          <Input
+            type="text"
+            name="email"
+            autoComplete="off"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
+        </InputContainer>
+        <div className="modal-buttons">
+          <button className="button" type="submit">
+            Submit
+          </button>
+          <button className="button" onClick={closeModal}>
+            Close
+          </button>
+        </div>
+      </FormContainer>
+    </div>
+  );
+};
 
 const mapStateToProps = state => {
   return {
