@@ -42,15 +42,6 @@ class CreateJob extends Component {
             value={this.state.company}
             onChange={this.changeHandler}
           />
-          <p>Link to Job Description:</p>
-          <Input
-            required
-            type="text"
-            name="link"
-            autoComplete="off"
-            value={this.state.link}
-            onChange={this.changeHandler}
-          />
           <p>LinkedIn Page:</p>
           <Input
             required
@@ -67,6 +58,15 @@ class CreateJob extends Component {
             name="website"
             autoComplete="off"
             value={this.state.website}
+            onChange={this.changeHandler}
+          />
+          <p>Link to Job Description:</p>
+          <Input
+            required
+            type="text"
+            name="link"
+            autoComplete="off"
+            value={this.state.link}
             onChange={this.changeHandler}
           />
 
