@@ -1,180 +1,132 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import Modal from "../layout/Modal";
 import UpdateStatus from "./UpdateStatus";
 import UpdateProgress from "./UpdateProgress";
 import JobNotes from "./JobNotes";
 import UpdateJob from "./UpdateJob";
-
-import {
-  // HeaderContainer,
-  Menu,
-  Span
-} from "../resusable-components/styledComponents";
+import { Menu, Span } from "../resusable-components/styledComponents";
 import styled from "styled-components";
 
-class Job extends Component {
-  state = {
-    status: false,
-    notes: false,
-    progress: false,
-    update: false
+const Job = ({
+  job,
+  job: { _id, company, linkedIn, link, website, notes, progress }
+}) => {
+  const [status, setStatus] = useState(false);
+  const [stateNotes, setNotes] = useState(false);
+  const [stateProgress, setProgress] = useState(false);
+  const [update, setUpdate] = useState(false);
+
+  const closeModal = () => {
+    setStatus(false);
+    setNotes(false);
+    setProgress(false);
+    setUpdate(false);
   };
 
-  showUpdate = () => {
-    this.setState({ update: true });
-  };
+  website = "https://" + website;
 
-  showProgress = () => {
-    this.setState({
-      progress: true
-    });
-  };
+  link = link && link.startsWith("http") ? link : "https://" + link;
 
-  showStatus = () => {
-    this.setState({
-      status: true
-    });
-  };
+  return (
+    <Container>
+      <Menu>
+        <Span>
+          <p className="nav-link" onClick={() => setUpdate(true)}>
+            Update
+          </p>
+        </Span>
+        <Span>
+          <a
+            className="nav-link"
+            href={linkedIn}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </a>
+        </Span>
+        <Span>
+          {/* todo standardize this on backend*/}
+          <a
+            className="nav-link"
+            href={website}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Website
+          </a>
+        </Span>
+        <Span>
+          <a
+            className="nav-link"
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Job Description
+          </a>
+        </Span>
+        <Span>
+          <p className="nav-link" onClick={() => setStatus(true)}>
+            Update Status
+          </p>
+        </Span>
+        <Span>
+          <p className="nav-link" onClick={() => setProgress(true)}>
+            Progress
+          </p>
+        </Span>
+        <Span>
+          <p className="nav-link" onClick={() => setNotes(true)}>
+            Notes
+          </p>
+        </Span>
+      </Menu>
 
-  showNotes = () => {
-    this.setState({
-      notes: true
-    });
-  };
-
-  closeModal = () => {
-    this.setState({
-      status: false,
-      notes: false,
-      progress: false,
-      update: false
-    });
-  };
-
-  render() {
-    let {
-      _id,
-      company,
-      linkedIn,
-      link,
-      website,
-      notes,
-      // status,
-      progress
-    } = this.props.job;
-
-    website = "https://" + website;
-    // debugger;
-
-    link = link && link.startsWith("http") ? link : "https://" + link;
-
-    return (
-      <Container>
-        <Menu>
-          <Span>
-            <p className="nav-link" onClick={this.showUpdate}>
-              Update
-            </p>
-          </Span>
-          <Span>
-            <a
-              className="nav-link"
-              href={linkedIn}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              LinkedIn
-            </a>
-          </Span>
-          <Span>
-            {/* todo standardize this on backend*/}
-            <a
-              className="nav-link"
-              href={website}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Website
-            </a>
-          </Span>
-          <Span>
-            <a
-              className="nav-link"
-              href={link}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Job Description
-            </a>
-          </Span>
-          <Span>
-            <p className="nav-link" onClick={this.showStatus}>
-              Update Status
-            </p>
-          </Span>
-          <Span>
-            <p className="nav-link" onClick={this.showProgress}>
-              Progress
-            </p>
-          </Span>
-          <Span>
-            <p className="nav-link" onClick={this.showNotes}>
-              Notes
-            </p>
-          </Span>
-        </Menu>
-
-        {this.state.status && (
-          <Modal
-            closeModal={this.closeModal}
-            component={<UpdateStatus closeModal={this.closeModal} _id={_id} />}
-            show={this.state.status}
-          />
-        )}
-        {this.state.notes && (
-          <Modal
-            closeModal={this.closeModal}
-            component={
-              <JobNotes
-                _id={_id}
-                company={company}
-                notes={notes}
-                closeModal={this.closeModal}
-              />
-            }
-            show={this.state.notes}
-          />
-        )}
-        {this.state.progress && (
-          <Modal
-            closeModal={this.closeModal}
-            component={
-              <UpdateProgress
-                closeModal={this.closeModal}
-                _id={_id}
-                progress={progress}
-              />
-            }
-            show={this.state.progress}
-          />
-        )}
-        {this.state.update && (
-          <Modal
-            closeModal={this.closeModal}
-            component={
-              <UpdateJob
-                job={this.props.job}
-                closeModal={this.closeModal}
-                _id={_id}
-              />
-            }
-            show={this.state.update}
-          />
-        )}
-      </Container>
-    );
-  }
-}
+      {status && (
+        <Modal
+          closeModal={closeModal}
+          component={<UpdateStatus closeModal={closeModal} _id={_id} />}
+          show={this.state.status}
+        />
+      )}
+      {stateNotes && (
+        <Modal
+          closeModal={closeModal}
+          component={
+            <JobNotes
+              _id={_id}
+              company={company}
+              notes={notes}
+              closeModal={closeModal}
+            />
+          }
+          show={stateNotes}
+        />
+      )}
+      {stateProgress && (
+        <Modal
+          closeModal={closeModal}
+          component={
+            <UpdateProgress
+              closeModal={closeModal}
+              _id={_id}
+              progress={progress}
+            />
+          }
+          show={stateProgress}
+        />
+      )}
+      {update && (
+        <Modal
+          closeModal={closeModal}
+          component={<UpdateJob job={job} closeModal={closeModal} _id={_id} />}
+          show={update}
+        />
+      )}
+    </Container>
+  );
+};
 
 const Container = styled.div`
   margin-top: 3em;

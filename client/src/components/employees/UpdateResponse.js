@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { updateJobThunk } from "../../redux/thunks/job";
@@ -7,78 +7,73 @@ import {
   HeaderContainer
 } from "../resusable-components/styledComponents";
 
-class UpdateResponse extends Component {
-  state = {
-    response: false
+const UpdateResponse = ({
+  _id,
+  closeModal,
+  submitHandler,
+  updateJobThunk,
+  currentEmployee: { name }
+}) => {
+  const [response, setResponse] = useState(false);
+
+  const close = () => {
+    setResponse(false);
+    closeModal();
   };
 
-  clickHandler = () => {
-    this.setState({ response: true });
-  };
-
-  close = () => {
-    this.setState({ response: false });
-    this.props.closeModal();
-  };
-
-  submit = e => {
+  const submit = e => {
     const update = { status: e.target.innerText };
-    this.props.submitHandler();
-    this.props.updateJobThunk(this.props._id, update);
+    submitHandler();
+    updateJobThunk(_id, update);
   };
 
-  render() {
-    const {
-      currentEmployee: { name }
-    } = this.props;
+  if (!name) return null;
 
-    if (!name) return null;
-    return (
-      <Container>
-        <HeaderContainer>
-          <p>Did {name.split(" ")[0]} email you back?</p>
-        </HeaderContainer>
-        <ButtonContainer>
-          <Span>
-            <button onClick={this.clickHandler}>Yes</button>
+  return (
+    <Container>
+      <HeaderContainer>
+        <p>Did {name.split(" ")[0]} email you back?</p>
+      </HeaderContainer>
+      <ButtonContainer>
+        <Span>
+          <button onClick={() => setResponse(true)}>Yes</button>
+        </Span>
+
+        <Span>
+          <button onClick={close}>No</button>
+        </Span>
+      </ButtonContainer>
+
+      {response && (
+        <>
+          <HeaderContainer>
+            <p>Update Status</p>
+          </HeaderContainer>
+          <Span onClick={submit}>
+            <p className="nav-link">
+              Submitted application; waiting for company response
+            </p>
           </Span>
-
-          <Span>
-            <button onClick={this.close}>No</button>
+          <Span onClick={submit}>
+            <p className="nav-link">Phone screen</p>
           </Span>
-        </ButtonContainer>
-
-        {this.state.response && (
-          <>
-            <HeaderContainer>
-              <p>Update Status</p>
-            </HeaderContainer>
-            <Span onClick={this.submit}>
-              <p className="nav-link">
-                Submitted application; waiting for company response
-              </p>
-            </Span>
-            <Span onClick={this.submit}>
-              <p className="nav-link">Phone screen</p>
-            </Span>
-            <Span onClick={this.submit}>
-              <p className="nav-link">Code challenge</p>
-            </Span>
-            <Span onClick={this.submit}>
-              <p className="nav-link">On-site</p>
-            </Span>
-            <Span onClick={this.submit}>
-              <p className="nav-link">Offer</p>
-            </Span>
-            <Span onClick={this.submit}>
-              <p className="nav-link">Rejected</p>
-            </Span>
-          </>
-        )}
-      </Container>
-    );
-  }
-}
+          <Span onClick={submit}>
+            <p className="nav-link">Code challenge</p>
+          </Span>
+          <Span onClick={submit}>
+            <p className="nav-link">On-site</p>
+          </Span>
+          <Span onClick={submit}>
+            <p className="nav-link">Offer</p>
+          </Span>
+          <Span onClick={submit}>
+            <p className="nav-link">Rejected</p>
+          </Span>
+        </>
+      )}
+    </Container>
+  );
+};
 
 const mapStateToProps = state => {
   return {

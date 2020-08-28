@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import NewEmployee from "../employees/NewEmployee";
 import Table from "../employees/Table";
@@ -31,256 +31,235 @@ import {
 } from "../resusable-components/styledComponents";
 import DeleteJob from "./DeleteJob";
 
-//todo:
-// - create job description component
-// - standardize method names
+const JobContainer = ({
+  job,
+  employees,
+  match,
+  templates,
+  history,
+  getJobByIdThunk,
+  getEmployeesThunk,
+  removeEmployees,
+  removeCurrentJob,
+  currentEmployeeId,
+  currentEmployee,
+  removeCurrentEmployee,
+  readAllTemplatesThunk,
+  newEmployeeThunk,
+  updateEmployeeThunk,
+  sendNewGmailThunk,
+  deleteJobThunk
+}) => {
+  const [newEmployeeForm, setNewEmployeeForm] = useState(false);
+  const [addEmailForm, setAddEmailForm] = useState(false);
+  const [sendEmailForm, setSendEmailForm] = useState(false);
+  const [stateEmployeeId, setEmployeeId] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [responseModal, setResponseModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
 
-class JobContainer extends Component {
-  state = {
-    newEmployeeForm: false,
-    addEmailForm: false,
-    sendEmailForm: false,
-    employeeId: "",
-    showModal: false,
-    responseModal: false,
-    deleteModal: false
-  };
-
-  componentDidMount() {
-    if (
-      this.props.employees.length === 0 &&
-      Object.keys(this.props.job).length === 0
-    ) {
-      const jobId = this.props.match.params.id;
-      this.props.getJobByIdThunk(jobId);
-      this.props.getEmployeesThunk(jobId);
-    }
-  }
-
-  componentWillUnmount() {
-    this.props.removeEmployees();
-    this.props.removeCurrentJob();
-  }
-
-  newEmployeeFormHandler = () => {
-    this.setState({
-      newEmployeeForm: !this.state.newEmployeeForm,
-      showModal: true
-    });
-  };
-
-  addEmailButtonClickHandler = employeeId => {
-    this.props.currentEmployee(employeeId);
-    this.setState({ addEmailForm: true, employeeId, showModal: true });
-  };
-
-  sendEmailButtonClickHandler = employeeId => {
-    this.props.currentEmployee(employeeId);
-
-    if (this.props.templates.length === 0) {
-      this.props.readAllTemplatesThunk();
+  useEffect(() => {
+    if (employees.length === 0 && Object.keys(job).length === 0) {
+      const jobId = match.params.id;
+      getJobByIdThunk(jobId);
+      getEmployeesThunk(jobId);
     }
 
-    this.setState({ sendEmailForm: true, employeeId, showModal: true });
+    return () => {
+      removeEmployees();
+      removeCurrentJob();
+    };
+  }, []);
+
+  const newEmployeeFormHandler = () => {
+    setNewEmployeeForm(!newEmployeeForm);
+    setShowModal(true);
   };
 
-  newEmployeeSubmitHandler = employee => {
-    this.setState({ newEmployeeForm: false, showModal: false });
-    return this.props.newEmployeeThunk(employee, this.props.job._id);
+  const addEmailButtonClickHandler = employeeId => {
+    currentEmployee(employeeId);
+    setAddEmailForm(true);
+    setEmployeeId(employeeId);
+    setShowModal(true);
   };
 
-  updateEmployeeSubmitHandler = updates => {
-    this.props.removeCurrentEmployee();
-    this.props.updateEmployeeThunk(
-      this.props.job._id,
-      this.state.employeeId,
-      updates
-    );
-    this.setState({
-      newEmployeeForm: false,
-      addEmailForm: false,
-      sendEmailForm: false,
-      employeeId: "",
-      showModal: false
-    });
+  const sendEmailButtonClickHandler = employeeId => {
+    currentEmployee(employeeId);
+    if (templates.length === 0) {
+      readAllTemplatesThunk();
+    }
+    setSendEmailForm(true);
+    setEmployeeId(employeeId);
+    setShowModal(true);
   };
 
-  sendEmailSubmitHandler = emailObj => {
-    this.props.removeCurrentEmployee();
-    this.props.sendNewGmailThunk(this.state.employeeId, emailObj);
-    this.setState({
-      newEmployeeForm: false,
-      addEmailForm: false,
-      sendEmailForm: false,
-      employeeId: "",
-      showModal: false
-    });
+  const newEmployeeSubmitHandler = employee => {
+    setNewEmployeeForm(false);
+    setShowModal(false);
+    // return props.newEmployeeThunk(employee, job._id);
+    newEmployeeThunk(employee, job._id);
   };
 
-  closeModal = () => {
-    this.props.removeCurrentEmployee();
-    this.setState({
-      showModal: false,
-      addEmailForm: false,
-      sendEmailForm: false,
-      newEmployeeForm: false,
-      employeeId: "",
-      responseModal: false,
-      deleteModal: false
-    });
+  const updateEmployeeSubmitHandler = updates => {
+    removeCurrentEmployee();
+    updateEmployeeThunk(job._id, stateEmployeeId, updates);
+
+    setNewEmployeeForm(false);
+    setAddEmailForm(false);
+    setSendEmailForm(false);
+    setEmployeeId("");
+    setShowModal(false);
   };
 
-  showResponseModal = employeeId => {
-    this.props.currentEmployee(employeeId);
-    this.setState({ responseModal: true }, () => {
-      console.log("state:", this.state);
-    });
+  const sendEmailSubmitHandler = emailObj => {
+    removeCurrentEmployee();
+    sendNewGmailThunk(stateEmployeeId, emailObj);
+    setNewEmployeeForm(false);
+    setAddEmailForm(false);
+    setSendEmailForm(false);
+    setEmployeeId("");
+    setShowModal(false);
   };
 
-  responseSubmitHandler = () => {
-    this.props.updateEmployeeThunk(
-      this.props.job._id,
-      this.props.currentEmployeeId,
-      { response: true }
-    );
-    this.props.removeCurrentEmployee();
-    this.setState({
-      newEmployeeForm: false,
-      addEmailForm: false,
-      sendEmailForm: false,
-      employeeId: "",
-      showModal: false,
-      responseModal: false,
-      deleteModal: false
-    });
+  const closeModal = () => {
+    removeCurrentEmployee();
+    setShowModal(false);
+    setAddEmailForm(false);
+    setSendEmailForm(false);
+    setNewEmployeeForm(false);
+    setEmployeeId("");
+    setResponseModal(false);
+    setDeleteModal(false);
   };
 
-  showDeleteModal = () => {
-    this.setState({ deleteModal: true });
+  const showResponseModal = employeeId => {
+    currentEmployee(employeeId);
+    setResponseModal(false);
   };
 
-  deleteHandler = () => {
-    //todo redirect to dashboard
-    this.props.deleteJobThunk(this.props.job._id);
-    this.closeModal();
-    this.props.history.push("/dashboard");
+  const responseSubmitHandler = () => {
+    updateEmployeeThunk(job._id, currentEmployeeId, { response: true });
+    closeModal();
   };
 
-  componentPassToModal = () => {
+  const deleteHandler = () => {
+    deleteJobThunk(job._id);
+    closeModal();
+    history.push("/dashboard");
+  };
+
+  const componentPassToModal = () => {
     if (
-      this.state.newEmployeeForm === true &&
-      this.state.addEmailForm === false &&
-      this.state.sendEmailForm === false
+      newEmployeeForm === true &&
+      addEmailForm === false &&
+      sendEmailForm === false
     ) {
       return (
         <NewEmployee
-          submitHandler={this.newEmployeeSubmitHandler}
-          closeModal={this.closeModal}
+          submitHandler={newEmployeeSubmitHandler}
+          closeModal={closeModal}
         />
       );
     } else if (
-      this.state.newEmployeeForm === false &&
-      this.state.addEmailForm === true &&
-      this.state.sendEmailForm === false
+      newEmployeeForm === false &&
+      addEmailForm === true &&
+      sendEmailForm === false
     ) {
       return (
         <AddEmail
-          closeModal={this.closeModal}
-          updateEmployeeSubmitHandler={this.updateEmployeeSubmitHandler}
+          closeModal={closeModal}
+          updateEmployeeSubmitHandler={updateEmployeeSubmitHandler}
         />
       );
     } else if (
-      this.state.newEmployeeForm === false &&
-      this.state.addEmailForm === false &&
-      this.state.sendEmailForm === true
+      newEmployeeForm === false &&
+      addEmailForm === false &&
+      sendEmailForm === true
     ) {
       return (
         <Email
-          closeModal={this.closeModal}
-          sendEmailSubmitHandler={this.sendEmailSubmitHandler}
+          closeModal={closeModal}
+          sendEmailSubmitHandler={sendEmailSubmitHandler}
         />
       );
     }
   };
 
-  render() {
-    if (
-      Object.keys(this.props.job).length === 0 &&
-      this.props.employees.length === 0
-    ) {
-      return <Loading />;
-    }
+  // debugger;
 
-    return (
-      <div>
-        <HeaderContainer>
-          <h1>{this.props.job.company}</h1>
-        </HeaderContainer>
-
-        <PageContainer>
-          <Job job={this.props.job} />
-          <TableDiv>
-            <AddFlex>
-              <TableButton onClick={this.newEmployeeFormHandler}>
-                Add Employee
-              </TableButton>
-            </AddFlex>
-
-            {this.props.employees.length > 0 && (
-              <Table
-                employees={this.props.employees}
-                jobId={this.props.job._id}
-                addEmailButtonClickHandler={this.addEmailButtonClickHandler}
-                sendEmailButtonClickHandler={this.sendEmailButtonClickHandler}
-                showSmallModal={this.showResponseModal}
-              />
-            )}
-
-            <AddFlex>
-              <DeleteButton onClick={this.showDeleteModal}>
-                Delete Job?
-              </DeleteButton>
-            </AddFlex>
-          </TableDiv>
-        </PageContainer>
-        <Modal
-          closeModal={this.closeModal}
-          show={this.state.showModal}
-          component={this.componentPassToModal()}
-        />
-
-        {this.state.responseModal && (
-          <SmallModal
-            closeModal={this.closeModal}
-            show={this.state.responseModal}
-            component={
-              <UpdateResponse
-                _id={this.props.job._id}
-                closeModal={this.closeModal}
-                submitHandler={this.responseSubmitHandler}
-              />
-            }
-          />
-        )}
-
-        {this.state.deleteModal && (
-          <SmallModal
-            closeModal={this.closeModal}
-            show={this.state.deleteModal}
-            component={
-              <DeleteJob
-                _id={this.props.job._id}
-                job={this.props.job}
-                closeModal={this.closeModal}
-                submitHandler={this.deleteHandler}
-              />
-            }
-          />
-        )}
-      </div>
-    );
+  if (Object.keys(job).length === 0 && employees.length === 0) {
+    return <Loading />;
   }
-}
+
+  return (
+    <div>
+      <HeaderContainer>
+        <h1>{job.company}</h1>
+      </HeaderContainer>
+
+      <PageContainer>
+        <Job job={job} />
+        <TableDiv>
+          <AddFlex>
+            <TableButton onClick={newEmployeeFormHandler}>
+              Add Employee
+            </TableButton>
+          </AddFlex>
+
+          {employees.length > 0 && (
+            <Table
+              employees={employees}
+              jobId={job._id}
+              addEmailButtonClickHandler={addEmailButtonClickHandler}
+              sendEmailButtonClickHandler={sendEmailButtonClickHandler}
+              showSmallModal={showResponseModal}
+            />
+          )}
+
+          <AddFlex>
+            <DeleteButton onClick={() => setDeleteModal(true)}>
+              Delete Job?
+            </DeleteButton>
+          </AddFlex>
+        </TableDiv>
+      </PageContainer>
+      <Modal
+        closeModal={closeModal}
+        show={showModal}
+        component={componentPassToModal()}
+      />
+
+      {responseModal && (
+        <SmallModal
+          closeModal={closeModal}
+          show={responseModal}
+          component={
+            <UpdateResponse
+              _id={job._id}
+              closeModal={closeModal}
+              submitHandler={responseSubmitHandler}
+            />
+          }
+        />
+      )}
+
+      {deleteModal && (
+        <SmallModal
+          closeModal={closeModal}
+          show={deleteModal}
+          component={
+            <DeleteJob
+              _id={job._id}
+              job={job}
+              closeModal={closeModal}
+              submitHandler={deleteHandler}
+            />
+          }
+        />
+      )}
+    </div>
+  );
+};
 
 const mapStateToProps = state => {
   return {

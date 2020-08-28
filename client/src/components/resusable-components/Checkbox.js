@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const Checkbox = ({ clickHandler, text, checked, show, position }) => {
-  console.log({ checked });
-
   const CheckBoxSpan = styled.span`
     display: flex;
     flex-direction: row;
