@@ -87,7 +87,7 @@ const Job = ({
         <Modal
           closeModal={closeModal}
           component={<UpdateStatus closeModal={closeModal} _id={_id} />}
-          show={this.state.status}
+          show={status}
         />
       )}
       {stateNotes && (
