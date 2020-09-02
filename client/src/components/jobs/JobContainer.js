@@ -134,7 +134,7 @@ const JobContainer = ({
 
   const showResponseModal = employeeId => {
     currentEmployee(employeeId);
-    setResponseModal(false);
+    setResponseModal(true);
   };
 
   const responseSubmitHandler = () => {
