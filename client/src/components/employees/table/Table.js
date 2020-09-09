@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { deleteEmployeeThunk } from "../../redux/thunks/employee";
-import Employee from "./Employee";
-import UpdateEmployee from "./UpdateEmployee";
-import Modal from "../layout/Modal";
-import SmallModal from "../layout/SmallModal";
-import Loading from "../layout/Loading";
+import { deleteEmployeeThunk } from "../../../redux/thunks/employee";
+import Employee from "../Employee";
+import UpdateEmployee from "../UpdateEmployee";
+import Modal from "../../layout/Modal";
+import SmallModal from "../../layout/SmallModal";
+import Loading from "../../layout/Loading";
 import styled from "styled-components";
-import DeleteEmployee from "./DeleteEmployee";
+import DeleteEmployee from "../DeleteEmployee";
 
 const Table = ({
   employees,
@@ -106,6 +106,13 @@ const Table = ({
   );
 };
 
+const mapStateToProps = state => {
+  return {
+    employees: state.employee.employees,
+    jobId: state.job.currentJob._id
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     deleteEmployeeThunk: (jobId, employeeId) =>
@@ -114,7 +121,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Table);
 

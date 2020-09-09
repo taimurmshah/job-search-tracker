@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import NewEmployee from "../employees/NewEmployee";
-import Table from "../employees/Table";
+import Table from "../employees/table/Table";
 import AddEmail from "../email/AddEmail";
 import Email from "../email/Email";
 import Modal from "../layout/Modal";
@@ -27,9 +27,11 @@ import { readAllTemplatesThunk } from "../../redux/thunks/template";
 import styled from "styled-components";
 import {
   HeaderContainer,
-  TableButton
+  TableButton,
+  Span
 } from "../resusable-components/styledComponents";
 import DeleteJob from "./DeleteJob";
+import ButtonsAboveTable from "../employees/table/ButtonsAboveTable";
 
 const JobContainer = ({
   job,
@@ -71,7 +73,7 @@ const JobContainer = ({
     };
   }, []);
 
-  const newEmployeeFormHandler = () => {
+  const createNewEmployee = () => {
     setNewEmployeeForm(!newEmployeeForm);
     setShowModal(true);
   };
@@ -200,16 +202,10 @@ const JobContainer = ({
       <PageContainer>
         <Job job={job} />
         <TableDiv>
-          <AddFlex>
-            <TableButton onClick={newEmployeeFormHandler}>
-              Add Employee
-            </TableButton>
-          </AddFlex>
+          <ButtonsAboveTable createNewEmployee={createNewEmployee} />
 
           {employees.length > 0 && (
             <Table
-              employees={employees}
-              jobId={job._id}
               addEmailButtonClickHandler={addEmailButtonClickHandler}
               sendEmailButtonClickHandler={sendEmailButtonClickHandler}
               showSmallModal={showResponseModal}

@@ -32,14 +32,12 @@ const BarChart = ({ data }) => {
 
     //y lines
     const makeYLines = () => d3.axisLeft().scale(y);
-    svg
-      .append("g")
-      .attr("class", "grid")
-      .call(
-        makeYLines()
-          .tickSize(-width, 0, 0)
-          .tickFormat("")
-      );
+    svg.append("g").attr("class", "grid");
+    // .call(
+    //   makeYLines()
+    //     .tickSize(-width, 0, 0)
+    //     .tickFormat("")
+    // );
 
     //axes
     let xAxisCall = d3.axisBottom(x);
