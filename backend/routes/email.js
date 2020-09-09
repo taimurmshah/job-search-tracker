@@ -12,8 +12,6 @@ const replaceValues = require("../helper-methods/email-helpers");
 const router = new express.Router();
 
 router.post("/gmail/send/new", auth, async (req, res) => {
-  console.log("req.body.emailObj:", req.body.emailObj);
-
   const user = req.user;
   const firstName = user.name.split(" ")[0];
   const lastName = user.name.split(" ")[1];
@@ -26,16 +24,6 @@ router.post("/gmail/send/new", auth, async (req, res) => {
 
   const employeeEmail = employee.email;
   try {
-    // const oauth2Client = new OAuth2(
-    //   process.env.OAUTH_CLIENT,
-    //   process.env.OAUTH_SECRET,
-    //   process.env.REDIRECT_URI
-    // );
-    //
-    // oauth2Client.setCredentials({
-    //   refresh_token: refresh_token
-    // });
-
     const smtpTransport = nodemailer.createTransport({
       service: "gmail",
       tls: {
@@ -59,7 +47,6 @@ router.post("/gmail/send/new", auth, async (req, res) => {
     };
 
     if (req.body.emailObj.withResume) {
-      console.log("user wants to send it with resume!");
       mailOptions.attachments = [
         {
           filename: `${firstName}-${lastName}-Resume.pdf`,
@@ -70,11 +57,8 @@ router.post("/gmail/send/new", auth, async (req, res) => {
 
     await smtpTransport.sendMail(mailOptions, async (err, result) => {
       if (err) {
-        console.log("in sendmail err", { err });
         return smtpTransport.close();
       }
-
-      console.log({ result });
 
       const date = new Date();
       job.mostRecentEmailSent = date;
@@ -90,16 +74,10 @@ router.post("/gmail/send/new", auth, async (req, res) => {
       ];
 
       if (job.numOfEmailsSent === 0) {
-        console.log(
-          `this is the first email you sent to ${
-            job.company
-          }! You've now applied!`
-        );
         job.progress = ["Applied"];
       }
 
       job.numOfEmailsSent++;
-      console.log("record of first email sent:", job.numOfEmailsSent);
 
       await employee.save();
       await job.save();
@@ -107,7 +85,6 @@ router.post("/gmail/send/new", auth, async (req, res) => {
       res.send({ result, employee });
     });
   } catch (err) {
-    console.log("in the overall catch, here's the error", err);
     res.status(400).send(err);
   }
 });
@@ -139,8 +116,6 @@ router.post("/gmail/send/template", auth, async (req, res) => {
         clientId: process.env.OAUTH_CLIENT,
         clientSecret: process.env.OAUTH_SECRET
       }
-      // debug: true, // show debug output
-      // logger: true // log information in console
     });
 
     if (template.interpolationValues) {
@@ -152,12 +127,6 @@ router.post("/gmail/send/template", auth, async (req, res) => {
       to: employeeEmail,
       subject: template.subject,
       text: template.message
-      // auth: {
-      //   user: myEmail,
-      //   // accessToken,
-      //   refreshToken,
-      //   expires: Date.now()
-      // }
     };
 
     if (template.withResume) {
@@ -171,24 +140,19 @@ router.post("/gmail/send/template", auth, async (req, res) => {
 
     await smtpTransport.sendMail(mailOptions, async (err, result) => {
       if (err) {
-        console.log("in sendmail err", { err });
         return smtpTransport.close();
       }
-
-      console.log({ result });
 
       if (!Object.keys(employee).includes("response")) {
         employee.response = false;
       }
 
-      // employee.response = false;
       const date = new Date();
 
       if (
         employee.emailsSent.length > 0 &&
         employee.emailsSent[0].method === undefined
       ) {
-        console.log("in here, fixing it");
         employee.emailsSent[0].method = "template";
         employee.emailsSent[0].template_id = "5de53ba3fcfed33a8fc61e21";
       }
@@ -208,23 +172,16 @@ router.post("/gmail/send/template", auth, async (req, res) => {
       job.status = "Waiting for email response";
 
       if (job.numOfEmailsSent === 0) {
-        console.log(
-          `this is the first email you sent to ${
-            job.company
-          }! You've now applied!`
-        );
         job.progress = ["Applied"];
       }
 
       job.numOfEmailsSent++;
-      console.log("record of first email sent:", job.numOfEmailsSent);
       await employee.save();
       await job.save();
 
       res.send({ result, employee });
     });
   } catch (err) {
-    console.log("in gmail/send/template, here's the error:", err);
     res.status(400).send(err);
   }
 });
