@@ -1,26 +1,34 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+
 import Modal from "../layout/Modal";
 import UpdateStatus from "./UpdateStatus";
 import UpdateProgress from "./UpdateProgress";
 import JobNotes from "./JobNotes";
 import UpdateJob from "./UpdateJob";
-import { Menu, Span } from "../resusable-components/styledComponents";
 import styled from "styled-components";
+import { Menu, Span } from "../resusable-components/styledComponents";
+import { jobDataModal } from "../../redux/actions/modal";
 
-const Job = ({
+const JobMenuOptions = ({
   job,
-  job: { _id, company, linkedIn, link, website, notes, progress }
+  job: { _id, company, linkedIn, link, website, notes, progress },
+  jobDataModal
 }) => {
   const [status, setStatus] = useState(false);
   const [stateNotes, setNotes] = useState(false);
   const [stateProgress, setProgress] = useState(false);
-  const [update, setUpdate] = useState(false);
+  // const [update, setUpdate] = useState(false);
 
   const closeModal = () => {
     setStatus(false);
     setNotes(false);
     setProgress(false);
-    setUpdate(false);
+    // setUpdate(false);
+  };
+
+  const update = () => {
+    jobDataModal();
   };
 
   website = "https://" + website;
@@ -31,7 +39,7 @@ const Job = ({
     <Container>
       <Menu>
         <Span>
-          <p className="nav-link" onClick={() => setUpdate(true)}>
+          <p className="nav-link" onClick={update}>
             Update
           </p>
         </Span>
@@ -128,9 +136,20 @@ const Job = ({
   );
 };
 
+const mapStateToProps = state => ({ job: state.job.currentJob });
+
+const mapDispatchToProps = dispatch => {
+  return {
+    jobDataModal: () => dispatch(jobDataModal())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(JobMenuOptions);
+
 const Container = styled.div`
   margin-top: 3em;
   width: 100px;
 `;
-
-export default Job;

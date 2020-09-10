@@ -5,9 +5,9 @@ import AddEmail from "../email/AddEmail";
 import EmailContainer from "../email/EmailContainer";
 import Modal from "../layout/Modal";
 import SmallModal from "../layout/SmallModal";
-import UpdateResponse from "../employees/UpdateResponse";
+import UpdateResponse from "../employees/UpdateEmployeeResponse";
 import Loading from "../layout/Loading";
-import Job from "./Job";
+import Job from "./JobMenuOptions";
 import { currentJob, removeCurrentJob } from "../../redux/actions/job";
 import {
   currentEmployee,
@@ -74,11 +74,6 @@ const JobContainer = ({
   const [showModal, setShowModal] = useState(false);
   const [responseModal, setResponseModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
-
-  const createNewEmployee = () => {
-    setNewEmployeeForm(!newEmployeeForm);
-    setShowModal(true);
-  };
 
   const addEmailButtonClickHandler = employeeId => {
     currentEmployee(employeeId);
@@ -201,50 +196,15 @@ const JobContainer = ({
       </HeaderContainer>
 
       <PageContainer>
-        <Job job={job} />
+        <Job />
         <TableDiv>
-          <ButtonsAboveTable createNewEmployee={createNewEmployee} />
-          <Table
-            addEmailButtonClickHandler={addEmailButtonClickHandler}
-            sendEmailButtonClickHandler={sendEmailButtonClickHandler}
-            showSmallModal={showResponseModal}
-          />
-
-          <ButtonsBelowTable setDeleteModal={setDeleteModal} />
+          <ButtonsAboveTable />
+          <Table />
+          <ButtonsBelowTable />
         </TableDiv>
       </PageContainer>
       <Modal />
-
       <SmallModal />
-
-      {responseModal && (
-        <SmallModal
-          closeModal={closeModal}
-          show={responseModal}
-          component={
-            <UpdateResponse
-              _id={job._id}
-              closeModal={closeModal}
-              submitHandler={responseSubmitHandler}
-            />
-          }
-        />
-      )}
-
-      {deleteModal && (
-        <SmallModal
-          closeModal={closeModal}
-          show={deleteModal}
-          component={
-            <DeleteJob
-              _id={job._id}
-              job={job}
-              closeModal={closeModal}
-              submitHandler={deleteHandler}
-            />
-          }
-        />
-      )}
     </div>
   );
 };

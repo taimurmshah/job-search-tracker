@@ -12,14 +12,14 @@ import {
 import linkedInLogo from "../../images/linkedInLogo.png";
 
 const Employee = ({
+  jobId,
   employee,
   employeeDataModal,
   addEmailModal,
   emailContainerModal,
   currentEmployee,
-  deleteEmployeeModal,
-  sendEmailButtonClickHandler,
-  showSmallModal
+  updateEmployeeThunk,
+  deleteEmployeeModal
 }) => {
   let { _id, name, position, linkedIn, email, response, emailsSent } = employee;
 
@@ -44,8 +44,15 @@ const Employee = ({
 
   const deleteEmployee = () => {
     currentEmployee(_id);
-
     deleteEmployeeModal();
+  };
+
+  const responseHandler = () => {
+    updateEmployeeThunk({
+      jobId,
+      employeeId: _id,
+      updates: { response: !response }
+    });
   };
 
   return (
@@ -78,17 +85,9 @@ const Employee = ({
 
         {emailsSent > 0 && (
           <TD>
-            {response ? (
-              <span role="img" aria-label="check">
-                ✅
-              </span>
-            ) : (
-              <NoButton onClick={() => showSmallModal(employee._id)}>
-                <span role="img" aria-label="siren">
-                  🚨
-                </span>
-              </NoButton>
-            )}
+            <NoButton role="img" aria-label="check" onClick={responseHandler}>
+              {response ? "✅" : "🚨"}
+            </NoButton>
           </TD>
         )}
         {emailsSent === 0 && <TD>Email not sent</TD>}
@@ -109,6 +108,8 @@ const Employee = ({
   );
 };
 
+const mapStateToProps = state => ({ jobId: state.job.currentJob._id });
+
 const mapDispatchToProps = dispatch => {
   return {
     updateEmployeeThunk: ({ jobId, employeeId, updates }) =>
@@ -122,7 +123,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Employee);
 

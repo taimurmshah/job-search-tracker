@@ -70,7 +70,7 @@ router.patch("/jobs/:id/employees/:employee_id", auth, async (req, res) => {
 
   const allowedUpdates = ["email", "name", "position", "linkedIn", "response"];
 
-  if (req.body.email.length === 0) {
+  if (req.body.email && req.body.email.length === 0) {
     delete req.body.email;
   }
 

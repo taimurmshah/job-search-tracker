@@ -1,13 +1,14 @@
-import React, { Component, useState } from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { updateJobThunk } from "../../redux/thunks/job";
+import { closeModal } from "../../redux/actions/modal";
+import styled from "styled-components";
 import {
   Span,
   HeaderContainer
 } from "../resusable-components/styledComponents";
 
-const UpdateResponse = ({
+const UpdateEmployeeResponse = ({
   _id,
   closeModal,
   submitHandler,
@@ -83,14 +84,16 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateJobThunk: (jobId, updates) => dispatch(updateJobThunk(jobId, updates))
+    updateJobThunk: (jobId, updates) =>
+      dispatch(updateJobThunk(jobId, updates)),
+    closeModal: () => dispatch(closeModal())
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(UpdateResponse);
+)(UpdateEmployeeResponse);
 
 const Container = styled.div`
   display: flex;

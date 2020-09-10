@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { closeModal } from "../../redux/actions/modal";
 import DeleteEmployee from "../employees/DeleteEmployee";
+import UpdateResponse from "../employees/UpdateEmployeeResponse";
 
 import styled from "styled-components";
 
@@ -16,6 +17,8 @@ const SmallModal = ({ modal, closeModal }) => {
           <button onClick={closeModal} className="close-thick" />
         </div>
         {modal.deleteEmployee && <DeleteEmployee />}
+
+        {modal.employeeResponse && <UpdateResponse />}
       </SmallModalMain>
     </div>
   );

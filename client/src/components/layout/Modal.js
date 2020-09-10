@@ -6,6 +6,7 @@ import AddEmail from "../email/AddEmail";
 import EmailContainer from "../email/EmailContainer";
 
 import styled from "styled-components";
+import JobDataForm from "../jobs/JobDataForm";
 
 const Modal = ({ modal, closeModal }) => {
   const showHideClassName = modal.isBigModalOpen
@@ -18,7 +19,10 @@ const Modal = ({ modal, closeModal }) => {
         <div className="dialog">
           <button onClick={closeModal} className="close-thick" />
         </div>
-        {modal.employeeDataForm && <EmployeeDataForm />}
+
+        {modal.jobData && <JobDataForm />}
+
+        {modal.employeeData && <EmployeeDataForm />}
 
         {modal.addEmail && <AddEmail />}
 

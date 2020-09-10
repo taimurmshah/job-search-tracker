@@ -62,12 +62,6 @@ export const updateEmployeeThunk = ({
   updates
 }) => async dispatch => {
   const token = localStorage.getItem("token");
-  console.log(
-    "in updateEmployeeThunk, heres the shit:",
-    { jobId },
-    { employeeId },
-    { updates }
-  );
 
   try {
     let res = await fetch(

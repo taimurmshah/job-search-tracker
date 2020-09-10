@@ -18,14 +18,7 @@ const Table = ({
   if (!employees) return <Loading />;
 
   const tableData = employees.map(e => {
-    return (
-      <Employee
-        key={e._id}
-        employee={e}
-        addEmailButtonClickHandler={addEmailButtonClickHandler}
-        sendEmailButtonClickHandler={sendEmailButtonClickHandler}
-      />
-    );
+    return <Employee key={e._id} employee={e} />;
   });
 
   return (
