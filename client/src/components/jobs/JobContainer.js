@@ -1,9 +1,8 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import NewEmployee from "../employees/NewEmployee";
 import Table from "../employees/table/Table";
 import AddEmail from "../email/AddEmail";
-import Email from "../email/Email";
+import EmailContainer from "../email/EmailContainer";
 import Modal from "../layout/Modal";
 import SmallModal from "../layout/SmallModal";
 import UpdateResponse from "../employees/UpdateResponse";
@@ -16,6 +15,12 @@ import {
   removeEmployees
 } from "../../redux/actions/employee";
 
+import {
+  employeeDataModal,
+  addEmailModal,
+  emailContainerModal
+} from "../../redux/actions/modal";
+
 import { getJobByIdThunk, deleteJobThunk } from "../../redux/thunks/job";
 import {
   getEmployeesThunk,
@@ -27,11 +32,12 @@ import { readAllTemplatesThunk } from "../../redux/thunks/template";
 import styled from "styled-components";
 import {
   HeaderContainer,
-  TableButton,
-  Span
+  TableButton
 } from "../resusable-components/styledComponents";
 import DeleteJob from "./DeleteJob";
 import ButtonsAboveTable from "../employees/table/ButtonsAboveTable";
+import ButtonsBelowTable from "../employees/table/ButtonsBelowTable";
+import EmployeeDataForm from "../employees/EmployeeDataForm";
 
 const JobContainer = ({
   job,
@@ -52,14 +58,6 @@ const JobContainer = ({
   sendNewGmailThunk,
   deleteJobThunk
 }) => {
-  const [newEmployeeForm, setNewEmployeeForm] = useState(false);
-  const [addEmailForm, setAddEmailForm] = useState(false);
-  const [sendEmailForm, setSendEmailForm] = useState(false);
-  const [stateEmployeeId, setEmployeeId] = useState("");
-  const [showModal, setShowModal] = useState(false);
-  const [responseModal, setResponseModal] = useState(false);
-  const [deleteModal, setDeleteModal] = useState(false);
-
   useEffect(() => {
     if (employees.length === 0 && Object.keys(job).length === 0) {
       const jobId = match.params.id;
@@ -72,6 +70,14 @@ const JobContainer = ({
       removeCurrentJob();
     };
   }, []);
+
+  const [newEmployeeForm, setNewEmployeeForm] = useState(false);
+  const [addEmailForm, setAddEmailForm] = useState(false);
+  const [sendEmailForm, setSendEmailForm] = useState(false);
+  const [stateEmployeeId, setEmployeeId] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [responseModal, setResponseModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
 
   const createNewEmployee = () => {
     setNewEmployeeForm(!newEmployeeForm);
@@ -98,7 +104,6 @@ const JobContainer = ({
   const newEmployeeSubmitHandler = employee => {
     setNewEmployeeForm(false);
     setShowModal(false);
-    // return props.newEmployeeThunk(employee, job._id);
     newEmployeeThunk(employee, job._id);
   };
 
@@ -157,8 +162,8 @@ const JobContainer = ({
       sendEmailForm === false
     ) {
       return (
-        <NewEmployee
-          submitHandler={newEmployeeSubmitHandler}
+        <EmployeeDataForm
+          submitEmployeeData={newEmployeeSubmitHandler}
           closeModal={closeModal}
         />
       );
@@ -179,7 +184,7 @@ const JobContainer = ({
       sendEmailForm === true
     ) {
       return (
-        <Email
+        <EmailContainer
           closeModal={closeModal}
           sendEmailSubmitHandler={sendEmailSubmitHandler}
         />
@@ -203,27 +208,16 @@ const JobContainer = ({
         <Job job={job} />
         <TableDiv>
           <ButtonsAboveTable createNewEmployee={createNewEmployee} />
+          <Table
+            addEmailButtonClickHandler={addEmailButtonClickHandler}
+            sendEmailButtonClickHandler={sendEmailButtonClickHandler}
+            showSmallModal={showResponseModal}
+          />
 
-          {employees.length > 0 && (
-            <Table
-              addEmailButtonClickHandler={addEmailButtonClickHandler}
-              sendEmailButtonClickHandler={sendEmailButtonClickHandler}
-              showSmallModal={showResponseModal}
-            />
-          )}
-
-          <AddFlex>
-            <DeleteButton onClick={() => setDeleteModal(true)}>
-              Delete Job?
-            </DeleteButton>
-          </AddFlex>
+          <ButtonsBelowTable setDeleteModal={setDeleteModal} />
         </TableDiv>
       </PageContainer>
-      <Modal
-        closeModal={closeModal}
-        show={showModal}
-        component={componentPassToModal()}
-      />
+      <Modal />
 
       {responseModal && (
         <SmallModal
@@ -282,7 +276,9 @@ const mapDispatchToProps = dispatch => {
     removeEmployees: () => dispatch(removeEmployees()),
     removeCurrentJob: () => dispatch(removeCurrentJob()),
     readAllTemplatesThunk: () => dispatch(readAllTemplatesThunk()),
-    deleteJobThunk: jobId => dispatch(deleteJobThunk(jobId))
+    deleteJobThunk: jobId => dispatch(deleteJobThunk(jobId)),
+    addEmailModal: () => dispatch(addEmailModal()),
+    emailContainerModal: () => dispatch(emailContainerModal())
   };
 };
 

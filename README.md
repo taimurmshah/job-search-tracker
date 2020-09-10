@@ -54,11 +54,11 @@ employee, and I track how many emails I've sent and whether I've received a repl
 
 ![Job Page](https://i.imgur.com/ZMe6kiA.png)
 
-When I click "Send Email," I can select from my email templates or I can write a new email. Again, this prevents me from having to copy, paste, and edit my email templates, and it prevents
+When I click "Send EmailContainer," I can select from my email templates or I can write a new email. Again, this prevents me from having to copy, paste, and edit my email templates, and it prevents
 me from having to click between a bunch of tabs. Here, I'm selecting the template called "Github example." All of this was made possible by integrating Google's Gmail API (which took me a long
 time to figure out). 
 
-![Select Email](https://i.imgur.com/xlyhXxt.png)
+![Select EmailContainer](https://i.imgur.com/xlyhXxt.png)
 
 And here's the email in my inbox:  
 

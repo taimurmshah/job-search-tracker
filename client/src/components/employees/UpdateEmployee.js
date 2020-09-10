@@ -8,6 +8,7 @@ import {
 } from "../resusable-components/styledComponents";
 import { updateEmployeeThunk } from "../../redux/thunks/employee";
 import styled from "styled-components";
+import CloseFormButton from "../resusable-components/CloseFormButton";
 
 const UpdateEmployee = ({
   employee,
@@ -95,9 +96,7 @@ const UpdateEmployee = ({
           <button className="button" type="submit">
             Submit
           </button>
-          <button className="button" onClick={closeModal}>
-            Close
-          </button>
+          <CloseFormButton />
         </div>
       </FormContainer>
     </div>

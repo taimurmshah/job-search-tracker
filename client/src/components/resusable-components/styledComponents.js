@@ -100,6 +100,14 @@ const TextArea = styled.textarea`
   resize: none;
 `;
 
+const ButtonsFlexbox = styled.div`
+  display: flex;
+  margin-bottom: 20px;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+`;
+
 export {
   FormContainer,
   Input,
@@ -111,5 +119,6 @@ export {
   FormButton,
   List,
   TableButton,
-  TextArea
+  TextArea,
+  ButtonsFlexbox
 };

@@ -1,25 +1,39 @@
 import React from "react";
-import styled from "styled-components";
-import { TableButton, Span } from "../../resusable-components/styledComponents";
+import { connect } from "react-redux";
+import { employeeDataModal } from "../../../redux/actions/modal";
+import {
+  TableButton,
+  Span,
+  ButtonsFlexbox
+} from "../../resusable-components/styledComponents";
 
-const ButtonsAboveTable = ({ createNewEmployee }) => {
+const ButtonsAboveTable = ({ employees, employeeDataModal }) => {
   return (
     <ButtonsFlexbox>
-      <TableButton onClick={createNewEmployee}>Add Employee</TableButton>{" "}
+      <TableButton onClick={employeeDataModal}>Add Employee</TableButton>{" "}
       <Span />
-      <TableButton onClick={() => console.log("hitting mass email button")}>
-        Mass Email
-      </TableButton>
+      {employees.length > 0 && (
+        <TableButton onClick={() => console.log("hitting mass email button")}>
+          Mass Email
+        </TableButton>
+      )}
     </ButtonsFlexbox>
   );
 };
 
-const ButtonsFlexbox = styled.div`
-  display: flex;
-  margin-bottom: 20px;
-  width: 100%;
-  flex-direction: row;
-  justify-content: center;
-`;
+const mapStateToProps = state => {
+  return {
+    employees: state.employee.employees
+  };
+};
 
-export default ButtonsAboveTable;
+const mapDispatchToProps = dispatch => {
+  return {
+    employeeDataModal: () => dispatch(employeeDataModal())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ButtonsAboveTable);

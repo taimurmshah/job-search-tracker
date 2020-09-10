@@ -1,16 +1,23 @@
 import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { currentEmployee } from "../../redux/actions/employee";
 import { updateEmployeeThunk } from "../../redux/thunks/employee";
+import {
+  employeeDataModal,
+  addEmailModal,
+  deleteEmployeeModal
+} from "../../redux/actions/modal";
 import linkedInLogo from "../../images/linkedInLogo.png";
 
 const Employee = ({
-  addEmailButtonClickHandler,
+  employee,
+  employeeDataModal,
+  addEmailModal,
+  currentEmployee,
+  deleteEmployeeModal,
   sendEmailButtonClickHandler,
-  showSmallModal,
-  openUpdateModal,
-  openDeleteModal,
-  employee
+  showSmallModal
 }) => {
   let { _id, name, position, linkedIn, email, response, emailsSent } = employee;
 
@@ -18,24 +25,32 @@ const Employee = ({
     emailsSent = emailsSent.length;
   }
 
+  const updateEmployee = () => {
+    currentEmployee(_id);
+    employeeDataModal();
+  };
+
+  const addEmail = () => {
+    currentEmployee(_id);
+    addEmailModal();
+  };
+
+  const deleteEmployee = () => {
+    currentEmployee(_id);
+
+    deleteEmployeeModal();
+  };
+
   return (
     <>
       <TR key={_id} data-id={_id}>
         <TD>
-          <HOVER
-            onClick={() => openUpdateModal(employee)}
-            role="img"
-            aria-label="siren"
-          >
+          <HOVER onClick={updateEmployee} role="img" aria-label="siren">
             ✎
           </HOVER>
 
           {" " + name + " "}
-          <HOVER
-            onClick={() => openDeleteModal(employee)}
-            role="img"
-            aria-label="siren"
-          >
+          <HOVER onClick={deleteEmployee} role="img" aria-label="siren">
             ❌
           </HOVER>
         </TD>
@@ -83,11 +98,7 @@ const Employee = ({
               Send Email
             </TableButton>
           ) : (
-            <TableButton
-              onClick={() => addEmailButtonClickHandler(employee._id)}
-            >
-              Add Email
-            </TableButton>
+            <TableButton onClick={addEmail}>Add Email</TableButton>
           )}
         </TD>
       </TR>
@@ -97,8 +108,12 @@ const Employee = ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateEmployeeThunk: (jobId, employeeId, updates) =>
-      dispatch(updateEmployeeThunk(jobId, employeeId, updates))
+    updateEmployeeThunk: ({ jobId, employeeId, updates }) =>
+      dispatch(updateEmployeeThunk({ jobId, employeeId, updates })),
+    employeeDataModal: () => dispatch(employeeDataModal()),
+    deleteEmployeeModal: () => dispatch(deleteEmployeeModal()),
+    addEmailModal: () => dispatch(addEmailModal()),
+    currentEmployee: employeeId => dispatch(currentEmployee(employeeId))
   };
 };
 

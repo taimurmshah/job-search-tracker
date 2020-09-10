@@ -1,21 +1,38 @@
 import React from "react";
+import { connect } from "react-redux";
+import { closeModal } from "../../redux/actions/modal";
+import DeleteEmployee from "../employees/DeleteEmployee";
+
 import styled from "styled-components";
 
-const SmallModal = ({ closeModal, show, component }) => {
-  const showHideClassName = show ? "modal display-block" : "modal display-none";
+const SmallModal = ({ modal, closeModal }) => {
+  const showHideClassName = modal.isSmallModalOpen
+    ? "modal display-block"
+    : "modal display-none";
   return (
     <div className={showHideClassName}>
       <SmallModalMain>
         <div className="dialog">
           <button onClick={closeModal} className="close-thick" />
         </div>
-        {component}
+        {modal.deleteEmployee && <DeleteEmployee />}
       </SmallModalMain>
     </div>
   );
 };
 
-export default SmallModal;
+const mapStateToProps = state => ({ modal: state.modal });
+
+const mapDispatchToProps = dispatch => {
+  return {
+    closeModal: () => dispatch(closeModal())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SmallModal);
 
 const SmallModalMain = styled.section`
   position: fixed;

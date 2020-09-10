@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { deleteEmployeeThunk } from "../../../redux/thunks/employee";
+import {
+  currentEmployee,
+  removeCurrentEmployee
+} from "../../../redux/actions/employee";
+import { addEmailModal } from "../../../redux/actions/modal";
+
 import Employee from "../Employee";
 import UpdateEmployee from "../UpdateEmployee";
 import Modal from "../../layout/Modal";
@@ -9,37 +15,26 @@ import Loading from "../../layout/Loading";
 import styled from "styled-components";
 import DeleteEmployee from "../DeleteEmployee";
 
+import EmployeeDataForm from "../EmployeeDataForm";
+
 const Table = ({
   employees,
   jobId,
   deleteEmployeeThunk,
+  currentEmployee,
+  removeCurrentEmployee,
   addEmailButtonClickHandler,
   sendEmailButtonClickHandler,
   showSmallModal
 }) => {
-  const [currentEmployee, setCurrentEmployee] = useState({});
+  // const [currentEmployee, setCurrentEmployee] = useState({});
   const [updateModal, setUpdateModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
 
-  const closeModal = () => {
-    setCurrentEmployee({});
-    setUpdateModal(false);
-    setDeleteModal(false);
-  };
-
-  const openUpdateModal = employee => {
-    setUpdateModal(true);
-    setCurrentEmployee(employee);
-  };
-
   const openDeleteModal = employee => {
     setDeleteModal(true);
-    setCurrentEmployee(employee);
-  };
-
-  const deleteHandler = () => {
-    deleteEmployeeThunk(jobId, currentEmployee._id);
-    closeModal();
+    currentEmployee(employee._id);
+    // setCurrentEmployee(employee);
   };
 
   if (!employees) return <Loading />;
@@ -52,57 +47,32 @@ const Table = ({
         addEmailButtonClickHandler={addEmailButtonClickHandler}
         sendEmailButtonClickHandler={sendEmailButtonClickHandler}
         showSmallModal={showSmallModal}
-        openUpdateModal={openUpdateModal}
         openDeleteModal={openDeleteModal}
       />
     );
   });
 
   return (
-    <Div>
-      <StyledTable>
-        <THead>
-          <tr>
-            <TH>Name</TH>
-            <TH>Position</TH>
-            <TH>LinkedIn</TH>
-            <TH>Response</TH>
-            <TH>Email</TH>
-            <TH>Emails Sent</TH>
-            <TH>Action</TH>
-          </tr>
-        </THead>
-        <tbody>{tableData}</tbody>
-      </StyledTable>
+    employees.length > 0 && (
+      <Div>
+        <StyledTable>
+          <THead>
+            <tr>
+              <TH>Name</TH>
+              <TH>Position</TH>
+              <TH>LinkedIn</TH>
+              <TH>Response</TH>
+              <TH>Email</TH>
+              <TH>Emails Sent</TH>
+              <TH>Action</TH>
+            </tr>
+          </THead>
+          <tbody>{tableData}</tbody>
+        </StyledTable>
 
-      {updateModal && (
-        <Modal
-          show={updateModal}
-          closeModal={closeModal}
-          component={
-            <UpdateEmployee
-              employee={currentEmployee}
-              closeModal={closeModal}
-              openDeleteModal={openDeleteModal}
-            />
-          }
-        />
-      )}
-
-      {deleteModal && (
-        <SmallModal
-          closeModal={closeModal}
-          show={deleteModal}
-          component={
-            <DeleteEmployee
-              employee={currentEmployee}
-              deleteHandler={deleteHandler}
-              closeModal={closeModal}
-            />
-          }
-        />
-      )}
-    </Div>
+        <SmallModal />
+      </Div>
+    )
   );
 };
 
@@ -116,7 +86,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     deleteEmployeeThunk: (jobId, employeeId) =>
-      dispatch(deleteEmployeeThunk(jobId, employeeId))
+      dispatch(deleteEmployeeThunk(jobId, employeeId)),
+    currentEmployee: employeeId => dispatch(currentEmployee(employeeId)),
+    removeCurrentEmployee: () => dispatch(removeCurrentEmployee()),
+    addEmailModal: () => dispatch(addEmailModal())
   };
 };
 

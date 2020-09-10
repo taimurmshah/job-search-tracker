@@ -5,7 +5,8 @@ import {
   deleteEmployee
 } from "../actions/employee";
 
-export const newEmployeeThunk = (employee, jobId) => async dispatch => {
+export const newEmployeeThunk = ({ employee, jobId }) => async dispatch => {
+  console.log("hitting new employee thunk");
   const token = localStorage.getItem("token");
   try {
     let res = await fetch(
@@ -28,8 +29,6 @@ export const newEmployeeThunk = (employee, jobId) => async dispatch => {
     return dispatch(newEmployee(res));
   } catch (err) {
     //todo handle error
-
-    debugger;
   }
 };
 
@@ -56,12 +55,18 @@ export const getEmployeesThunk = jobId => async dispatch => {
   }
 };
 
-export const updateEmployeeThunk = (
+export const updateEmployeeThunk = ({
   jobId,
   employeeId,
   updates
-) => async dispatch => {
+}) => async dispatch => {
   const token = localStorage.getItem("token");
+  console.log(
+    "in updateEmployeeThunk, heres the shit:",
+    { jobId },
+    { employeeId },
+    { updates }
+  );
 
   try {
     let res = await fetch(

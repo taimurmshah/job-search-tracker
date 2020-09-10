@@ -3,7 +3,7 @@ import EmailNavbar from "./EmailNavbar";
 import SendEmail from "./SendEmail";
 import EmailModalTemplateList from "../templates/EmailModalTemplateList";
 
-const Email = ({ sendEmailSubmitHandler, closeModal }) => {
+const EmailContainer = ({ sendEmailSubmitHandler, closeModal }) => {
   const [template, setTemplate] = useState(false);
   const [newEmail, setNewEmail] = useState(false);
 
@@ -30,4 +30,4 @@ const Email = ({ sendEmailSubmitHandler, closeModal }) => {
   );
 };
 
-export default Email;
+export default EmailContainer;
