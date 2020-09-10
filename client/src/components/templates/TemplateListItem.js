@@ -6,19 +6,30 @@ import {
   FormButton,
   TableButton
 } from "../resusable-components/styledComponents";
+import { removeCurrentEmployee } from "../../redux/actions/employee";
+import { closeModal } from "../../redux/actions/modal";
+import { sendTemplateGmailThunk } from "../../redux/thunks/email";
 
 const TemplateListItem = ({
   template,
+  id,
+  employeeId,
   update,
   select,
   updateClickHandler,
-  selectClickHandler,
-  id,
-  selectTemplate
+  sendTemplateGmailThunk,
+
+  selectTemplate,
+  closeModal
 }) => {
   const updateHandler = () => {
     selectTemplate(id);
     updateClickHandler();
+  };
+
+  const sendEmail = () => {
+    sendTemplateGmailThunk(employeeId, id);
+    closeModal();
   };
 
   return (
@@ -34,11 +45,7 @@ const TemplateListItem = ({
         )}
         {select && (
           <Span>
-            <TableButton
-              onClick={selectClickHandler ? () => selectClickHandler(id) : null}
-            >
-              Select
-            </TableButton>
+            <TableButton onClick={sendEmail}>Select</TableButton>
           </Span>
         )}
       </Span>
@@ -46,14 +53,21 @@ const TemplateListItem = ({
   );
 };
 
+const mapStateToProps = state => ({
+  employeeId: state.employee.currentEmployee._id
+});
+
 const mapDispatchToProps = dispatch => {
   return {
-    selectTemplate: templateId => dispatch(selectTemplate(templateId))
+    sendTemplateGmailThunk: (employeeId, templateId) =>
+      dispatch(sendTemplateGmailThunk(employeeId, templateId)),
+    selectTemplate: templateId => dispatch(selectTemplate(templateId)),
+    closeModal: () => dispatch(closeModal())
   };
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(TemplateListItem);
 

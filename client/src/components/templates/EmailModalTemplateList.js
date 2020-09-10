@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import TemplateListItem from "./TemplateListItem";
 import { sendTemplateGmailThunk } from "../../redux/thunks/email";
+import { readAllTemplatesThunk } from "../../redux/thunks/template";
 import { HeaderContainer } from "../resusable-components/styledComponents";
 import styled from "styled-components";
 
@@ -49,7 +50,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     sendTemplateGmailThunk: (employeeId, templateId) =>
-      dispatch(sendTemplateGmailThunk(employeeId, templateId))
+      dispatch(sendTemplateGmailThunk(employeeId, templateId)),
+    readAllTemplatesThunk: () => dispatch(readAllTemplatesThunk())
   };
 };
 

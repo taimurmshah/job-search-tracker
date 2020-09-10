@@ -6,6 +6,7 @@ import { updateEmployeeThunk } from "../../redux/thunks/employee";
 import {
   employeeDataModal,
   addEmailModal,
+  emailContainerModal,
   deleteEmployeeModal
 } from "../../redux/actions/modal";
 import linkedInLogo from "../../images/linkedInLogo.png";
@@ -14,6 +15,7 @@ const Employee = ({
   employee,
   employeeDataModal,
   addEmailModal,
+  emailContainerModal,
   currentEmployee,
   deleteEmployeeModal,
   sendEmailButtonClickHandler,
@@ -33,6 +35,11 @@ const Employee = ({
   const addEmail = () => {
     currentEmployee(_id);
     addEmailModal();
+  };
+
+  const sendEmail = () => {
+    currentEmployee(_id);
+    emailContainerModal();
   };
 
   const deleteEmployee = () => {
@@ -92,11 +99,7 @@ const Employee = ({
 
         <TD>
           {email ? (
-            <TableButton
-              onClick={() => sendEmailButtonClickHandler(employee._id)}
-            >
-              Send Email
-            </TableButton>
+            <TableButton onClick={sendEmail}>Send Email</TableButton>
           ) : (
             <TableButton onClick={addEmail}>Add Email</TableButton>
           )}
@@ -113,6 +116,7 @@ const mapDispatchToProps = dispatch => {
     employeeDataModal: () => dispatch(employeeDataModal()),
     deleteEmployeeModal: () => dispatch(deleteEmployeeModal()),
     addEmailModal: () => dispatch(addEmailModal()),
+    emailContainerModal: () => dispatch(emailContainerModal()),
     currentEmployee: employeeId => dispatch(currentEmployee(employeeId))
   };
 };

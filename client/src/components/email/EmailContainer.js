@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { removeCurrentEmployee } from "../../redux/actions/employee";
+import { closeModal } from "../../redux/actions/modal";
 import EmailNavbar from "./EmailNavbar";
-import SendEmail from "./SendEmail";
+import SendCustomEmail from "./SendCustomEmail";
 import EmailModalTemplateList from "../templates/EmailModalTemplateList";
 
-const EmailContainer = ({ sendEmailSubmitHandler, closeModal }) => {
+const EmailContainer = ({ removeCurrentEmployee }) => {
   const [template, setTemplate] = useState(false);
   const [newEmail, setNewEmail] = useState(false);
+
+  //todo readAllTemplatesThunk should happen in joblistcontainer
+  useEffect(() => () => removeCurrentEmployee(), []);
 
   const selectTemplate = () => {
     setTemplate(true);
@@ -21,13 +27,23 @@ const EmailContainer = ({ sendEmailSubmitHandler, closeModal }) => {
     <div>
       <EmailNavbar template={selectTemplate} newEmail={selectNewEmail} />
 
-      {newEmail && (
-        <SendEmail sendEmailSubmitHandler={sendEmailSubmitHandler} />
-      )}
+      {newEmail && <SendCustomEmail />}
 
-      {template && <EmailModalTemplateList closeModal={closeModal} />}
+      {template && <EmailModalTemplateList />}
     </div>
   );
 };
 
-export default EmailContainer;
+const mapStateToProps = state => ({ templates: state.template.templates });
+
+const mapDispatchToProps = dispatch => {
+  return {
+    removeCurrentEmployee: () => dispatch(removeCurrentEmployee()),
+    closeModal: () => dispatch(closeModal())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EmailContainer);

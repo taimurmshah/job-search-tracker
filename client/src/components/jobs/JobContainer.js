@@ -53,6 +53,8 @@ const JobContainer = ({
   deleteJobThunk
 }) => {
   useEffect(() => {
+    if (templates.length === 0) readAllTemplatesThunk();
+
     if (employees.length === 0 && Object.keys(job).length === 0) {
       const jobId = match.params.id;
       getJobByIdThunk(jobId);
