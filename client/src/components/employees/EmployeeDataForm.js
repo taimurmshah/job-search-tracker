@@ -23,8 +23,8 @@ const EmployeeDataForm = ({
 }) => {
   useEffect(() => () => removeCurrentEmployee(), []);
 
-  let { name = "", position = "", linkedIn = "", email = "" } = employee;
-  // debugger;
+  let { name = " ", position = "", linkedIn = "", email = "" } = employee;
+
   const [stateFirstName, setFirstName] = useState(name.split(" ")[0]);
   const [stateLastName, setLastName] = useState(name.split(" ")[1]);
   const [statePosition, setPosition] = useState(position);
@@ -35,7 +35,7 @@ const EmployeeDataForm = ({
     e.preventDefault();
     const employeeObject = createEmployeeObject();
     if (Object.keys(employee).length === 0) {
-      newEmployeeThunk({ employeeObject, jobId });
+      newEmployeeThunk({ employee: employeeObject, jobId });
     } else {
       updateEmployeeThunk({
         jobId,

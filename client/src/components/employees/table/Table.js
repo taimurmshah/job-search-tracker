@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { deleteEmployeeThunk } from "../../../redux/thunks/employee";
 import {
@@ -6,37 +6,15 @@ import {
   removeCurrentEmployee
 } from "../../../redux/actions/employee";
 import { addEmailModal } from "../../../redux/actions/modal";
-
 import Employee from "../Employee";
-import UpdateEmployee from "../UpdateEmployee";
-import Modal from "../../layout/Modal";
-import SmallModal from "../../layout/SmallModal";
 import Loading from "../../layout/Loading";
 import styled from "styled-components";
-import DeleteEmployee from "../DeleteEmployee";
-
-import EmployeeDataForm from "../EmployeeDataForm";
 
 const Table = ({
   employees,
-  jobId,
-  deleteEmployeeThunk,
-  currentEmployee,
-  removeCurrentEmployee,
   addEmailButtonClickHandler,
-  sendEmailButtonClickHandler,
-  showSmallModal
+  sendEmailButtonClickHandler
 }) => {
-  // const [currentEmployee, setCurrentEmployee] = useState({});
-  const [updateModal, setUpdateModal] = useState(false);
-  const [deleteModal, setDeleteModal] = useState(false);
-
-  const openDeleteModal = employee => {
-    setDeleteModal(true);
-    currentEmployee(employee._id);
-    // setCurrentEmployee(employee);
-  };
-
   if (!employees) return <Loading />;
 
   const tableData = employees.map(e => {
@@ -46,8 +24,6 @@ const Table = ({
         employee={e}
         addEmailButtonClickHandler={addEmailButtonClickHandler}
         sendEmailButtonClickHandler={sendEmailButtonClickHandler}
-        showSmallModal={showSmallModal}
-        openDeleteModal={openDeleteModal}
       />
     );
   });
@@ -69,8 +45,6 @@ const Table = ({
           </THead>
           <tbody>{tableData}</tbody>
         </StyledTable>
-
-        <SmallModal />
       </Div>
     )
   );

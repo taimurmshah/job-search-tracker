@@ -70,6 +70,10 @@ router.patch("/jobs/:id/employees/:employee_id", auth, async (req, res) => {
 
   const allowedUpdates = ["email", "name", "position", "linkedIn", "response"];
 
+  if (req.body.email.length === 0) {
+    delete req.body.email;
+  }
+
   for (let i = 0; i < updates.length; i++) {
     if (!allowedUpdates.includes(updates[i])) {
       return res.status(400).send({ error: "Invalid update parameters." });

@@ -15,12 +15,6 @@ import {
   removeEmployees
 } from "../../redux/actions/employee";
 
-import {
-  employeeDataModal,
-  addEmailModal,
-  emailContainerModal
-} from "../../redux/actions/modal";
-
 import { getJobByIdThunk, deleteJobThunk } from "../../redux/thunks/job";
 import {
   getEmployeesThunk,
@@ -219,6 +213,8 @@ const JobContainer = ({
       </PageContainer>
       <Modal />
 
+      <SmallModal />
+
       {responseModal && (
         <SmallModal
           closeModal={closeModal}
@@ -276,9 +272,7 @@ const mapDispatchToProps = dispatch => {
     removeEmployees: () => dispatch(removeEmployees()),
     removeCurrentJob: () => dispatch(removeCurrentJob()),
     readAllTemplatesThunk: () => dispatch(readAllTemplatesThunk()),
-    deleteJobThunk: jobId => dispatch(deleteJobThunk(jobId)),
-    addEmailModal: () => dispatch(addEmailModal()),
-    emailContainerModal: () => dispatch(emailContainerModal())
+    deleteJobThunk: jobId => dispatch(deleteJobThunk(jobId))
   };
 };
 

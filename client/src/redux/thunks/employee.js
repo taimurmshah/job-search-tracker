@@ -7,6 +7,7 @@ import {
 
 export const newEmployeeThunk = ({ employee, jobId }) => async dispatch => {
   console.log("hitting new employee thunk");
+  console.log("here's the shit:", { employee }, { jobId });
   const token = localStorage.getItem("token");
   try {
     let res = await fetch(

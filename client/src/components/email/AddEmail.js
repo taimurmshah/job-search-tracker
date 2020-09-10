@@ -1,19 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import PossibleEmails from "./PossibleEmails";
+import CloseFormButton from "../resusable-components/CloseFormButton";
 import {
   InputContainer,
   Input,
   List
 } from "../resusable-components/styledComponents";
 import styled from "styled-components";
+import { updateEmployeeThunk } from "../../redux/thunks/employee";
+import { removeCurrentEmployee } from "../../redux/actions/employee";
+import { closeModal } from "../../redux/actions/modal";
 
-const AddEmail = ({ closeModal, updateEmployeeSubmitHandler }) => {
+const AddEmail = ({
+  jobId,
+  employeeId,
+  updateEmployeeThunk,
+  removeCurrentEmployee,
+  closeModal
+}) => {
+  useEffect(() => () => removeCurrentEmployee(), []);
+
   const [email, setEmail] = useState("");
 
   const submitHandler = e => {
     e.preventDefault();
-    updateEmployeeSubmitHandler({ email });
+    updateEmployeeThunk({ jobId, employeeId, updates: { email } });
     setEmail("");
+    return closeModal();
   };
 
   return (
@@ -34,13 +48,30 @@ const AddEmail = ({ closeModal, updateEmployeeSubmitHandler }) => {
       </List>
       <div className="modal-buttons">
         <button onClick={submitHandler}>Submit</button>
-        <button onClick={closeModal}>Close</button>
+        <CloseFormButton />
       </div>
     </>
   );
 };
 
-export default AddEmail;
+const mapStateToProps = state => ({
+  jobId: state.job.currentJob._id,
+  employeeId: state.employee.currentEmployee._id
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    updateEmployeeThunk: ({ jobId, employeeId, updates }) =>
+      dispatch(updateEmployeeThunk({ jobId, employeeId, updates })),
+    removeCurrentEmployee: () => dispatch(removeCurrentEmployee()),
+    closeModal: () => dispatch(closeModal())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddEmail);
 
 const Form = styled.form`
   display: flex;

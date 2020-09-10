@@ -24,7 +24,7 @@ export default function(state = initialState, action) {
     case "CLOSE_MODAL":
       return {
         ...state,
-        isModalOpen: false,
+        isBigModalOpen: false,
         isSmallModalOpen: false,
         employeeDataForm: false,
         addEmail: false,
