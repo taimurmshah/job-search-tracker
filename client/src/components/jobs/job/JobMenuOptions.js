@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 
-import Modal from "../layout/Modal";
+import Modal from "../../layout/Modal";
 import UpdateStatus from "./UpdateStatus";
 import UpdateProgress from "./UpdateProgress";
 import JobNotes from "./JobNotes";
-import UpdateJob from "./UpdateJob";
+import UpdateJob from "../UpdateJob";
 import styled from "styled-components";
-import { Menu, Span } from "../resusable-components/styledComponents";
-import { jobDataModal } from "../../redux/actions/modal";
+import { Menu, Span } from "../../resusable-components/styledComponents";
+import { jobDataModal } from "../../../redux/actions/modal";
 
 const JobMenuOptions = ({
   job,
@@ -18,13 +18,11 @@ const JobMenuOptions = ({
   const [status, setStatus] = useState(false);
   const [stateNotes, setNotes] = useState(false);
   const [stateProgress, setProgress] = useState(false);
-  // const [update, setUpdate] = useState(false);
 
   const closeModal = () => {
     setStatus(false);
     setNotes(false);
     setProgress(false);
-    // setUpdate(false);
   };
 
   const update = () => {

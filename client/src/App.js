@@ -10,8 +10,8 @@ import Navbar from "./components/layout/Navbar";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Dashboard from "./components/dashboard/Dashboard";
-import Jobs from "./components/jobs/Jobs";
-import Job from "./components/jobs/JobContainer";
+import Jobs from "./components/jobs/jobs-list/Jobs";
+import Job from "./components/jobs/job/JobContainer";
 import CreateJob from "./components/jobs/CreateJob";
 import Resume from "./components/resume/ViewResume";
 

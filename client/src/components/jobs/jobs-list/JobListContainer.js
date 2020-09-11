@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { currentJob } from "../../redux/actions/job";
-import { getEmployeesThunk } from "../../redux/thunks/employee";
+import { currentJob } from "../../../redux/actions/job";
+import { getEmployeesThunk } from "../../../redux/thunks/employee";
 import JobCard from "./JobCard";
-import Checkbox from "../resusable-components/Checkbox";
+import Checkbox from "../../resusable-components/Checkbox";
 
 class JobListContainer extends Component {
   state = {

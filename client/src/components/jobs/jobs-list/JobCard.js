@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { currentJob } from "../../redux/actions/job";
-import { getEmployeesThunk } from "../../redux/thunks/employee";
+import { currentJob } from "../../../redux/actions/job";
+import { getEmployeesThunk } from "../../../redux/thunks/employee";
 import { Link, useHistory } from "react-router-dom";
-import { Span } from "../resusable-components/styledComponents";
+import { Span } from "../../resusable-components/styledComponents";
 import styled from "styled-components";
 import Moment from "react-moment";
 

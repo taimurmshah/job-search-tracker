@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Checkbox from "../resusable-components/Checkbox";
-import { updateJobThunk } from "../../redux/thunks/job";
+import Checkbox from "../../resusable-components/Checkbox";
+import { updateJobThunk } from "../../../redux/thunks/job";
 import {
   HeaderContainer,
   List,
   Span,
   TableButton
-} from "../resusable-components/styledComponents";
+} from "../../resusable-components/styledComponents";
 
 class UpdateProgress extends Component {
   state = { progress: this.props.progress };

@@ -2,7 +2,7 @@ import React from "react";
 import {
   Span,
   HeaderContainer
-} from "../resusable-components/styledComponents";
+} from "../../resusable-components/styledComponents";
 import styled from "styled-components";
 const DeleteJob = ({ job, closeModal, submitHandler }) => {
   return (

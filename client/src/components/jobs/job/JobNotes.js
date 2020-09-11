@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateJobThunk } from "../../redux/thunks/job";
+import { updateJobThunk } from "../../../redux/thunks/job";
 import {
   HeaderContainer,
   InputContainer,
   TableButton,
   Span
-} from "../resusable-components/styledComponents";
+} from "../../resusable-components/styledComponents";
 import styled from "styled-components";
 
 class JobNotes extends Component {

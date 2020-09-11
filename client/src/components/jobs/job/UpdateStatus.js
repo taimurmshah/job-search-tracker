@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { updateJobThunk } from "../../redux/thunks/job";
+import { updateJobThunk } from "../../../redux/thunks/job";
 import {
   HeaderContainer,
   Span,
   List
-} from "../resusable-components/styledComponents";
+} from "../../resusable-components/styledComponents";
 
 const UpdateStatus = ({ _id, closeModal, updateJobThunk }) => {
   const clickHandler = e => {
