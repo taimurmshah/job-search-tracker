@@ -7,6 +7,8 @@ import JobCard from "./JobCard";
 import Checkbox from "../resusableComponents/Checkbox";
 import Loading from "../layout/Loading";
 import styled from "styled-components";
+import RejectedJobs from "./filteredJobs/RejectedJobs";
+import ActiveJobs from "./filteredJobs/ActiveJobs";
 
 const JobListContainer = ({ jobs }) => {
   const [filter, setFilter] = useState("");
@@ -55,15 +57,7 @@ const JobListContainer = ({ jobs }) => {
     .filter(j => j.status !== "Rejected")
     .map(j => transformJob(j));
 
-  const rejectedJobs = jobs
-    .filter(j => j.status === "Rejected")
-    .map(j => transformJob(j));
-
   if (jobs.length === 0) return <Loading />;
-
-  const testFunc = () => {
-    console.log("RETURN TEST FUNC");
-  };
 
   return (
     <Container>
@@ -99,17 +93,16 @@ const JobListContainer = ({ jobs }) => {
         </TextContainer>
       </Header>
       <JobGrid>
-        {rejected === false &&
-          followUp === false &&
-          filter.length === 0 &&
-          activeJobs}
+        {rejected === false && followUp === false && filter.length === 0 && (
+          <ActiveJobs />
+        )}
         {rejected === false &&
           followUp === false &&
           filter.length > 0 &&
           jobs
             .filter(j => j.company.toLowerCase().startsWith(filter))
             .map(j => transformJob(j))}
-        {rejected && rejectedJobs}
+        {rejected && <RejectedJobs />}
         {followUp && followUpJobs}
       </JobGrid>
     </Container>
@@ -137,7 +130,6 @@ const Container = styled.div`
   background-color: white;
   height: 100px;
   border-radius: 8px;
-  // box-shadow: 10px 10px 5px -6px rgba(0, 0, 0, 0.75);
 `;
 
 const Header = styled.div`
