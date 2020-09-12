@@ -105,8 +105,8 @@ export const deleteJobThunk = jobId => async dispatch => {
       }
     });
     let job = await res.json();
-    deleteJob(job);
-    removeCurrentJob();
+    dispatch(deleteJob(job));
+    dispatch(removeCurrentJob());
   } catch (err) {
     //todo configure auth errors with redux...
   }
