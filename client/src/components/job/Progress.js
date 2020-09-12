@@ -100,7 +100,7 @@ const mapDispatchToProps = dispatch => {
   return {
     updateJobThunk: (jobId, updates) =>
       dispatch(updateJobThunk(jobId, updates)),
-    closeModal: () => dispatch(closeModal)
+    closeModal: () => dispatch(closeModal())
   };
 };
 

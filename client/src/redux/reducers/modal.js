@@ -41,6 +41,7 @@ export default function(state = initialState, action) {
         isBigModalOpen: false,
         isSmallModalOpen: false,
         jobData: false,
+        jobProgress: false,
         jobNotes: false,
         deleteJob: false,
         employeeData: false,
