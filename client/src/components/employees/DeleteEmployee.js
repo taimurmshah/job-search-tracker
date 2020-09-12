@@ -15,7 +15,7 @@ const DeleteEmployee = ({
 }) => {
   console.log("Is this hitting? ");
 
-  useEffect(() => () => removeCurrentEmployee());
+  useEffect(() => () => removeCurrentEmployee(), []);
 
   const deleteEmployee = () => {
     deleteEmployeeThunk(job._id, employee._id);

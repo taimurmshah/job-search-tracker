@@ -101,6 +101,7 @@ export const deleteEmployeeThunk = (jobId, employeeId) => async dispatch => {
     );
 
     res = await res.json();
+
     return dispatch(deleteEmployee(res));
   } catch (err) {
     //todo handle error

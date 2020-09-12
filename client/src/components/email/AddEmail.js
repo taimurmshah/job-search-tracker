@@ -19,7 +19,7 @@ const AddEmail = ({
   removeCurrentEmployee,
   closeModal
 }) => {
-  useEffect(() => () => removeCurrentEmployee());
+  useEffect(() => () => removeCurrentEmployee(), []);
 
   const [email, setEmail] = useState("");
 

@@ -71,10 +71,6 @@ export const readAllTemplatesThunk = () => async dispatch => {
     });
 
     const result = await res.json();
-    console.log(
-      "need to dispatch all templates to state, here's the res:",
-      result
-    );
     dispatch(readTemplates(result));
   } catch (err) {
     console.log({ err });

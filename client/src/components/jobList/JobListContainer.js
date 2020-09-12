@@ -7,13 +7,14 @@ import JobCard from "./JobCard";
 import Checkbox from "../resusableComponents/Checkbox";
 import Loading from "../layout/Loading";
 import styled from "styled-components";
-import Navbar from "./Navbar";
 
 const JobListContainer = ({ jobs }) => {
   const [filter, setFilter] = useState("");
   const [followUp, setFollowUp] = useState(false);
+  const followUpHandler = () => setFollowUp(!followUp);
 
   const [rejected, setRejected] = useState(false);
+  const rejectedHandler = () => setRejected(!rejected);
 
   const today = new Date();
 
@@ -81,7 +82,7 @@ const JobListContainer = ({ jobs }) => {
           <CheckFlex>
             <Checkbox
               text={"Follow Up? (" + followUpJobs.length + ")"}
-              clickHandler={testFunc}
+              clickHandler={followUpHandler}
               checked={followUp}
               show={!(rejected || filter.length > 0)}
               position="flex-end"
@@ -89,7 +90,7 @@ const JobListContainer = ({ jobs }) => {
 
             <Checkbox
               text={"Rejected Jobs"}
-              clickHandler={testFunc}
+              clickHandler={rejectedHandler}
               checked={rejected}
               show={!(followUp || filter.length > 0)}
               position="flex-end"

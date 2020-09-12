@@ -13,7 +13,7 @@ const EmailContainer = ({ removeCurrentEmployee }) => {
   //todo readAllTemplatesThunk should happen in joblistcontainer
   useEffect(() => {
     return () => removeCurrentEmployee();
-  });
+  }, []);
 
   const selectTemplate = () => {
     setTemplate(true);

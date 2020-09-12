@@ -21,7 +21,7 @@ const EmployeeDataForm = ({
   removeCurrentEmployee,
   closeModal
 }) => {
-  useEffect(() => () => removeCurrentEmployee());
+  useEffect(() => () => removeCurrentEmployee(), []);
 
   let { name = " ", position = "", linkedIn = "", email = "" } = employee;
 

@@ -5,7 +5,6 @@ import AddEmail from "../email/AddEmail";
 import EmailContainer from "../email/EmailContainer";
 import Modal from "../layout/Modal";
 import SmallModal from "../layout/SmallModal";
-import UpdateResponse from "../employees/UpdateEmployeeResponse";
 import Loading from "../layout/Loading";
 import Job from "./MenuOptions";
 import { currentJob, removeCurrentJob } from "../../redux/actions/job";
@@ -28,7 +27,7 @@ import {
   HeaderContainer,
   TableButton
 } from "../resusableComponents/styledComponents";
-import DeleteJob from "./DeleteJob";
+
 import ButtonsAboveTable from "../table/ButtonsAboveTable";
 import ButtonsBelowTable from "../table/ButtonsBelowTable";
 import EmployeeDataForm from "../employees/EmployeeDataForm";
@@ -53,7 +52,9 @@ const JobContainer = ({
   deleteJobThunk
 }) => {
   useEffect(() => {
-    if (templates.length === 0) readAllTemplatesThunk();
+    if (templates.length === 0) {
+      readAllTemplatesThunk();
+    }
 
     if (employees.length === 0 && Object.keys(job).length === 0) {
       const jobId = match.params.id;
@@ -65,7 +66,7 @@ const JobContainer = ({
       removeEmployees();
       removeCurrentJob();
     };
-  });
+  }, []);
 
   const [newEmployeeForm, setNewEmployeeForm] = useState(false);
   const [addEmailForm, setAddEmailForm] = useState(false);

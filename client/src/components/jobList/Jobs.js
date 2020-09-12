@@ -1,16 +1,18 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { readJobsThunk } from "../../redux/thunks/job";
-import { getEmployeesThunk } from "../../redux/thunks/employee";
 import { currentJob } from "../../redux/actions/job";
+import { getEmployeesThunk } from "../../redux/thunks/employee";
 import JobListContainer from "./JobListContainer";
+import Modal from "../layout/Modal";
 
 import styled from "styled-components";
 import { Span } from "../resusableComponents/styledComponents";
+import { jobDataModal } from "../../redux/actions/modal";
 
-const Jobs = ({ readJobsThunk, jobDataModal }) => {
+const Jobs = ({ jobs, readJobsThunk, jobDataModal }) => {
   useEffect(() => {
-    readJobsThunk();
+    if (jobs.length === 0) readJobsThunk();
   });
 
   return (
@@ -20,9 +22,7 @@ const Jobs = ({ readJobsThunk, jobDataModal }) => {
           Add New Job +
         </Add>
       </Span>
-
-      {/*<JobListContainer /!*jobs={this.props.jobs}*!/ />*/}
-
+      <Modal />
       <JobListContainer />
     </JobsDiv>
   );
@@ -39,6 +39,7 @@ const mapDispatchToProps = dispatch => {
   return {
     currentJob: job => dispatch(currentJob(job)),
     getEmployeesThunk: jobId => dispatch(getEmployeesThunk(jobId)),
+    jobDataModal: () => dispatch(jobDataModal()),
     readJobsThunk: () => dispatch(readJobsThunk())
   };
 };

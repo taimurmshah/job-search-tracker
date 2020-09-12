@@ -1,13 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { deleteJobThunk } from "../../redux/thunks/job";
 import { closeModal } from "../../redux/actions/modal";
 import { Span, HeaderContainer } from "../resusableComponents/styledComponents";
 import styled from "styled-components";
+
 const DeleteJob = ({ job, closeModal, deleteJobThunk }) => {
+  const history = useHistory();
   const deleteJob = () => {
     deleteJobThunk(job._id);
     closeModal();
+    history.push("/dashboard");
   };
 
   return (
@@ -27,7 +31,7 @@ const DeleteJob = ({ job, closeModal, deleteJobThunk }) => {
   );
 };
 
-const mapStateToProps = state => ({ job: state.job.currentJob._id });
+const mapStateToProps = state => ({ job: state.job.currentJob });
 
 const mapDispatchToProps = dispatch => {
   return {
