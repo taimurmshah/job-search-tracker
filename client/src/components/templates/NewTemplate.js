@@ -8,8 +8,8 @@ import {
   FormButton,
   HeaderContainer,
   TextArea
-} from "../resusable-components/styledComponents";
-import Checkbox from "../resusable-components/Checkbox";
+} from "../resusableComponents/styledComponents";
+import Checkbox from "../resusableComponents/Checkbox";
 
 class NewTemplate extends Component {
   state = {

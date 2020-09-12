@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { HeaderContainer } from "../resusable-components/styledComponents";
+import { HeaderContainer } from "../resusableComponents/styledComponents";
 
 class Landing extends Component {
   render() {

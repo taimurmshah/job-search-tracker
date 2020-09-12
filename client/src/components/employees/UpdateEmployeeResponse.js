@@ -3,10 +3,7 @@ import { connect } from "react-redux";
 import { updateJobThunk } from "../../redux/thunks/job";
 import { closeModal } from "../../redux/actions/modal";
 import styled from "styled-components";
-import {
-  Span,
-  HeaderContainer
-} from "../resusable-components/styledComponents";
+import { Span, HeaderContainer } from "../resusableComponents/styledComponents";
 
 const UpdateEmployeeResponse = ({
   _id,

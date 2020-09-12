@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { connect } from "react-redux";
-import { HeaderContainer } from "../resusable-components/styledComponents";
+import { HeaderContainer } from "../resusableComponents/styledComponents";
 import * as d3 from "d3";
 import styled from "styled-components";
 

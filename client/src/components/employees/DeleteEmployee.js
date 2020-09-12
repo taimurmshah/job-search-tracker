@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import {
-  Span,
-  HeaderContainer
-} from "../resusable-components/styledComponents";
+import { Span, HeaderContainer } from "../resusableComponents/styledComponents";
 import styled from "styled-components";
 import { closeModal } from "../../redux/actions/modal";
 import { deleteEmployeeThunk } from "../../redux/thunks/employee";
@@ -18,7 +15,7 @@ const DeleteEmployee = ({
 }) => {
   console.log("Is this hitting? ");
 
-  useEffect(() => () => removeCurrentEmployee(), []);
+  useEffect(() => () => removeCurrentEmployee());
 
   const deleteEmployee = () => {
     deleteEmployeeThunk(job._id, employee._id);

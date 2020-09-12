@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { employeeDataModal } from "../../../redux/actions/modal";
+import { employeeDataModal } from "../../redux/actions/modal";
 import {
   TableButton,
   Span,
   ButtonsFlexbox
-} from "../../resusable-components/styledComponents";
+} from "../resusableComponents/styledComponents";
 
 const ButtonsAboveTable = ({ employees, employeeDataModal }) => {
   return (

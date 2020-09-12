@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import TemplateListItem from "./TemplateListItem";
 import { sendTemplateGmailThunk } from "../../redux/thunks/email";
 import { readAllTemplatesThunk } from "../../redux/thunks/template";
-import { HeaderContainer } from "../resusable-components/styledComponents";
+import { HeaderContainer } from "../resusableComponents/styledComponents";
 import styled from "styled-components";
 
 const EmailModalTemplateList = ({

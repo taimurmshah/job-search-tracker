@@ -5,10 +5,10 @@ import {
   InputContainer,
   Input,
   TableButton
-} from "../resusable-components/styledComponents";
+} from "../resusableComponents/styledComponents";
 import { updateEmployeeThunk } from "../../redux/thunks/employee";
 import styled from "styled-components";
-import CloseFormButton from "../resusable-components/CloseFormButton";
+import CloseFormButton from "../resusableComponents/CloseFormButton";
 
 const UpdateEmployee = ({
   employee,

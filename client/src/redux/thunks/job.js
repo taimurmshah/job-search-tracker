@@ -4,7 +4,9 @@ import {
   refreshCurrentJob,
   hasJobs,
   updateJob,
-  getProgressInfo
+  getProgressInfo,
+  deleteJob,
+  removeCurrentJob
 } from "../actions/job";
 
 export const newJobThunk = jobObj => async dispatch => {
@@ -103,6 +105,8 @@ export const deleteJobThunk = jobId => async dispatch => {
       }
     });
     let job = await res.json();
+    deleteJob(job);
+    removeCurrentJob();
   } catch (err) {
     //todo configure auth errors with redux...
   }

@@ -7,7 +7,7 @@ import {
   FormContainer,
   Input,
   FormButton
-} from "../resusable-components/styledComponents";
+} from "../resusableComponents/styledComponents";
 
 const JobDataForm = ({ job, newJobThunk, updateJobThunk, closeModal }) => {
   const { company = "", website = "", linkedIn = "", link = "" } = job;

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PossibleEmails from "./PossibleEmails";
-import CloseFormButton from "../resusable-components/CloseFormButton";
+import CloseFormButton from "../resusableComponents/CloseFormButton";
 import {
   InputContainer,
   Input,
   List
-} from "../resusable-components/styledComponents";
+} from "../resusableComponents/styledComponents";
 import styled from "styled-components";
 import { updateEmployeeThunk } from "../../redux/thunks/employee";
 import { removeCurrentEmployee } from "../../redux/actions/employee";
@@ -19,7 +19,7 @@ const AddEmail = ({
   removeCurrentEmployee,
   closeModal
 }) => {
-  useEffect(() => () => removeCurrentEmployee(), []);
+  useEffect(() => () => removeCurrentEmployee());
 
   const [email, setEmail] = useState("");
 

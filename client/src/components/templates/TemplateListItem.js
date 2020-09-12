@@ -5,7 +5,7 @@ import styled from "styled-components";
 import {
   FormButton,
   TableButton
-} from "../resusable-components/styledComponents";
+} from "../resusableComponents/styledComponents";
 import { removeCurrentEmployee } from "../../redux/actions/employee";
 import { closeModal } from "../../redux/actions/modal";
 import { sendTemplateGmailThunk } from "../../redux/thunks/email";

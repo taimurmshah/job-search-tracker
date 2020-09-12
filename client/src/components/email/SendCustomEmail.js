@@ -3,14 +3,14 @@ import { connect } from "react-redux";
 import { sendNewGmailThunk } from "../../redux/thunks/email";
 import { removeCurrentEmployee } from "../../redux/actions/employee";
 import { closeModal } from "../../redux/actions/modal";
-import Checkbox from "../resusable-components/Checkbox";
+import Checkbox from "../resusableComponents/Checkbox";
 import {
   FormContainer,
   InputContainer,
   Input,
   FormButton,
   TextArea
-} from "../resusable-components/styledComponents";
+} from "../resusableComponents/styledComponents";
 
 const SendCustomEmail = ({
   employeeId,

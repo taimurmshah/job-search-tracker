@@ -7,8 +7,8 @@ import {
   FormButton,
   HeaderContainer,
   TextArea
-} from "../resusable-components/styledComponents";
-import Checkbox from "../resusable-components/Checkbox";
+} from "../resusableComponents/styledComponents";
+import Checkbox from "../resusableComponents/Checkbox";
 import { updateTemplateThunk } from "../../redux/thunks/template";
 
 class UpdateTemplate extends Component {

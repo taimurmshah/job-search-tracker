@@ -1,5 +1,5 @@
 import React from "react";
-import { Span, ModalNav } from "../resusable-components/styledComponents";
+import { Span, ModalNav } from "../resusableComponents/styledComponents";
 
 const TemplateNavbar = ({ view, create }) => {
   return (

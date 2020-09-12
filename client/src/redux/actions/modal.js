@@ -1,5 +1,11 @@
 export const jobDataModal = () => ({ type: "JOB_DATA_MODAL" });
 
+export const jobProgressModal = () => ({ type: "JOB_PROGRESS_MODAL" });
+
+export const jobNotesModal = () => ({ type: "JOB_NOTES_MODAL" });
+
+export const deleteJobModal = () => ({ type: "DELETE_JOB_MODAL" });
+
 export const employeeDataModal = () => ({ type: "EMPLOYEE_DATA_MODAL" });
 
 export const addEmailModal = () => ({ type: "ADD_EMAIL" });

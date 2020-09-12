@@ -7,10 +7,9 @@ import Modal from "../layout/Modal";
 import DashboardLinks from "./DashboardLinks";
 import Resume from "../resume/Resume";
 import Templates from "../templates/Templates";
-import { HeaderContainer } from "../resusable-components/styledComponents";
+import { HeaderContainer } from "../resusableComponents/styledComponents";
 import { readAllTemplatesThunk } from "../../redux/thunks/template";
 import { clearTemplate } from "../../redux/actions/template";
-import BarChart from "./BarChart";
 import BarChart2 from "./BarChart2";
 
 const Dashboard = ({

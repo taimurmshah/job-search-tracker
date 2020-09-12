@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import TemplateListItem from "./TemplateListItem";
-import { HeaderContainer } from "../resusable-components/styledComponents";
+import { HeaderContainer } from "../resusableComponents/styledComponents";
 import styled from "styled-components";
 
 const ViewTemplates = ({ templates, update }) => {

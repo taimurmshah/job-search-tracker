@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import {
-  InputContainer,
-  Input
-} from "../resusable-components/styledComponents";
+import { InputContainer, Input } from "../resusableComponents/styledComponents";
 import { connect } from "react-redux";
 import { newResumeThunk, editResumeThunk } from "../../redux/thunks/resume";
 

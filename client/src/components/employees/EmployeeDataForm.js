@@ -10,8 +10,8 @@ import {
   FormContainer,
   InputContainer,
   Input
-} from "../resusable-components/styledComponents";
-import CloseFormButton from "../resusable-components/CloseFormButton";
+} from "../resusableComponents/styledComponents";
+import CloseFormButton from "../resusableComponents/CloseFormButton";
 
 const EmployeeDataForm = ({
   employee,
@@ -21,7 +21,7 @@ const EmployeeDataForm = ({
   removeCurrentEmployee,
   closeModal
 }) => {
-  useEffect(() => () => removeCurrentEmployee(), []);
+  useEffect(() => () => removeCurrentEmployee());
 
   let { name = " ", position = "", linkedIn = "", email = "" } = employee;
 

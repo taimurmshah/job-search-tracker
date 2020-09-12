@@ -11,7 +11,9 @@ const EmailContainer = ({ removeCurrentEmployee }) => {
   const [newEmail, setNewEmail] = useState(false);
 
   //todo readAllTemplatesThunk should happen in joblistcontainer
-  useEffect(() => () => removeCurrentEmployee(), []);
+  useEffect(() => {
+    return () => removeCurrentEmployee();
+  });
 
   const selectTemplate = () => {
     setTemplate(true);

@@ -52,7 +52,7 @@ sent, there's so much data to track, and it becomes difficult to do all of this 
 most repeated corporate email formats, which has been a tremendous help in finding the right email addresses for employees at companies I want to connect with. Each row in a table represents an
 employee, and I track how many emails I've sent and whether I've received a reply. 
 
-![JobMenuOptions Page](https://i.imgur.com/ZMe6kiA.png)
+![MenuOptions Page](https://i.imgur.com/ZMe6kiA.png)
 
 When I click "Send EmailContainer," I can select from my email templates or I can write a new email. Again, this prevents me from having to copy, paste, and edit my email templates, and it prevents
 me from having to click between a bunch of tabs. Here, I'm selecting the template called "Github example." All of this was made possible by integrating Google's Gmail API (which took me a long

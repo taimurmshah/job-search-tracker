@@ -1,37 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import Table from "../../employees/table/Table";
-import AddEmail from "../../email/AddEmail";
-import EmailContainer from "../../email/EmailContainer";
-import Modal from "../../layout/Modal";
-import SmallModal from "../../layout/SmallModal";
-import UpdateResponse from "../../employees/UpdateEmployeeResponse";
-import Loading from "../../layout/Loading";
-import Job from "./JobMenuOptions";
-import { currentJob, removeCurrentJob } from "../../../redux/actions/job";
+import Table from "../table/Table";
+import AddEmail from "../email/AddEmail";
+import EmailContainer from "../email/EmailContainer";
+import Modal from "../layout/Modal";
+import SmallModal from "../layout/SmallModal";
+import UpdateResponse from "../employees/UpdateEmployeeResponse";
+import Loading from "../layout/Loading";
+import Job from "./MenuOptions";
+import { currentJob, removeCurrentJob } from "../../redux/actions/job";
 import {
   currentEmployee,
   removeCurrentEmployee,
   removeEmployees
-} from "../../../redux/actions/employee";
+} from "../../redux/actions/employee";
 
-import { getJobByIdThunk, deleteJobThunk } from "../../../redux/thunks/job";
+import { getJobByIdThunk, deleteJobThunk } from "../../redux/thunks/job";
 import {
   getEmployeesThunk,
   updateEmployeeThunk,
   newEmployeeThunk
-} from "../../../redux/thunks/employee";
-import { sendNewGmailThunk } from "../../../redux/thunks/email";
-import { readAllTemplatesThunk } from "../../../redux/thunks/template";
+} from "../../redux/thunks/employee";
+import { sendNewGmailThunk } from "../../redux/thunks/email";
+import { readAllTemplatesThunk } from "../../redux/thunks/template";
 import styled from "styled-components";
 import {
   HeaderContainer,
   TableButton
-} from "../../resusable-components/styledComponents";
+} from "../resusableComponents/styledComponents";
 import DeleteJob from "./DeleteJob";
-import ButtonsAboveTable from "../../employees/table/ButtonsAboveTable";
-import ButtonsBelowTable from "../../employees/table/ButtonsBelowTable";
-import EmployeeDataForm from "../../employees/EmployeeDataForm";
+import ButtonsAboveTable from "../table/ButtonsAboveTable";
+import ButtonsBelowTable from "../table/ButtonsBelowTable";
+import EmployeeDataForm from "../employees/EmployeeDataForm";
 
 const JobContainer = ({
   job,
@@ -65,7 +65,7 @@ const JobContainer = ({
       removeEmployees();
       removeCurrentJob();
     };
-  }, []);
+  });
 
   const [newEmployeeForm, setNewEmployeeForm] = useState(false);
   const [addEmailForm, setAddEmailForm] = useState(false);

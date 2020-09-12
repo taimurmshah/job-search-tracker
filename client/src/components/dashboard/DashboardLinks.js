@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Menu } from "../resusable-components/styledComponents";
+import { Menu } from "../resusableComponents/styledComponents";
 
 const DashboardLinks = ({ openResume, openTemplates }) => {
   return (

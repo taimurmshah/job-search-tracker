@@ -1,12 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { closeModal } from "../../redux/actions/modal";
+import JobDataForm from "../job/JobDataForm";
+import Progress from "../job/Progress";
+import Notes from "../job/Notes";
 import EmployeeDataForm from "../employees/EmployeeDataForm";
 import AddEmail from "../email/AddEmail";
 import EmailContainer from "../email/EmailContainer";
 
 import styled from "styled-components";
-import JobDataForm from "../jobs/JobDataForm";
 
 const Modal = ({ modal, closeModal }) => {
   const showHideClassName = modal.isBigModalOpen
@@ -21,6 +23,10 @@ const Modal = ({ modal, closeModal }) => {
         </div>
 
         {modal.jobData && <JobDataForm />}
+
+        {modal.jobProgress && <Progress />}
+
+        {modal.jobNotes && <Notes />}
 
         {modal.employeeData && <EmployeeDataForm />}
 
