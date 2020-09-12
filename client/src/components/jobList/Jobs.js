@@ -22,6 +22,7 @@ const Jobs = ({ readJobsThunk, jobDataModal }) => {
       </Span>
 
       {/*<JobListContainer /!*jobs={this.props.jobs}*!/ />*/}
+
       <JobListContainer />
     </JobsDiv>
   );

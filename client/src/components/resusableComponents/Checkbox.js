@@ -25,14 +25,28 @@ const Checkbox = ({ clickHandler, text, checked, show, position }) => {
     <CheckBoxSpan>
       {position === "flex-start" ? (
         <>
-          <CheckboxInput defaultChecked={checked} onClick={clickHandler} />
+          <CheckboxInput
+            defaultChecked={checked}
+            onClick={() => {
+              console.log({ clickHandler });
+
+              clickHandler();
+            }}
+          />
           <Span />
           <P>{text}</P>
         </>
       ) : (
         <>
           <P>{text}</P>
-          <CheckboxInput defaultChecked={checked} onClick={clickHandler} />
+          <CheckboxInput
+            defaultChecked={checked}
+            onClick={() => {
+              console.log({ clickHandler });
+
+              clickHandler();
+            }}
+          />
         </>
       )}
     </CheckBoxSpan>
