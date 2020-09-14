@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import Job from "./MenuOptions";
+import MenuOptions from "./MenuOptions";
 import ButtonsAboveTable from "../table/ButtonsAboveTable";
 import Table from "../table/Table";
 import ButtonsBelowTable from "../table/ButtonsBelowTable";
@@ -58,7 +58,7 @@ const JobContainer = ({
       </HeaderContainer>
 
       <PageContainer>
-        <Job />
+        <MenuOptions />
         <div>
           <ButtonsAboveTable />
           <Table />
