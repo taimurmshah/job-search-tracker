@@ -1,21 +1,26 @@
 import React from "react";
 import { connect } from "react-redux";
-import { employeeDataModal } from "../../redux/actions/modal";
+import {
+  employeeDataModal,
+  massEmailModal
+} from "../../../redux/actions/modal";
 import {
   TableButton,
   Span,
   ButtonsFlexbox
-} from "../resusableComponents/styledComponents";
+} from "../../resusableComponents/styledComponents";
 
-const ButtonsAboveTable = ({ employees, employeeDataModal }) => {
+const ButtonsAboveTable = ({
+  employees,
+  employeeDataModal,
+  massEmailModal
+}) => {
   return (
     <ButtonsFlexbox>
       <TableButton onClick={employeeDataModal}>Add Employee</TableButton>{" "}
       <Span />
       {employees.length > 0 && (
-        <TableButton onClick={() => console.log("hitting mass email button")}>
-          Mass Email
-        </TableButton>
+        <TableButton onClick={massEmailModal}>Mass Email</TableButton>
       )}
     </ButtonsFlexbox>
   );
@@ -29,7 +34,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    employeeDataModal: () => dispatch(employeeDataModal())
+    employeeDataModal: () => dispatch(employeeDataModal()),
+    massEmailModal: () => dispatch(massEmailModal())
   };
 };
 

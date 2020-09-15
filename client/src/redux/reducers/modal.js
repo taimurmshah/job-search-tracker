@@ -8,6 +8,7 @@ const initialState = {
   employeeData: false,
   addEmail: false,
   emailContainer: false,
+  massEmail: false,
   editTemplates: false,
   uploadResume: false,
   deleteEmployee: false
@@ -29,6 +30,8 @@ export default function(state = initialState, action) {
       return { ...state, isBigModalOpen: true, addEmail: true };
     case "EMAIL_CONTAINER":
       return { ...state, isBigModalOpen: true, emailContainer: true };
+    case "MASS_EMAIL_MODAL":
+      return { ...state, isBigModalOpen: true, massEmail: true };
     case "DELETE_EMPLOYEE_MODAL":
       return { ...state, isSmallModalOpen: true, deleteEmployee: true };
     case "EDIT_TEMPLATES":
@@ -47,6 +50,7 @@ export default function(state = initialState, action) {
         employeeData: false,
         addEmail: false,
         emailContainer: false,
+        massEmail: false,
         editTemplates: false,
         uploadResume: false,
         deleteEmployee: false

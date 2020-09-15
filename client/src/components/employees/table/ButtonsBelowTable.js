@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { deleteJobModal } from "../../redux/actions/modal";
+import { deleteJobModal } from "../../../redux/actions/modal";
 import {
   ButtonsFlexbox,
   TableButton
-} from "../resusableComponents/styledComponents";
+} from "../../resusableComponents/styledComponents";
 import styled from "styled-components";
 
 const ButtonsBelowTable = ({ deleteJobModal }) => {

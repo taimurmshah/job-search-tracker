@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import MenuOptions from "./MenuOptions";
-import ButtonsAboveTable from "../table/ButtonsAboveTable";
-import Table from "../table/Table";
-import ButtonsBelowTable from "../table/ButtonsBelowTable";
+import ButtonsAboveTable from "../employees/table/ButtonsAboveTable";
+import Table from "../employees/table/Table";
+import ButtonsBelowTable from "../employees/table/ButtonsBelowTable";
 import Modal from "../layout/Modal";
 import SmallModal from "../layout/SmallModal";
 import Loading from "../layout/Loading";

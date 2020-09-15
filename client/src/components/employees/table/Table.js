@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { deleteEmployeeThunk } from "../../redux/thunks/employee";
+import { deleteEmployeeThunk } from "../../../redux/thunks/employee";
 import {
   currentEmployee,
   removeCurrentEmployee
-} from "../../redux/actions/employee";
-import { addEmailModal } from "../../redux/actions/modal";
-import Employee from "../employees/Employee";
-import Loading from "../layout/Loading";
+} from "../../../redux/actions/employee";
+import { addEmailModal } from "../../../redux/actions/modal";
+import Employee from "../Employee";
+import Loading from "../../layout/Loading";
 import styled from "styled-components";
 
 const Table = ({

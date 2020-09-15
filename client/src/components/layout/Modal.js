@@ -7,6 +7,7 @@ import Notes from "../job/Notes";
 import EmployeeDataForm from "../employees/EmployeeDataForm";
 import AddEmail from "../email/AddEmail";
 import EmailContainer from "../email/EmailContainer";
+import MassEmail from "../email/MassEmail";
 
 import styled from "styled-components";
 
@@ -33,6 +34,8 @@ const Modal = ({ modal, closeModal }) => {
         {modal.addEmail && <AddEmail />}
 
         {modal.emailContainer && <EmailContainer />}
+
+        {modal.massEmail && <MassEmail />}
       </ModalMain>
     </div>
   );
