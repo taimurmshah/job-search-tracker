@@ -69,7 +69,7 @@ const BarChart = ({ data }) => {
       .attr("class", "d3-label")
       .attr("y", -15)
       .attr("x", width / 2)
-      .attr("font-size", "30px")
+      .attr("font-size", "6em")
       .attr("text-anchor", "middle")
       .text("Job Hunt Progress");
 

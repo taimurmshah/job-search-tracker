@@ -83,6 +83,8 @@ const TableButton = styled.button`
   border: 0;
   box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.25);
   background-color: rgb(15, 174, 241);
+  font-family: "Bitter", serif;
+  font-size: 16px;
   font-weight: bold;
   color: white;
   transition: all 0.25s ease-in-out;

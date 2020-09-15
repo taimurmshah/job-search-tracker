@@ -111,9 +111,14 @@ const StatusContainer = styled.div`
 
 const DaysContainer = styled.div`
   grid-row: 3/4;
+  font-family: "Bitter", serif;
+  font-size: 14px;
+  // font-weight: bold;
 `;
 
 const P = styled.p`
-  font-size: 14px;
+  font-family: "Bitter", serif;
+
+  font-size: 16px;
   padding: 3px 0;
 `;

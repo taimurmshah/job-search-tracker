@@ -9,6 +9,7 @@ import {
   emailContainerModal,
   deleteEmployeeModal
 } from "../../redux/actions/modal";
+import { TableButton } from "../resusableComponents/styledComponents";
 import linkedInLogo from "../../images/linkedInLogo.png";
 
 const Employee = ({
@@ -98,9 +99,13 @@ const Employee = ({
 
         <TD>
           {email ? (
-            <TableButton onClick={sendEmail}>Send Email</TableButton>
+            <EmployeeTableButton onClick={sendEmail}>
+              Send Email
+            </EmployeeTableButton>
           ) : (
-            <TableButton onClick={addEmail}>Add Email</TableButton>
+            <EmployeeTableButton onClick={addEmail}>
+              Add Email
+            </EmployeeTableButton>
           )}
         </TD>
       </TR>
@@ -141,21 +146,8 @@ const HOVER = styled.span`
   cursor: pointer;
 `;
 
-const TableButton = styled.button`
+const EmployeeTableButton = styled(TableButton)`
   width: 115px;
-  padding: 10px;
-  border-radius: 4px;
-  outline: none;
-  border: 0;
-  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.25);
-  background-color: rgb(15, 174, 241);
-  font-weight: bold;
-  color: white;
-  transition: all 0.25s ease-in-out;
-  :hover {
-    box-shadow: 0;
-    background-color: rgb(146, 211, 239);
-  }
 `;
 
 const TR = styled.tr`

@@ -10,10 +10,20 @@ html, body {
 
 p {
     font-family: 'Bitter', serif;
+    font-size: 16px;
 }
 
-.d3-label, .tooltip {
+.d3-label {
     font-family: 'Bitter', serif;
+    font-size: 25px;
+    fill: white;
+}
+
+
+.tooltip {
+    font-family: 'Bitter', serif;
+    font-size: 16px;
+    font-weight: bold;
     fill: white;
 }
 
@@ -27,6 +37,7 @@ p {
 h1 {
     font-family: 'Patua One', cursive;
     font-size: 6em;
+    /*font-weight: bold;*/
 }
 
 h2 {
@@ -123,6 +134,7 @@ textarea {
     border: none;
     padding: 0 !important;
     font-family: 'Bitter', serif;
+    font-size: 16px;
     color: rgb(26, 31, 33);
     text-decoration: none;
     cursor: pointer;
@@ -133,6 +145,7 @@ textarea {
     border: none;
     padding: 0 !important;
     font-family: 'Bitter', serif;
+    font-size: 16px;
     color: white;
     text-decoration: none;
     cursor: pointer;
@@ -143,6 +156,7 @@ textarea {
     border: none;
     padding: 0 !important;
     font-family: 'Bitter', serif;
+    font-size: 16px;
     color: rgb(26, 31, 33);
     text-decoration: none;
     cursor: pointer;

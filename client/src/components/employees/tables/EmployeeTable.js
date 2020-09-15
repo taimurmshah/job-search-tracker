@@ -10,11 +10,7 @@ import Employee from "../Employee";
 import Loading from "../../layout/Loading";
 import styled from "styled-components";
 
-const Table = ({
-  employees,
-  addEmailButtonClickHandler,
-  sendEmailButtonClickHandler
-}) => {
+const EmployeeTable = ({ employees }) => {
   if (!employees) return <Loading />;
 
   const tableData = employees.map(e => {
@@ -63,7 +59,7 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Table);
+)(EmployeeTable);
 
 const Div = styled.div`
   display: flex;

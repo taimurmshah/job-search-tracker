@@ -7,7 +7,7 @@ import Notes from "../job/Notes";
 import EmployeeDataForm from "../employees/EmployeeDataForm";
 import AddEmail from "../email/AddEmail";
 import EmailContainer from "../email/EmailContainer";
-import MassEmail from "../email/MassEmail";
+import MassEmail from "../email/massEmail/MassEmail";
 
 import styled from "styled-components";
 
