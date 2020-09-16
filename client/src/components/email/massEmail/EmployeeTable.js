@@ -34,6 +34,7 @@ const Div = styled.div`
 `;
 
 const StyledTable = styled.table`
+  width: 600px;
   font-size: 16px;
   border: none;
   padding: 3px;

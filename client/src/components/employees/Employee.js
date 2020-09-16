@@ -9,7 +9,11 @@ import {
   emailContainerModal,
   deleteEmployeeModal
 } from "../../redux/actions/modal";
-import { TableButton } from "../resusableComponents/styledComponents";
+import {
+  HeaderContainer,
+  TableButton,
+  Span
+} from "../resusableComponents/styledComponents";
 import linkedInLogo from "../../images/linkedInLogo.png";
 
 const Employee = ({
@@ -60,53 +64,68 @@ const Employee = ({
     <>
       <TR key={_id} data-id={_id}>
         <TD>
-          <HOVER onClick={updateEmployee} role="img" aria-label="siren">
-            ✎
-          </HOVER>
-
-          {" " + name + " "}
-          <HOVER onClick={deleteEmployee} role="img" aria-label="siren">
-            ❌
-          </HOVER>
+          <HeaderContainer>{name}</HeaderContainer>
         </TD>
-        <TD>{position}</TD>
+
         <TD>
-          <a
-            href={linkedIn[0] === "h" ? linkedIn : "https://" + linkedIn}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              className="linkedIn-logo"
-              src={linkedInLogo}
-              alt="linkedIn logo"
-            />
-          </a>
+          <HeaderContainer>{position}</HeaderContainer>
+        </TD>
+
+        <TD>
+          <HeaderContainer>
+            <a
+              href={linkedIn[0] === "h" ? linkedIn : "https://" + linkedIn}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                className="linkedIn-logo"
+                src={linkedInLogo}
+                alt="linkedIn logo"
+              />
+            </a>
+          </HeaderContainer>
         </TD>
 
         {emailsSent > 0 && (
           <TD>
-            <NoButton role="img" aria-label="check" onClick={responseHandler}>
-              {response ? "✅" : "🚨"}
-            </NoButton>
+            <HeaderContainer>
+              <NoButton role="img" aria-label="check" onClick={responseHandler}>
+                {response ? "✅" : "🚨"}
+              </NoButton>
+            </HeaderContainer>
           </TD>
         )}
         {emailsSent === 0 && <TD>Email not sent</TD>}
 
-        <TD>{email ? email : ""}</TD>
-
-        <TD>{emailsSent}</TD>
+        <TD>
+          <HeaderContainer>{email ? email : ""}</HeaderContainer>
+        </TD>
 
         <TD>
-          {email ? (
-            <EmployeeTableButton onClick={sendEmail}>
-              Send Email
-            </EmployeeTableButton>
-          ) : (
-            <EmployeeTableButton onClick={addEmail}>
-              Add Email
-            </EmployeeTableButton>
-          )}
+          <HeaderContainer>{emailsSent}</HeaderContainer>
+        </TD>
+
+        <TD>
+          <HeaderContainer>
+            {email ? (
+              <EmployeeTableButton onClick={sendEmail}>
+                Send Email
+              </EmployeeTableButton>
+            ) : (
+              <EmployeeTableButton onClick={addEmail}>
+                Add Email
+              </EmployeeTableButton>
+            )}
+            <Span />
+            <HOVER onClick={updateEmployee} role="img" aria-label="siren">
+              ✎
+            </HOVER>
+            <Span />
+            <HOVER onClick={deleteEmployee} role="img" aria-label="siren">
+              ❌
+            </HOVER>
+          </HeaderContainer>
         </TD>
       </TR>
     </>

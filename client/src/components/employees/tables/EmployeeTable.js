@@ -29,7 +29,7 @@ const EmployeeTable = ({ employees }) => {
               <TH>Response</TH>
               <TH>Email</TH>
               <TH>Emails Sent</TH>
-              <TH>Action</TH>
+              <TH>Actions</TH>
             </tr>
           </THead>
           <tbody>{tableData}</tbody>
@@ -69,6 +69,7 @@ const Div = styled.div`
 `;
 
 const StyledTable = styled.table`
+  width: 60vw;
   font-size: 16px;
   border: none;
   padding: 3px;

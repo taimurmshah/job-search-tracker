@@ -4,19 +4,24 @@ import styled from "styled-components";
 import { HeaderContainer } from "../../resusableComponents/styledComponents";
 
 const EmployeeElem = ({ employee: { _id, name, response, emailsSent } }) => {
-  console.log("emailsSent:", emailsSent);
   return (
     <>
       <TR data-id={_id}>
         <TD>
           <Checkbox />
         </TD>
-        <TD>{name}</TD>
+
+        <TD>
+          <HeaderContainer>{name} </HeaderContainer>
+        </TD>
+
         <TD>
           <HeaderContainer>{response ? "✅" : "🚨"}</HeaderContainer>
         </TD>
-        {/*<TD>{emailsSent}</TD>*/}
-        <TD>{emailsSent.length}</TD>
+
+        <TD>
+          <HeaderContainer>{emailsSent.length}</HeaderContainer>
+        </TD>
       </TR>
     </>
   );
@@ -32,7 +37,6 @@ const TR = styled.tr`
 `;
 
 const TD = styled.td`
-  padding: 10px;
   border: none;
 `;
 

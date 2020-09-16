@@ -10,6 +10,13 @@ import {
 const TemplateDropdown = ({ templates }) => {
   const [show, setShow] = useState(false);
   const [chosenTemplate, setChosenTemplate] = useState("Select Template");
+  const [templateId, setTemplateId] = useState("");
+
+  const select = (_id, name) => {
+    setTemplateId(_id);
+    setChosenTemplate(name);
+    setShow(false);
+  };
 
   const DropdownContent = styled.div`
     display: ${show ? "show" : "none"};
@@ -21,7 +28,13 @@ const TemplateDropdown = ({ templates }) => {
   `;
 
   templates = templates.map((t, i) => (
-    <DropdownOption key={t._id} idx={i} _id={t._id} name={t.name} />
+    <DropdownOption
+      key={t._id}
+      idx={i}
+      _id={t._id}
+      name={t.name}
+      select={select}
+    />
   ));
 
   return (
