@@ -7,10 +7,9 @@ import {
   TableButton
 } from "../../resusableComponents/styledComponents";
 
-const TemplateDropdown = ({ templates }) => {
+const TemplateDropdown = ({ templates, setTemplateId }) => {
   const [show, setShow] = useState(false);
   const [chosenTemplate, setChosenTemplate] = useState("Select Template");
-  const [templateId, setTemplateId] = useState("");
 
   const select = (_id, name) => {
     setTemplateId(_id);

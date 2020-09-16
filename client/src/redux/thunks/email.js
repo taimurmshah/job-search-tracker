@@ -47,6 +47,7 @@ export const sendTemplateGmailThunk = (
     res = await res.json();
     console.log("res from email thunk, need to dispatch action:", res);
     dispatch(updateEmployee(res.employee));
+    return res;
   } catch (err) {
     console.log("sendTemplateGmailThunk, here's the error:", err);
     //todo handle error

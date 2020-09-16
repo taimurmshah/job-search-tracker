@@ -4,8 +4,14 @@ import EmployeeElem from "./EmployeeElem";
 import Checkbox from "../../resusableComponents/Checkbox";
 import styled from "styled-components";
 
-const EmployeeTable = ({ employees }) => {
-  employees = employees.map(e => <EmployeeElem key={e._id} employee={e} />);
+const EmployeeTable = ({ employees, setEmployees }) => {
+  const employeeElems = employees.map(e => (
+    <EmployeeElem key={e._id} employee={e} />
+  ));
+
+  const selectAllEmployees = () => {
+    setEmployees(employees);
+  };
 
   return (
     <Div>
@@ -20,7 +26,7 @@ const EmployeeTable = ({ employees }) => {
             <TH>EmailsSent</TH>
           </tr>
         </THead>
-        <tbody>{employees}</tbody>
+        <tbody>{employeeElems}</tbody>
       </StyledTable>
     </Div>
   );
