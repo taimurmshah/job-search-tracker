@@ -12,12 +12,12 @@ const BarChart = ({ data }) => {
 
     // let margin = { left: 80, right: 20, top: 50, bottom: 100 };
 
-    let width = 800; //- margin.left - margin.right;
-    let height = 500; //- margin.top - margin.bottom;
+    let width = 800;
+    let height = 500;
     const svg = d3
       .select(svgRef.current)
-      .attr("height", height /* + margin.top + margin.bottom */)
-      .attr("width", width /* + margin.left + margin.right*/);
+      .attr("height", height)
+      .attr("width", width);
 
     //scales
     let x = d3
@@ -33,11 +33,6 @@ const BarChart = ({ data }) => {
     //y lines
     const makeYLines = () => d3.axisLeft().scale(y);
     svg.append("g").attr("class", "grid");
-    // .call(
-    //   makeYLines()
-    //     .tickSize(-width, 0, 0)
-    //     .tickFormat("")
-    // );
 
     //axes
     let xAxisCall = d3.axisBottom(x);
@@ -84,6 +79,12 @@ const BarChart = ({ data }) => {
       .attr("transform", "rotate(-90)")
       .text("Number of Companies");
 
+    const numPlacement = n => {
+      if (n > 100) return 2.4;
+      if (n > 10) return 2.3;
+      return 2.16;
+    };
+
     //bars
     svg
       .selectAll(".bar")
@@ -94,15 +95,32 @@ const BarChart = ({ data }) => {
       .attr("x", d => x(d.stage) + x.bandwidth() / 4)
       .attr("y", -height)
       .attr("width", x.bandwidth() / 2)
+
+      .on("mouseenter", function(barData, idx) {
+        d3.selectAll(".bar")
+          .transition()
+          .duration(400)
+          .attr("opacity", 0);
+        d3.select(this)
+
+          .transition()
+          .duration(400)
+          .attr("opacity", 0.6);
+      })
+      .on("mouseleave", function() {
+        d3.selectAll(".bar")
+          .transition()
+          .duration(400)
+          .attr("opacity", 1);
+        d3.select(this)
+          .transition()
+          .duration(400)
+          .attr("opacity", 1);
+      })
       .transition()
       .attr("height", d => height - y(d.number))
-      .attr("fill", "#80cbc4 !important");
 
-    const numPlacement = n => {
-      if (n > 100) return 2.4;
-      if (n > 10) return 2.3;
-      return 2.16;
-    };
+      .attr("fill", "#80cbc4 !important");
 
     svg
       .selectAll(".tooltip")

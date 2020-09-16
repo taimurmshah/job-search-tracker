@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-
 import { currentJob } from "../../redux/actions/job";
 import { getEmployeesThunk } from "../../redux/thunks/employee";
 import JobCard from "./JobCard";
