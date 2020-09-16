@@ -1,18 +1,41 @@
 import React from "react";
-import Checkbox from "../../resusableComponents/Checkbox";
 import styled from "styled-components";
 import { HeaderContainer } from "../../resusableComponents/styledComponents";
 
-const EmployeeElem = ({ employee: { _id, name, response, emailsSent } }) => {
+const EmployeeElem = ({
+  employee: { _id, name, response, emailsSent },
+  selectedEmployees,
+  setSelectedEmployees
+}) => {
+  const CheckBox = styled.input.attrs({ type: "checkbox" })``;
+
+  const checked = selectedEmployees.includes(_id);
+
+  const toggleEmployee = e => {
+    const employeeId = e.currentTarget.dataset.id;
+    if (e.currentTarget.checked) {
+      setSelectedEmployees([...selectedEmployees, employeeId]);
+    } else {
+      const removed = selectedEmployees.filter(e => e !== _id);
+      setSelectedEmployees(removed);
+    }
+  };
+
   return (
     <>
-      <TR data-id={_id}>
+      <TR>
         <TD>
-          <Checkbox />
+          <HeaderContainer>
+            <CheckBox
+              data-id={_id}
+              defaultChecked={checked}
+              onClick={e => toggleEmployee(e)}
+            />
+          </HeaderContainer>
         </TD>
 
         <TD>
-          <HeaderContainer>{name} </HeaderContainer>
+          <HeaderContainer>{name}</HeaderContainer>
         </TD>
 
         <TD>

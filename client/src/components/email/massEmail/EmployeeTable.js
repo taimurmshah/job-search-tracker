@@ -1,22 +1,36 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import EmployeeElem from "./EmployeeElem";
 import styled from "styled-components";
 
-const EmployeeTable = ({ employees, setEmployees }) => {
-  const [show, setShow] = useState(false);
+const EmployeeTable = ({
+  employees,
+  selectedEmployees,
+  setSelectedEmployees
+}) => {
+  const CheckBox = styled.input.attrs({ type: "checkbox" })``;
 
-  const CheckBox = styled.input.attrs({ type: "checkbox" })`
-    margin-left: 5px;
-  `;
+  const checked = selectedEmployees.length === employees.length;
+
+  const toggleSelectAll = () => {
+    if (!checked) {
+      const employeesToAdd = [...selectedEmployees];
+      employees.forEach(e => {
+        if (!employeesToAdd.includes(e._id)) employeesToAdd.push(e._id);
+      });
+
+      setSelectedEmployees(employeesToAdd);
+    } else setSelectedEmployees([]);
+  };
 
   const employeeElems = employees.map(e => (
-    <EmployeeElem key={e._id} employee={e} setEmployees={setEmployees} />
+    <EmployeeElem
+      key={e._id}
+      employee={e}
+      selectedEmployees={selectedEmployees}
+      setSelectedEmployees={setSelectedEmployees}
+    />
   ));
-
-  const selectAllEmployees = () => {
-    setEmployees(employees);
-  };
 
   return (
     <Div>
@@ -24,7 +38,7 @@ const EmployeeTable = ({ employees, setEmployees }) => {
         <THead>
           <tr>
             <TH>
-              <CheckBox />
+              <CheckBox defaultChecked={checked} onClick={toggleSelectAll} />
             </TH>
             <TH>Name</TH>
             <TH>Response</TH>
