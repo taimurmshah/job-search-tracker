@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import EmployeeElem from "./EmployeeElem";
-import Checkbox from "../../resusableComponents/Checkbox";
 import styled from "styled-components";
 
 const EmployeeTable = ({ employees, setEmployees }) => {
+  const [show, setShow] = useState(false);
+
+  const CheckBox = styled.input.attrs({ type: "checkbox" })`
+    margin-left: 5px;
+  `;
+
   const employeeElems = employees.map(e => (
-    <EmployeeElem key={e._id} employee={e} />
+    <EmployeeElem key={e._id} employee={e} setEmployees={setEmployees} />
   ));
 
   const selectAllEmployees = () => {
@@ -19,7 +24,7 @@ const EmployeeTable = ({ employees, setEmployees }) => {
         <THead>
           <tr>
             <TH>
-              <Checkbox />
+              <CheckBox />
             </TH>
             <TH>Name</TH>
             <TH>Response</TH>

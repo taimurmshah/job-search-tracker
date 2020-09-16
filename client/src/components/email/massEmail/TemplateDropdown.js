@@ -37,14 +37,18 @@ const TemplateDropdown = ({ templates, setTemplateId }) => {
   ));
 
   return (
-    <HeaderContainer>
+    <Container>
       <Dropdown>
         <DropBtn onClick={() => setShow(!show)}>{chosenTemplate}</DropBtn>
         <DropdownContent>{templates}</DropdownContent>
       </Dropdown>
-    </HeaderContainer>
+    </Container>
   );
 };
+
+const Container = styled(HeaderContainer)`
+  margin-top: 1vh;
+`;
 
 const Dropdown = styled.div`
   position: relative;
