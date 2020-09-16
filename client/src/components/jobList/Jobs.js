@@ -5,15 +5,14 @@ import { currentJob } from "../../redux/actions/job";
 import { getEmployeesThunk } from "../../redux/thunks/employee";
 import JobListContainer from "./JobListContainer";
 import Modal from "../layout/Modal";
-
 import styled from "styled-components";
 import { Span } from "../resusableComponents/styledComponents";
 import { jobDataModal } from "../../redux/actions/modal";
 
 const Jobs = ({ jobs, readJobsThunk, jobDataModal }) => {
   useEffect(() => {
-    if (jobs.length === 0) readJobsThunk();
-  });
+    readJobsThunk();
+  }, []);
 
   return (
     <JobsDiv>

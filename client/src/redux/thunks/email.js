@@ -29,10 +29,7 @@ export const sendTemplateGmailThunk = (
   templateId
 ) => async dispatch => {
   const token = localStorage.getItem("token");
-  console.log("sendTemplateGmailThunk, here's the arguments:", {
-    employeeId,
-    templateId
-  });
+
   try {
     let res = await fetch(`${process.env.REACT_APP_URL}/gmail/send/template`, {
       method: "POST",
@@ -43,9 +40,7 @@ export const sendTemplateGmailThunk = (
       },
       body: JSON.stringify({ employeeId, templateId })
     });
-
     res = await res.json();
-    console.log("res from email thunk, need to dispatch action:", res);
     dispatch(updateEmployee(res.employee));
     return res;
   } catch (err) {

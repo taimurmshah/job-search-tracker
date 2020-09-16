@@ -36,7 +36,7 @@ const JobListContainer = ({ jobs }) => {
       const lastEmail = new Date(j.mostRecentEmailSent);
       const diffTime = Math.abs(today - lastEmail);
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      return diffDays > 7;
+      return diffDays > 4;
     })
     .filter(
       j =>

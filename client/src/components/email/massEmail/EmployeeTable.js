@@ -8,6 +8,8 @@ const EmployeeTable = ({
   selectedEmployees,
   setSelectedEmployees
 }) => {
+  employees = employees.filter(e => e.email);
+
   const CheckBox = styled.input.attrs({ type: "checkbox" })``;
 
   const checked = selectedEmployees.length === employees.length;
@@ -23,14 +25,16 @@ const EmployeeTable = ({
     } else setSelectedEmployees([]);
   };
 
-  const employeeElems = employees.map(e => (
-    <EmployeeElem
-      key={e._id}
-      employee={e}
-      selectedEmployees={selectedEmployees}
-      setSelectedEmployees={setSelectedEmployees}
-    />
-  ));
+  const employeeElems = employees
+    .filter(e => e.email)
+    .map(e => (
+      <EmployeeElem
+        key={e._id}
+        employee={e}
+        selectedEmployees={selectedEmployees}
+        setSelectedEmployees={setSelectedEmployees}
+      />
+    ));
 
   return (
     <Div>

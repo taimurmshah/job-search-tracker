@@ -24,7 +24,9 @@ const MassEmail = ({ sendTemplateGmailThunk, closeModal }) => {
     for (let i = 0; i < selectedEmployees.length; i++) {
       const employeeId = selectedEmployees[i];
       const res = await sendTemplateGmailThunk(employeeId, templateId);
-      console.log("IN COMPONENT MASS_EMAIL:", { res });
+
+      if (res.result.accepted.length > 0)
+        console.log(`${res.employee.name}: Success.`);
     }
     setLoading(false);
     return closeModal();
