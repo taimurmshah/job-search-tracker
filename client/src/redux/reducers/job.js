@@ -30,20 +30,14 @@ export default function(state = initialState, action) {
         currentJob
       };
     case "UPDATE_JOB":
-      console.log(
-        "Did update job reducer get hit??? here's the payload:",
-        action.payload
-      );
       let updatedJobs = [...state.jobs];
       let index = updatedJobs.findIndex(j => j._id === action.payload._id);
       updatedJobs[index] = action.payload;
-
       return {
         ...state,
         jobs: updatedJobs,
         currentJob: action.payload
       };
-
     case "DELETE_JOB":
       let newJobs = [...state.jobs];
       newJobs = newJobs.filter(j => j.company !== action.payload.company);
@@ -52,7 +46,6 @@ export default function(state = initialState, action) {
         jobs: newJobs,
         currentJob: {}
       };
-
     case "REFRESH_CURRENT_JOB":
       return { ...state, currentJob: action.payload };
     case "REMOVE_CURRENT_JOB":
