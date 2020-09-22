@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import {
   jobDataModal,
+  jobStatusModal,
   jobNotesModal,
   jobProgressModal
 } from "../../redux/actions/modal";
@@ -12,12 +13,11 @@ import { Menu, Span } from "../resusableComponents/styledComponents";
 const MenuOptions = ({
   job,
   jobDataModal,
+  jobStatusModal,
   jobProgressModal,
   jobNotesModal
 }) => {
   let { linkedIn, link, website } = job;
-
-  const [status, setStatus] = useState(false);
 
   const update = () => {
     jobDataModal();
@@ -67,7 +67,7 @@ const MenuOptions = ({
           </a>
         </Span>
         <Span>
-          <p className="nav-link" onClick={() => setStatus(true)}>
+          <p className="nav-link" onClick={jobStatusModal}>
             Update Status
           </p>
         </Span>
@@ -91,6 +91,7 @@ const mapStateToProps = state => ({ job: state.job.currentJob });
 const mapDispatchToProps = dispatch => {
   return {
     jobDataModal: () => dispatch(jobDataModal()),
+    jobStatusModal: () => dispatch(jobStatusModal()),
     jobProgressModal: () => dispatch(jobProgressModal()),
     jobNotesModal: () => dispatch(jobNotesModal())
   };

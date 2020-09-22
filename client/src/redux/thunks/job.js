@@ -75,6 +75,7 @@ export const getJobByIdThunk = jobId => async dispatch => {
 export const updateJobThunk = (jobId, updates) => async dispatch => {
   const token = localStorage.getItem("token");
   try {
+    console.log("UPDATES:", updates);
     let res = await fetch(`${process.env.REACT_APP_URL}/jobs/${jobId}`, {
       method: "PATCH",
       headers: {
@@ -88,6 +89,7 @@ export const updateJobThunk = (jobId, updates) => async dispatch => {
     let response = await res.json();
     // debugger;
     dispatch(updateJob(response));
+    console.log({ response });
   } catch (err) {
     //todo configure auth errors with redux...
   }

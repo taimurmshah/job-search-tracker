@@ -69,7 +69,7 @@ const Div = styled.div`
 `;
 
 const StyledTable = styled.table`
-  width: 60vw;
+  width: 70vw;
   font-size: 16px;
   border: none;
   padding: 3px;

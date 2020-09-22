@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { closeModal } from "../../redux/actions/modal";
 import JobDataForm from "../job/JobDataForm";
+import Status from "../job/Status";
 import Progress from "../job/Progress";
 import Notes from "../job/Notes";
 import EmployeeDataForm from "../employees/EmployeeDataForm";
@@ -24,6 +25,8 @@ const Modal = ({ modal, closeModal }) => {
         </div>
 
         {modal.jobData && <JobDataForm />}
+
+        {modal.jobStatus && <Status />}
 
         {modal.jobProgress && <Progress />}
 

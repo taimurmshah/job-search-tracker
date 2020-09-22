@@ -1,5 +1,7 @@
 export const jobDataModal = () => ({ type: "JOB_DATA_MODAL" });
 
+export const jobStatusModal = () => ({ type: "JOB_STATUS_MODAL" });
+
 export const jobProgressModal = () => ({ type: "JOB_PROGRESS_MODAL" });
 
 export const jobNotesModal = () => ({ type: "JOB_NOTES_MODAL" });
