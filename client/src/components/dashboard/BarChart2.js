@@ -122,17 +122,17 @@ const BarChart = ({ data }) => {
 
       .attr("fill", "#80cbc4 !important");
 
-    svg
-      .selectAll(".tooltip")
-      .data(data)
-      .join("text")
-      .attr("class", "tooltip")
-      .text(v => (v.number > 0 ? v.number : null))
-      .attr("fill", "#fff")
-      .attr("x", v => x(v.stage) + x.bandwidth() / numPlacement(v.number))
-      .attr("y", v => y(v.number) + (v.number > 4 ? 20 : 17))
-      .transition()
-      .attr("opacity", 1);
+    // svg
+    //     //   .selectAll(".tooltip")
+    //     //   .data(data)
+    //     //   .join("text")
+    //     //   .attr("class", "tooltip")
+    //     //   .text(v => (v.number > 0 ? v.number : null))
+    //     //   .attr("fill", "#fff")
+    //     //   .attr("x", v => x(v.stage) + x.bandwidth() / numPlacement(v.number))
+    //     //   .attr("y", v => y(v.number) + (v.number > 4 ? 20 : 17))
+    //     //   .transition()
+    //     //   .attr("opacity", 1);
   }, [data]);
 
   return (

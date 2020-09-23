@@ -15,20 +15,17 @@ const PossibleEmails = ({ name, website }) => {
     emails.push(firstName + lastName + "@" + website);
 
     emails.push(firstName + "@" + website);
-
     emails.push(firstName + "." + lastName + "@" + website);
-    emails.push(lastName + "." + firstName + "@" + website);
-
-    emails.push(firstName[0] + "." + lastName + "@" + website);
-    emails.push(lastName + "." + firstName[0] + "@" + website);
-
     emails.push(firstName[0] + lastName + "@" + website);
-    emails.push(lastName + firstName[0] + "@" + website);
-
+    emails.push(firstName[0] + "." + lastName + "@" + website);
     emails.push(firstName + "." + lastName[0] + "@" + website);
-    emails.push(lastName[0] + "." + firstName + "@" + website);
-
     emails.push(firstName + lastName[0] + "@" + website);
+
+    emails.push(lastName + "@" + website);
+    emails.push(lastName + "." + firstName + "@" + website);
+    emails.push(lastName + "." + firstName[0] + "@" + website);
+    emails.push(lastName + firstName[0] + "@" + website);
+    emails.push(lastName[0] + "." + firstName + "@" + website);
     emails.push(lastName[0] + firstName + "@" + website);
 
     return emails.map((e, i) => <li key={i}>{e}</li>);
