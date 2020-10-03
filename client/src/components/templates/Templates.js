@@ -1,75 +1,68 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import TemplateNavbar from "./TemplateNavbar";
 import NewTemplate from "./NewTemplate";
 import ViewTemplates from "./ViewTemplates";
 import UpdateTemplate from "./UpdateTemplate";
+import { clearTemplate } from "../../redux/actions/template";
+import { closeModal } from "../../redux/actions/modal";
+import { readAllTemplatesThunk } from "../../redux/thunks/template";
 
-class Templates extends Component {
-  state = {
-    view: false,
-    create: false,
-    update: false
+const Templates = ({
+  templates,
+  readAllTemplatesThunk,
+  clearTemplate,
+  closeModal
+}) => {
+  useEffect(() => {
+    templates.length === 0 && readAllTemplatesThunk();
+  }, []);
+
+  const [view, setView] = useState(false);
+  const [create, setCreate] = useState(false);
+  const [update, setUpdate] = useState(false);
+
+  const handleView = () => {
+    clearTemplate();
+    setView(true);
+    setCreate(false);
+    setUpdate(false);
   };
 
-  view = () => {
-    this.props.clearTemplate();
-    this.setState({
-      view: true,
-      create: false,
-      update: false
-    });
+  const handleCreate = () => {
+    clearTemplate();
+    setCreate(true);
+    setView(false);
+    setUpdate(false);
   };
 
-  create = () => {
-    this.props.clearTemplate();
-    this.setState({
-      view: false,
-      create: true,
-      update: false
-    });
+  const handleUpdate = () => {
+    setUpdate(true);
+    setView(false);
+    setCreate(false);
   };
 
-  update = () => {
-    this.setState({
-      view: false,
-      create: false,
-      update: true
-    });
-  };
+  return (
+    <div>
+      <TemplateNavbar view={handleView} create={handleCreate} />
+      {view && <ViewTemplates update={handleUpdate} />}
+      {create && <NewTemplate closeModal={closeModal} />}
+      {update && <UpdateTemplate closeModal={closeModal} />}
+    </div>
+  );
+};
 
-  closeModal = () => {
-    this.props.clearTemplate();
-    this.props.closeModal();
-  };
-
-  render() {
-    return (
-      <div>
-        <TemplateNavbar
-          view={this.view}
-          create={this.create}
-          clear={this.props.clear}
-        />
-        {this.state.view && <ViewTemplates update={this.update} />}
-        {this.state.create && (
-          <NewTemplate closeModal={this.props.closeModal} />
-        )}
-        {this.state.update && (
-          <UpdateTemplate closeModal={this.props.closeModal} />
-        )}
-      </div>
-    );
-  }
-}
+const mapStateToProps = state => ({ templates: state.template.templates });
 
 const mapDispatchToProps = dispatch => {
   return {
-    // clearTemplate: () => dispatch(clearTemplate)
+    readAllTemplatesThunk: () => dispatch(readAllTemplatesThunk()),
+    clearTemplate: () => dispatch(clearTemplate()),
+    closeModal: () => dispatch(closeModal())
   };
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Templates);

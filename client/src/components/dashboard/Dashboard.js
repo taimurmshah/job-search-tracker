@@ -47,28 +47,6 @@ const Dashboard = ({
     setShowModal(true);
   };
 
-  const componentToPassToModal = () => {
-    if (resume) {
-      return (
-        <Modal
-          component={<Resume closeModal={closeModal} />}
-          closeModal={closeModal}
-          show={showModal}
-        />
-      );
-    } else if (template) {
-      return (
-        <Modal
-          component={
-            <Templates closeModal={closeModal} clearTemplate={clearTemplate} />
-          }
-          closeModal={closeModal}
-          show={showModal}
-        />
-      );
-    }
-  };
-
   if (!isLoggedIn) return <Loading />;
   if (!localStorage.getItem("token")) return <Redirect to="/" />;
 
@@ -77,9 +55,8 @@ const Dashboard = ({
       <HeaderContainer>
         <h1>Dashboard</h1>
       </HeaderContainer>
-      {showModal && componentToPassToModal()}
       <DashboardLinks openResume={openResume} openTemplates={openTemplates} />
-      {/*<BarChart />*/}
+      <Modal />
       <BarChart2 />
     </div>
   );

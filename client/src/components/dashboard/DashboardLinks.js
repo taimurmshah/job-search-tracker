@@ -3,8 +3,12 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Menu } from "../resusableComponents/styledComponents";
+import {
+  editTemplatesModal,
+  uploadResumeModal
+} from "../../redux/actions/modal";
 
-const DashboardLinks = ({ openResume, openTemplates }) => {
+const DashboardLinks = ({ editTemplatesModal, uploadResumeModal }) => {
   return (
     <Menu>
       <Span>
@@ -13,12 +17,12 @@ const DashboardLinks = ({ openResume, openTemplates }) => {
         </Link>
       </Span>
       <Span>
-        <p className="nav-link" onClick={openResume}>
+        <p className="nav-link" onClick={uploadResumeModal}>
           Resume
         </p>
       </Span>
       <Span>
-        <p className="nav-link" onClick={openTemplates}>
+        <p className="nav-link" onClick={editTemplatesModal}>
           Templates
         </p>
       </Span>
@@ -33,7 +37,17 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(DashboardLinks);
+const mapDispatchToProps = dispatch => {
+  return {
+    uploadResumeModal: () => dispatch(uploadResumeModal()),
+    editTemplatesModal: () => dispatch(editTemplatesModal())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DashboardLinks);
 
 const Span = styled.span`
   padding: 10px;

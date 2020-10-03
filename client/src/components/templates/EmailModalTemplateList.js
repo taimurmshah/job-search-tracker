@@ -17,7 +17,6 @@ const EmailModalTemplateList = ({
   }
 
   const templateEmailHandler = templateId => {
-    console.log("template email handler is getting hit!");
     sendTemplateGmailThunk(employeeId, templateId);
     closeModal();
   };

@@ -77,14 +77,3 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(Resume);
-//
-// const Nav = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   width: 100%;
-// `;
-//
-// const Span = styled.span`
-//   padding: 10px;
-//   margin: 5px;
-// `;

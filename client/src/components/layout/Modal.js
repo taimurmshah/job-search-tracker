@@ -9,7 +9,8 @@ import EmployeeDataForm from "../employees/EmployeeDataForm";
 import AddEmail from "../email/AddEmail";
 import EmailContainer from "../email/EmailContainer";
 import MassEmail from "../email/massEmail/MassEmail";
-
+import Resume from "../resume/Resume";
+import Templates from "../templates/Templates";
 import styled from "styled-components";
 
 const Modal = ({ modal, closeModal }) => {
@@ -39,6 +40,10 @@ const Modal = ({ modal, closeModal }) => {
         {modal.emailContainer && <EmailContainer />}
 
         {modal.massEmail && <MassEmail />}
+
+        {modal.uploadResume && <Resume />}
+
+        {modal.editTemplates && <Templates />}
       </ModalMain>
     </div>
   );
