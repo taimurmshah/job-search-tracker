@@ -179,6 +179,7 @@ router.post("/gmail/send/template", auth, async (req, res) => {
       await employee.save();
       await job.save();
 
+      console.log(`email sent to ${employee.name + ": " + result.accepted[0]}`);
       res.send({ result, employee });
     });
   } catch (err) {
