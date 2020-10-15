@@ -12,7 +12,6 @@ import Signup from "./components/auth/Signup";
 import Dashboard from "./components/dashboard/Dashboard";
 import Jobs from "./components/jobList/Jobs";
 import Job from "./components/job/JobContainer";
-// import CreateJob from "./components/jobs/CreateJob";
 import Resume from "./components/resume/ViewResume";
 
 const App = ({ jwtThunk, readJobsThunk }) => {
@@ -34,7 +33,6 @@ const App = ({ jwtThunk, readJobsThunk }) => {
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/jobs" component={Jobs} />
           <PrivateRoute exact path="/jobs/:id" component={Job} />
-          {/*<PrivateRoute exact path="/create-job" component={CreateJob} />*/}
           <PrivateRoute exact path="/resume" component={Resume} />
           <Route exact path="/" component={Landing} />
         </Switch>
@@ -43,14 +41,11 @@ const App = ({ jwtThunk, readJobsThunk }) => {
   );
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    jwtThunk: token => dispatch(jwtThunk(token)),
-    readJobsThunk: () => dispatch(readJobsThunk())
+    jwtThunk: (token) => dispatch(jwtThunk(token)),
+    readJobsThunk: () => dispatch(readJobsThunk()),
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(App);
+export default connect(null, mapDispatchToProps)(App);
