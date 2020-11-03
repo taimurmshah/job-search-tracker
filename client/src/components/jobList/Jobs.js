@@ -27,26 +27,23 @@ const Jobs = ({ jobs, readJobsThunk, jobDataModal }) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.auth.isLoggedIn,
-    jobs: state.job.jobs
+    jobs: state.job.jobs,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    currentJob: job => dispatch(currentJob(job)),
-    getEmployeesThunk: jobId => dispatch(getEmployeesThunk(jobId)),
+    currentJob: (job) => dispatch(currentJob(job)),
+    getEmployeesThunk: (jobId) => dispatch(getEmployeesThunk(jobId)),
     jobDataModal: () => dispatch(jobDataModal()),
-    readJobsThunk: () => dispatch(readJobsThunk())
+    readJobsThunk: () => dispatch(readJobsThunk()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Jobs);
+export default connect(mapStateToProps, mapDispatchToProps)(Jobs);
 
 const Add = styled.p`
   margin-left: 30px;

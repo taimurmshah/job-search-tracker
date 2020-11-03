@@ -1,92 +1,67 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import styled from "styled-components";
 import { InputContainer, Input } from "../resusableComponents/styledComponents";
 import { connect } from "react-redux";
 import { newResumeThunk, editResumeThunk } from "../../redux/thunks/resume";
+import { closeModal } from "../../redux/actions/modal";
 
-class Upload extends Component {
-  state = {
-    file: "",
-    fileName: "Choose File"
+const Upload = ({
+  resume = null,
+  newResumeThunk,
+  editResumeThunk,
+  closeModal,
+}) => {
+  const [file, setFile] = useState("");
+  const [fileName, setFileName] = useState("Choose File");
+
+  const changeHandler = (e) => {
+    setFile(e.target.files[0]);
+    setFileName(e.target.files[0].name);
   };
 
-  changeHandler = e => {
-    this.setState(
-      {
-        file: e.target.files[0],
-        fileName: e.target.files[0].name
-      },
-      () => {
-        console.log("state:", this.state);
-      }
-    );
-  };
-
-  submitHandler = async e => {
-    console.log("submit handler is hit");
+  const submit = (e) => {
     e.preventDefault();
-
     let formData = new FormData();
-    formData.append("resume", this.state.file);
-
-    if (this.props.resume) {
-      console.log(
-        "in the resume submit handler's if statement, here is this.props.resume:",
-        this.props.resume
-      );
-      this.props.editResumeThunk(formData);
-    } else {
-      console.log(
-        "in the resume submit handler's else statement, here is this.props.resume:",
-        this.props.resume
-      );
-      this.props.newResumeThunk(formData);
-    }
-    this.props.closeModal();
+    formData.append("resume", file);
+    if (resume) editResumeThunk(formData);
+    else newResumeThunk(formData);
+    return closeModal();
   };
 
-  render() {
-    return (
-      <div>
-        {/*<div className="upload-btn-wrapper">*/}
-        <form onSubmit={this.submitHandler}>
-          <InputContainer>
-            <Input readOnly type="text" value={this.state.fileName} />
+  return (
+    <div>
+      <form onSubmit={submit}>
+        <InputContainer>
+          <Input readOnly type="text" value={fileName} />
 
-            {this.state.fileName !== "Choose File" ? (
-              <Button type="submit" onClick={this.submitHandler}>
-                Submit
-              </Button>
-            ) : (
-              /*<Button>Select Resume</Button>*/
-              <input type="file" onChange={this.changeHandler} />
-            )}
+          {fileName !== "Choose File" ? (
+            <Button type="submit" onClick={submit}>
+              Submit
+            </Button>
+          ) : (
+            <input type="file" onChange={changeHandler} />
+          )}
+        </InputContainer>
+      </form>
+    </div>
+  );
+};
 
-            {/*<input type="submit" value="submit" />*/}
-          </InputContainer>
-        </form>
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    resume: state.auth.currentUser.resume
+    resume: state.auth.currentUser.resume,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    newResumeThunk: formData => dispatch(newResumeThunk(formData)),
-    editResumeThunk: formData => dispatch(editResumeThunk(formData))
+    newResumeThunk: (formData) => dispatch(newResumeThunk(formData)),
+    editResumeThunk: (formData) => dispatch(editResumeThunk(formData)),
+    closeModal: () => dispatch(closeModal()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Upload);
+export default connect(mapStateToProps, mapDispatchToProps)(Upload);
 
 const Button = styled.button`
   border: 2px solid black;

@@ -11,7 +11,7 @@ import { currentJob, removeCurrentJob } from "../../redux/actions/job";
 import {
   currentEmployee,
   removeCurrentEmployee,
-  removeEmployees
+  removeEmployees,
 } from "../../redux/actions/employee";
 import { getJobByIdThunk } from "../../redux/thunks/job";
 import { getEmployeesThunk } from "../../redux/thunks/employee";
@@ -28,7 +28,7 @@ const JobContainer = ({
   getEmployeesThunk,
   removeEmployees,
   removeCurrentJob,
-  readAllTemplatesThunk
+  readAllTemplatesThunk,
 }) => {
   useEffect(() => {
     if (templates.length === 0) {
@@ -71,32 +71,29 @@ const JobContainer = ({
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     job: state.job.currentJob,
     employees: state.employee.employees,
     currentEmployeeId: state.employee.currentEmployee._id,
-    templates: state.template.templates
+    templates: state.template.templates,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    getJobByIdThunk: jobId => dispatch(getJobByIdThunk(jobId)),
-    currentJob: jobId => dispatch(currentJob(jobId)),
+    getJobByIdThunk: (jobId) => dispatch(getJobByIdThunk(jobId)),
+    currentJob: (jobId) => dispatch(currentJob(jobId)),
     removeCurrentJob: () => dispatch(removeCurrentJob()),
-    getEmployeesThunk: jobId => dispatch(getEmployeesThunk(jobId)),
+    getEmployeesThunk: (jobId) => dispatch(getEmployeesThunk(jobId)),
     removeEmployees: () => dispatch(removeEmployees()),
-    currentEmployee: employeeId => dispatch(currentEmployee(employeeId)),
+    currentEmployee: (employeeId) => dispatch(currentEmployee(employeeId)),
     removeCurrentEmployee: () => dispatch(removeCurrentEmployee()),
-    readAllTemplatesThunk: () => dispatch(readAllTemplatesThunk())
+    readAllTemplatesThunk: () => dispatch(readAllTemplatesThunk()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(JobContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(JobContainer);
 
 const PageContainer = styled.div`
   margin-top: 2em;

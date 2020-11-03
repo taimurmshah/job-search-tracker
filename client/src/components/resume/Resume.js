@@ -12,7 +12,7 @@ class Resume extends Component {
     upload: false,
     view: false,
     edit: false,
-    deleteResume: false
+    deleteResume: false,
   };
 
   upload = () => {
@@ -20,7 +20,7 @@ class Resume extends Component {
       upload: true,
       view: false,
       edit: false,
-      deleteResume: false
+      deleteResume: false,
     });
   };
 
@@ -29,7 +29,7 @@ class Resume extends Component {
       upload: false,
       view: true,
       edit: false,
-      deleteResume: false
+      deleteResume: false,
     });
   };
 
@@ -38,7 +38,7 @@ class Resume extends Component {
       upload: false,
       view: false,
       edit: true,
-      deleteResume: false
+      deleteResume: false,
     });
   };
 
@@ -47,7 +47,7 @@ class Resume extends Component {
       upload: false,
       view: false,
       edit: false,
-      deleteResume: true
+      deleteResume: true,
     });
   };
 
@@ -70,9 +70,9 @@ class Resume extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    resume: state.auth.currentUser.resume
+    resume: state.auth.currentUser.resume,
   };
 };
 

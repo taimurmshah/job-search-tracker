@@ -18,7 +18,7 @@ const Dashboard = ({
   readJobsThunk,
   readAllTemplatesThunk,
   clearTemplate,
-  progressThunk
+  progressThunk,
 }) => {
   useEffect(() => {
     if (!hasJobs) readJobsThunk();
@@ -62,23 +62,20 @@ const Dashboard = ({
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.auth.isLoggedIn,
-    hasJobs: state.job.hasJobs
+    hasJobs: state.job.hasJobs,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     readJobsThunk: () => dispatch(readJobsThunk()),
     readAllTemplatesThunk: () => dispatch(readAllTemplatesThunk()),
     clearTemplate: () => dispatch(clearTemplate()),
-    progressThunk: () => dispatch(progressThunk())
+    progressThunk: () => dispatch(progressThunk()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
