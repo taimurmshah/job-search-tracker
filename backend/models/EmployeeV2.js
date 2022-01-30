@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 
-const employeeSchema = new mongoose.Schema(
+const employeeV2Schema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -30,10 +30,6 @@ const employeeSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    notes: {
-      type: String,
-      trim: true,
-    },
     emailsSent: [
       {
         method: {
@@ -50,7 +46,7 @@ const employeeSchema = new mongoose.Schema(
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "Job",
+      ref: "Company",
     },
   },
   {
@@ -59,8 +55,8 @@ const employeeSchema = new mongoose.Schema(
   }
 );
 
-employeeSchema.set("autoIndex", false);
+employeeV2Schema.set("autoIndex", false);
 
-const Employee = mongoose.model("Employee", employeeSchema);
+const EmployeeV2 = mongoose.model("EmployeeV2", employeeV2Schema);
 
-module.exports = Employee;
+module.exports = EmployeeV2;

@@ -55,24 +55,19 @@ const Navbar = ({ currentUser, isLoggedIn, imageUrl }) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     currentUser: state.auth.currentUser,
     isLoggedIn: state.auth.isLoggedIn,
-    imageUrl: state.auth.currentUser.imageUrl
+    imageUrl: state.auth.currentUser.imageUrl,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Navbar)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));
 
 const Nav = styled.div`
   display: flex;

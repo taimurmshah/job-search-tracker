@@ -4,21 +4,21 @@ import { loginThunk } from "../../redux/thunks/auth";
 import {
   FormContainer,
   InputContainer,
-  Input
+  Input,
 } from "../resusableComponents/styledComponents";
 
 class LoginForm extends Component {
   state = {
     method: "local",
     email: "",
-    password: ""
+    password: "",
   };
 
-  changeHandler = e => {
+  changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  submitHandler = e => {
+  submitHandler = (e) => {
     e.preventDefault();
     this.props.closeModal();
     this.props.loginThunk(this.state);
@@ -59,19 +59,16 @@ class LoginForm extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    isLoggedIn: state.auth.isLoggedIn
+    isLoggedIn: state.auth.isLoggedIn,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    loginThunk: userObj => dispatch(loginThunk(userObj))
+    loginThunk: (userObj) => dispatch(loginThunk(userObj)),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

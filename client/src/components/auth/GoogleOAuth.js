@@ -5,8 +5,8 @@ import { googleOAuthThunk } from "../../redux/thunks/auth";
 
 //todo take care of the clientId value -- why isn't process.env working?
 
-const GoogleOAuth = props => {
-  const googleResponse = response => {
+const GoogleOAuth = (props) => {
+  const googleResponse = (response) => {
     const code = response.code;
     props.googleOAuthThunk(code);
   };
@@ -21,11 +21,11 @@ const GoogleOAuth = props => {
       responseType="code"
       redirectUri="postmessage"
       onSuccess={googleResponse}
-      onFailure={err => {
+      onFailure={(err) => {
         console.log({ err });
       }}
       clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
-      render={renderProps => (
+      render={(renderProps) => (
         <button
           className="login-page-button google-button"
           onClick={renderProps.onClick}
@@ -38,13 +38,10 @@ const GoogleOAuth = props => {
   );
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    googleOAuthThunk: code => dispatch(googleOAuthThunk(code))
+    googleOAuthThunk: (code) => dispatch(googleOAuthThunk(code)),
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(GoogleOAuth);
+export default connect(null, mapDispatchToProps)(GoogleOAuth);

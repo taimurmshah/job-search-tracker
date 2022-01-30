@@ -11,12 +11,12 @@ const userSchema = new mongoose.Schema(
     method: {
       type: String,
       enum: ["local", "google"],
-      required: true
+      required: true,
     },
     name: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
     },
     local: {
       email: {
@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema(
           if (!validator.isEmail(value)) {
             throw new Error("Please enter valid email");
           }
-        }
+        },
       },
       password: {
         type: String,
@@ -35,59 +35,63 @@ const userSchema = new mongoose.Schema(
           if (value.toLowerCase().includes("password")) {
             throw new Error("Password entry cannot contain 'password'.");
           }
-        }
-      }
+        },
+      },
     },
     google: {
       id: {
-        type: String
+        type: String,
       },
       email: {
         type: String,
-        lowercase: true
+        lowercase: true,
       },
       refresh_token: {
-        type: String
+        type: String,
       },
       access_token: {
-        type: String
-      }
+        type: String,
+      },
     },
     tokens: [
       {
         token: {
           type: String,
-          required: true
-        }
-      }
+          required: true,
+        },
+      },
     ],
     resume: {
-      type: Buffer
+      type: Buffer,
     },
     imageUrl: {
-      type: String
-    }
+      type: String,
+    },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 
-//todo is tokens field gonna be part of local?
+userSchema.virtual("jobSearches", {
+  ref: "JobSearch",
+  localField: "_id",
+  foreignField: "owner",
+});
 
 userSchema.virtual("jobs", {
   ref: "Job",
   localField: "_id",
-  foreignField: "owner"
+  foreignField: "owner",
 });
 
 userSchema.virtual("templates", {
   ref: "Template",
   localField: "_id",
-  foreignField: "owner"
+  foreignField: "owner",
 });
 
-userSchema.pre("save", async function(next) {
+userSchema.pre("save", async function (next) {
   const user = this;
 
   if (user.method !== "local") {
@@ -101,7 +105,7 @@ userSchema.pre("save", async function(next) {
   next();
 });
 
-userSchema.methods.toJSON = function() {
+userSchema.methods.toJSON = function () {
   const user = this;
 
   const userObj = user.toObject();
@@ -134,7 +138,7 @@ userSchema.statics.findByCredentials = async (email, password) => {
   return user;
 };
 
-userSchema.methods.generateAuthToken = async function() {
+userSchema.methods.generateAuthToken = async function () {
   const user = this;
 
   let token = await jwt.sign({ _id: user._id }, config.get("secret"));
@@ -145,7 +149,7 @@ userSchema.methods.generateAuthToken = async function() {
   return token;
 };
 
-userSchema.pre("remove", async function(next) {
+userSchema.pre("remove", async function (next) {
   const user = this;
   await Job.deleteMany({ owner: user._id });
   await Template.deleteMany({ owner: user._id });

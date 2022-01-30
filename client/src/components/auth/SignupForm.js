@@ -4,7 +4,7 @@ import { signupThunk } from "../../redux/thunks/auth";
 import {
   FormContainer,
   InputContainer,
-  Input
+  Input,
 } from "../resusableComponents/styledComponents";
 
 class SignupForm extends Component {
@@ -12,21 +12,21 @@ class SignupForm extends Component {
     method: "local",
     name: "",
     email: "",
-    password: ""
+    password: "",
   };
 
-  changeHandler = e => {
+  changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  submitHandler = e => {
+  submitHandler = (e) => {
     e.preventDefault();
     this.props.closeModal();
     this.props.signupThunk(this.state);
     return this.setState({
       name: "",
       email: "",
-      password: ""
+      password: "",
     });
   };
 
@@ -72,13 +72,10 @@ class SignupForm extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    signupThunk: userObj => dispatch(signupThunk(userObj))
+    signupThunk: (userObj) => dispatch(signupThunk(userObj)),
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(SignupForm);
+export default connect(null, mapDispatchToProps)(SignupForm);

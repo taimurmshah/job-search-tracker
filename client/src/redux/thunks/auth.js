@@ -1,17 +1,17 @@
 import { login, signup, googleLogin, authorize, logout } from "../actions/auth";
 // import { process.env.REACT_APP_URL } from "../../resources";
 
-export const signupThunk = userObj => async dispatch => {
+export const signupThunk = (userObj) => async (dispatch) => {
   try {
     let res = await fetch(`${process.env.REACT_APP_URL}/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json"
+        Accept: "application/json",
       },
       body: JSON.stringify({
-        ...userObj
-      })
+        ...userObj,
+      }),
     });
 
     res = await res.json();
@@ -24,17 +24,17 @@ export const signupThunk = userObj => async dispatch => {
   }
 };
 
-export const loginThunk = userObj => async dispatch => {
+export const loginThunk = (userObj) => async (dispatch) => {
   try {
     let res = await fetch(`${process.env.REACT_APP_URL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json"
+        Accept: "application/json",
       },
       body: JSON.stringify({
-        ...userObj
-      })
+        ...userObj,
+      }),
     });
 
     res = await res.json();
@@ -47,36 +47,37 @@ export const loginThunk = userObj => async dispatch => {
   }
 };
 
-export const googleOAuthThunk = code => async dispatch => {
+export const googleOAuthThunk = (code) => async (dispatch) => {
   try {
+    console.log("o auth thunk CODE:", code);
     let res = await fetch(`${process.env.REACT_APP_URL}/oauth/google`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json"
+        Accept: "application/json",
       },
-      body: JSON.stringify({ code })
+      body: JSON.stringify({ code }),
     });
 
     res = await res.json();
 
     localStorage.setItem("token", res.token);
-
+    console.log("RES:", res);
     dispatch(googleLogin(res.user));
   } catch (err) {
     //todo configure auth errors with redux...
   }
 };
 
-export const jwtThunk = token => async dispatch => {
+export const jwtThunk = (token) => async (dispatch) => {
   try {
     let res = await fetch(`${process.env.REACT_APP_URL}/users/me`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: token
-      }
+        Authorization: token,
+      },
     });
     res = await res.json();
 
@@ -86,7 +87,7 @@ export const jwtThunk = token => async dispatch => {
   }
 };
 
-export const logoutThunk = token => async dispatch => {
+export const logoutThunk = (token) => async (dispatch) => {
   console.log("LogoutThunk is hit!");
   try {
     await fetch(`${process.env.REACT_APP_URL}/logout`, {
@@ -94,8 +95,8 @@ export const logoutThunk = token => async dispatch => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: token
-      }
+        Authorization: token,
+      },
     });
     localStorage.removeItem("token");
     return dispatch(logout());

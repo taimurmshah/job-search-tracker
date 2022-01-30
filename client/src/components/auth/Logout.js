@@ -8,7 +8,7 @@ const Logout = ({ logoutThunk }) => {
   return (
     <button
       className="navbar-link"
-      onClick={e => {
+      onClick={(e) => {
         e.preventDefault();
 
         return logoutThunk(token);
@@ -19,13 +19,10 @@ const Logout = ({ logoutThunk }) => {
   );
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    logoutThunk: token => dispatch(logoutThunk(token))
+    logoutThunk: (token) => dispatch(logoutThunk(token)),
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Logout);
+export default connect(null, mapDispatchToProps)(Logout);

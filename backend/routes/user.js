@@ -14,7 +14,7 @@ router.post("/users", async (req, res) => {
     method,
     "local.email": email,
     "local.password": password,
-    name
+    name,
   });
 
   try {
@@ -46,11 +46,9 @@ router.post("/oauth/google", googleOAuth, async (req, res) => {
   try {
     const user = req.user;
     const code = req.body.code;
-
     const token = await user.generateAuthToken();
     res.send({ user, token });
   } catch (err) {
-    console.log("google oauth route err:", err);
     res.status(400).send(err);
   }
 });
@@ -60,7 +58,7 @@ router.post("/logout", auth, async (req, res) => {
   try {
     const user = req.user;
 
-    user.tokens = user.tokens.filter(token => token.token !== req.token);
+    user.tokens = user.tokens.filter((token) => token.token !== req.token);
 
     await user.save();
 
@@ -93,7 +91,7 @@ router.patch("/users/me", auth, async (req, res) => {
     const updates = Object.keys(req.body);
     const allowedUpdates = ["name", "email", "password"];
 
-    const isValidOperation = updates.every(update =>
+    const isValidOperation = updates.every((update) =>
       allowedUpdates.includes(update)
     );
 
@@ -101,7 +99,7 @@ router.patch("/users/me", auth, async (req, res) => {
       res.status(400).send("Invalid update parameters");
     }
 
-    updates.forEach(update => {
+    updates.forEach((update) => {
       user[update] = req.body[update];
     });
 
@@ -126,7 +124,7 @@ router.delete("/users/me", auth, async (req, res) => {
 //resume upload ish:
 const upload = multer({
   limits: {
-    fileSize: 1000000
+    fileSize: 1000000,
   },
   fileFilter(req, file, cb) {
     // if (!file.originalname.match(/\.(pdf|doc|docx|rtf)$/)) {
@@ -145,7 +143,7 @@ const upload = multer({
     }
 
     cb(undefined, true);
-  }
+  },
 });
 
 //upload user's resume

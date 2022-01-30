@@ -1,33 +1,31 @@
 const mongoose = require("mongoose");
 const Employee = require("./Employee");
 
-//todo website validation (includes ".com")
-
 const jobSchema = new mongoose.Schema(
   {
     company: {
       type: String,
       trim: true,
-      required: true
+      required: true,
     },
     website: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
     },
     link: {
       type: String,
       trim: true,
-      required: true
+      required: true,
     },
     linkedIn: {
       type: String,
       trim: true,
-      required: true
+      required: true,
     },
     response: {
       type: Boolean,
-      default: false
+      default: false,
     },
     status: {
       type: String,
@@ -40,20 +38,20 @@ const jobSchema = new mongoose.Schema(
         "Phone screen",
         "Code challenge",
         "On-site",
-        "Offer"
+        "Offer",
       ],
-      default: "Haven't sent email yet"
+      default: "Haven't sent email yet",
     },
     mostRecentEmailSent: {
-      type: Date
+      type: Date,
     },
     numOfEmailsSent: {
       type: Number,
-      default: 0
+      default: 0,
     },
     notes: {
       type: String,
-      trim: true
+      trim: true,
     },
     progress: [
       {
@@ -64,28 +62,28 @@ const jobSchema = new mongoose.Schema(
           "Technical Call",
           "Code Challenge",
           "Onsite",
-          "Offer"
-        ]
-      }
+          "Offer",
+        ],
+      },
     ],
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "User"
-    }
+      ref: "User",
+    },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 
 jobSchema.virtual("employees", {
   ref: "Employee",
   localField: "_id",
-  foreignField: "owner"
+  foreignField: "owner",
 });
 
-jobSchema.pre("remove", async function(next) {
+jobSchema.pre("remove", async function (next) {
   const job = this;
   await Employee.deleteMany({ owner: job._id });
   next();

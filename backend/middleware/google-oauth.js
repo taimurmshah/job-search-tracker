@@ -31,12 +31,16 @@ const googleOAuth = async (req, res, next) => {
   try {
     const code = req.body.code;
 
+    console.log({ code });
+
     const tokens = await getTokens(code);
 
     const access_token = tokens.access_token;
     let refresh_token;
 
     const userProfile = await fetchUserProfile(access_token);
+
+    // console.log("ACCESS TOKEN:", access_token);
 
     const googleId = userProfile.sub;
 
@@ -69,6 +73,7 @@ const googleOAuth = async (req, res, next) => {
     req.user = existingUser;
     next();
   } catch (err) {
+    console.log("google oauth error:", err);
     res.status(400).send(err);
   }
 };
