@@ -206,11 +206,21 @@ router.get("/jobs/d3/progress", auth, async (req, res) => {
     const user = req.user;
     await user
       .populate({
+        path: "jobSearches",
+      })
+      .execPopulate();
+
+    const activeJobSearch = user.jobSearches.filter(
+      (js) => js.currentSession === true
+    )[0];
+
+    await activeJobSearch
+      .populate({
         path: "jobs",
       })
       .execPopulate();
 
-    let jobs = user.jobs;
+    let jobs = activeJobSearch.jobs;
 
     for (let i = 0; i < jobs.length; i++) {
       let prog = jobs[i].progress;
@@ -242,32 +252,3 @@ router.get("/jobs/d3/progress", auth, async (req, res) => {
 });
 
 module.exports = router;
-
-const assignJobsToJobSearch = async (jobs, user) => {
-  try {
-    await user
-      .populate({
-        path: "jobSearches",
-      })
-      .execPopulate();
-
-    const jobSearches = user.jobSearches;
-
-    const searchOne = jobSearches[0];
-    const searchOnePointFive = jobSearches[1];
-
-    const citi = jobs.filter((j) => j.company === "Citi")[0];
-
-    for (const job of jobs) {
-      if (job.createdAt <= searchOne.endDate) {
-        job.jobSearch = searchOne._id;
-      } else if (job.createdAt >= searchOnePointFive.startDate) {
-        job.jobSearch = searchOnePointFive._id;
-      }
-      await job.save();
-      console.log("now branded:", job.company);
-    }
-  } catch (err) {
-    console.log({ err });
-  }
-};
