@@ -10,7 +10,7 @@ const UpdateEmployeeResponse = ({
   closeModal,
   submitHandler,
   updateJobThunk,
-  currentEmployee: { name }
+  currentEmployee: { name },
 }) => {
   const [response, setResponse] = useState(false);
 
@@ -19,7 +19,7 @@ const UpdateEmployeeResponse = ({
     closeModal();
   };
 
-  const submit = e => {
+  const submit = (e) => {
     const update = { status: e.target.innerText };
     submitHandler();
     updateJobThunk(_id, update);
@@ -73,17 +73,17 @@ const UpdateEmployeeResponse = ({
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    currentEmployee: state.employee.currentEmployee
+    currentEmployee: state.employee.currentEmployee,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     updateJobThunk: (jobId, updates) =>
       dispatch(updateJobThunk(jobId, updates)),
-    closeModal: () => dispatch(closeModal())
+    closeModal: () => dispatch(closeModal()),
   };
 };
 

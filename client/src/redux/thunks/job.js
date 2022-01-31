@@ -6,10 +6,10 @@ import {
   updateJob,
   getProgressInfo,
   deleteJob,
-  removeCurrentJob
+  removeCurrentJob,
 } from "../actions/job";
 
-export const newJobThunk = jobObj => async dispatch => {
+export const newJobThunk = (jobObj) => async (dispatch) => {
   const token = localStorage.getItem("token");
 
   try {
@@ -18,9 +18,9 @@ export const newJobThunk = jobObj => async dispatch => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: token
+        Authorization: token,
       },
-      body: JSON.stringify(jobObj)
+      body: JSON.stringify(jobObj),
     });
 
     res = await res.json();
@@ -31,16 +31,16 @@ export const newJobThunk = jobObj => async dispatch => {
   }
 };
 
-export const readJobsThunk = () => async dispatch => {
+export const readJobsThunk = () => async (dispatch) => {
   const token = localStorage.getItem("token");
   try {
-    let res = await fetch(`${process.env.REACT_APP_URL}/jobs`, {
+    let res = await fetch(`${process.env.REACT_APP_URL}/active-jobs`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: token
-      }
+        Authorization: token,
+      },
     });
 
     res = await res.json();
@@ -53,7 +53,7 @@ export const readJobsThunk = () => async dispatch => {
   }
 };
 
-export const getJobByIdThunk = jobId => async dispatch => {
+export const getJobByIdThunk = (jobId) => async (dispatch) => {
   const token = localStorage.getItem("token");
   try {
     let res = await fetch(`${process.env.REACT_APP_URL}/jobs/${jobId}`, {
@@ -61,8 +61,8 @@ export const getJobByIdThunk = jobId => async dispatch => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: token
-      }
+        Authorization: token,
+      },
     });
 
     res = await res.json();
@@ -72,7 +72,7 @@ export const getJobByIdThunk = jobId => async dispatch => {
   }
 };
 
-export const updateJobThunk = (jobId, updates) => async dispatch => {
+export const updateJobThunk = (jobId, updates) => async (dispatch) => {
   const token = localStorage.getItem("token");
   try {
     let res = await fetch(`${process.env.REACT_APP_URL}/jobs/${jobId}`, {
@@ -80,9 +80,9 @@ export const updateJobThunk = (jobId, updates) => async dispatch => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: token
+        Authorization: token,
       },
-      body: JSON.stringify(updates)
+      body: JSON.stringify(updates),
     });
 
     let response = await res.json();
@@ -92,7 +92,7 @@ export const updateJobThunk = (jobId, updates) => async dispatch => {
   }
 };
 
-export const deleteJobThunk = jobId => async dispatch => {
+export const deleteJobThunk = (jobId) => async (dispatch) => {
   const token = localStorage.getItem("token");
   try {
     let res = await fetch(`${process.env.REACT_APP_URL}/jobs/${jobId}`, {
@@ -100,8 +100,8 @@ export const deleteJobThunk = jobId => async dispatch => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: token
-      }
+        Authorization: token,
+      },
     });
     let job = await res.json();
     dispatch(deleteJob(job));
@@ -111,7 +111,7 @@ export const deleteJobThunk = jobId => async dispatch => {
   }
 };
 
-export const progressThunk = () => async dispatch => {
+export const progressThunk = () => async (dispatch) => {
   const token = localStorage.getItem("token");
   try {
     let res = await fetch(`${process.env.REACT_APP_URL}/jobs/d3/progress`, {
@@ -119,8 +119,8 @@ export const progressThunk = () => async dispatch => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: token
-      }
+        Authorization: token,
+      },
     });
 
     let info = await res.json();

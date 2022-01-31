@@ -6,7 +6,7 @@ import {
   HeaderContainer,
   InputContainer,
   TableButton,
-  Span
+  Span,
 } from "../resusableComponents/styledComponents";
 import styled from "styled-components";
 
@@ -15,7 +15,7 @@ const Notes = ({ job, updateJobThunk, closeModal }) => {
 
   const [stateNotes, setStateNotes] = useState(notes);
 
-  const submit = e => {
+  const submit = (e) => {
     e.preventDefault();
     updateJobThunk(_id, { notes: stateNotes });
     closeModal();
@@ -31,7 +31,7 @@ const Notes = ({ job, updateJobThunk, closeModal }) => {
           required
           name="notes"
           value={stateNotes}
-          onChange={e => setStateNotes(e.target.value)}
+          onChange={(e) => setStateNotes(e.target.value)}
           id=""
           cols="30"
           rows="20"
@@ -46,20 +46,17 @@ const Notes = ({ job, updateJobThunk, closeModal }) => {
   );
 };
 
-const mapStateToProps = state => ({ job: state.job.currentJob });
+const mapStateToProps = (state) => ({ job: state.job.currentJob });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     updateJobThunk: (jobId, updates) =>
       dispatch(updateJobThunk(jobId, updates)),
-    closeModal: () => dispatch(closeModal())
+    closeModal: () => dispatch(closeModal()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Notes);
+export default connect(mapStateToProps, mapDispatchToProps)(Notes);
 
 const Title = styled.h3`
   font-size: 25px;

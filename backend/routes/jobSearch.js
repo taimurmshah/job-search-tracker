@@ -1,8 +1,6 @@
 const express = require("express");
 const auth = require("../middleware/auth");
 const JobSearch = require("../models/JobSearch");
-const job = require("../../client/src/redux/reducers/job");
-const Job = require("../../client/src/redux/reducers/job");
 
 const router = new express.Router();
 

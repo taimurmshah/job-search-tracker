@@ -24,18 +24,15 @@ const SmallModal = ({ modal, closeModal }) => {
   );
 };
 
-const mapStateToProps = state => ({ modal: state.modal });
+const mapStateToProps = (state) => ({ modal: state.modal });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    closeModal: () => dispatch(closeModal())
+    closeModal: () => dispatch(closeModal()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SmallModal);
+export default connect(mapStateToProps, mapDispatchToProps)(SmallModal);
 
 const SmallModalMain = styled.section`
   position: fixed;

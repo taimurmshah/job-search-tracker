@@ -2,7 +2,7 @@ const express = require("express");
 const auth = require("../middleware/auth");
 const Job = require("../models/Job");
 const Employee = require("../models/Employee");
-
+const JobSearch = require("../models/JobSearch");
 const router = new express.Router();
 
 //this was after an update to the schema.
@@ -11,7 +11,7 @@ router.patch("/jobs/model-update", auth, async (req, res) => {
     const user = req.user;
     await user
       .populate({
-        path: "jobs"
+        path: "jobs",
       })
       .execPopulate();
 
@@ -22,7 +22,7 @@ router.patch("/jobs/model-update", auth, async (req, res) => {
       let numOfEmailsSent = 0;
       await job
         .populate({
-          path: "employees"
+          path: "employees",
         })
         .execPopulate();
 
@@ -52,7 +52,7 @@ router.post("/jobs", auth, async (req, res) => {
 
   const job = new Job({
     ...req.body,
-    owner: req.user._id
+    owner: req.user._id,
   });
 
   try {
@@ -64,17 +64,50 @@ router.post("/jobs", auth, async (req, res) => {
   }
 });
 
-//view all of my jobs
+//get all jobs
 router.get("/jobs", auth, async (req, res) => {
   try {
     const user = req.user;
     await user
       .populate({
-        path: "jobs"
+        path: "jobs",
       })
       .execPopulate();
 
     let jobs = user.jobs;
+
+    for (let i = 0, j = jobs.length - 1; i < j; i++, j--) {
+      [jobs[i], jobs[j]] = [jobs[j], jobs[i]];
+    }
+
+    res.send(jobs);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+//get all active jobs
+router.get("/active-jobs", auth, async (req, res) => {
+  try {
+    const user = req.user;
+
+    await user
+      .populate({
+        path: "jobSearches",
+      })
+      .execPopulate();
+
+    const activeJobSearch = user.jobSearches.filter(
+      (js) => js.currentSession === true
+    )[0];
+
+    await activeJobSearch
+      .populate({
+        path: "jobs",
+      })
+      .execPopulate();
+
+    let jobs = activeJobSearch.jobs;
 
     for (let i = 0, j = jobs.length - 1; i < j; i++, j--) {
       [jobs[i], jobs[j]] = [jobs[j], jobs[i]];
@@ -117,7 +150,7 @@ router.patch("/jobs/:id", auth, async (req, res) => {
     "link",
     "company",
     "linkedIn",
-    "website"
+    "website",
   ];
 
   for (let i = 0; i < updates.length; i++) {
@@ -133,7 +166,7 @@ router.patch("/jobs/:id", auth, async (req, res) => {
 
     if (!job) return res.status(404).send();
 
-    updates.forEach(update => (job[update] = req.body[update]));
+    updates.forEach((update) => (job[update] = req.body[update]));
 
     await job.save();
 
@@ -166,14 +199,14 @@ router.get("/jobs/d3/progress", auth, async (req, res) => {
     "Technical Call": 0,
     "Code Challenge": 0,
     Onsite: 0,
-    Offer: 0
+    Offer: 0,
   };
 
   try {
     const user = req.user;
     await user
       .populate({
-        path: "jobs"
+        path: "jobs",
       })
       .execPopulate();
 
@@ -199,7 +232,7 @@ router.get("/jobs/d3/progress", auth, async (req, res) => {
       { stage: "Code Challenge", number: d3Info["Code Challenge"] },
       { stage: "Technical Call", number: d3Info["Technical Call"] },
       { stage: "Onsite", number: d3Info.Onsite },
-      { stage: "Offer", number: d3Info.Offer }
+      { stage: "Offer", number: d3Info.Offer },
     ];
 
     res.send(d3Info);
@@ -209,3 +242,32 @@ router.get("/jobs/d3/progress", auth, async (req, res) => {
 });
 
 module.exports = router;
+
+const assignJobsToJobSearch = async (jobs, user) => {
+  try {
+    await user
+      .populate({
+        path: "jobSearches",
+      })
+      .execPopulate();
+
+    const jobSearches = user.jobSearches;
+
+    const searchOne = jobSearches[0];
+    const searchOnePointFive = jobSearches[1];
+
+    const citi = jobs.filter((j) => j.company === "Citi")[0];
+
+    for (const job of jobs) {
+      if (job.createdAt <= searchOne.endDate) {
+        job.jobSearch = searchOne._id;
+      } else if (job.createdAt >= searchOnePointFive.startDate) {
+        job.jobSearch = searchOnePointFive._id;
+      }
+      await job.save();
+      console.log("now branded:", job.company);
+    }
+  } catch (err) {
+    console.log({ err });
+  }
+};

@@ -6,7 +6,7 @@ import {
   HeaderContainer,
   List,
   Span,
-  TableButton
+  TableButton,
 } from "../resusableComponents/styledComponents";
 import { closeModal } from "../../redux/actions/modal";
 
@@ -15,16 +15,16 @@ const Progress = ({ job, updateJobThunk, closeModal }) => {
 
   const [stateProgress, setStateProgress] = useState(progress);
 
-  const checkBoxHandler = e => {
+  const checkBoxHandler = (e) => {
     let text = e.target.nextElementSibling.nextElementSibling.innerText;
     if (e.target.checked) setStateProgress([...stateProgress, text]);
     else {
-      const newProg = stateProgress.filter(t => t !== text);
+      const newProg = stateProgress.filter((t) => t !== text);
       setStateProgress(newProg);
     }
   };
 
-  const submit = e => {
+  const submit = (e) => {
     e.preventDefault();
     updateJobThunk(_id, { progress: stateProgress });
     closeModal();
@@ -94,17 +94,14 @@ const Progress = ({ job, updateJobThunk, closeModal }) => {
   );
 };
 
-const mapStateToProps = state => ({ job: state.job.currentJob });
+const mapStateToProps = (state) => ({ job: state.job.currentJob });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     updateJobThunk: (jobId, updates) =>
       dispatch(updateJobThunk(jobId, updates)),
-    closeModal: () => dispatch(closeModal())
+    closeModal: () => dispatch(closeModal()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Progress);
+export default connect(mapStateToProps, mapDispatchToProps)(Progress);

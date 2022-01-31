@@ -79,6 +79,12 @@ userSchema.virtual("jobSearches", {
   foreignField: "owner",
 });
 
+userSchema.virtual("companies", {
+  ref: "Company",
+  localField: "_id",
+  foreignField: "owner",
+});
+
 userSchema.virtual("jobs", {
   ref: "Job",
   localField: "_id",

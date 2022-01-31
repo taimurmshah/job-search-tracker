@@ -5,13 +5,13 @@ import { closeModal } from "../../redux/actions/modal";
 import {
   HeaderContainer,
   Span,
-  List
+  List,
 } from "../resusableComponents/styledComponents";
 
 const Status = ({ _id, closeModal, updateJobThunk }) => {
-  const clickHandler = e => {
+  const clickHandler = (e) => {
     const update = {
-      status: e.target.innerText
+      status: e.target.innerText,
     };
     updateJobThunk(_id, update);
     closeModal();
@@ -57,17 +57,14 @@ const Status = ({ _id, closeModal, updateJobThunk }) => {
   );
 };
 
-const mapStateToProps = state => ({ _id: state.job.currentJob._id });
+const mapStateToProps = (state) => ({ _id: state.job.currentJob._id });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     updateJobThunk: (jobId, updates) =>
       dispatch(updateJobThunk(jobId, updates)),
-    closeModal: () => dispatch(closeModal())
+    closeModal: () => dispatch(closeModal()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Status);
+export default connect(mapStateToProps, mapDispatchToProps)(Status);

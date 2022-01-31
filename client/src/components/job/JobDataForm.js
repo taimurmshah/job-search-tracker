@@ -6,7 +6,7 @@ import { closeModal } from "../../redux/actions/modal";
 import {
   FormContainer,
   Input,
-  FormButton
+  FormButton,
 } from "../resusableComponents/styledComponents";
 
 const JobDataForm = ({ job, newJobThunk, updateJobThunk, closeModal }) => {
@@ -17,13 +17,13 @@ const JobDataForm = ({ job, newJobThunk, updateJobThunk, closeModal }) => {
   const [jobLinkState, setJobLink] = useState(link);
   const [linkedInState, setLinkedIn] = useState(linkedIn);
 
-  const submit = e => {
+  const submit = (e) => {
     e.preventDefault();
     const jobObj = {
       company: companyState,
       website: websiteState,
       link: jobLinkState,
-      linkedIn: linkedInState
+      linkedIn: linkedInState,
     };
     if (Object.keys(job).length === 0) {
       newJobThunk(jobObj);
@@ -42,7 +42,7 @@ const JobDataForm = ({ job, newJobThunk, updateJobThunk, closeModal }) => {
         type="text"
         name="company"
         value={companyState}
-        onChange={e => setCompany(e.target.value)}
+        onChange={(e) => setCompany(e.target.value)}
       />
       <p>LinkedIn Page:</p>
       <Input
@@ -51,7 +51,7 @@ const JobDataForm = ({ job, newJobThunk, updateJobThunk, closeModal }) => {
         name="linkedIn"
         autoComplete="off"
         value={linkedInState}
-        onChange={e => setLinkedIn(e.target.value)}
+        onChange={(e) => setLinkedIn(e.target.value)}
       />
       <p>Company Website:</p>
       <Input
@@ -60,7 +60,7 @@ const JobDataForm = ({ job, newJobThunk, updateJobThunk, closeModal }) => {
         name="website"
         autoComplete="off"
         value={websiteState}
-        onChange={e => setWebsite(e.target.value)}
+        onChange={(e) => setWebsite(e.target.value)}
       />
       <p>Link to Job Description:</p>
       <Input
@@ -69,25 +69,22 @@ const JobDataForm = ({ job, newJobThunk, updateJobThunk, closeModal }) => {
         name="link"
         autoComplete="off"
         value={jobLinkState}
-        onChange={e => setJobLink(e.target.value)}
+        onChange={(e) => setJobLink(e.target.value)}
       />
       <FormButton type="submit">Submit</FormButton>
     </FormContainer>
   );
 };
 
-const mapStateToProps = state => ({ job: state.job.currentJob });
+const mapStateToProps = (state) => ({ job: state.job.currentJob });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    newJobThunk: jobObj => dispatch(newJobThunk(jobObj)),
+    newJobThunk: (jobObj) => dispatch(newJobThunk(jobObj)),
     updateJobThunk: (jobId, updates) =>
       dispatch(updateJobThunk(jobId, updates)),
-    closeModal: () => dispatch(closeModal())
+    closeModal: () => dispatch(closeModal()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(JobDataForm);
+export default connect(mapStateToProps, mapDispatchToProps)(JobDataForm);

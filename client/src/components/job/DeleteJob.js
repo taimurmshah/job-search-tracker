@@ -31,19 +31,16 @@ const DeleteJob = ({ job, closeModal, deleteJobThunk }) => {
   );
 };
 
-const mapStateToProps = state => ({ job: state.job.currentJob });
+const mapStateToProps = (state) => ({ job: state.job.currentJob });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    deleteJobThunk: jobId => dispatch(deleteJobThunk(jobId)),
-    closeModal: () => dispatch(closeModal())
+    deleteJobThunk: (jobId) => dispatch(deleteJobThunk(jobId)),
+    closeModal: () => dispatch(closeModal()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DeleteJob);
+export default connect(mapStateToProps, mapDispatchToProps)(DeleteJob);
 
 const Container = styled.div`
   display: flex;
