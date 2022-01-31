@@ -6,9 +6,13 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case "GET_JOB_SEARCHES":
+      const active = action.payload.filter(
+        (js) => js.currentSession === true
+      )[0];
       return {
         ...state,
         jobSearches: action.payload,
+        activeJobSearch: active,
       };
     case "NEW_JOB_SEARCH":
       return {

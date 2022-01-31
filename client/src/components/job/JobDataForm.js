@@ -76,7 +76,9 @@ const JobDataForm = ({ job, newJobThunk, updateJobThunk, closeModal }) => {
   );
 };
 
-const mapStateToProps = (state) => ({ job: state.job.currentJob });
+const mapStateToProps = (state) => ({
+  job: state.job.currentJob,
+});
 
 const mapDispatchToProps = (dispatch) => {
   return {

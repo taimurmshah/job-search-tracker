@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { readJobsThunk } from "../../redux/thunks/job";
-import { currentJob, hasJobs } from "../../redux/actions/job";
+import { currentJob } from "../../redux/actions/job";
 import { getEmployeesThunk } from "../../redux/thunks/employee";
 import JobListContainer from "./JobListContainer";
 import Modal from "../layout/Modal";
