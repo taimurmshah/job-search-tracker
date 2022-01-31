@@ -50,16 +50,32 @@ router.post("/jobs", auth, async (req, res) => {
     req.body.website = req.body.website.split("/")[2];
   }
 
+  const user = req.user;
+
+  await user
+    .populate({
+      path: "jobSearches",
+    })
+    .execPopulate();
+
+  const activeJobSearch = user.jobSearches.filter(
+    (js) => js.currentSession === true
+  )[0];
+
   const job = new Job({
     ...req.body,
     owner: req.user._id,
+    jobSearch: activeJobSearch._id,
   });
+
+  console.log({ job });
 
   try {
     await job.save();
 
     res.send(job);
   } catch (err) {
+    console.log({ err });
     res.status(400).send(err);
   }
 });

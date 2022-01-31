@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { readJobsThunk } from "../../redux/thunks/job";
-import { currentJob } from "../../redux/actions/job";
+import { currentJob, hasJobs } from "../../redux/actions/job";
 import { getEmployeesThunk } from "../../redux/thunks/employee";
 import JobListContainer from "./JobListContainer";
 import Modal from "../layout/Modal";
@@ -9,7 +9,7 @@ import styled from "styled-components";
 import { Span } from "../resusableComponents/styledComponents";
 import { jobDataModal } from "../../redux/actions/modal";
 
-const Jobs = ({ jobs, readJobsThunk, jobDataModal }) => {
+const Jobs = ({ hasJobs, readJobsThunk, jobDataModal }) => {
   useEffect(() => {
     readJobsThunk();
   }, []);
@@ -22,7 +22,7 @@ const Jobs = ({ jobs, readJobsThunk, jobDataModal }) => {
         </Add>
       </Span>
       <Modal />
-      <JobListContainer />
+      {hasJobs && <JobListContainer />}
     </JobsDiv>
   );
 };
@@ -30,7 +30,7 @@ const Jobs = ({ jobs, readJobsThunk, jobDataModal }) => {
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.auth.isLoggedIn,
-    jobs: state.job.jobs,
+    hasJobs: state.job.hasJobs,
   };
 };
 

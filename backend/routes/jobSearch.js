@@ -5,7 +5,7 @@ const JobSearch = require("../models/JobSearch");
 const router = new express.Router();
 
 //create new job search
-router.post("/searches", auth, async (req, res) => {
+router.post("/job-searches", auth, async (req, res) => {
   const jobSearch = new JobSearch({
     ...req.body,
     owner: req.user._id,
@@ -19,8 +19,8 @@ router.post("/searches", auth, async (req, res) => {
   }
 });
 
-//view all job searches
-router.get("/searches", auth, async (req, res) => {
+//get all job job-searches
+router.get("/job-searches", auth, async (req, res) => {
   try {
     const user = req.user;
     await user
@@ -38,7 +38,7 @@ router.get("/searches", auth, async (req, res) => {
 });
 
 //get job search by id
-router.get("/searches/:id", auth, async (req, res) => {
+router.get("/job-searches/:id", auth, async (req, res) => {
   try {
     const jobSearch = await JobSearch.findOne({
       _id: req.params.id,
@@ -54,11 +54,11 @@ router.get("/searches/:id", auth, async (req, res) => {
 });
 
 //update job search
-router.patch("/searches/:id", auth, async (req, res) => {
+router.patch("/job-searches/:id", auth, async (req, res) => {
   const updates = Object.keys(req.body);
   // console.log("updates:", updates);
 
-  const allowedUpdates = ["title", "currentSession", "startDate", "endDate"];
+  const allowedUpdates = ["title", "currentSession", "endDate"];
 
   for (let i = 0; i < updates.length; i++) {
     if (!allowedUpdates.includes(updates[i])) {
@@ -84,7 +84,7 @@ router.patch("/searches/:id", auth, async (req, res) => {
 });
 
 //delete job search
-router.delete("/searches/:id", auth, async (req, res) => {
+router.delete("/job-searches/:id", auth, async (req, res) => {
   const _id = req.params.id;
 
   try {
