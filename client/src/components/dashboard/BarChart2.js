@@ -4,7 +4,7 @@ import { HeaderContainer } from "../resusableComponents/styledComponents";
 import * as d3 from "d3";
 import styled from "styled-components";
 
-const BarChart = ({ data }) => {
+const BarChart = ({ data, hasJobs }) => {
   const svgRef = useRef();
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const BarChart = ({ data }) => {
     //scales
     let x = d3
       .scaleBand()
-      .domain(data.map(d => d.stage))
+      .domain(data.map((d) => d.stage))
       .range([0, width]);
 
     let y = d3
@@ -79,7 +79,7 @@ const BarChart = ({ data }) => {
       .attr("transform", "rotate(-90)")
       .text("Number of Companies");
 
-    const numPlacement = n => {
+    const numPlacement = (n) => {
       if (n > 100) return 2.4;
       if (n > 10) return 2.3;
       return 2.16;
@@ -92,33 +92,24 @@ const BarChart = ({ data }) => {
       .join("rect")
       .attr("class", "bar")
       .style("transform", "scale(1, -1)")
-      .attr("x", d => x(d.stage) + x.bandwidth() / 4)
+      .attr("x", (d) => x(d.stage) + x.bandwidth() / 4)
       .attr("y", -height)
       .attr("width", x.bandwidth() / 2)
 
-      .on("mouseenter", function(barData, idx) {
-        d3.selectAll(".bar")
-          .transition()
-          .duration(400)
-          .attr("opacity", 0);
+      .on("mouseenter", function (barData, idx) {
+        d3.selectAll(".bar").transition().duration(400).attr("opacity", 0);
         d3.select(this)
 
           .transition()
           .duration(400)
           .attr("opacity", 0.6);
       })
-      .on("mouseleave", function() {
-        d3.selectAll(".bar")
-          .transition()
-          .duration(400)
-          .attr("opacity", 1);
-        d3.select(this)
-          .transition()
-          .duration(400)
-          .attr("opacity", 1);
+      .on("mouseleave", function () {
+        d3.selectAll(".bar").transition().duration(400).attr("opacity", 1);
+        d3.select(this).transition().duration(400).attr("opacity", 1);
       })
       .transition()
-      .attr("height", d => height - y(d.number))
+      .attr("height", (d) => height - y(d.number))
 
       .attr("fill", "#80cbc4 !important");
 
@@ -137,12 +128,14 @@ const BarChart = ({ data }) => {
 
   return (
     <HeaderContainer>
-      <ChartArea>
-        <SVG ref={svgRef}>
-          <g className="x-axis" />
-          <g className="y-axis" />
-        </SVG>
-      </ChartArea>
+      {hasJobs && (
+        <ChartArea>
+          <SVG ref={svgRef}>
+            <g className="x-axis" />
+            <g className="y-axis" />
+          </SVG>
+        </ChartArea>
+      )}
     </HeaderContainer>
   );
 };
@@ -172,7 +165,10 @@ const ChartArea = styled.div`
   }
 `;
 
-const mapStateToProps = state => ({ data: state.job.jobsProgress });
+const mapStateToProps = (state) => ({
+  data: state.job.jobsProgress,
+  hasJobs: state.job.hasJobs,
+});
 
 export default connect(mapStateToProps)(BarChart);
 
