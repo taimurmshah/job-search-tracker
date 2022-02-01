@@ -7,12 +7,12 @@ import {
   employeeDataModal,
   addEmailModal,
   emailContainerModal,
-  deleteEmployeeModal
+  deleteEmployeeModal,
 } from "../../redux/actions/modal";
 import {
   HeaderContainer,
   TableButton,
-  Span
+  Span,
 } from "../resusableComponents/styledComponents";
 import linkedInLogo from "../../images/linkedInLogo.png";
 
@@ -24,7 +24,7 @@ const Employee = ({
   emailContainerModal,
   currentEmployee,
   updateEmployeeThunk,
-  deleteEmployeeModal
+  deleteEmployeeModal,
 }) => {
   let { _id, name, position, linkedIn, email, response, emailsSent } = employee;
 
@@ -56,7 +56,7 @@ const Employee = ({
     updateEmployeeThunk({
       jobId,
       employeeId: _id,
-      updates: { response: !response }
+      updates: { response: !response },
     });
   };
 
@@ -132,9 +132,9 @@ const Employee = ({
   );
 };
 
-const mapStateToProps = state => ({ jobId: state.job.currentJob._id });
+const mapStateToProps = (state) => ({ jobId: state.job.currentJob._id });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     updateEmployeeThunk: ({ jobId, employeeId, updates }) =>
       dispatch(updateEmployeeThunk({ jobId, employeeId, updates })),
@@ -142,14 +142,11 @@ const mapDispatchToProps = dispatch => {
     deleteEmployeeModal: () => dispatch(deleteEmployeeModal()),
     addEmailModal: () => dispatch(addEmailModal()),
     emailContainerModal: () => dispatch(emailContainerModal()),
-    currentEmployee: employeeId => dispatch(currentEmployee(employeeId))
+    currentEmployee: (employeeId) => dispatch(currentEmployee(employeeId)),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Employee);
+export default connect(mapStateToProps, mapDispatchToProps)(Employee);
 
 const NoButton = styled.button`
   border: none;

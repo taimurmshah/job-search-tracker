@@ -1,3 +1,5 @@
+export const jobSearchModal = () => ({ type: "JOB_SEARCH_MODAL" });
+
 export const jobDataModal = () => ({ type: "JOB_DATA_MODAL" });
 
 export const jobStatusModal = () => ({ type: "JOB_STATUS_MODAL" });

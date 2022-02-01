@@ -5,7 +5,7 @@ import CloseFormButton from "../resusableComponents/CloseFormButton";
 import {
   InputContainer,
   Input,
-  List
+  List,
 } from "../resusableComponents/styledComponents";
 import styled from "styled-components";
 import { updateEmployeeThunk } from "../../redux/thunks/employee";
@@ -17,13 +17,13 @@ const AddEmail = ({
   employeeId,
   updateEmployeeThunk,
   removeCurrentEmployee,
-  closeModal
+  closeModal,
 }) => {
   useEffect(() => () => removeCurrentEmployee(), []);
 
   const [email, setEmail] = useState("");
 
-  const submitHandler = e => {
+  const submitHandler = (e) => {
     e.preventDefault();
     updateEmployeeThunk({ jobId, employeeId, updates: { email } });
     setEmail("");
@@ -40,7 +40,7 @@ const AddEmail = ({
               type="text"
               name="email"
               value={email}
-              onChange={e => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </InputContainer>
           <PossibleEmails />
@@ -54,24 +54,21 @@ const AddEmail = ({
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   jobId: state.job.currentJob._id,
-  employeeId: state.employee.currentEmployee._id
+  employeeId: state.employee.currentEmployee._id,
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     updateEmployeeThunk: ({ jobId, employeeId, updates }) =>
       dispatch(updateEmployeeThunk({ jobId, employeeId, updates })),
     removeCurrentEmployee: () => dispatch(removeCurrentEmployee()),
-    closeModal: () => dispatch(closeModal())
+    closeModal: () => dispatch(closeModal()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AddEmail);
+export default connect(mapStateToProps, mapDispatchToProps)(AddEmail);
 
 const Form = styled.form`
   display: flex;

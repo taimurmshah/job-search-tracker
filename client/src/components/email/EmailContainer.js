@@ -36,16 +36,13 @@ const EmailContainer = ({ removeCurrentEmployee }) => {
   );
 };
 
-const mapStateToProps = state => ({ templates: state.template.templates });
+const mapStateToProps = (state) => ({ templates: state.template.templates });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     removeCurrentEmployee: () => dispatch(removeCurrentEmployee()),
-    closeModal: () => dispatch(closeModal())
+    closeModal: () => dispatch(closeModal()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EmailContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(EmailContainer);

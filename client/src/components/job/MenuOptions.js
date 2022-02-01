@@ -4,7 +4,7 @@ import {
   jobDataModal,
   jobStatusModal,
   jobNotesModal,
-  jobProgressModal
+  jobProgressModal,
 } from "../../redux/actions/modal";
 
 import styled from "styled-components";
@@ -15,7 +15,7 @@ const MenuOptions = ({
   jobDataModal,
   jobStatusModal,
   jobProgressModal,
-  jobNotesModal
+  jobNotesModal,
 }) => {
   let { linkedIn, link, website } = job;
 
@@ -86,21 +86,18 @@ const MenuOptions = ({
   );
 };
 
-const mapStateToProps = state => ({ job: state.job.currentJob });
+const mapStateToProps = (state) => ({ job: state.job.currentJob });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     jobDataModal: () => dispatch(jobDataModal()),
     jobStatusModal: () => dispatch(jobStatusModal()),
     jobProgressModal: () => dispatch(jobProgressModal()),
-    jobNotesModal: () => dispatch(jobNotesModal())
+    jobNotesModal: () => dispatch(jobNotesModal()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MenuOptions);
+export default connect(mapStateToProps, mapDispatchToProps)(MenuOptions);
 
 const Container = styled.div`
   margin-top: 3em;

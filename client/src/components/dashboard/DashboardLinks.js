@@ -5,10 +5,15 @@ import styled from "styled-components";
 import { Menu } from "../resusableComponents/styledComponents";
 import {
   editTemplatesModal,
-  uploadResumeModal
+  uploadResumeModal,
+  jobSearchModal,
 } from "../../redux/actions/modal";
 
-const DashboardLinks = ({ editTemplatesModal, uploadResumeModal }) => {
+const DashboardLinks = ({
+  editTemplatesModal,
+  uploadResumeModal,
+  jobSearchModal,
+}) => {
   return (
     <Menu>
       <Span>
@@ -26,28 +31,31 @@ const DashboardLinks = ({ editTemplatesModal, uploadResumeModal }) => {
           Templates
         </p>
       </Span>
+      <Span>
+        <p className="nav-link" onClick={jobSearchModal}>
+          Job Searches
+        </p>
+      </Span>
     </Menu>
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     resume: state.auth.currentUser.resume,
-    hasJobs: state.job.hasJobs
+    hasJobs: state.job.hasJobs,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     uploadResumeModal: () => dispatch(uploadResumeModal()),
-    editTemplatesModal: () => dispatch(editTemplatesModal())
+    editTemplatesModal: () => dispatch(editTemplatesModal()),
+    jobSearchModal: () => dispatch(jobSearchModal()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DashboardLinks);
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardLinks);
 
 const Span = styled.span`
   padding: 10px;

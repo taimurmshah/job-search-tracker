@@ -4,9 +4,8 @@ import { selectTemplate } from "../../redux/actions/template";
 import styled from "styled-components";
 import {
   FormButton,
-  TableButton
+  TableButton,
 } from "../resusableComponents/styledComponents";
-import { removeCurrentEmployee } from "../../redux/actions/employee";
 import { closeModal } from "../../redux/actions/modal";
 import { sendTemplateGmailThunk } from "../../redux/thunks/email";
 
@@ -20,7 +19,7 @@ const TemplateListItem = ({
   sendTemplateGmailThunk,
 
   selectTemplate,
-  closeModal
+  closeModal,
 }) => {
   const updateHandler = () => {
     selectTemplate(id);
@@ -53,23 +52,20 @@ const TemplateListItem = ({
   );
 };
 
-const mapStateToProps = state => ({
-  employeeId: state.employee.currentEmployee._id
+const mapStateToProps = (state) => ({
+  employeeId: state.employee.currentEmployee._id,
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     sendTemplateGmailThunk: (employeeId, templateId) =>
       dispatch(sendTemplateGmailThunk(employeeId, templateId)),
-    selectTemplate: templateId => dispatch(selectTemplate(templateId)),
-    closeModal: () => dispatch(closeModal())
+    selectTemplate: (templateId) => dispatch(selectTemplate(templateId)),
+    closeModal: () => dispatch(closeModal()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TemplateListItem);
+export default connect(mapStateToProps, mapDispatchToProps)(TemplateListItem);
 
 const TemplateContainer = styled.div`
   display: flex;

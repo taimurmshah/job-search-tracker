@@ -8,7 +8,7 @@ import { closeModal } from "../../../redux/actions/modal";
 import styled from "styled-components";
 import {
   HeaderContainer,
-  TableButton
+  TableButton,
 } from "../../resusableComponents/styledComponents";
 
 //todo handle submit error; if email doesn't go through
@@ -56,17 +56,14 @@ const Grid = styled.div`
   grid-template-rows: repeat(3, 1fr);
 `;
 
-const mapStateToProps = state => ({ employees: state.employee.employees });
+const mapStateToProps = (state) => ({ employees: state.employee.employees });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     sendTemplateGmailThunk: (employeeId, templateId) =>
       dispatch(sendTemplateGmailThunk(employeeId, templateId)),
-    closeModal: () => dispatch(closeModal())
+    closeModal: () => dispatch(closeModal()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MassEmail);
+export default connect(mapStateToProps, mapDispatchToProps)(MassEmail);

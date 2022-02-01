@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import TemplateNavbar from "./TemplateNavbar";
 import NewTemplate from "./NewTemplate";
@@ -12,7 +12,7 @@ const Templates = ({
   templates,
   readAllTemplatesThunk,
   clearTemplate,
-  closeModal
+  closeModal,
 }) => {
   useEffect(() => {
     templates.length === 0 && readAllTemplatesThunk();
@@ -52,17 +52,14 @@ const Templates = ({
   );
 };
 
-const mapStateToProps = state => ({ templates: state.template.templates });
+const mapStateToProps = (state) => ({ templates: state.template.templates });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     readAllTemplatesThunk: () => dispatch(readAllTemplatesThunk()),
     clearTemplate: () => dispatch(clearTemplate()),
-    closeModal: () => dispatch(closeModal())
+    closeModal: () => dispatch(closeModal()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Templates);
+export default connect(mapStateToProps, mapDispatchToProps)(Templates);

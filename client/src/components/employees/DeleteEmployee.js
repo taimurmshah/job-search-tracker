@@ -11,7 +11,7 @@ const DeleteEmployee = ({
   employee,
   closeModal,
   removeCurrentEmployee,
-  deleteEmployeeThunk
+  deleteEmployeeThunk,
 }) => {
   console.log("Is this hitting? ");
 
@@ -40,24 +40,21 @@ const DeleteEmployee = ({
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   employee: state.employee.currentEmployee,
-  job: state.job.currentJob
+  job: state.job.currentJob,
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     deleteEmployeeThunk: (jobId, employeeId) =>
       dispatch(deleteEmployeeThunk(jobId, employeeId)),
     removeCurrentEmployee: () => dispatch(removeCurrentEmployee()),
-    closeModal: () => dispatch(closeModal())
+    closeModal: () => dispatch(closeModal()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DeleteEmployee);
+export default connect(mapStateToProps, mapDispatchToProps)(DeleteEmployee);
 
 const Container = styled.div`
   display: flex;

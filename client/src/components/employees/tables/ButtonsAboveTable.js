@@ -2,18 +2,18 @@ import React from "react";
 import { connect } from "react-redux";
 import {
   employeeDataModal,
-  massEmailModal
+  massEmailModal,
 } from "../../../redux/actions/modal";
 import {
   TableButton,
   Span,
-  ButtonsFlexbox
+  ButtonsFlexbox,
 } from "../../resusableComponents/styledComponents";
 
 const ButtonsAboveTable = ({
   employees,
   employeeDataModal,
-  massEmailModal
+  massEmailModal,
 }) => {
   return (
     <ButtonsFlexbox>
@@ -26,20 +26,17 @@ const ButtonsAboveTable = ({
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    employees: state.employee.employees
+    employees: state.employee.employees,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     employeeDataModal: () => dispatch(employeeDataModal()),
-    massEmailModal: () => dispatch(massEmailModal())
+    massEmailModal: () => dispatch(massEmailModal()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ButtonsAboveTable);
+export default connect(mapStateToProps, mapDispatchToProps)(ButtonsAboveTable);

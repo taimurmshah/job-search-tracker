@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { newTemplateThunk } from "../../redux/thunks/template";
-import styled from "styled-components";
 import {
   FormContainer,
   Input,
   FormButton,
   HeaderContainer,
-  TextArea
+  TextArea,
 } from "../resusableComponents/styledComponents";
 import Checkbox from "../resusableComponents/Checkbox";
 
@@ -17,16 +16,16 @@ class NewTemplate extends Component {
     subject: "",
     message: "",
     interpolationValues: false,
-    withResume: false
+    withResume: false,
   };
 
-  changeHandler = e => {
+  changeHandler = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  submitHandler = e => {
+  submitHandler = (e) => {
     e.preventDefault();
     this.props.newTemplateThunk(this.state);
     this.props.closeModal();
@@ -36,7 +35,7 @@ class NewTemplate extends Component {
   interpolationCheckHandler = () => {
     this.setState(
       {
-        interpolationValues: !this.state.interpolationValues
+        interpolationValues: !this.state.interpolationValues,
       },
       () => {
         console.log("interpolationValues:", this.state.interpolationValues);
@@ -46,7 +45,7 @@ class NewTemplate extends Component {
 
   resumeCheckHandler = () => {
     this.setState({
-      withResume: !this.state.withResume
+      withResume: !this.state.withResume,
     });
   };
 
@@ -99,26 +98,16 @@ class NewTemplate extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    newTemplateThunk: templateObj => dispatch(newTemplateThunk(templateObj))
+    newTemplateThunk: (templateObj) => dispatch(newTemplateThunk(templateObj)),
   };
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    resume: state.auth.currentUser.resume
+    resume: state.auth.currentUser.resume,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NewTemplate);
-//
-// const TextArea = styled.textarea`
-//   margin-top: 10px;
-//   margin-bottom: 0px;
-//   height: 150px;
-//   width: 400px;
-// `;
+export default connect(mapStateToProps, mapDispatchToProps)(NewTemplate);

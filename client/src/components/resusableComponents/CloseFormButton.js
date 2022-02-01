@@ -10,13 +10,10 @@ const CloseFormButton = ({ closeModal }) => {
   );
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    closeModal: () => dispatch(closeModal())
+    closeModal: () => dispatch(closeModal()),
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(CloseFormButton);
+export default connect(null, mapDispatchToProps)(CloseFormButton);

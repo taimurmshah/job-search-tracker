@@ -5,7 +5,7 @@ import { HeaderContainer } from "../resusableComponents/styledComponents";
 import styled from "styled-components";
 
 const ViewTemplates = ({ templates, update }) => {
-  const allTemplates = templates.map(t => {
+  const allTemplates = templates.map((t) => {
     return (
       <TemplateListItem
         update={true}
@@ -28,9 +28,9 @@ const ViewTemplates = ({ templates, update }) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    templates: state.template.templates
+    templates: state.template.templates,
   };
 };
 

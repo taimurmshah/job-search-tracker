@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 import { removeCurrentEmployee } from "../../redux/actions/employee";
 import {
   newEmployeeThunk,
-  updateEmployeeThunk
+  updateEmployeeThunk,
 } from "../../redux/thunks/employee";
 import { closeModal } from "../../redux/actions/modal";
 import {
   FormContainer,
   InputContainer,
-  Input
+  Input,
 } from "../resusableComponents/styledComponents";
 import CloseFormButton from "../resusableComponents/CloseFormButton";
 
@@ -19,7 +19,7 @@ const EmployeeDataForm = ({
   newEmployeeThunk,
   updateEmployeeThunk,
   removeCurrentEmployee,
-  closeModal
+  closeModal,
 }) => {
   useEffect(() => () => removeCurrentEmployee(), []);
 
@@ -31,7 +31,7 @@ const EmployeeDataForm = ({
   const [stateLinkedIn, setLinkedIn] = useState(linkedIn);
   const [stateEmail, setEmail] = useState(email);
 
-  const submit = e => {
+  const submit = (e) => {
     e.preventDefault();
     const employeeObject = createEmployeeObject();
     if (Object.keys(employee).length === 0) {
@@ -40,7 +40,7 @@ const EmployeeDataForm = ({
       updateEmployeeThunk({
         jobId,
         employeeId: employee._id,
-        updates: employeeObject
+        updates: employeeObject,
       });
     }
     return closeModal();
@@ -51,7 +51,7 @@ const EmployeeDataForm = ({
       name: stateFirstName + " " + stateLastName,
       position: statePosition,
       linkedIn: stateLinkedIn,
-      email: stateEmail
+      email: stateEmail,
     };
   };
 
@@ -64,7 +64,7 @@ const EmployeeDataForm = ({
           name="stateFirstName"
           autoComplete="off"
           value={stateFirstName}
-          onChange={e => setFirstName(e.target.value)}
+          onChange={(e) => setFirstName(e.target.value)}
           required
         />
         <p>Last Name:</p>
@@ -73,7 +73,7 @@ const EmployeeDataForm = ({
           name="stateLastName"
           autoComplete="off"
           value={stateLastName}
-          onChange={e => setLastName(e.target.value)}
+          onChange={(e) => setLastName(e.target.value)}
           required
         />
         <p>Position:</p>
@@ -81,7 +81,7 @@ const EmployeeDataForm = ({
           type="text"
           name="statePosition"
           value={statePosition}
-          onChange={e => setPosition(e.target.value)}
+          onChange={(e) => setPosition(e.target.value)}
           required
         />
         <p>LinkedIn Profile:</p>
@@ -90,7 +90,7 @@ const EmployeeDataForm = ({
           name="stateLinkedIn"
           autoComplete="off"
           value={stateLinkedIn}
-          onChange={e => {
+          onChange={(e) => {
             setLinkedIn(e.target.value);
           }}
           required
@@ -101,7 +101,7 @@ const EmployeeDataForm = ({
           name="stateEmail"
           autoComplete="off"
           value={stateEmail}
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </InputContainer>
       <div className="modal-buttons">
@@ -114,25 +114,22 @@ const EmployeeDataForm = ({
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     jobId: state.job.currentJob._id,
-    employee: state.employee.currentEmployee
+    employee: state.employee.currentEmployee,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     newEmployeeThunk: ({ employee, jobId }) =>
       dispatch(newEmployeeThunk({ employee, jobId })),
     updateEmployeeThunk: ({ jobId, employeeId, updates }) =>
       dispatch(updateEmployeeThunk({ jobId, employeeId, updates })),
     removeCurrentEmployee: () => dispatch(removeCurrentEmployee()),
-    closeModal: () => dispatch(closeModal())
+    closeModal: () => dispatch(closeModal()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EmployeeDataForm);
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeDataForm);

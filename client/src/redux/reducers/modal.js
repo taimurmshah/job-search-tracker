@@ -1,6 +1,7 @@
 const initialState = {
   isBigModalOpen: false,
   isSmallModalOpen: false,
+  jobSearch: false,
   jobData: false,
   jobStatus: false,
   jobProgress: false,
@@ -12,11 +13,13 @@ const initialState = {
   massEmail: false,
   editTemplates: false,
   uploadResume: false,
-  deleteEmployee: false
+  deleteEmployee: false,
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
+    case "JOB_SEARCH_MODAL":
+      return { ...state, isBigModalOpen: true, jobSearch: true };
     case "JOB_DATA_MODAL":
       return { ...state, isBigModalOpen: true, jobData: true };
     case "JOB_STATUS_MODAL":
@@ -46,6 +49,7 @@ export default function(state = initialState, action) {
         ...state,
         isBigModalOpen: false,
         isSmallModalOpen: false,
+        jobSearch: false,
         jobData: false,
         jobStatus: false,
         jobProgress: false,
@@ -57,7 +61,7 @@ export default function(state = initialState, action) {
         massEmail: false,
         editTemplates: false,
         uploadResume: false,
-        deleteEmployee: false
+        deleteEmployee: false,
       };
     default:
       return state;

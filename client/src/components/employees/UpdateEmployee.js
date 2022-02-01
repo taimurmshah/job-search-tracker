@@ -4,7 +4,7 @@ import {
   FormContainer,
   InputContainer,
   Input,
-  TableButton
+  TableButton,
 } from "../resusableComponents/styledComponents";
 import { updateEmployeeThunk } from "../../redux/thunks/employee";
 import styled from "styled-components";
@@ -14,7 +14,7 @@ const UpdateEmployee = ({
   employee,
   updateEmployeeThunk,
   jobId,
-  closeModal
+  closeModal,
 }) => {
   const [firstName, setFirstName] = useState(employee.name.split(" ")[0]);
   const [lastName, setLastName] = useState(employee.name.split(" ")[1]);
@@ -22,13 +22,13 @@ const UpdateEmployee = ({
   const [linkedIn, setLinkedIn] = useState(employee.linkedIn);
   const [email, setEmail] = useState(employee.email);
 
-  const submitHandler = e => {
+  const submitHandler = (e) => {
     e.preventDefault();
     let updatedEmployee = {
       name: firstName + " " + lastName,
       position,
       linkedIn,
-      email
+      email,
     };
 
     updateEmployeeThunk(jobId, employee._id, updatedEmployee);
@@ -46,7 +46,7 @@ const UpdateEmployee = ({
             name="firstName"
             autoComplete="off"
             value={firstName}
-            onChange={e => {
+            onChange={(e) => {
               setFirstName(e.target.value);
             }}
             required
@@ -57,7 +57,7 @@ const UpdateEmployee = ({
             name="lastName"
             autoComplete="off"
             value={lastName}
-            onChange={e => {
+            onChange={(e) => {
               setLastName(e.target.value);
             }}
             required
@@ -67,7 +67,7 @@ const UpdateEmployee = ({
             type="text"
             name="position"
             value={position}
-            onChange={e => {
+            onChange={(e) => {
               setPosition(e.target.value);
             }}
             required
@@ -78,7 +78,7 @@ const UpdateEmployee = ({
             name="linkedIn"
             autoComplete="off"
             value={linkedIn}
-            onChange={e => {
+            onChange={(e) => {
               setLinkedIn(e.target.value);
             }}
             required
@@ -89,7 +89,7 @@ const UpdateEmployee = ({
             name="email"
             autoComplete="off"
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </InputContainer>
         <div className="modal-buttons">
@@ -103,23 +103,20 @@ const UpdateEmployee = ({
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    jobId: state.job.currentJob._id
+    jobId: state.job.currentJob._id,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     updateEmployeeThunk: (jobId, employeeId, updates) =>
-      dispatch(updateEmployeeThunk(jobId, employeeId, updates))
+      dispatch(updateEmployeeThunk(jobId, employeeId, updates)),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UpdateEmployee);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateEmployee);
 
 const DeleteButton = styled(TableButton)`
   background-color: red;

@@ -10,18 +10,18 @@ const EmailModalTemplateList = ({
   templates,
   employeeId,
   sendTemplateGmailThunk,
-  closeModal
+  closeModal,
 }) => {
   if (templates.length === 0) {
     return <p>You don't have any templates</p>;
   }
 
-  const templateEmailHandler = templateId => {
+  const templateEmailHandler = (templateId) => {
     sendTemplateGmailThunk(employeeId, templateId);
     closeModal();
   };
 
-  const allTemplates = templates.map(t => {
+  const allTemplates = templates.map((t) => {
     return (
       <TemplateListItem
         id={t._id}
@@ -39,18 +39,18 @@ const EmailModalTemplateList = ({
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     templates: state.template.templates,
-    employeeId: state.employee.currentEmployee._id
+    employeeId: state.employee.currentEmployee._id,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     sendTemplateGmailThunk: (employeeId, templateId) =>
       dispatch(sendTemplateGmailThunk(employeeId, templateId)),
-    readAllTemplatesThunk: () => dispatch(readAllTemplatesThunk())
+    readAllTemplatesThunk: () => dispatch(readAllTemplatesThunk()),
   };
 };
 

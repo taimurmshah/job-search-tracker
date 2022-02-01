@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { deleteJobModal } from "../../../redux/actions/modal";
 import {
   ButtonsFlexbox,
-  TableButton
+  TableButton,
 } from "../../resusableComponents/styledComponents";
 import styled from "styled-components";
 
@@ -23,13 +23,10 @@ const DeleteButton = styled(TableButton)`
   }
 `;
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    deleteJobModal: () => dispatch(deleteJobModal())
+    deleteJobModal: () => dispatch(deleteJobModal()),
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(ButtonsBelowTable);
+export default connect(null, mapDispatchToProps)(ButtonsBelowTable);

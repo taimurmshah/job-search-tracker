@@ -9,20 +9,20 @@ import {
   InputContainer,
   Input,
   FormButton,
-  TextArea
+  TextArea,
 } from "../resusableComponents/styledComponents";
 
 const SendCustomEmail = ({
   employeeId,
   hasResume,
   sendNewGmailThunk,
-  closeModal
+  closeModal,
 }) => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [withResume, setWithResume] = useState(false);
 
-  const submit = e => {
+  const submit = (e) => {
     e.preventDefault();
     sendNewGmailThunk(employeeId, { subject, message, withResume });
     closeModal();
@@ -38,7 +38,7 @@ const SendCustomEmail = ({
             type="text"
             name="subject"
             value={subject}
-            onChange={e => {
+            onChange={(e) => {
               setSubject(e.target.value);
             }}
           />
@@ -48,7 +48,7 @@ const SendCustomEmail = ({
             required
             name="message"
             value={message}
-            onChange={e => setMessage(e.target.value)}
+            onChange={(e) => setMessage(e.target.value)}
             id=""
             cols="30"
             rows="10"
@@ -72,23 +72,20 @@ const SendCustomEmail = ({
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     hasResume: state.auth.currentUser.resume,
-    employeeId: state.employee.currentEmployee._id
+    employeeId: state.employee.currentEmployee._id,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     sendNewGmailThunk: (employeeId, emailObj) =>
       dispatch(sendNewGmailThunk(employeeId, emailObj)),
     removeCurrentEmployee: () => dispatch(removeCurrentEmployee()),
-    closeModal: () => dispatch(closeModal())
+    closeModal: () => dispatch(closeModal()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SendCustomEmail);
+export default connect(mapStateToProps, mapDispatchToProps)(SendCustomEmail);

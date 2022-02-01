@@ -9,18 +9,25 @@ import styled from "styled-components";
 import { Span } from "../resusableComponents/styledComponents";
 import { jobDataModal } from "../../redux/actions/modal";
 
-const Jobs = ({ hasJobs, readJobsThunk, jobDataModal }) => {
+const Jobs = ({
+  hasJobs,
+  readJobsThunk,
+  jobDataModal,
+  isCurrentJobSearchOnGoing,
+}) => {
   useEffect(() => {
     readJobsThunk();
   }, []);
 
   return (
     <JobsDiv>
-      <Span>
-        <Add className="nav-link" onClick={jobDataModal}>
-          Add New Job +
-        </Add>
-      </Span>
+      {!isCurrentJobSearchOnGoing && (
+        <Span>
+          <Add className="nav-link" onClick={jobDataModal}>
+            Add New Job +
+          </Add>
+        </Span>
+      )}
       <Modal />
       {hasJobs && <JobListContainer />}
     </JobsDiv>
@@ -31,6 +38,7 @@ const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.auth.isLoggedIn,
     hasJobs: state.job.hasJobs,
+    isCurrentJobSearchOnGoing: state.jobSearch.activeJobSearch.endDate,
   };
 };
 

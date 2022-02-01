@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { closeModal } from "../../redux/actions/modal";
+import JobSearch from "../jobSearch/JobSearch";
 import JobDataForm from "../job/JobDataForm";
 import Status from "../job/Status";
 import Progress from "../job/Progress";
@@ -24,6 +25,8 @@ const Modal = ({ modal, closeModal }) => {
         <div className="dialog">
           <button onClick={closeModal} className="close-thick" />
         </div>
+
+        {modal.jobSearch && <JobSearch />}
 
         {modal.jobData && <JobDataForm />}
 

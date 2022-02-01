@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { deleteEmployeeThunk } from "../../../redux/thunks/employee";
 import {
   currentEmployee,
-  removeCurrentEmployee
+  removeCurrentEmployee,
 } from "../../../redux/actions/employee";
 import { addEmailModal } from "../../../redux/actions/modal";
 import Employee from "../Employee";
@@ -13,7 +13,7 @@ import styled from "styled-components";
 const EmployeeTable = ({ employees }) => {
   if (!employees) return <Loading />;
 
-  const tableData = employees.map(e => {
+  const tableData = employees.map((e) => {
     return <Employee key={e._id} employee={e} />;
   });
 
@@ -39,27 +39,24 @@ const EmployeeTable = ({ employees }) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     employees: state.employee.employees,
-    jobId: state.job.currentJob._id
+    jobId: state.job.currentJob._id,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     deleteEmployeeThunk: (jobId, employeeId) =>
       dispatch(deleteEmployeeThunk(jobId, employeeId)),
-    currentEmployee: employeeId => dispatch(currentEmployee(employeeId)),
+    currentEmployee: (employeeId) => dispatch(currentEmployee(employeeId)),
     removeCurrentEmployee: () => dispatch(removeCurrentEmployee()),
-    addEmailModal: () => dispatch(addEmailModal())
+    addEmailModal: () => dispatch(addEmailModal()),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EmployeeTable);
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeTable);
 
 const Div = styled.div`
   display: flex;
