@@ -22,6 +22,10 @@ export const deleteEmployeeModal = () => ({ type: "DELETE_EMPLOYEE_MODAL" });
 
 export const editTemplatesModal = () => ({ type: "EDIT_TEMPLATES" });
 
+export const deleteTemplateModal = () => ({ type: "DELETE_TEMPLATE_MODAL" });
+
 export const uploadResumeModal = () => ({ type: "UPLOAD_RESUME" });
 
 export const closeModal = () => ({ type: "CLOSE_MODAL" });
+
+export const closeSmallModal = () => ({ type: "CLOSE_SMALL_MODAL" });

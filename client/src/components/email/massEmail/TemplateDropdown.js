@@ -4,7 +4,7 @@ import DropdownOption from "./DropdownOption";
 import styled from "styled-components";
 import {
   HeaderContainer,
-  TableButton
+  TableButton,
 } from "../../resusableComponents/styledComponents";
 
 const TemplateDropdown = ({ templates, setTemplateId }) => {
@@ -70,13 +70,10 @@ const DropBtn = styled(TableButton)`
   }
 `;
 
-const mapStateToProps = state => ({ templates: state.template.templates });
+const mapStateToProps = (state) => ({ templates: state.template.templates });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TemplateDropdown);
+export default connect(mapStateToProps, mapDispatchToProps)(TemplateDropdown);

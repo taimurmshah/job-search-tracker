@@ -110,6 +110,14 @@ const ButtonsFlexbox = styled.div`
   justify-content: center;
 `;
 
+const DeleteButton = styled(TableButton)`
+  background-color: red;
+  :hover {
+    box-shadow: 0;
+    background-color: #edadad;
+  }
+`;
+
 export {
   FormContainer,
   Input,
@@ -121,6 +129,7 @@ export {
   FormButton,
   List,
   TableButton,
+  DeleteButton,
   TextArea,
-  ButtonsFlexbox
+  ButtonsFlexbox,
 };

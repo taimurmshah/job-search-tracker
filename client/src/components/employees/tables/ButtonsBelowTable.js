@@ -3,9 +3,8 @@ import { connect } from "react-redux";
 import { deleteJobModal } from "../../../redux/actions/modal";
 import {
   ButtonsFlexbox,
-  TableButton,
+  DeleteButton,
 } from "../../resusableComponents/styledComponents";
-import styled from "styled-components";
 
 const ButtonsBelowTable = ({ deleteJobModal }) => {
   return (
@@ -14,14 +13,6 @@ const ButtonsBelowTable = ({ deleteJobModal }) => {
     </ButtonsFlexbox>
   );
 };
-
-const DeleteButton = styled(TableButton)`
-  background-color: red;
-  :hover {
-    box-shadow: 0;
-    background-color: #edadad;
-  }
-`;
 
 const mapDispatchToProps = (dispatch) => {
   return {

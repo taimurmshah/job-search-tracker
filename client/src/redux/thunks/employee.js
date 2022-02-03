@@ -2,12 +2,10 @@ import {
   newEmployee,
   getEmployees,
   updateEmployee,
-  deleteEmployee
+  deleteEmployee,
 } from "../actions/employee";
 
-export const newEmployeeThunk = ({ employee, jobId }) => async dispatch => {
-  console.log("hitting new employee thunk");
-  console.log("here's the shit:", { employee }, { jobId });
+export const newEmployeeThunk = ({ employee, jobId }) => async (dispatch) => {
   const token = localStorage.getItem("token");
   try {
     let res = await fetch(
@@ -17,9 +15,9 @@ export const newEmployeeThunk = ({ employee, jobId }) => async dispatch => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: token
+          Authorization: token,
         },
-        body: JSON.stringify(employee)
+        body: JSON.stringify(employee),
       }
     );
 
@@ -33,7 +31,7 @@ export const newEmployeeThunk = ({ employee, jobId }) => async dispatch => {
   }
 };
 
-export const getEmployeesThunk = jobId => async dispatch => {
+export const getEmployeesThunk = (jobId) => async (dispatch) => {
   const token = localStorage.getItem("token");
   try {
     let res = await fetch(
@@ -43,8 +41,8 @@ export const getEmployeesThunk = jobId => async dispatch => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: token
-        }
+          Authorization: token,
+        },
       }
     );
 
@@ -56,11 +54,9 @@ export const getEmployeesThunk = jobId => async dispatch => {
   }
 };
 
-export const updateEmployeeThunk = ({
-  jobId,
-  employeeId,
-  updates
-}) => async dispatch => {
+export const updateEmployeeThunk = ({ jobId, employeeId, updates }) => async (
+  dispatch
+) => {
   const token = localStorage.getItem("token");
 
   try {
@@ -71,9 +67,9 @@ export const updateEmployeeThunk = ({
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: token
+          Authorization: token,
         },
-        body: JSON.stringify(updates)
+        body: JSON.stringify(updates),
       }
     );
 
@@ -85,7 +81,7 @@ export const updateEmployeeThunk = ({
   }
 };
 
-export const deleteEmployeeThunk = (jobId, employeeId) => async dispatch => {
+export const deleteEmployeeThunk = (jobId, employeeId) => async (dispatch) => {
   const token = localStorage.getItem("token");
   try {
     let res = await fetch(
@@ -95,8 +91,8 @@ export const deleteEmployeeThunk = (jobId, employeeId) => async dispatch => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: token
-        }
+          Authorization: token,
+        },
       }
     );
 

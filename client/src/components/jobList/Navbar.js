@@ -6,13 +6,10 @@ const Navbar = () => {
   return <HeaderContainer>"OPTIONS HERE"</HeaderContainer>;
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Navbar);
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

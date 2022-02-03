@@ -19,7 +19,7 @@ const JobListContainer = ({ jobs }) => {
 
   const today = new Date();
 
-  const transformJob = job => (
+  const transformJob = (job) => (
     <JobCard
       key={job._id}
       _id={job._id}
@@ -30,19 +30,19 @@ const JobListContainer = ({ jobs }) => {
   );
 
   const followUpJobs = jobs
-    .filter(j => j.mostRecentEmailSent !== null)
-    .filter(j => {
+    .filter((j) => j.mostRecentEmailSent !== null)
+    .filter((j) => {
       const lastEmail = new Date(j.mostRecentEmailSent);
       const diffTime = Math.abs(today - lastEmail);
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
       return diffDays > 3;
     })
     .filter(
-      j =>
+      (j) =>
         j.status === "Waiting for email response" ||
         j.status === "Submitted application; waiting for company response"
     )
-    .map(j => (
+    .map((j) => (
       <JobCard
         key={j._id}
         _id={j._id}
@@ -53,8 +53,8 @@ const JobListContainer = ({ jobs }) => {
     ));
 
   const activeJobs = jobs
-    .filter(j => j.status !== "Rejected")
-    .map(j => transformJob(j));
+    .filter((j) => j.status !== "Rejected")
+    .map((j) => transformJob(j));
 
   if (jobs.length === 0) return <Loading />;
 
@@ -68,7 +68,7 @@ const JobListContainer = ({ jobs }) => {
             <Input
               type="text"
               value={filter}
-              onChange={e => setFilter(e.target.value.toLowerCase())}
+              onChange={(e) => setFilter(e.target.value.toLowerCase())}
             />
           )}
 
@@ -99,8 +99,8 @@ const JobListContainer = ({ jobs }) => {
           followUp === false &&
           filter.length > 0 &&
           jobs
-            .filter(j => j.company.toLowerCase().startsWith(filter))
-            .map(j => transformJob(j))}
+            .filter((j) => j.company.toLowerCase().startsWith(filter))
+            .map((j) => transformJob(j))}
         {rejected && <RejectedJobs />}
         {followUp && followUpJobs}
       </JobGrid>
@@ -108,19 +108,16 @@ const JobListContainer = ({ jobs }) => {
   );
 };
 
-const mapStateToProps = state => ({ jobs: state.job.jobs });
+const mapStateToProps = (state) => ({ jobs: state.job.jobs });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    currentJob: job => dispatch(currentJob(job)),
-    getEmployeesThunk: jobId => dispatch(getEmployeesThunk(jobId))
+    currentJob: (job) => dispatch(currentJob(job)),
+    getEmployeesThunk: (jobId) => dispatch(getEmployeesThunk(jobId)),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(JobListContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(JobListContainer);
 
 const Container = styled.div`
   max-width: 1170px;

@@ -1,10 +1,12 @@
 import {
+  clearTemplate,
   newTemplate,
   readTemplates,
-  updateTemplate
+  updateTemplate,
+  deleteTemplate,
 } from "../actions/template";
 
-export const newTemplateThunk = templateObj => async dispatch => {
+export const newTemplateThunk = (templateObj) => async (dispatch) => {
   const token = localStorage.getItem("token");
   console.log("in new template thunk, here's the templateObj:", templateObj);
   try {
@@ -13,9 +15,9 @@ export const newTemplateThunk = templateObj => async dispatch => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: token
+        Authorization: token,
       },
-      body: JSON.stringify(templateObj)
+      body: JSON.stringify(templateObj),
     });
 
     const result = await res.json();
@@ -28,12 +30,29 @@ export const newTemplateThunk = templateObj => async dispatch => {
   }
 };
 
-export const updateTemplateThunk = (
-  templateObj,
-  templateId
-) => async dispatch => {
+export const readAllTemplatesThunk = () => async (dispatch) => {
   const token = localStorage.getItem("token");
-  console.log("in update template thunk, here's the templateObj:", templateObj);
+  try {
+    const res = await fetch(`${process.env.REACT_APP_URL}/templates`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: token,
+      },
+    });
+
+    const result = await res.json();
+    dispatch(readTemplates(result));
+  } catch (err) {
+    console.log({ err });
+  }
+};
+
+export const updateTemplateThunk = (templateObj, templateId) => async (
+  dispatch
+) => {
+  const token = localStorage.getItem("token");
   try {
     const res = await fetch(
       `${process.env.REACT_APP_URL}/templates/${templateId}`,
@@ -42,9 +61,9 @@ export const updateTemplateThunk = (
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: token
+          Authorization: token,
         },
-        body: JSON.stringify(templateObj)
+        body: JSON.stringify(templateObj),
       }
     );
 
@@ -58,20 +77,24 @@ export const updateTemplateThunk = (
   }
 };
 
-export const readAllTemplatesThunk = () => async dispatch => {
+export const deleteTemplateThunk = (templateId) => async (dispatch) => {
   const token = localStorage.getItem("token");
   try {
-    const res = await fetch(`${process.env.REACT_APP_URL}/templates`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: token
+    const res = await fetch(
+      `${process.env.REACT_APP_URL}/templates/${templateId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: token,
+        },
       }
-    });
+    );
 
-    const result = await res.json();
-    dispatch(readTemplates(result));
+    let template = await res.json();
+    dispatch(deleteTemplate(template));
+    dispatch(clearTemplate());
   } catch (err) {
     console.log({ err });
   }

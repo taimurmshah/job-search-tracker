@@ -3,10 +3,11 @@ import { connect } from "react-redux";
 import { selectTemplate } from "../../redux/actions/template";
 import styled from "styled-components";
 import {
+  DeleteButton,
   FormButton,
   TableButton,
 } from "../resusableComponents/styledComponents";
-import { closeModal } from "../../redux/actions/modal";
+import { closeModal, deleteTemplateModal } from "../../redux/actions/modal";
 import { sendTemplateGmailThunk } from "../../redux/thunks/email";
 
 const TemplateListItem = ({
@@ -17,13 +18,19 @@ const TemplateListItem = ({
   select,
   updateClickHandler,
   sendTemplateGmailThunk,
-
   selectTemplate,
+  deleteTemplateModal,
   closeModal,
 }) => {
   const updateHandler = () => {
     selectTemplate(id);
     updateClickHandler();
+  };
+
+  const deleteHandler = () => {
+    console.log("deleteHandler", { id });
+    selectTemplate(id);
+    deleteTemplateModal();
   };
 
   const sendEmail = () => {
@@ -40,6 +47,8 @@ const TemplateListItem = ({
         {update && (
           <Span>
             <TableButton onClick={updateHandler}>View/Update</TableButton>
+            <Span />
+            <DeleteButton onClick={deleteHandler}>Delete</DeleteButton>
           </Span>
         )}
         {select && (
@@ -61,6 +70,7 @@ const mapDispatchToProps = (dispatch) => {
     sendTemplateGmailThunk: (employeeId, templateId) =>
       dispatch(sendTemplateGmailThunk(employeeId, templateId)),
     selectTemplate: (templateId) => dispatch(selectTemplate(templateId)),
+    deleteTemplateModal: () => dispatch(deleteTemplateModal()),
     closeModal: () => dispatch(closeModal()),
   };
 };

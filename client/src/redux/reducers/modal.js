@@ -12,6 +12,7 @@ const initialState = {
   emailContainer: false,
   massEmail: false,
   editTemplates: false,
+  deleteTemplate: false,
   uploadResume: false,
   deleteEmployee: false,
 };
@@ -42,6 +43,8 @@ export default function (state = initialState, action) {
       return { ...state, isSmallModalOpen: true, deleteEmployee: true };
     case "EDIT_TEMPLATES":
       return { ...state, isBigModalOpen: true, editTemplates: true };
+    case "DELETE_TEMPLATE_MODAL":
+      return { ...state, isSmallModalOpen: true, deleteTemplate: true };
     case "UPLOAD_RESUME":
       return { ...state, isBigModalOpen: true, uploadResume: true };
     case "CLOSE_MODAL":
@@ -60,7 +63,16 @@ export default function (state = initialState, action) {
         emailContainer: false,
         massEmail: false,
         editTemplates: false,
+        deleteTemplate: false,
         uploadResume: false,
+        deleteEmployee: false,
+      };
+    case "CLOSE_SMALL_MODAL":
+      return {
+        ...state,
+        isSmallModalOpen: false,
+        deleteTemplate: false,
+        deleteJob: false,
         deleteEmployee: false,
       };
     default:

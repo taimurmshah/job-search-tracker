@@ -27,7 +27,7 @@ router.get("/templates", auth, async (req, res) => {
     const user = req.user;
     await user
       .populate({
-        path: "templates"
+        path: "templates",
       })
       .execPopulate();
     res.send(user.templates);
@@ -41,7 +41,7 @@ router.get("/templates/:id", auth, async (req, res) => {
   try {
     const template = await Template.findOne({
       _id: req.params.id,
-      owner: req.user._id
+      owner: req.user._id,
     });
     if (!template) {
       return res.status(400).send();
@@ -62,7 +62,7 @@ router.patch("/templates/:id", auth, async (req, res) => {
     "subject",
     "message",
     "withResume",
-    "interpolationValues"
+    "interpolationValues",
   ];
 
   for (let i = 0; i < updates.length; i++) {
@@ -78,7 +78,7 @@ router.patch("/templates/:id", auth, async (req, res) => {
 
     if (!template) return res.status(404).send();
 
-    updates.forEach(update => (template[update] = req.body[update]));
+    updates.forEach((update) => (template[update] = req.body[update]));
 
     await template.save();
 
@@ -89,11 +89,11 @@ router.patch("/templates/:id", auth, async (req, res) => {
 });
 
 //delete template
-router.delete("/template/:id", auth, async (req, res) => {
+router.delete("/templates/:id", auth, async (req, res) => {
   try {
     const template = await Template.findOneAndDelete({
       _id: req.params.id,
-      owner: req.user._id
+      owner: req.user._id,
     });
 
     if (!template) return res.status(400).send();

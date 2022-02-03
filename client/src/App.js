@@ -19,7 +19,6 @@ const App = ({ jwtThunk, readJobsThunk, readJobSearchesThunk }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      console.log("USE EFFECT IN APP.JS HIT");
       jwtThunk(token);
       readJobsThunk();
       readJobSearchesThunk();

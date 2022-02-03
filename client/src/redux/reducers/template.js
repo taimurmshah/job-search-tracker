@@ -1,19 +1,19 @@
 const initialState = {
   templates: [],
-  selectedTemplate: {}
+  selectedTemplate: {},
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case "READ_TEMPLATES":
       return {
         ...state,
-        templates: action.payload
+        templates: action.payload,
       };
     case "NEW_TEMPLATE":
       return {
         ...state,
-        templates: [...state.templates, action.payload]
+        templates: [...state.templates, action.payload],
       };
     case "UPDATE_TEMPLATE":
       console.log(
@@ -21,21 +21,27 @@ export default function(state = initialState, action) {
         action.payload
       );
       let updatedTemplates = [...state.templates];
-      let index = updatedTemplates.findIndex(t => t._id === action.payload._id);
+      let index = updatedTemplates.findIndex(
+        (t) => t._id === action.payload._id
+      );
       updatedTemplates[index] = action.payload;
 
       return {
         ...state,
-        templates: updatedTemplates
+        templates: updatedTemplates,
       };
     case "SELECT_TEMPLATE":
-      // debugger;
-      const template = state.templates.find(t => t._id === action.payload);
+      const template = state.templates.find((t) => t._id === action.payload);
       return { ...state, selectedTemplate: template };
+    case "DELETE_TEMPLATE":
+      console.log("delete template action being hit");
+      let newTemplates = [...state.templates];
+      newTemplates = newTemplates.filter((t) => t._id !== action.payload._id);
+      return { ...state, templates: newTemplates };
     case "CLEAR_TEMPLATE":
       return {
         ...state,
-        selectedTemplate: {}
+        selectedTemplate: {},
       };
     default:
       return state;

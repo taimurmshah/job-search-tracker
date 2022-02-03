@@ -13,7 +13,7 @@ const JobCard = ({
   status,
   currentJob,
   getEmployeesThunk,
-  date
+  date,
 }) => {
   const history = useHistory();
   const [hover, setHover] = useState(false);
@@ -62,17 +62,14 @@ const JobCard = ({
   );
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    currentJob: job => dispatch(currentJob(job)),
-    getEmployeesThunk: jobId => dispatch(getEmployeesThunk(jobId))
+    currentJob: (job) => dispatch(currentJob(job)),
+    getEmployeesThunk: (jobId) => dispatch(getEmployeesThunk(jobId)),
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(JobCard);
+export default connect(null, mapDispatchToProps)(JobCard);
 
 const Card = styled.div`
   border-radius: 10px;
@@ -98,7 +95,7 @@ const Body = styled.div`
   display: grid;
   grid-template-rows: 100px 10px 20px;
   width: 100%;
-  background: ${props => (props.hover === true ? "#e6ffff" : "#efecec")};
+  background: ${(props) => (props.hover === true ? "#e6ffff" : "#efecec")};
   height: 150px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;

@@ -5,18 +5,18 @@ import { HeaderContainer } from "../../resusableComponents/styledComponents";
 const EmployeeElem = ({
   employee: { _id, name, response, emailsSent },
   selectedEmployees,
-  setSelectedEmployees
+  setSelectedEmployees,
 }) => {
   const CheckBox = styled.input.attrs({ type: "checkbox" })``;
 
   const checked = selectedEmployees.includes(_id);
 
-  const toggleEmployee = e => {
+  const toggleEmployee = (e) => {
     const employeeId = e.currentTarget.dataset.id;
     if (e.currentTarget.checked) {
       setSelectedEmployees([...selectedEmployees, employeeId]);
     } else {
-      const removed = selectedEmployees.filter(e => e !== _id);
+      const removed = selectedEmployees.filter((e) => e !== _id);
       setSelectedEmployees(removed);
     }
   };
@@ -29,7 +29,7 @@ const EmployeeElem = ({
             <CheckBox
               data-id={_id}
               defaultChecked={checked}
-              onClick={e => toggleEmployee(e)}
+              onClick={(e) => toggleEmployee(e)}
             />
           </HeaderContainer>
         </TD>

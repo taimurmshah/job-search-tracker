@@ -1,33 +1,40 @@
-export const newTemplate = template => {
+export const newTemplate = (template) => {
   return {
     type: "NEW_TEMPLATE",
-    payload: template
+    payload: template,
   };
 };
 
-export const readTemplates = templates => {
+export const readTemplates = (templates) => {
   return {
     type: "READ_TEMPLATES",
-    payload: templates
+    payload: templates,
   };
 };
 
-export const selectTemplate = templateId => {
+export const selectTemplate = (templateId) => {
   return {
     type: "SELECT_TEMPLATE",
-    payload: templateId
+    payload: templateId,
   };
 };
 
-export const updateTemplate = template => {
+export const updateTemplate = (template) => {
   return {
     type: "UPDATE_TEMPLATE",
-    payload: template
+    payload: template,
+  };
+};
+
+export const deleteTemplate = (template) => {
+  return {
+    type: "DELETE_TEMPLATE",
+    payload: template,
   };
 };
 
 export const clearTemplate = () => {
   return {
-    type: "CLEAR_TEMPLATE"
+    type: "CLEAR_TEMPLATE",
   };
 };

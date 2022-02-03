@@ -6,9 +6,9 @@ import styled from "styled-components";
 const EmployeeTable = ({
   employees,
   selectedEmployees,
-  setSelectedEmployees
+  setSelectedEmployees,
 }) => {
-  employees = employees.filter(e => e.email);
+  employees = employees.filter((e) => e.email);
 
   const CheckBox = styled.input.attrs({ type: "checkbox" })``;
 
@@ -17,7 +17,7 @@ const EmployeeTable = ({
   const toggleSelectAll = () => {
     if (!checked) {
       const employeesToAdd = [...selectedEmployees];
-      employees.forEach(e => {
+      employees.forEach((e) => {
         if (!employeesToAdd.includes(e._id)) employeesToAdd.push(e._id);
       });
 
@@ -26,8 +26,8 @@ const EmployeeTable = ({
   };
 
   const employeeElems = employees
-    .filter(e => e.email)
-    .map(e => (
+    .filter((e) => e.email)
+    .map((e) => (
       <EmployeeElem
         key={e._id}
         employee={e}
@@ -83,8 +83,8 @@ const THead = styled.thead`
   height: 100px;
 `;
 
-const mapStateToProps = state => ({
-  employees: state.employee.employees
+const mapStateToProps = (state) => ({
+  employees: state.employee.employees,
 });
 
 export default connect(mapStateToProps)(EmployeeTable);

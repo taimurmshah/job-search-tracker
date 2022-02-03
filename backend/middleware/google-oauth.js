@@ -40,8 +40,6 @@ const googleOAuth = async (req, res, next) => {
 
     const userProfile = await fetchUserProfile(access_token);
 
-    // console.log("ACCESS TOKEN:", access_token);
-
     const googleId = userProfile.sub;
 
     //check for existing User
@@ -73,7 +71,6 @@ const googleOAuth = async (req, res, next) => {
     req.user = existingUser;
     next();
   } catch (err) {
-    console.log("google oauth error:", err);
     res.status(400).send(err);
   }
 };

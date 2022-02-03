@@ -4,8 +4,8 @@ import JobCard from "../JobCard";
 
 const RejectedJobs = ({ jobs }) => {
   return jobs
-    .filter(job => job.status === "Rejected")
-    .map(job => (
+    .filter((job) => job.status === "Rejected")
+    .map((job) => (
       <JobCard
         key={job._id}
         _id={job._id}
@@ -16,6 +16,6 @@ const RejectedJobs = ({ jobs }) => {
     ));
 };
 
-const mapStateToProps = state => ({ jobs: state.job.jobs });
+const mapStateToProps = (state) => ({ jobs: state.job.jobs });
 
 export default connect(mapStateToProps)(RejectedJobs);

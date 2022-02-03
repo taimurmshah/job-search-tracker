@@ -13,8 +13,6 @@ const DeleteEmployee = ({
   removeCurrentEmployee,
   deleteEmployeeThunk,
 }) => {
-  console.log("Is this hitting? ");
-
   useEffect(() => () => removeCurrentEmployee(), []);
 
   const deleteEmployee = () => {

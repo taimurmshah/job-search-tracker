@@ -30,7 +30,6 @@ export const newJobSearchThunk = (jobSearchObj) => async (dispatch) => {
 export const readJobSearchesThunk = () => async (dispatch) => {
   const token = localStorage.getItem("token");
   try {
-    console.log("Read job searches thunk hit");
     let res = await fetch(`${process.env.REACT_APP_URL}/job-searches`, {
       method: "GET",
       headers: {
@@ -41,8 +40,6 @@ export const readJobSearchesThunk = () => async (dispatch) => {
     });
 
     res = await res.json();
-
-    console.log("res in read job searches thunk:", res);
 
     return dispatch(getJobSearches(res));
   } catch (err) {

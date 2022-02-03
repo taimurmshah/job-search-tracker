@@ -1,7 +1,7 @@
 import React from "react";
 import { ModalNav } from "../resusableComponents/styledComponents";
 
-const Loading = props => {
+const Loading = (props) => {
   return (
     <ModalNav>
       <img

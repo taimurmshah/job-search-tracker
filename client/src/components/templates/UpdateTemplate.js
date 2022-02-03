@@ -6,7 +6,7 @@ import {
   Input,
   FormButton,
   HeaderContainer,
-  TextArea
+  TextArea,
 } from "../resusableComponents/styledComponents";
 import Checkbox from "../resusableComponents/Checkbox";
 import { updateTemplateThunk } from "../../redux/thunks/template";
@@ -17,24 +17,24 @@ class UpdateTemplate extends Component {
     subject: this.props.template.subject,
     message: this.props.template.message,
     interpolationValues: this.props.template.interpolationValues,
-    withResume: this.props.template.withResume
+    withResume: this.props.template.withResume,
   };
 
-  changeHandler = e => {
+  changeHandler = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   interpolationCheckHandler = () => {
     this.setState({
-      interpolationValues: !this.state.interpolationValues
+      interpolationValues: !this.state.interpolationValues,
     });
   };
 
   resumeCheckHandler = () => {
     this.setState({
-      withResume: !this.state.withResume
+      withResume: !this.state.withResume,
     });
   };
 
@@ -98,24 +98,21 @@ class UpdateTemplate extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     template: state.template.selectedTemplate,
-    resume: state.auth.currentUser.resume
+    resume: state.auth.currentUser.resume,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     updateTemplateThunk: (templateObj, templateId) =>
-      dispatch(updateTemplateThunk(templateObj, templateId))
+      dispatch(updateTemplateThunk(templateObj, templateId)),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UpdateTemplate);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateTemplate);
 
 // const TextArea = styled.textarea`
 //   margin-top: 10px;

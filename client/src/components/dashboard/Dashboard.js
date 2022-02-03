@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import { readJobsThunk, progressThunk } from "../../redux/thunks/job";
 import Loading from "../layout/Loading";
 import Modal from "../layout/Modal";
+import SmallModal from "../layout/SmallModal";
 import DashboardLinks from "./DashboardLinks";
 import Resume from "../resume/Resume";
 import Templates from "../templates/Templates";
@@ -57,6 +58,7 @@ const Dashboard = ({
       </HeaderContainer>
       <DashboardLinks openResume={openResume} openTemplates={openTemplates} />
       <Modal />
+      <SmallModal />
       <BarChart2 />
     </div>
   );

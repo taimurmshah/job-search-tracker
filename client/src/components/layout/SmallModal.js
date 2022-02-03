@@ -1,12 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { closeModal } from "../../redux/actions/modal";
+import { closeSmallModal } from "../../redux/actions/modal";
 import DeleteJob from "../job/DeleteJob";
 import DeleteEmployee from "../employees/DeleteEmployee";
+import DeleteTemplate from "../templates/DeleteTemplate";
 
 import styled from "styled-components";
 
-const SmallModal = ({ modal, closeModal }) => {
+const SmallModal = ({ modal, closeSmallModal }) => {
   const showHideClassName = modal.isSmallModalOpen
     ? "modal display-block"
     : "modal display-none";
@@ -14,11 +15,13 @@ const SmallModal = ({ modal, closeModal }) => {
     <div className={showHideClassName}>
       <SmallModalMain>
         <div className="dialog">
-          <button onClick={closeModal} className="close-thick" />
+          <button onClick={closeSmallModal} className="close-thick" />
         </div>
         {modal.deleteJob && <DeleteJob />}
 
         {modal.deleteEmployee && <DeleteEmployee />}
+
+        {modal.deleteTemplate && <DeleteTemplate />}
       </SmallModalMain>
     </div>
   );
@@ -28,7 +31,7 @@ const mapStateToProps = (state) => ({ modal: state.modal });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    closeModal: () => dispatch(closeModal()),
+    closeSmallModal: () => dispatch(closeSmallModal()),
   };
 };
 
