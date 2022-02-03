@@ -4,7 +4,7 @@ import { HeaderContainer } from "../resusableComponents/styledComponents";
 import * as d3 from "d3";
 import styled from "styled-components";
 
-const BarChart = ({ data, hasJobs }) => {
+const BarChart = ({ data, hasJobs, activeJobSearch }) => {
   const svgRef = useRef();
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const BarChart = ({ data, hasJobs }) => {
       .attr("x", width / 2)
       .attr("font-size", "6em")
       .attr("text-anchor", "middle")
-      .text("Job Hunt Progress");
+      .text(`${activeJobSearch.title} Progress`);
 
     //y label
     svg
@@ -154,11 +154,11 @@ const ChartArea = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 50px
+  padding-top: 50px;
   height: 650px;
   width: 1000px;
   margin-bottom: 100px;
-  background-color: #2F4A6D;
+  background-color: #2f4a6d;
   color: white;
   @media screen and (prefers-color-scheme: light) {
     background-color: #2f4a6d;
@@ -168,8 +168,7 @@ const ChartArea = styled.div`
 const mapStateToProps = (state) => ({
   data: state.job.jobsProgress,
   hasJobs: state.job.hasJobs,
+  activeJobSearch: state.jobSearch.activeJobSearch,
 });
 
 export default connect(mapStateToProps)(BarChart);
-
-//todo - does the d3 fetch really need to be in any other component than this?
