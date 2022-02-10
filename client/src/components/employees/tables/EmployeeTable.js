@@ -83,5 +83,5 @@ const TH = styled.th`
 `;
 
 const THead = styled.thead`
-  height: 100px;
+  height: 10px;
 `;
